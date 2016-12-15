@@ -46,3 +46,13 @@ gulp.task('minify_demos', function () {
         }))
         .pipe(gulp.dest(targetPath));
 });
+gulp.task('minify_materials', function () {
+    var path = './materials';
+    var pattern = [path + '/**/*.jpg', path + '/**/*.png'];
+    gulp.src(pattern)
+        .pipe(imagemin({
+            progressive: true,
+            use: [pngquant()]
+        }))
+        .pipe(gulp.dest(path));
+});

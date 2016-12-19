@@ -1,4 +1,6 @@
 var gulp = require('gulp');
+var debug = require('gulp-debug');
+var changed = require('gulp-changed');
 var htmlmin = require('gulp-htmlmin');
 var minifyCss = require('gulp-minify-css');
 var uglify = require('gulp-uglify');
@@ -22,26 +24,38 @@ gulp.task('minify_demos', function () {
             minifyJS: true,
             minifyCSS: true
         }))
-        .pipe(gulp.dest(targetPath));
+        .pipe(changed(targetPath))
+        .pipe(gulp.dest(targetPath))
+        .pipe(debug({title: 'html:'}));
 
     gulp.src([jsPath, '!' + minJsPath])
         .pipe(uglify())
-        .pipe(gulp.dest(targetPath));
+        .pipe(changed(targetPath))
+        .pipe(gulp.dest(targetPath))
+        .pipe(debug({title: 'js:'}));
     gulp.src(minJsPath)
-        .pipe(gulp.dest(targetPath));
+        .pipe(changed(targetPath))
+        .pipe(gulp.dest(targetPath))
+        .pipe(debug({title: 'min.js:'}));
 
     gulp.src([cssPath, '!' + minCssPath])
         .pipe(minifyCss())
-        .pipe(gulp.dest(targetPath));
+        .pipe(changed(targetPath))
+        .pipe(gulp.dest(targetPath))
+        .pipe(debug({title: 'css:'}));
     gulp.src(minCssPath)
-        .pipe(gulp.dest(targetPath));
+        .pipe(changed(targetPath))
+        .pipe(gulp.dest(targetPath))
+        .pipe(debug({title: 'min.css:'}))
 
     gulp.src(imgPath)
         .pipe(imagemin({
             progressive: true,
             use: [pngquant()]
         }))
-        .pipe(gulp.dest(targetPath));
+        .pipe(changed(targetPath))
+        .pipe(gulp.dest(targetPath))
+        .pipe(debug({title: 'img:'}));
 });
 gulp.task('minify_materials', function () {
     var path = './materials';
@@ -51,5 +65,7 @@ gulp.task('minify_materials', function () {
             progressive: true,
             use: [pngquant()]
         }))
-        .pipe(gulp.dest(path));
+        .pipe(changed(path))
+        .pipe(gulp.dest(path))
+        .pipe(debug({title: 'img:'}));
 });

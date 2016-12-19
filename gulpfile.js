@@ -5,16 +5,13 @@ var uglify = require('gulp-uglify');
 var imagemin = require('gulp-imagemin');
 var pngquant = require('imagemin-pngquant');
 
-gulp.task('default', function () {
-    console.log('hello world');
-});
 gulp.task('minify_demos', function () {
     var srcPath = './demosSrc';
     var targetPath = './demos';
     var htmlPath = srcPath + '/**/*.html';
     var jsPath = srcPath + '/**/*.js';
     var cssPath = srcPath + '/**/*.css';
-    var imgPath = [srcPath + '/**/*.jpg', srcPath + '/**/*.png'];
+    var imgPath = srcPath + '/**/*.{png,jpg}';
     var minJsPath = srcPath + '/**/*.min.js';
     var minCssPath = srcPath + '/**/*.min.css';
 
@@ -48,7 +45,7 @@ gulp.task('minify_demos', function () {
 });
 gulp.task('minify_materials', function () {
     var path = './materials';
-    var pattern = [path + '/**/*.jpg', path + '/**/*.png'];
+    var pattern = path + '/**/*.{png,jpg}';
     gulp.src(pattern)
         .pipe(imagemin({
             progressive: true,

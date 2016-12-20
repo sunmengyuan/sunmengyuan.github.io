@@ -5,7 +5,6 @@ avatar: # path/to/avatar for index page. e.g. /assets/img/avatar.jpg
 favicon: # path/to/favicon for site. e.g. /assets/img/favicon.ico
 google_analytics: # google analytics id
 disqus_shortname: # disqus_shortname for disqus comment system
-destination: dist
 
 # Content for about page.
 # Each paragraph will be a <p> tag which is inserted to about

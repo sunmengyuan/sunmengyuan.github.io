@@ -1,0 +1,17 @@
+---
+layout: basic
+---
+
+<section class="posts">
+    <ul>
+        {% for post in site.posts %}
+        <li>
+            <a href="{{ post.url }}">
+                <h3>{{ post.title }}</h3>
+                <time>{{ post.date | date_to_string }}</time>
+                <p class="abstract">{{ post.abstract }}</p>
+            </a>
+        </li>
+        {% endfor %}
+    </ul>
+</section>

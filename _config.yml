@@ -1,0 +1,8 @@
+title: 呆恋小喵
+description: 
+google_analytics: 
+show_downloads: true
+theme: jekyll-theme-cayman
+
+gems:
+  - jekyll-mentions

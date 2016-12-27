@@ -33,7 +33,10 @@ img{display: block;width: 100%;}
 
 @menuBtnClrGn: rgba(63, 208, 111, 0.8);
 @menuBtnClrGy: rgba(0, 0, 0, 0.9);
-@menuClr: rgba(0, 0, 0, 0.9);
+@menuBgClr: rgba(0, 0, 0, 0.9);
+@headerBgClr: #33b15d;
+@fontClrWt: #fff;
+@fontClrGnWeak: #d6ffd5;
 
 html, body {
     width: 100%;
@@ -91,7 +94,7 @@ nav {
         left: 0;
         width: 100%;
         height: 100%;
-        background-color: @menuClr;
+        background-color: @menuBgClr;
         padding-top: 50px;
 
         li {
@@ -100,7 +103,7 @@ nav {
             a {
                 font-size: 24px;
                 line-height: 80px;
-                color: #fff;
+                color: @fontClrWt;
                 opacity: 0.7;
                 padding-left: 50px;
 
@@ -124,16 +127,40 @@ nav {
         }
     }
 }
+header {
+    background-color: @headerBgClr;
+    margin-top: -54px;
+}
+header.welcome {
+    width: 100%;
+    height: 100%;
+
+    h1, p {
+        .c-center();
+
+        position: absolute;
+    }
+    h1 {
+        font-size: 40px;
+        color: @fontClrWt;
+    }
+    p {
+        font-size: 20px;
+        color: @fontClrGnWeak;
+    }
+}
 
 /* animate */
 @-webkit-keyframes rollingF
 {
     from {
         .rotate(0deg);
+
         background-color: @menuBtnClrGn;
     }
     to {
         .rotate(360deg);
+
         background-color: @menuBtnClrGy;
     }
 }
@@ -141,10 +168,12 @@ nav {
 {
     from {
         .rotate(360deg);
+
         background-color: @menuBtnClrGy;
     }
     to {
         .rotate(0deg);
+
         background-color: @menuBtnClrGn;
     }
 }

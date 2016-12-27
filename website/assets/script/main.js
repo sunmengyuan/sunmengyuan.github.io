@@ -9,10 +9,10 @@ var main = {
         $btn.on('click', function () {
             var status = $(this).hasClass('close');
             if (status) {
-                $(this).removeClass('rollingF close').addClass('rollingB');
+                $(this).removeClass('rollingB close').addClass('rollingF');
                 $menu.slideUp();
             } else {
-                $(this).removeClass('rollingB').addClass('rollingF close');
+                $(this).removeClass('rollingF').addClass('rollingB close');
                 $menu.slideDown();
             }
         });

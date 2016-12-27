@@ -44,14 +44,15 @@ html, body {
 }
 nav {
     & > a {
+        float: right;
         width: 54px;
         height: 54px;
         background-color: @menuBtnClrGn;
         border-radius: 50%;
         position: relative;
         top: 20px;
-        left: 20px;
-        z-index: 1;
+        right: 20px;
+        z-index: 501;
 
         span {
             display: block;
@@ -92,6 +93,7 @@ nav {
         position: fixed;
         top: 0;
         left: 0;
+        z-index: 500;
         width: 100%;
         height: 100%;
         background-color: @menuBgClr;
@@ -129,24 +131,28 @@ nav {
 }
 header {
     background-color: @headerBgClr;
-    margin-top: -54px;
 }
 header.welcome {
     width: 100%;
     height: 100%;
 
-    h1, p {
+    & > div {
         .c-center();
 
         position: absolute;
-    }
-    h1 {
-        font-size: 40px;
-        color: @fontClrWt;
-    }
-    p {
-        font-size: 20px;
-        color: @fontClrGnWeak;
+        width: 300px;
+        text-align: center;
+
+        h1 {
+            font-size: 26px;
+            color: @fontClrWt;
+            margin-bottom: 15px;
+        }
+        p {
+            font-size: 16px;
+            line-height: 22px;
+            color: @fontClrGnWeak;
+        }
     }
 }
 
@@ -156,12 +162,12 @@ header.welcome {
     from {
         .rotate(0deg);
 
-        background-color: @menuBtnClrGn;
+        background-color: @menuBtnClrGy;
     }
     to {
         .rotate(360deg);
 
-        background-color: @menuBtnClrGy;
+        background-color: @menuBtnClrGn;
     }
 }
 @-webkit-keyframes rollingB
@@ -169,17 +175,17 @@ header.welcome {
     from {
         .rotate(360deg);
 
-        background-color: @menuBtnClrGy;
+        background-color: @menuBtnClrGn;
     }
     to {
         .rotate(0deg);
 
-        background-color: @menuBtnClrGn;
+        background-color: @menuBtnClrGy;
     }
 }
 .rollingF {
-    -webkit-animation: rollingF 0.7s forwards;
+    -webkit-animation: rollingF 0.5s forwards;
 }
 .rollingB {
-    -webkit-animation: rollingB 0.7s forwards;
+    -webkit-animation: rollingB 0.5s forwards;
 }

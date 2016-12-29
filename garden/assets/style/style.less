@@ -34,9 +34,11 @@ img{display: block;width: 100%;}
 @menuBtnClrGn: rgba(63, 208, 111, 0.8);
 @menuBtnClrGy: rgba(0, 0, 0, 0.9);
 @menuBgClr: rgba(0, 0, 0, 0.9);
-@headerBgClr: #33b15d;
-@fontClrWt: #fff;
-@fontClrGnWeak: #d6ffd5;
+
+@GnStrong: #33b15d;
+@GnWeak: #d6ffd5;
+@GyStrong: #666;
+@GyWeak: #7d7d7d;
 
 html, body {
     width: 100%;
@@ -105,7 +107,7 @@ nav {
             a {
                 font-size: 24px;
                 line-height: 80px;
-                color: @fontClrWt;
+                color: #fff;
                 opacity: 0.7;
                 padding-left: 50px;
 
@@ -130,7 +132,7 @@ nav {
     }
 }
 header {
-    background-color: @headerBgClr;
+    background-color: @GnStrong;
 }
 header.welcome {
     width: 100%;
@@ -145,13 +147,13 @@ header.welcome {
 
         h1 {
             font-size: 26px;
-            color: @fontClrWt;
+            color: #fff;
             margin: 15px 0;
         }
         p {
             font-size: 16px;
             line-height: 22px;
-            color: @fontClrGnWeak;
+            color: @GnWeak;
         }
         svg {
             width: 250px;

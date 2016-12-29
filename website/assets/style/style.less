@@ -31,12 +31,14 @@ img{display: block;width: 100%;}
             transform-origin: center center;
 }
 
-@menuBtnClrGn: rgba(63, 208, 111, 0.8);
-@menuBtnClrGy: rgba(0, 0, 0, 0.9);
-@menuBgClr: rgba(0, 0, 0, 0.9);
-@headerBgClr: #33b15d;
-@fontClrWt: #fff;
-@fontClrGnWeak: #d6ffd5;
+@btnGn: rgba(63, 208, 111, 0.8);
+@btnBl: rgba(0, 0, 0, 0.9);
+@maskBl: rgba(0, 0, 0, 0.9);
+
+@GnStrong: #33b15d;
+@GnWeak: #d6ffd5;
+@GyStrong: #666;
+@GyWeak: #7d7d7d;
 
 html, body {
     width: 100%;
@@ -47,7 +49,7 @@ nav {
         float: right;
         width: 54px;
         height: 54px;
-        background-color: @menuBtnClrGn;
+        background-color: @btnGn;
         border-radius: 50%;
         position: relative;
         top: 20px;
@@ -73,7 +75,7 @@ nav {
         }
     }
     & > a.close {
-        background-color: @menuBtnClrGy;
+        background-color: @btnBl;
 
         span {
             margin-top: -1px;
@@ -96,7 +98,7 @@ nav {
         z-index: 500;
         width: 100%;
         height: 100%;
-        background-color: @menuBgClr;
+        background-color: @maskBl;
         padding-top: 50px;
 
         li {
@@ -105,7 +107,7 @@ nav {
             a {
                 font-size: 24px;
                 line-height: 80px;
-                color: @fontClrWt;
+                color: #fff;
                 opacity: 0.7;
                 padding-left: 50px;
 
@@ -130,7 +132,7 @@ nav {
     }
 }
 header {
-    background-color: @headerBgClr;
+    background-color: @GnStrong;
 }
 header.welcome {
     width: 100%;
@@ -145,13 +147,13 @@ header.welcome {
 
         h1 {
             font-size: 26px;
-            color: @fontClrWt;
+            color: #fff;
             margin: 15px 0;
         }
         p {
             font-size: 16px;
             line-height: 22px;
-            color: @fontClrGnWeak;
+            color: @GnWeak;
         }
         svg {
             width: 250px;
@@ -179,12 +181,12 @@ header.welcome {
     from {
         .rotate(0deg);
 
-        background-color: @menuBtnClrGy;
+        background-color: @btnBl;
     }
     to {
         .rotate(360deg);
 
-        background-color: @menuBtnClrGn;
+        background-color: @btnGn;
     }
 }
 @-webkit-keyframes rollingB
@@ -192,12 +194,12 @@ header.welcome {
     from {
         .rotate(360deg);
 
-        background-color: @menuBtnClrGn;
+        background-color: @btnGn;
     }
     to {
         .rotate(0deg);
 
-        background-color: @menuBtnClrGy;
+        background-color: @btnBl;
     }
 }
 .rollingF {

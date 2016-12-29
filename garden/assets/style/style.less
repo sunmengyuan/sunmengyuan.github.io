@@ -37,10 +37,11 @@ img{display: block;width: 100%;}
     li {
         float: left;
         font-size: 12px;
+        line-height: 24px;
         color: @GnStrong;
         background-color: @GnWeak;
         border-radius: 4px;
-        padding: 0 5px;
+        padding: 0 10px;
         margin: 5px;
     }
 }
@@ -190,9 +191,7 @@ header.welcome {
 }
 header.post {
     & > div {
-        width: 300px;
-        margin: 0 auto;
-        padding: 20px 0;
+        padding: 20px 84px 20px 20px;
 
         h2 {
             font-size: 20px;
@@ -203,7 +202,7 @@ header.post {
             color: @GnWeak;
         }
         p {
-            font-size: 16px;
+            font-size: 14px;
             color: #fff;
             margin: 15px 0;
         }
@@ -227,7 +226,7 @@ section.posts {
                 color: @GnStrong;
             }
             p {
-                font-size: 16px;
+                font-size: 14px;
                 color: @GyWeak;
                 margin: 15px 0;
             }
@@ -236,6 +235,9 @@ section.posts {
             }
         }
     }
+}
+article {
+    padding: 20px;
 }
 
 /* animate */

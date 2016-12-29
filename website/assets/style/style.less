@@ -243,6 +243,7 @@ section.about {
         position: fixed;
         bottom: 0;
         left: 0;
+        z-index: -1;
         width: 100%;
 
         fill: none;
@@ -269,6 +270,34 @@ section.about {
         #ab-path18 { stroke-dasharray: 200; }
         #ab-path19 { stroke-dasharray: 200; }
         #ab-path20 { stroke-dasharray: 200; }
+    }
+    & > div {
+        padding: 20px;
+
+        h1 {
+            font-size: 20px;
+            color: @GnStrong;
+        }
+        p {
+            font-size: 14px;
+            color: @GyWeak;
+        }
+        ul {
+            margin-top: 50px;
+
+            a {
+                color: @GnStrong;
+
+                &:hover {
+                    text-decoration: underline;
+                }
+            }
+            li {
+                font-size: 14px;
+                color: @GyWeak;
+                margin: 10px 0;
+            }
+        }
     }
 }
 article {

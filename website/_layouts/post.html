@@ -2,15 +2,17 @@
 layout: basic
 ---
 
-<header>
-    <h2>{{ page.title }}</h2>
-    <time>{{ page.date | date_to_string }}</time>
-    <p class="abstract">{{ page.abstract }}</p>
-    <ul class="tags">
-        {% for keyword in page.keywords %}
-        <li>{{ keyword }}</li>
-        {% endfor %}
-    </ul>
+<header class="post">
+    <div>
+        <h2>{{ page.title }}</h2>
+        <time>{{ page.date | date_to_string }}</time>
+        <p class="abstract">{{ page.abstract }}</p>
+        <ul class="c-fix">
+            {% for keyword in page.keywords %}
+            <li>{{ keyword }}</li>
+            {% endfor %}
+        </ul>
+    </div>
 </header>
 <article>
     {{ content }}

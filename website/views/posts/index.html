@@ -10,6 +10,11 @@ layout: basic
                 <h3>{{ post.title }}</h3>
                 <time>{{ post.date | date_to_string }}</time>
                 <p class="abstract">{{ post.abstract }}</p>
+                <ul class="c-fix">
+                    {% for keyword in post.keywords %}
+                    <li>{{ keyword }}</li>
+                    {% endfor %}
+                </ul>
             </a>
         </li>
         {% endfor %}

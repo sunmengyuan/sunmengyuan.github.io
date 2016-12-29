@@ -1,5 +1,5 @@
 *{margin: 0;padding: 0;}
-body{text-align: left;font-family: "\5FAE\8F6F\96C5\9ED1", "\5B8B\4F53", Arial, Verdana;}
+body{text-align: left;line-height: 1.6;font-family: "\5FAE\8F6F\96C5\9ED1", "\5B8B\4F53", Arial, Verdana;}
 h1, h2, h3, h4, h5, h6{font-weight: normal;}
 ul, ol, li{list-style: none;}
 template{display: block;}
@@ -34,6 +34,7 @@ img{display: block;width: 100%;}
 @btnGn: rgba(63, 208, 111, 0.8);
 @btnBl: rgba(0, 0, 0, 0.9);
 @maskBl: rgba(0, 0, 0, 0.9);
+@borderGy: #e5e5e5;
 
 @GnStrong: #33b15d;
 @GnWeak: #d6ffd5;
@@ -152,7 +153,6 @@ header.welcome {
         }
         p {
             font-size: 16px;
-            line-height: 22px;
             color: @GnWeak;
         }
         svg {
@@ -170,6 +170,41 @@ header.welcome {
             image {
                 width: 100%;
                 height: 100%;
+            }
+        }
+    }
+}
+section.posts {
+    & > ul {
+        & > li {
+            padding: 20px 84px 20px 20px;
+            border-bottom: 1px solid @borderGy;
+
+            h3 {
+                font-size: 20px;
+                color: @GyStrong;
+            }
+            time {
+                font-size: 14px;
+                color: @GnStrong;
+            }
+            p {
+                font-size: 16px;
+                color: @GyWeak;
+                margin: 15px 0;
+            }
+            ul {
+                margin: -5px;
+
+                li {
+                    float: left;
+                    font-size: 14px;
+                    color: @GnStrong;
+                    background-color: @GnWeak;
+                    border-radius: 4px;
+                    padding: 0 5px;
+                    margin: 5px;
+                }
             }
         }
     }

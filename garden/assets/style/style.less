@@ -330,7 +330,7 @@ article {
     color: #333;
 
     h1, h2, h3, h4, h5, h6,
-    table, & > ul, & > p,
+    table, & > ul, & > p, blockquote,
     .highlighter-rouge
     {
         margin-bottom: 20px;
@@ -427,6 +427,10 @@ article {
     img {
         width: auto;
         max-width: 100%;
+    }
+    blockquote {
+        border-left: 3px solid @OgStrong;
+        padding-left: 10px;
     }
 }
 

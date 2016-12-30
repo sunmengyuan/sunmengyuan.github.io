@@ -46,7 +46,7 @@ img{display: block;width: 100%;}
     }
 }
 
-@btnGn: rgba(255, 152, 0, 0.7);
+@btnOg: rgba(255, 152, 0, 0.7);
 @btnBl: rgba(0, 0, 0, 0.9);
 @maskBl: rgba(0, 0, 0, 0.9);
 @borderGy: #e5e5e5;
@@ -56,11 +56,19 @@ img{display: block;width: 100%;}
 @GnWeak: #d6ffd5;
 @GyStrong: #666;
 @GyWeak: #7d7d7d;
-@OgStrong: #ff9800;
 
 html, body {
     width: 100%;
     height: 100%;
+}
+section.posts > ul > li a,
+section.about > div,
+header.post > div,
+article
+{
+    display: block;
+    max-width: 980px;
+    margin: 0 auto;
 }
 nav {
     margin-bottom: -54px;
@@ -69,7 +77,7 @@ nav {
         float: right;
         width: 54px;
         height: 54px;
-        background-color: @btnGn;
+        background-color: @btnOg;
         border-radius: 50%;
         position: relative;
         top: 20px;
@@ -94,7 +102,7 @@ nav {
             }
         }
         &:hover {
-            box-shadow: inset 0 0 10px 1px @btnGn;
+            box-shadow: inset 0 0 30px 1px @btnOg;
         }
     }
     & > a.close {
@@ -114,7 +122,7 @@ nav {
             }
         }
         &:hover {
-            box-shadow: inset 0 0 10px 1px @GnStrong;
+            box-shadow: inset 0 0 30px 1px @GnStrong;
         }
     }
     & > ul {
@@ -122,10 +130,11 @@ nav {
         top: 0;
         left: 0;
         z-index: 500;
+        box-sizing: border-box;
         width: 100%;
         height: 100%;
         background-color: @maskBl;
-        padding-top: 50px;
+        padding-top: 100px;
 
         li {
             text-align: center;
@@ -200,9 +209,9 @@ header.welcome {
     }
 }
 header.post {
-    & > div {
-        padding: 20px 84px 20px 20px;
+    padding: 50px 84px 50px 20px;
 
+    & > div {
         h2 {
             font-size: 20px;
             color: #fff;
@@ -284,7 +293,7 @@ section.about {
         #ab-path20 { stroke-dasharray: 200; }
     }
     & > div {
-        padding: 20px;
+        padding: 50px 84px 50px 20px;
 
         h1 {
             font-size: 20px;
@@ -313,7 +322,7 @@ section.about {
     }
 }
 article {
-    padding: 20px;
+    padding: 20px 84px 20px 20px;
 }
 
 /* animate */
@@ -327,7 +336,7 @@ article {
     to {
         .rotate(360deg);
 
-        background-color: @btnGn;
+        background-color: @btnOg;
     }
 }
 @-webkit-keyframes rollingB
@@ -335,7 +344,7 @@ article {
     from {
         .rotate(360deg);
 
-        background-color: @btnGn;
+        background-color: @btnOg;
     }
     to {
         .rotate(0deg);

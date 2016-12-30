@@ -2,6 +2,8 @@ var main = {
     do: function () {
         var _this = this;
         _this.menuHandle();
+
+        hljs.initHighlightingOnLoad();
     },
     menuHandle: function () {
         var $menu = $('.js_menu');

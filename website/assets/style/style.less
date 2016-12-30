@@ -56,6 +56,7 @@ img{display: block;width: 100%;}
 @GnWeak: #d6ffd5;
 @GyStrong: #666;
 @GyWeak: #7d7d7d;
+@OgStrong: #ff9800;
 
 html, body {
     width: 100%;
@@ -325,6 +326,85 @@ section.about {
 }
 article {
     padding: 20px 84px 20px 20px;
+    font-size: 16px;
+    color: #333;
+
+    h1, h2, h3, h4, h5, h6,
+    table, & > ul, & > p,
+    .highlighter-rouge
+    {
+        margin-bottom: 20px;
+    }
+    h1, h2, h3, h4, h5, h6 {
+        color: @GnStrong;
+    }
+    h1 {
+        font-size: 26px;
+    }
+    h2 {
+        font-size: 24px;
+    }
+    h3 {
+        font-size: 22px;
+    }
+    h4 {
+        font-size: 20px;
+    }
+    h5 {
+        font-size: 18px;
+    }
+    h6 {
+        font-size: 16px;
+    }
+    table {
+        border-left: 1px solid @borderGy;
+        border-top: 1px solid @borderGy;
+
+        th, td {
+            border-right: 1px solid @borderGy;
+            border-bottom: 1px solid @borderGy;
+            padding: 10px;
+        }
+        th {
+            background-color: @bgGy;
+        }
+    }
+    hr {
+        border: 1px solid @borderGy;
+        margin: 40px 0 20px;
+    }
+    ul {
+        li {
+            position: relative;
+            padding-left: 15px;
+            margin-bottom: 10px;
+
+            & > p {
+                margin-bottom: 10px;
+            }
+            &:before {
+                content: "";
+                position: absolute;
+                left: 0;
+                top: 10px;
+                display: block;
+                width: 5px;
+                height: 5px;
+                border-radius: 50%;
+                background-color: @GnStrong;
+            }
+        }
+    }
+    em {
+        font-style: italic;
+    }
+    strong {
+        font-weight: bold;
+
+        em {
+            color: @OgStrong;
+        }
+    }
 }
 
 /* animate */

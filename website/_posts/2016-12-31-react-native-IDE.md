@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "React Native 开发环境搭建"
-date: "2016-12-30"
+date: "2016-12-31"
 abstract: "教你如何搭建 React Native 开发环境，以 Android 为例。"
 keywords: ["React Native", "开发环境搭建", "虚拟机", "模拟器"]
 ---

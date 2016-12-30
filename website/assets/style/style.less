@@ -175,7 +175,7 @@ header.welcome {
         .c-center();
 
         position: absolute;
-        width: 300px;
+        width: 500px;
         text-align: center;
 
         h1 {
@@ -185,6 +185,7 @@ header.welcome {
         }
         p {
             font-size: 16px;
+            text-align: left;
             color: @GnWeak;
         }
         svg {
@@ -429,6 +430,12 @@ article {
         color: @GyStrong;
         border-left: 3px solid @OgStrong;
         padding-left: 10px;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    header.welcome > div {
+        width: 80%;
     }
 }
 

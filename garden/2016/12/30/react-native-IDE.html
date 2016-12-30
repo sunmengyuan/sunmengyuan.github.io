@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0" />
+    <title>呆恋小喵 - React Native 开发环境搭建</title>
+    <link rel="stylesheet" href="https://cdn.bootcss.com/highlight.js/8.0/styles/sunburst.min.css" />
+    <link rel="stylesheet/less" href="/garden/assets/style/style.less" />
+</head>
+<body>
+<nav>
+    <img src="http://oij8a9ql4.bkt.clouddn.com/portrait.jpg" width="0" height="0" />
+    <a href="javascript:;" class="js_menu_btn">
+        <span></span>
+        <span></span>
+        <span></span>
+    </a>
+    <ul class="c-hidden js_menu">
+        <li><a href="/garden/">Home</a></li>
+        <li><a href="/garden/views/posts">Posts</a></li>
+        <li><a href="/garden/views/about">About</a></li>
+    </ul>
+</nav>
+<header class="post">
+    <div>
+        <h2>React Native 开发环境搭建</h2>
+        <time>30 Dec 2016</time>
+        <p class="abstract">教你如何搭建 React Native 开发环境，以 Android 为例。</p>
+        <ul class="c-fix">
+            
+            <li>React Native</li>
+            
+            <li>开发环境搭建</li>
+            
+            <li>虚拟机</li>
+            
+            <li>模拟器</li>
+            
+        </ul>
+    </div>
+</header>
+<article>
+    <p>安装 <strong>node.js</strong> <a href="https://nodejs.org/en/">下载地址</a></p>
+
+<p>安装 <strong>npm</strong></p>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code>curl -L https://npmjs.com/install.sh | sh
+</code></pre>
+</div>
+
+<p>安装 <strong>react-native-cli</strong></p>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code>npm install react-native-cli -g
+</code></pre>
+</div>
+
+<p>安装 <strong>JDK</strong> <a href="http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html">下载地址</a></p>
+
+<p>安装 <strong>Android Studio</strong> <a href="http://www.android-studio.org/">下载地址</a></p>
+
+<ul>
+  <li>
+    <p>选择 <strong>Custom</strong></p>
+  </li>
+  <li>
+    <p>勾选 <strong>Performance</strong>、<strong>Android Virtual Device</strong></p>
+  </li>
+  <li>
+    <p>选择 <strong>Configure -&gt; SDK Manager</strong></p>
+
+    <ul>
+      <li>
+        <p>选择 <strong>SDK Platforms</strong> -&gt; 勾选 <strong>Show Package Details</strong> -&gt; 勾选 <strong>Android 6.0 (Marshmallow)</strong> 中 <strong>Google APIs</strong>、<strong>Android SDK Platform 23</strong>、<strong>Intel x86 Atom System Image</strong>、<strong>Intel x86 Atom_64 System Image</strong>、<strong>Google APIs Intel x86 Atom_64 System Image</strong></p>
+      </li>
+      <li>
+        <p>选择 <strong>SDK Tools</strong> -&gt; 勾选 <strong>Show Package Details</strong> -&gt; 勾选 <strong>Android SDK Build Tools</strong> 中 <strong>Android SDK Build-Tools 23.0.1</strong></p>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<p>设置环境变量</p>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code><span class="c"># 创建 .bash_profile 文件并编辑</span>
+sudo vi ~/.bash_profile   
+
+<span class="c"># .bash_profile 文件添加如下两行</span>
+<span class="nb">export </span><span class="nv">ANDROID_HOME</span><span class="o">=</span>~/Library/Android/sdk
+<span class="nb">export </span><span class="nv">PATH</span><span class="o">=</span>~/Library/Android/sdk/platform-tools/:<span class="nv">$PATH</span>
+
+<span class="c"># 生效 .bash_profile 文件</span>
+<span class="nb">source</span> ~/.bash_profile
+</code></pre>
+</div>
+
+<p>安装 <strong>VirtualBox</strong> <a href="https://www.virtualbox.org/wiki/Downloads">下载地址</a></p>
+
+<p>安装 <strong>Genymotion</strong> <a href="./genymotion.dmg.zip">下载地址</a></p>
+
+<ul>
+  <li>
+    <p>注册账号 <a href="https://www.genymotion.com/account/create/">注册地址</a></p>
+  </li>
+  <li>
+    <p>添加 <strong>Virtual Device</strong></p>
+  </li>
+  <li>
+    <p>设置 <strong>ADB</strong></p>
+
+    <ul>
+      <li>选择 <strong>Use custom Android SDK tools</strong> -&gt; 填写 <strong>/Users/[用户名]/Library/Android/sdk/</strong></li>
+    </ul>
+  </li>
+  <li>
+    <p>创建项目并启动</p>
+  </li>
+</ul>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code>react-native init app
+<span class="nb">cd </span>app
+react-native run-android
+</code></pre>
+</div>
+
+</article>
+
+<script src="https://lib.sinaapp.com/js/jquery/1.9.1/jquery-1.9.1.min.js"></script>
+<script src="https://cdn.bootcss.com/less.js/1.7.0/less.min.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/8.0/highlight.min.js"></script>
+<script src="/garden/assets/script/main.js"></script>
+</body>
+</html>

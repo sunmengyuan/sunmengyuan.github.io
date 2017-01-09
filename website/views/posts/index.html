@@ -5,7 +5,7 @@ title: "印记"
 
 <section class="posts">
     <ul>
-        {% for post in site.posts %}
+        {% for post in paginator.posts %}
         <li>
             <a href="{{ site.baseurl }}{{ post.url }}" title="{{ post.title }}">
                 <h3>{{ post.title }}</h3>
@@ -20,4 +20,12 @@ title: "印记"
         </li>
         {% endfor %}
     </ul>
+    <div class="paginator js_paginator"></div>
 </section>
+<script>
+    var pageData = {
+        postsUrl: '{{ site.baseurl }}/views/posts',
+        curPage: {{ paginator.page }},
+        totalPage: {{ paginator.total_pages }}
+    };
+</script>

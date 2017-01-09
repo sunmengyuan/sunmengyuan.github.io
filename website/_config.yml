@@ -1,2 +1,5 @@
 baseurl: /garden
 destination: ../garden
+gems: [jekyll-paginate]
+paginate: 1
+paginate_path: /views/posts/:num

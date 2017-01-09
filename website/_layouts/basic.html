@@ -2,6 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="keywords" content="前端开发{% for keyword in page.keywords %},{{ keyword }}{% endfor %}" />
+    <meta name="description" content="{% if page.abstract %}{{ page.abstract }}{% endif %}" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0" />
     <title>呆恋小喵{% if page.title %} - {{ page.title }}{% endif %}</title>
     <link rel="shortcut icon" href="http://oij8a9ql4.bkt.clouddn.com/icon.ico" />
@@ -9,8 +11,8 @@
     <link rel="stylesheet/less" href="{{ site.baseurl }}/assets/style/style.less" />
 </head>
 <body>
+<img src="http://oij8a9ql4.bkt.clouddn.com/portrait.jpg" alt="呆恋小喵" width="0" height="0" />
 <nav>
-    <img src="http://oij8a9ql4.bkt.clouddn.com/portrait.jpg" width="0" height="0" />
     <a href="javascript:;" class="js_menu_btn">
         <span></span>
         <span></span>

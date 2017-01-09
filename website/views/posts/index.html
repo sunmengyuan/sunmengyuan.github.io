@@ -7,7 +7,7 @@ title: "印记"
     <ul>
         {% for post in site.posts %}
         <li>
-            <a href="{{ site.baseurl }}{{ post.url }}">
+            <a href="{{ site.baseurl }}{{ post.url }}" title="{{ post.title }}">
                 <h3>{{ post.title }}</h3>
                 <time>{{ post.date | date_to_string }}</time>
                 <p class="abstract">{{ post.abstract }}</p>

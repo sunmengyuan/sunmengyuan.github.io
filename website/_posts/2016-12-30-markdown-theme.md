@@ -65,6 +65,12 @@ ___粗斜体___
 
 *****
 
+图片
+
+![图片](http://oij8a9ql4.bkt.clouddn.com/test.png)
+
+*****
+
 代码片段
 
 ```html
@@ -118,9 +124,3 @@ gulp.task('minify_demos', function () {
     );
 });
 ```
-
-*****
-
-图片
-
-![图片](http://oij8a9ql4.bkt.clouddn.com/test.png)

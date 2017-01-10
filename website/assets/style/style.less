@@ -44,6 +44,7 @@ img{display: block;width: 100%;}
 }
 
 @btnOg: rgba(255, 152, 0, 0.7);
+@btnGn: rgba(51, 177, 93, 0.7);
 @btnBl: rgba(0, 0, 0, 0.9);
 @maskBl: rgba(0, 0, 0, 0.9);
 @borderGy: #e5e5e5;
@@ -160,6 +161,36 @@ nav {
                 background-size: auto 30px;
             }
         }
+    }
+}
+a.gotop {
+    display: none;
+    width: 54px;
+    height: 54px;
+    background-color: @btnGn;
+    border-radius: 50%;
+    position: fixed;
+    bottom: 50px;
+    right: 20px;
+    z-index: 501;
+
+    &:before, &:after {
+        content: "";
+        display: block;
+        width: 0;
+        height: 0;
+        border: 14px solid transparent;
+    }
+    &:before {
+        border-bottom: 22px solid #fff;
+        margin: 1px auto 0;
+    }
+    &:after {
+        border-bottom: 11px solid @btnGn;
+        margin: -25px auto 0;
+    }
+    &:hover {
+        box-shadow: inset 0 0 30px 1px @btnGn;
     }
 }
 header {

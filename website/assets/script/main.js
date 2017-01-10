@@ -2,6 +2,7 @@ var main = {
     do: function () {
         var _this = this;
         _this.menuHandle();
+        _this.gotop();
         pageData.postsData && _this.paginator();
 
         hljs.initHighlightingOnLoad();
@@ -17,6 +18,24 @@ var main = {
             } else {
                 $(this).removeClass('rollingF').addClass('rollingB close');
                 $menu.slideDown();
+            }
+        });
+    },
+    gotop: function () {
+        var $btn = $('.js_gotop');
+        var $win = $(window);
+        var $body = $('body');
+        var dbase = 1 * $body.height();
+        var t = null;
+        $btn.on('click', function () {
+            $win.scrollTop(0);
+        });
+        $win.on('scroll', function () {
+            if (t == null) {
+                t = setTimeout(function () {
+                    dbase <= $body.scrollTop() ? $btn.show() : $btn.hide();
+                    t = null;
+                }, 500);
             }
         });
     },
@@ -37,7 +56,7 @@ var main = {
         };
 
         if (cur < count - offset) {
-            for (var i = 1;i <= (total < count ? total : count);i++) {
+            for (var i = 1; i <= (total < count ? total : count); i++) {
                 var $item = createItem(i);
                 $paginator.append($item);
             }
@@ -46,7 +65,7 @@ var main = {
         }
 
         if (cur > total - offset) {
-            for (var j = total;j > (total < count ? 0 : total - count);j--) {
+            for (var j = total; j > (total < count ? 0 : total - count); j--) {
                 var $item = createItem(j);
                 $paginator.prepend($item);
             }
@@ -56,7 +75,7 @@ var main = {
 
         var $cur = createItem(cur);
         $paginator.append($cur);
-        for (var m = 1;m <= offset;m++) {
+        for (var m = 1; m <= offset; m++) {
             var pre = cur - m;
             var next = cur + m;
             var $pre = createItem(pre);

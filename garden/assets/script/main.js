@@ -2,7 +2,7 @@ var main = {
     do: function () {
         var _this = this;
         _this.menuHandle();
-        _this.paginator();
+        pageData.postsData && _this.paginator();
 
         hljs.initHighlightingOnLoad();
     },
@@ -24,45 +24,47 @@ var main = {
         var $paginator = $('.js_paginator');
         var offset = 2;
         var count = 2 * offset + 1;
-        var cur = pageData.curPage >> 0;
-        var total = pageData.totalPage >> 0;
+        var cur = pageData.postsData.curPage >> 0;
+        var total = pageData.postsData.totalPage >> 0;
+        var createItem = function (value) {
+            var $item = $(document.createElement('A'))
+                .text(value)
+                .attr('href', pageData.postsData.postsUrl + '/' + (value == 1 ? '' : value));
+            return $item;
+        };
+        var setActive = function () {
+            $paginator.find('a:contains(' + cur + ')').addClass('active');
+        };
 
         if (cur < count - offset) {
             for (var i = 1;i <= (total < count ? total : count);i++) {
-                var $item = $(document.createElement('a'))
-                    .text(i)
-                    .attr('href', pageData.postsUrl + '/' + (i == 1 ? '' : i));
+                var $item = createItem(i);
                 $paginator.append($item);
             }
+            setActive();
             return;
         }
 
         if (cur > total - offset) {
             for (var j = total;j > (total < count ? 0 : total - count);j--) {
-                var $item = $(document.createElement('a'))
-                    .text(j)
-                    .attr('href', pageData.postsUrl + '/' + (j == 1 ? '' : j));
+                var $item = createItem(j);
                 $paginator.prepend($item);
             }
+            setActive();
             return;
         }
 
-        var $cur = $(document.createElement('a'))
-            .text(cur)
-            .attr('href', pageData.postsUrl + '/' + (cur == 1 ? '' : cur));
+        var $cur = createItem(cur);
         $paginator.append($cur);
         for (var m = 1;m <= offset;m++) {
             var pre = cur - m;
             var next = cur + m;
-            var $pre = $(document.createElement('a'))
-                .text(pre)
-                .attr('href', pageData.postsUrl + '/' + (pre == 1 ? '' : pre));
-            var $next = $(document.createElement('a'))
-                .text(next)
-                .attr('href', pageData.postsUrl + '/' + (next == 1 ? '' : next));
+            var $pre = createItem(pre);
+            var $next = createItem(next);
             $paginator.prepend($pre);
             $paginator.append($next);
         }
+        setActive();
     }
 };
 

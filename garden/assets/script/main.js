@@ -25,17 +25,30 @@ var main = {
         var $btn = $('.js_gotop');
         var $win = $(window);
         var $body = $('body');
-        var dbase = 1 * $body.height();
-        var t = null;
+        var dbase = 3 * $body.height();
+        var timeout = null;
+        var scrolling = function (initPos) {
+            var pos = initPos;
+            var interval = setInterval(function () {
+                var dPos = pos / 10;
+                if (dPos < 0.2) {
+                    pos = 0;
+                    clearInterval(interval);
+                } else {
+                    pos -= dPos;
+                }
+                $body.scrollTop(pos);
+            }, 16);
+        };
         $btn.on('click', function () {
-            $win.scrollTop(0);
+            scrolling($body.scrollTop());
         });
         $win.on('scroll', function () {
-            if (t == null) {
-                t = setTimeout(function () {
+            if (timeout == null) {
+                timeout = setTimeout(function () {
                     dbase <= $body.scrollTop() ? $btn.show() : $btn.hide();
-                    t = null;
-                }, 500);
+                    timeout = null;
+                }, 16);
             }
         });
     },

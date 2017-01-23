@@ -99,7 +99,6 @@ button{background-color: transparent;}
 em, i{font-style: normal;}
 a{text-decoration: none;}
 img{display: block;width: 100%;}
-
 .c-fix:after{content: "";display: block;height: 0;clear: both;visibility: hidden;}
 .c-mask{position: fixed;left: 0;top: 0;width: 100%;height: 100%;z-index: 100;background-color: rgba(0, 0, 0, 0.5);display: none;}
 .c-header{position: fixed;left: 0;top: 0;width: 100%;z-index: 10;box-sizing: border-box;}

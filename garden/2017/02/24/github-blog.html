@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="keywords" content="前端开发,github Page,jekyll,个人技术博客" />
-    <meta name="description" content="" />
+    <meta name="keywords" content="前端开发,github Page,jekyll,个人技术博客搭建" />
+    <meta name="description" content="介绍如何使用静态站点生成工具 jekyll 及 github 服务器搭建个人网站。" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0" />
     <title>呆恋小喵的后花园 - 使用 jekyll + github Page 搭建个人网站</title>
     <link rel="shortcut icon" href="http://oij8a9ql4.bkt.clouddn.com/shortcut.ico" />
@@ -42,14 +42,14 @@
     <div>
         <h2>使用 jekyll + github Page 搭建个人网站</h2>
         <time>24 Feb 2017</time>
-        <p class="abstract"></p>
+        <p class="abstract">介绍如何使用静态站点生成工具 jekyll 及 github 服务器搭建个人网站。</p>
         <ul class="c-fix">
             
             <li>github Page</li>
             
             <li>jekyll</li>
             
-            <li>个人技术博客</li>
+            <li>个人技术博客搭建</li>
             
         </ul>
     </div>
@@ -57,7 +57,7 @@
 <article>
     <h3 id="一创建-github-账号">一、创建 github 账号</h3>
 
-<p>若尚未申请 github 账号，请移驾此处 <a href="https://github.com/">https://github.com/</a> 进行注册。</p>
+<p>若尚未申请 github 账号，请移驾<a href="https://github.com/">此处</a>进行注册。</p>
 
 <p>github 用户名是可以修改的：</p>
 
@@ -69,7 +69,7 @@
 
 <h3 id="二新建仓库">二、新建仓库</h3>
 
-<p>使用 github 托管个人网站时，所对应仓库的命名是有规则的：【github 用户名】.github.io。例如本人的用户名为 sunmengyuan，那么我的个人网站所对应的仓库名为 sunmengyuan.github.io。</p>
+<p>使用 github 托管个人网站时，所对应仓库的命名是有规则的：<strong><em>[github 用户名].github.io</em></strong>。例如本人的用户名为 sunmengyuan，那么我的个人网站所对应的仓库名为 sunmengyuan.github.io。</p>
 
 <p>下面，开始创建新仓库：</p>
 
@@ -83,13 +83,43 @@
 
 <p>github 有许多模板主题可供选择，相关代码可自动生成：</p>
 
+<p><img src="http://olvck72xe.bkt.clouddn.com/select-theme.png" alt="github Page 主题选择" /></p>
+
 <p>但本人更倾向于自行搭建模板，一是因为与其改别人的不如自己写，二是为了令自己的网站更符合个人审美，三是因为作为一枚傲娇的前端工程师套用别人的模板实在说不过去。</p>
 
-<p>下面来一句广告语，欢迎参观呆恋小喵的后花园 <a href="https://sunmengyuan.github.io">https://sunmengyuan.github.io</a>，你可能觉得它不够漂亮，但是我喜欢。该网站使用 jekyll 框架搭建，教程在此 <a href="http://jekyll.com.cn/">http://jekyll.com.cn/</a>。</p>
+<p>下面来一句广告语，欢迎参观<a href="https://sunmengyuan.github.io">呆恋小喵的后花园</a>，你可能觉得它不够漂亮，但是我喜欢。该网站使用 jekyll 框架搭建。</p>
 
 <h4 id="-关于-jekyll">* 关于 jekyll</h4>
 
 <p>jekyll 是一种静态站点生成工具，它可以使发表文章的过程简化为添加并撰写一篇 markdown 文档。欲使用 jekyll 首先需要安装它，安装完成后创建项目并启动服务（端口号默认 4000）。</p>
+
+<p>下面以本人的个人网站为例，简单介绍 jekyll 的使用方法，更多内容请参阅<a href="http://jekyll.com.cn/">官方文档</a>。</p>
+
+<p>目录结构如下：_layouts 内的文件为骨架模板；_posts 内的 markdown 文档为我们需要发表的文章；assets 含一些静态资源文件；views 包含站点内的所有页面；_config.yml 为配置文件。待站点搭建完毕，我们只需关注 _posts 文件夹。</p>
+
+<p><img src="http://olvck72xe.bkt.clouddn.com/jekyll-catalog.png" alt="jekyll 项目目录结构" /></p>
+
+<p>不介意各位<a href="https://github.com/sunmengyuan/sunmengyuan.github.io/tree/master/website">下载本人的原创模板</a>做实验，将它拷贝至你的 [github 用户名].github.io 仓库并提交。不了解 git 命令行的同学请查阅<a href="http://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000">教程</a>。</p>
+
+<p>现在，访问 <strong>[github 用户名].github.io/garden/</strong> 会有惊喜嗷 ~</p>
+
+<p>恭喜你可以愉快的撰写技术文档了！今后，增删文章只需在 _posts 文件夹内增删对应的 markdown 文件，若想在本地预览效果，只需启动 jekyll 服务并访问 <a href="http://localhost:4000/garden/">http://localhost:4000/garden/</a>。</p>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code><span class="c"># 启动 jekyll 服务</span>
+<span class="nb">cd </span>website
+jekyll server
+</code></pre>
+</div>
+
+<hr />
+
+<p>作者：呆恋小喵</p>
+
+<p>我的网站：<a href="https://sunmengyuan.github.io">https://sunmengyuan.github.io</a></p>
+
+<p>我的 github：<a href="https://github.com/sunmengyuan">https://github.com/sunmengyuan</a></p>
+
+<p>原文链接：<a href="https://sunmengyuan.github.io/garden/2017/02/24/github-blog.html">https://sunmengyuan.github.io/garden/2017/02/24/github-blog.html</a></p>
 
 </article>
 

@@ -1,9 +1,9 @@
 ---
 layout: post
-title: "使用 jekyll + github Page 搭建个人网站"
+title: "使用 Jekyll + Github Page 搭建个人网站"
 date: "2017-02-24"
 abstract: "介绍如何使用静态站点生成工具 jekyll 及 github 服务器搭建个人网站。"
-keywords: ["github Page", "jekyll", "个人技术博客搭建"]
+keywords: ["github page", "jekyll", "个人技术博客搭建"]
 ---
 
 ### 一、创建 github 账号
@@ -46,7 +46,7 @@ jekyll 是一种静态站点生成工具，它可以使发表文章的过程简�
 
 下面以本人的个人网站为例，简单介绍 jekyll 的使用方法，更多内容请参阅[官方文档](http://jekyll.com.cn/)。
 
-目录结构如下：_layouts 内的文件为骨架模板；_posts 内的 markdown 文档为我们需要发表的文章；assets 含一些静态资源文件；views 包含站点内的所有页面；_config.yml 为配置文件。待站点搭建完毕，我们只需关注 _posts 文件夹。
+目录结构如下：_layouts 内的文件为骨架模板；_posts 内的 markdown 文件会转化为我们所需发表的文章；assets 含一些静态资源文件；views 包含站点内的所有页面；_config.yml 为配置文件。待站点搭建完毕，我们只需关注 _posts 文件夹。
 
 ![jekyll 项目目录结构](http://olvck72xe.bkt.clouddn.com/jekyll-catalog.png)
 

@@ -2,8 +2,8 @@
 layout: post
 title: "使用 Jekyll + Github Page 搭建个人网站"
 date: "2017-02-24"
-abstract: "介绍如何使用静态站点生成工具 jekyll 及 github 服务器搭建个人网站。"
-keywords: ["github page", "jekyll", "个人技术博客搭建"]
+abstract: "前段时间，朋友问我如何高大上地展现个人作品。既然要求高大上，无外乎易传播、体验好、摒除纸媒，那就以线上的方式将自己的作品丢给面试官呗（朋友在求职）。我向她推荐了 github page，一来无需购买服务器及域名，二则因为按照她的需求一个静态站点足矣。本文算是为朋友量身打造，比较适合小白实用，介绍了如何使用静态站点生成工具 jekyll 及 github 服务器搭建个人网站。大神请飘过但不反对批评指正，万分感谢。"
+keywords: ["github page", "jekyll", "个人网站搭建"]
 ---
 
 ### 一、创建 github 账号
@@ -12,11 +12,11 @@ keywords: ["github page", "jekyll", "个人技术博客搭建"]
 
 github 用户名是可以修改的：
 
-![github 用户名变更](http://olvck72xe.bkt.clouddn.com/change-username.png)
+![github 用户名变更](http://om0msk8ci.bkt.clouddn.com/change-username.png)
 
 若执行上述操作后发现用户名仍未变更，其原因多半是该用户名已被占用（提示信息不明显，以致很多人不明修改失败的原因）。
 
-![github 用户名变更失败](http://olvck72xe.bkt.clouddn.com/change-username-alert.png)
+![github 用户名变更失败](http://om0msk8ci.bkt.clouddn.com/change-username-alert.png)
 
 ### 二、新建仓库
 
@@ -24,31 +24,31 @@ github 用户名是可以修改的：
 
 下面，开始创建新仓库：
 
-![创建 github 仓库](http://olvck72xe.bkt.clouddn.com/create-repository.png)
+![创建 github 仓库](http://om0msk8ci.bkt.clouddn.com/create-repository.png)
 
 最后，将项目克隆至本地：
 
-![克隆 github 项目至本地](http://olvck72xe.bkt.clouddn.com/clone-repository.png)
+![克隆 github 项目至本地](http://om0msk8ci.bkt.clouddn.com/clone-repository.png)
 
 ### 三、搭建个人网站
 
 github 有许多模板主题可供选择，相关代码可自动生成：
 
-![github Page 主题选择](http://olvck72xe.bkt.clouddn.com/select-theme.png)
+![github Page 主题选择](http://om0msk8ci.bkt.clouddn.com/select-theme.png)
 
 但本人更倾向于自行搭建模板，一是因为与其改别人的不如自己写，二是为了令自己的网站更符合个人审美，三是因为作为一枚傲娇的前端工程师套用别人的模板实在说不过去。
 
-下面来一句广告语，欢迎参观[呆恋小喵的后花园](https://sunmengyuan.github.io)，你可能觉得它不够漂亮，但是我喜欢。该网站使用 jekyll 框架搭建。
+下面来一句广告语，欢迎参观[呆恋小喵的后花园](https://sunmengyuan.github.io)，你可能觉得它不够漂亮，但是我喜欢。该网站使用 jekyll 框架搭建，图片资源使用七牛托管。为何要将资源托管呢？因为 github page 的免费空间有限啊，图片辣么大不是么。
 
 #### * 关于 jekyll
 
-jekyll 是一种静态站点生成工具，它可以使发表文章的过程简化为添加并撰写一篇 markdown 文档。欲使用 jekyll 首先需要安装它，安装完成后创建项目并启动服务（端口号默认 4000）。
+jekyll 是一种静态站点生成工具，它可以使发表文章的过程简化为添加并撰写一篇 markdown 文档。欲使用 jekyll 首先需要安装它，安装完成后创建项目并启动服务（默认端口号 4000）。
 
 下面以本人的个人网站为例，简单介绍 jekyll 的使用方法，更多内容请参阅[官方文档](http://jekyll.com.cn/)。
 
 目录结构如下：_layouts 内的文件为骨架模板；_posts 内的 markdown 文件会转化为我们所需发表的文章；assets 含一些静态资源文件；views 包含站点内的所有页面；_config.yml 为配置文件。待站点搭建完毕，我们只需关注 _posts 文件夹。
 
-![jekyll 项目目录结构](http://olvck72xe.bkt.clouddn.com/jekyll-catalog.png)
+![jekyll 项目目录结构](http://om0msk8ci.bkt.clouddn.com/jekyll-catalog.png)
 
 不介意各位[下载本人的原创模板](https://github.com/sunmengyuan/sunmengyuan.github.io/tree/master/website)做实验，将它拷贝至你的 [github 用户名].github.io 仓库并提交。不了解 git 命令行的同学请查阅[教程](http://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000)。
 
@@ -62,11 +62,19 @@ cd website
 jekyll server
 ```
 
+友情提示：
+
++ jekyll 服务的启动应在含 _config.yml 文件的目录下。
+
++ 具体访问路径请查看 _config.yml 文件中的 baseurl 配置项。
+
++ 启动 jekyll 服务时若提示含未安装插件，请查看 _config.yml 文件中的 gems 配置项。
+
 *****
 
 作者：呆恋小喵
 
-我的网站：<https://sunmengyuan.github.io>
+我的后花园：<https://sunmengyuan.github.io/garden/>
 
 我的 github：<https://github.com/sunmengyuan>
 

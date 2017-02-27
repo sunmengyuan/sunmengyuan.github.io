@@ -10,7 +10,7 @@ title: "印记"
             <a href="{{ site.baseurl }}{{ post.url }}" title="{{ post.title }}">
                 <h3>{{ post.title }}</h3>
                 <time>{{ post.date | date_to_string }}</time>
-                <p class="abstract">{{ post.abstract }}</p>
+                <p class="abstract ellipsis-row2">{{ post.abstract }}</p>
                 <ul class="c-fix">
                     {% for keyword in post.keywords %}
                     <li>{{ keyword }}</li>

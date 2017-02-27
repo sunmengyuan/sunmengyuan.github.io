@@ -1,4 +1,4 @@
-*{margin: 0;padding: 0;}
+*{margin: 0;padding: 0;word-break: break-all;}
 body{text-align: left;line-height: 1.6;font-family: "\5FAE\8F6F\96C5\9ED1", "\5B8B\4F53", Arial, Verdana;}
 h1, h2, h3, h4, h5, h6{font-weight: normal;}
 ul, ol, li{list-style: none;}
@@ -20,6 +20,9 @@ img{display: block;width: 100%;}
 .c-center () {top: 50%;left: 50%;-webkit-transform: translate(-50%, -50%);transform: translate(-50%, -50%);}
 .c-vertical () {top: 50%;-webkit-transform: translate(0, -50%);transform: translate(0, -50%);}
 .c-horizontal () {left: 50%;-webkit-transform: translate(-50%, 0);transform: translate(-50%, 0);}
+.ellipsis-row1{overflow: hidden;text-overflow: ellipsis;white-space: nowrap;}
+.ellipsis-row2{overflow: hidden;text-overflow: ellipsis;-webkit-line-clamp: 2;-webkit-box-orient: vertical;display: -webkit-box;}
+.ellipsis-row3{overflow: hidden;text-overflow: ellipsis;-webkit-line-clamp: 3;-webkit-box-orient: vertical;display: -webkit-box;}
 
 .rotate (@deg) {
     -webkit-transform: rotate(@deg);
@@ -481,7 +484,6 @@ article {
     a {
         color: @GnStrong;
         text-decoration: underline;
-        word-break: break-all;
     }
     img {
         width: auto;

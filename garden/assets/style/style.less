@@ -50,6 +50,7 @@ img{display: block;width: 100%;}
 @btnGn: rgba(51, 177, 93, 0.7);
 @btnBl: rgba(0, 0, 0, 0.9);
 @maskBl: rgba(0, 0, 0, 0.9);
+@maskGn: rgba(51, 177, 93, 0.9);
 @borderGy: #e5e5e5;
 @bgGy: #f7f7f7;
 
@@ -240,9 +241,25 @@ header.welcome {
     }
 }
 header.post {
+    position: relative;
     padding: 50px 84px 50px 20px;
+    background-position: 50% 50%;
+    background-size: cover;
 
+    &:before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 1;
+        width: 100%;
+        height: 100%;
+        background-color: @maskGn;
+    }
     & > div {
+        position: relative;
+        z-index: 2;
+
         h2 {
             font-size: 20px;
             color: #fff;

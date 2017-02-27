@@ -1,9 +1,11 @@
 ---
 layout: post
-title: "使用 Jekyll + Github Page 搭建个人网站"
+title: "使用 Jekyll + Github Pages 搭建个人网站"
 date: "2017-02-24"
-abstract: "前段时间，朋友问我如何高大上地展现个人作品。既然要求高大上，无外乎易传播、体验好、摒除纸媒，那就以线上的方式将自己的作品丢给面试官呗（朋友在求职）。我向她推荐了 github page，一来无需购买服务器及域名，二则因为按照她的需求一个静态站点足矣。本文算是为朋友量身打造，比较适合小白食用，介绍了如何使用静态站点生成工具 jekyll 及 github 服务器搭建个人网站。大神请飘过但不反对批评指正，万分感谢。"
-keywords: ["github page", "jekyll", "个人网站搭建"]
+abstract: "前段时间，朋友问我如何高大上地展现个人作品。既然要求高大上，无外乎易传播、体验好、摒除纸媒，那就以线上的方式将自己的作品丢给面试官呗（朋友在求职）。我向她推荐了 github pages，一来无需购买服务器及域名，二则因为按照她的需求一个静态站点足矣。本文算是为朋友量身打造，比较适合小白食用，介绍了如何使用静态站点生成工具 jekyll 及 github 服务器搭建个人网站。大神请飘过但不反对批评指正，万分感谢。"
+keywords: ["github pages", "jekyll", "个人网站搭建"]
+banner: "http://om0msk8ci.bkt.clouddn.com/banner.jpg"
+thumb: "http://om0msk8ci.bkt.clouddn.com/thumb.jpg"
 ---
 
 ### 一、创建 github 账号
@@ -34,11 +36,11 @@ github 用户名是可以修改的：
 
 github 有许多模板主题可供选择，相关代码可自动生成：
 
-![github Page 主题选择](http://om0msk8ci.bkt.clouddn.com/select-theme.png)
+![github pages 主题选择](http://om0msk8ci.bkt.clouddn.com/select-theme.png)
 
 但本人更倾向于自行搭建模板，一是因为与其改别人的不如自己写，二是为了令自己的网站更符合个人审美，三是因为作为一枚傲娇的前端工程师套用别人的模板实在说不过去。
 
-下面来一句广告语，欢迎参观[呆恋小喵的后花园](https://sunmengyuan.github.io)，你可能觉得它不够漂亮，但是我喜欢。该网站使用 jekyll 框架搭建，图片资源使用七牛托管。为何要将资源托管呢？因为 github page 的免费空间有限啊，图片辣么大不是么。
+下面来一句广告语，欢迎参观[呆恋小喵的后花园](https://sunmengyuan.github.io)，你可能觉得它不够漂亮，但是我喜欢。该网站使用 jekyll 框架搭建，图片资源使用七牛托管。为何要将资源托管呢？因为 github pages 的免费空间有限啊，图片辣么大不是么。
 
 #### * 关于 jekyll
 

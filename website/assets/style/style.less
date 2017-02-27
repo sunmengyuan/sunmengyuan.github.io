@@ -281,7 +281,9 @@ header.post {
 section.posts {
     & > ul {
         & > li {
-            padding: 20px 84px 20px 20px;
+            position: relative;
+            min-height: 150px;
+            padding: 20px 84px 20px 190px;
             border-bottom: 1px solid @borderGy;
 
             h3 {
@@ -299,6 +301,14 @@ section.posts {
             }
             ul {
                 .keywords();
+            }
+            img {
+                .c-vertical();
+
+                width: 150px;
+                height: 150px;
+                position: absolute;
+                left: 20px;
             }
 
             &:hover {

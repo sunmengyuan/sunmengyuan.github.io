@@ -123,3 +123,13 @@ gulp.task('minify_demos', function () {
     );
 });
 ```
+
+*****
+
+作者：呆恋小喵
+
+我的后花园：<https://sunmengyuan.github.io/garden/>
+
+我的 github：<https://github.com/sunmengyuan>
+
+原文链接：<https://sunmengyuan.github.io/garden/2016/12/30/markdown-theme.html>

@@ -16,7 +16,7 @@ title: "印记"
                     <li>{{ keyword }}</li>
                     {% endfor %}
                 </ul>
-                <img src="{{ post.litimg }}" class="c-block" />
+                <img src="{% if post.litimg %}{{ post.litimg }}{% else %}http://oij8a9ql4.bkt.clouddn.com/nothumb.png{% endif %}" class="c-block" />
             </a>
         </li>
         {% endfor %}

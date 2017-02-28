@@ -1,3 +1,21 @@
+var method = {
+    getUrlParam: function (key) {
+        var search = location.search;
+        var tmp = [];
+        var value = '';
+        if (search) {
+            tmp = search.substr(1).split('&');
+        }
+        for (var i = 0; i < tmp.length; i++) {
+            if (tmp[i].substring(0, tmp[i].indexOf('=')) == key) {
+                value = tmp[i].substr(tmp[i].indexOf('=') + 1);
+                break;
+            }
+        }
+        return value;
+    }
+};
+
 var main = {
     do: function () {
         var _this = this;
@@ -20,6 +38,12 @@ var main = {
                 $(this).removeClass('rollingF').addClass('rollingB close');
                 $menu.slideDown();
             }
+        });
+        $('.js_goto_posts').on('click', function (e) {
+            e.preventDefault();
+            var page = method.getUrlParam('page');
+            var url = $(this).attr('href');
+            location.href = (page == 1) ? url : url + '/' + page;
         });
     },
     browserHandle: function () {

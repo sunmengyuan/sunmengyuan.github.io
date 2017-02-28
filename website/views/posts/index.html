@@ -7,7 +7,7 @@ title: "印记"
     <ul>
         {% for post in paginator.posts %}
         <li>
-            <a href="{{ site.baseurl }}{{ post.url }}" title="{{ post.title }}">
+            <a href="{{ site.baseurl }}{{ post.url }}?page={{ paginator.page }}" title="{{ post.title }}">
                 <h3>{{ post.title }}</h3>
                 <time>{{ post.date | date_to_string }}</time>
                 <p class="abstract ellipsis-row2">{{ post.abstract }}</p>

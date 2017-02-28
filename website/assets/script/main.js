@@ -2,8 +2,8 @@ var main = {
     do: function () {
         var _this = this;
         _this.menuHandle();
+        _this.browserHandle();
         _this.gotop();
-        _this.viewArticleImg();
         pageData.postsData && _this.paginator();
 
         hljs.initHighlightingOnLoad();
@@ -20,6 +20,19 @@ var main = {
                 $(this).removeClass('rollingF').addClass('rollingB close');
                 $menu.slideDown();
             }
+        });
+    },
+    browserHandle: function () {
+        var $browser = $('.js_browser');
+        var $img = $browser.find('img');
+        $('.js_article').on('click', 'img', function () {
+            var src = $(this).attr('src');
+            $img.attr('src', src);
+            $browser.show();
+        });
+        $browser.on('click', function () {
+            $browser.hide();
+            $img.attr('src', '');
         });
     },
     gotop: function () {
@@ -51,19 +64,6 @@ var main = {
                     timeout = null;
                 }, 16);
             }
-        });
-    },
-    viewArticleImg: function () {
-        var $browser = $('.js_browser');
-        var $img = $browser.find('img');
-        $('.js_viewimg').on('click', 'img', function () {
-            var src = $(this).attr('src');
-            $img.attr('src', src);
-            $browser.show();
-        });
-        $browser.on('click', function () {
-            $browser.hide();
-            $img.attr('src', '');
         });
     },
     paginator: function () {

@@ -80,7 +80,7 @@ ___粗斜体___
         <span></span>
         <span></span>
     </a>
-    <ul class="c-hidden js_menu">
+    <ul class="js_menu">
         <li><a href="{{ site.baseurl }}/">Home</a></li>
         <li><a href="{{ site.baseurl }}/views/posts">Posts</a></li>
         <li><a href="{{ site.baseurl }}/views/about">About</a></li>

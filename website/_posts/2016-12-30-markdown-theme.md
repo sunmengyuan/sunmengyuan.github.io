@@ -26,7 +26,7 @@ __粗体__
 
 ___粗斜体___
 
-[链接](http://oij8a9ql4.bkt.clouddn.com/test.png)
+[链接](http://oij8a9ql4.bkt.clouddn.com/nothumb.png)
 
 > 引用
 
@@ -67,7 +67,7 @@ ___粗斜体___
 
 图片
 
-![图片](http://oij8a9ql4.bkt.clouddn.com/test.png)
+![图片](http://oij8a9ql4.bkt.clouddn.com/nothumb.png)
 
 *****
 

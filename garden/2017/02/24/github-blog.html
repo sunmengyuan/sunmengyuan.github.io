@@ -85,33 +85,32 @@
 
 <p><img src="http://om0msk8ci.bkt.clouddn.com/select-theme.png" alt="github pages 主题选择" /></p>
 
-<p>但本人更倾向于自行搭建模板，一是因为与其改别人的不如自己写，二是为了令自己的网站更符合个人审美，三是因为作为一枚傲娇的前端工程师套用别人的模板实在说不过去。</p>
+<p>但本人更倾向于自行搭建模板：一是因为与其改别人的不如自己写；二是为了令自己的网站更符合个人审美；三是因为作为一枚傲娇的前端工程师套用别人的模板实在说不过去。</p>
 
 <p>下面来一句广告语，欢迎参观<a href="https://sunmengyuan.github.io">呆恋小喵的后花园</a>，你可能觉得它不够漂亮，但是我喜欢。该网站使用 jekyll 框架搭建，图片资源使用七牛托管。为何要将资源托管呢？因为 github pages 的免费空间有限啊，图片辣么大不是么。</p>
 
+<hr />
+
 <h4 id="-关于-jekyll">* 关于 jekyll</h4>
 
-<p>jekyll 是一种静态站点生成工具，它可以使发表文章的过程简化为添加并撰写一篇 markdown 文档。欲使用 jekyll 首先需要安装它，安装完成后创建项目并启动服务（默认端口号 4000）。</p>
+<p>jekyll 是一种静态站点生成工具，它可以使发表文章的过程简化为添加并撰写一篇 markdown 文档。</p>
 
-<p>下面以本人的个人网站为例，简单介绍 jekyll 的使用方法，更多内容请参阅<a href="http://jekyll.com.cn/">官方文档</a>。</p>
+<p>下面，<strong><em>以本人的个人网站为例</em></strong>，简单介绍 jekyll 的使用方法，更多内容请参阅<a href="http://jekyll.com.cn/">官方文档</a>。</p>
 
-<p>目录结构如下：_layouts 内的文件为骨架模板；_posts 内的 markdown 文件会转化为我们所需发表的文章；assets 含一些静态资源文件；views 包含站点内的所有页面；_config.yml 为配置文件。待站点搭建完毕，我们只需关注 _posts 文件夹。</p>
+<p>目录结构如下：_layouts 内的文件为骨架模板；_posts 内的 markdown 文件会转化为我们所需发表的文章；assets 含一些静态资源文件；views 包含站点内的所有页面；_config.yml 为配置文件。</p>
 
 <p><img src="http://om0msk8ci.bkt.clouddn.com/jekyll-catalog.png" alt="jekyll 项目目录结构" /></p>
 
-<p>不介意各位<a href="https://github.com/sunmengyuan/sunmengyuan.github.io/tree/master/website">下载本人的原创模板</a>做实验，将它拷贝至你的 [github 用户名].github.io 仓库并提交。不了解 git 命令行的同学请查阅<a href="http://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000">教程</a>。</p>
+<h5 id="-关于-jekyll-开发环境">* 关于 jekyll 开发环境</h5>
 
-<p>现在，访问 <strong>[github 用户名].github.io/garden/</strong> 会有惊喜嗷 ~</p>
-
-<p>恭喜你可以愉快的撰写技术文档了！今后，增删文章只需在 _posts 文件夹内增删对应的 markdown 文件，若想在本地预览效果，只需启动 jekyll 服务并访问 <a href="http://localhost:4000/garden/">http://localhost:4000/garden/</a>。</p>
+<p>为何需要开启 jekyll 服务？一是使 jekyll 可自动编译文件从而生成静态站点；二是方便在开发环境预览修改效果。</p>
 
 <div class="language-bash highlighter-rouge"><pre class="highlight"><code><span class="c"># 启动 jekyll 服务</span>
-<span class="nb">cd </span>website
 jekyll server
 </code></pre>
 </div>
 
-<p>关于 _config.yml 配置文件的几点说明：</p>
+<p>注意事项：</p>
 
 <ul>
   <li>
@@ -121,6 +120,14 @@ jekyll server
     <p>启动 jekyll 服务时若提示含未安装插件，请查看 _config.yml 文件中的 gems 配置项并将所需插件一一安装。</p>
   </li>
 </ul>
+
+<hr />
+
+<p>不介意各位<a href="https://github.com/sunmengyuan/sunmengyuan.github.io/tree/master/website">下载本人的原创模板</a>做实验，将它拷贝至你的 [github 用户名].github.io 仓库并提交。不了解 git 命令行的同学请查阅<a href="http://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000">教程</a>。</p>
+
+<p>现在，访问 <strong>[github 用户名].github.io/garden/</strong> 会有惊喜嗷~</p>
+
+<p>恭喜你可以愉快的撰写文档了！今后，增删文章只需在 _posts 文件夹内增删对应的 markdown 文件，若想在本地预览效果，只需启动 jekyll 服务并访问 <a href="http://localhost:4000/garden/">http://localhost:4000/garden/</a>。</p>
 
 <hr />
 

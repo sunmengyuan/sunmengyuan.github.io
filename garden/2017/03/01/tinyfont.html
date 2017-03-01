@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="keywords" content="前端开发,css3,移动端 web 开发" />
+    <meta name="description" content="浏览器可渲染的最小字号为 12px，但设计图上经常出现小于该值的字体。对于 11px 我往往就按 12px 处理了，可 9px 这样的超小字号处理成 12px 绝对太不地道啊。大家可能都知道通过 transform: scale(n) 能达到缩小字体的效果，但你没有发现并非十分好用？" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0" />
+    <title>呆恋小喵的后花园 - 移动端 Web 开发中小字号字体处理的思考</title>
+    <link rel="shortcut icon" href="http://oij8a9ql4.bkt.clouddn.com/shortcut.ico" />
+    <link rel="stylesheet" href="https://cdn.bootcss.com/highlight.js/8.0/styles/sunburst.min.css" />
+    <link rel="stylesheet/less" href="/garden/assets/style/style.less" />
+    <script src="https://lib.sinaapp.com/js/jquery/1.9.1/jquery-1.9.1.min.js"></script>
+    <script src="https://cdn.bootcss.com/less.js/1.7.0/less.min.js"></script>
+    <script src="https://cdn.bootcss.com/highlight.js/8.0/highlight.min.js"></script>
+</head>
+<body>
+<script>
+    var pageData = {};
+    var _hmt = _hmt || [];
+    (function () {
+        var hm = document.createElement('script');
+        hm.src = 'https://hm.baidu.com/hm.js?6b9830e6ab8073ce1a44ad49a03d8596';
+        var s = document.getElementsByTagName('script')[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+<img src="http://oij8a9ql4.bkt.clouddn.com/portrait.jpg" alt="呆恋小喵" width="0" height="0" />
+<nav>
+    <a href="javascript:;" class="js_menu_btn">
+        <span></span>
+        <span></span>
+        <span></span>
+    </a>
+    <ul class="js_menu">
+        <li><a href="/garden/">Home</a></li>
+        <li><a href="/garden/views/posts" class="js_goto_posts">Posts</a></li>
+        <li><a href="/garden/views/about">About</a></li>
+    </ul>
+</nav>
+<a href="javascript:;" class="gotop js_gotop"></a>
+<header class="post" style="background-image: url('http://oij8a9ql4.bkt.clouddn.com/banner.jpg')">
+    <div>
+        <h2>移动端 Web 开发中小字号字体处理的思考</h2>
+        <time>01 Mar 2017</time>
+        <p class="abstract">浏览器可渲染的最小字号为 12px，但设计图上经常出现小于该值的字体。对于 11px 我往往就按 12px 处理了，可 9px 这样的超小字号处理成 12px 绝对太不地道啊。大家可能都知道通过 transform: scale(n) 能达到缩小字体的效果，但你没有发现并非十分好用？</p>
+        <ul class="c-fix">
+            
+            <li>css3</li>
+            
+            <li>移动端 web 开发</li>
+            
+        </ul>
+    </div>
+</header>
+<article class="js_article">
+    <p>第一个例子：看到红框内 9px 的小字体了吗？用 transform: scale(n) 单独处理这一行，字体被缩小的同时，上下左右间距也被缩小了。那么问题来了：你能算出缩小处理后多出了多少空白，能知道使用 margin-left 向左折回多少像素来实现左对齐吗？显然不能！</p>
+
+<p><img src="http://om4r1gige.bkt.clouddn.com/example-tinyfont-1.png" alt="移动端 web 开发中小字号字体处理举例" /></p>
+
+<p>缩小处理后的留白为 <strong><em>(1 - n) * 原尺寸 / 2</em></strong> 像素。原尺寸是不定的，因为这行文案中的价格不一定总是 4 位数，并且对于不同尺寸的屏幕它的占比也不同。所以上述方法缩小了字体却无法实现左对齐。</p>
+
+<p>给大家解释一下我所述的留白为何：自行看图领悟。</p>
+
+<p>transform: scale(n) 处理前：</p>
+
+<p><img src="http://om4r1gige.bkt.clouddn.com/tinyfont-space-before.png" alt="" /></p>
+
+<p>transform: scale(n) 处理后：</p>
+
+<p><img src="http://om4r1gige.bkt.clouddn.com/tinyfont-space-after.png" alt="" /></p>
+
+<hr />
+
+<p>第二个例子：文字居中对齐所以左右有多少留白都无所谓了吗？我开始也这么认为，然而……</p>
+
+<p><img src="http://om4r1gige.bkt.clouddn.com/example-tinyfont-2.png" alt="移动端 web 开发中小字号字体处理举例" /></p>
+
+<p>看似没有问题，其实当该行文字超出限度时，两端并不能与其它行对齐。原因必然是缩小处理后产生了留白。</p>
+
+<p><img src="http://om4r1gige.bkt.clouddn.com/tinyfont-center-space.png" alt="" /></p>
+
+<hr />
+
+
+</article>
+<footer>
+    <a href="/garden/views/posts" class="js_goto_posts">返回目录 - 我的印记</a>
+</footer>
+<div class="browser js_browser">
+    <img src="" />
+</div>
+
+<script src="/garden/assets/script/main.js"></script>
+</body>
+</html>

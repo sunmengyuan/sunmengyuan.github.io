@@ -62,9 +62,9 @@ img{display: block;width: 100%;}
 @btnBl: rgba(0, 0, 0, 0.9);
 @maskBl: rgba(0, 0, 0, 0.9);
 @maskGn: rgba(51, 177, 93, 0.9);
-@maskBrn: rgba(88, 55, 6, 0.7);
 @borderGy: #e5e5e5;
 @bgGy: #f7f7f7;
+@ftBrn: #9e756a;
 
 @GnStrong: #33b15d;
 @GnWeak: #d6ffd5;
@@ -303,18 +303,17 @@ header.post {
     }
 }
 footer {
-    background: url("http://oij8a9ql4.bkt.clouddn.com/banner.jpg") no-repeat 50% 50%;
-    background-size: cover;
-    margin-top: 50px;
-
     a {
         display: block;
         font-size: 18px;
         line-height: 50px;
         text-align: center;
         color: #fff;
-        background-color: @maskBrn;
-        opacity: 0.8;
+        background-color: @ftBrn;
+
+        &:hover {
+            opacity: 0.95;
+        }
     }
 }
 section.posts {

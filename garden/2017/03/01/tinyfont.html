@@ -81,6 +81,36 @@
 
 <hr />
 
+<p>下面介绍本人的解决方案：</p>
+
+<div class="language-css highlighter-rouge"><pre class="highlight"><code><span class="nc">.tinyscale</span> <span class="p">{</span>
+    <span class="nl">width</span><span class="p">:</span> <span class="m">200%</span><span class="p">;</span>
+    <span class="nl">margin-left</span><span class="p">:</span> <span class="m">-50%</span><span class="p">;</span>
+    <span class="nl">-webkit-transform</span><span class="p">:</span> <span class="n">scale</span><span class="p">(</span><span class="m">0.5</span><span class="p">);</span>
+            <span class="nl">transform</span><span class="p">:</span> <span class="n">scale</span><span class="p">(</span><span class="m">0.5</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<p>在含小字体的占宽 100% 的父级容器上添加 tinyscale 类，而后将其中所有的尺寸值及间距值乘 2。</p>
+
+<p>缩小为 0.5 倍后：宽度恢复 100%；尺寸值及间距值恢复为所需值。</p>
+
+<p>缩小处理后的留白为 <strong><em>(1 - 0.5) * 200% / 2</em></strong> 即 50%，所以使用 margin-left 向左折回 50% 即可，这样的处理无需考虑横向尺寸不固定的问题。</p>
+
+<p>上述方法的缺点是仅适用于定高的情况，因为纵向的折回值若使用百分比其基准值是宽度非高度……</p>
+
+<p>希望大神们留下更好的解决方案，万分感谢！</p>
+
+<hr />
+
+<p>作者：呆恋小喵</p>
+
+<p>我的后花园：<a href="https://sunmengyuan.github.io/garden/">https://sunmengyuan.github.io/garden/</a></p>
+
+<p>我的 github：<a href="https://github.com/sunmengyuan">https://github.com/sunmengyuan</a></p>
+
+<p>原文链接：<a href="https://sunmengyuan.github.io/garden/2017/03/01/tinyfont.html">https://sunmengyuan.github.io/garden/2017/03/01/tinyfont.html</a></p>
 
 </article>
 <footer>

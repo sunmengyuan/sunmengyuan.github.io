@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="keywords" content="前端开发,sass" />
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0" />
+    <title>呆恋小喵的后花园 - </title>
+    <link rel="shortcut icon" href="http://oij8a9ql4.bkt.clouddn.com/shortcut.ico" />
+    <link rel="stylesheet" href="https://cdn.bootcss.com/highlight.js/8.0/styles/sunburst.min.css" />
+    <link rel="stylesheet/less" href="/garden/assets/style/style.less" />
+    <script src="https://lib.sinaapp.com/js/jquery/1.9.1/jquery-1.9.1.min.js"></script>
+    <script src="https://cdn.bootcss.com/less.js/1.7.0/less.min.js"></script>
+    <script src="https://cdn.bootcss.com/highlight.js/8.0/highlight.min.js"></script>
+</head>
+<body>
+<script>
+    var pageData = {};
+    var _hmt = _hmt || [];
+    (function () {
+        var hm = document.createElement('script');
+        hm.src = 'https://hm.baidu.com/hm.js?6b9830e6ab8073ce1a44ad49a03d8596';
+        var s = document.getElementsByTagName('script')[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+<img src="http://oij8a9ql4.bkt.clouddn.com/portrait.jpg" alt="呆恋小喵" width="0" height="0" />
+<nav>
+    <a href="javascript:;" class="js_menu_btn">
+        <span></span>
+        <span></span>
+        <span></span>
+    </a>
+    <ul class="js_menu">
+        <li><a href="/garden/">Home</a></li>
+        <li><a href="/garden/views/posts" class="js_goto_posts">Posts</a></li>
+        <li><a href="/garden/views/about">About</a></li>
+    </ul>
+</nav>
+<a href="javascript:;" class="gotop js_gotop"></a>
+<header class="post" style="background-image: url('http://oij8a9ql4.bkt.clouddn.com/banner.jpg')">
+    <div>
+        <h2></h2>
+        <time>23 Mar 2017</time>
+        <p class="abstract"></p>
+        <ul class="c-fix">
+            
+            <li>sass</li>
+            
+        </ul>
+    </div>
+</header>
+<article class="js_article">
+    <h2 id="一变量">一、变量</h2>
+
+<h4 id="变量默认值">变量默认值</h4>
+
+<blockquote>
+  <p>变量默认值的价值在于进行组件化开发</p>
+</blockquote>
+
+<h4 id="特殊变量">特殊变量</h4>
+
+<ul>
+  <li>
+    <p>应用于选择器</p>
+  </li>
+  <li>
+    <p>应用于属性值</p>
+  </li>
+</ul>
+
+<div class="language-sass highlighter-rouge"><pre class="highlight"><code><span class="cm">/* sass */
+</span><span class="nv">$fontSize</span><span class="p">:</span> <span class="m">12px</span><span class="err">;</span>
+<span class="nv">$lineHeight</span><span class="p">:</span> <span class="m">20px</span><span class="err">;</span>
+<span class="nt">body</span> <span class="err">{</span>
+    <span class="nl">font</span><span class="p">:</span> <span class="si">#{</span><span class="nv">$fontSize</span><span class="si">}</span><span class="o">/</span><span class="si">#{</span><span class="nv">$lineHeight</span><span class="si">}</span> <span class="n">arial</span><span class="err">;</span>
+<span class="err">}</span>
+</code></pre>
+</div>
+
+<div class="language-css highlighter-rouge"><pre class="highlight"><code><span class="c">/* css */</span>
+<span class="nt">body</span> <span class="p">{</span>
+    <span class="nl">font</span><span class="p">:</span> <span class="m">12px</span><span class="p">/</span><span class="m">20px</span> <span class="n">arial</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<p>当变量 $fontSize 及变量 $lineHeight 不作为特殊变量处理时，符号 / 会被解析为除号：</p>
+
+<div class="language-sass highlighter-rouge"><pre class="highlight"><code><span class="cm">/* sass */
+</span><span class="nv">$fontSize</span><span class="p">:</span> <span class="m">12px</span><span class="err">;</span>
+<span class="nv">$lineHeight</span><span class="p">:</span> <span class="m">20px</span><span class="err">;</span>
+<span class="nt">body</span> <span class="err">{</span>
+    <span class="nl">font</span><span class="p">:</span> <span class="nv">$fontSize</span><span class="o">/</span><span class="nv">$lineHeight</span> <span class="n">arial</span><span class="err">;</span>
+<span class="err">}</span>
+</code></pre>
+</div>
+
+<div class="language-css highlighter-rouge"><pre class="highlight"><code><span class="c">/* css */</span>
+<span class="nt">body</span> <span class="p">{</span>
+    <span class="nl">font</span><span class="p">:</span> <span class="m">0.6</span> <span class="n">arial</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<h4 id="多值变量">多值变量</h4>
+
+<ul>
+  <li>
+    <p>List 类型</p>
+  </li>
+  <li>
+    <p>Map 类型</p>
+  </li>
+</ul>
+
+<div class="language-sass highlighter-rouge"><pre class="highlight"><code><span class="cm">/* sass */
+</span><span class="nv">$color</span><span class="p">:</span> <span class="p">(</span>
+    <span class="na">mainColor</span><span class="p">:</span> <span class="p">(</span><span class="mh">#333</span><span class="o">,</span> <span class="mh">#666</span><span class="p">)</span><span class="o">,</span>
+    <span class="na">assistantColor</span><span class="p">:</span> <span class="p">(</span><span class="mh">#666</span><span class="o">,</span> <span class="mh">#999</span><span class="p">)</span><span class="o">,</span>
+    <span class="na">weakColor</span><span class="p">:</span> <span class="p">(</span><span class="mh">#999</span><span class="o">,</span> <span class="mh">#CCC</span><span class="p">)</span>
+<span class="o">);</span>
+<span class="nc">.div1</span> <span class="err">{</span>
+    <span class="nl">background-color</span><span class="p">:</span> <span class="nf">nth</span><span class="p">(</span><span class="nf">map-get</span><span class="p">(</span><span class="nv">$color</span><span class="o">,</span> <span class="n">mainColor</span><span class="p">)</span><span class="o">,</span> <span class="m">1</span><span class="p">)</span><span class="err">;</span>
+    <span class="k">&amp;</span><span class="nd">:hover</span> <span class="err">{</span>
+        <span class="nl">background-color</span><span class="p">:</span> <span class="nf">nth</span><span class="p">(</span><span class="nf">map-get</span><span class="p">(</span><span class="nv">$color</span><span class="o">,</span> <span class="n">mainColor</span><span class="p">)</span><span class="o">,</span> <span class="m">2</span><span class="p">)</span><span class="err">;</span>
+    <span class="err">}</span>
+<span class="err">}</span>
+<span class="nc">.div2</span> <span class="err">{</span>
+    <span class="nl">background-color</span><span class="p">:</span> <span class="nf">nth</span><span class="p">(</span><span class="nf">map-get</span><span class="p">(</span><span class="nv">$color</span><span class="o">,</span> <span class="n">assistantColor</span><span class="p">)</span><span class="o">,</span> <span class="m">1</span><span class="p">)</span><span class="err">;</span>
+    <span class="k">&amp;</span><span class="nd">:hover</span> <span class="err">{</span>
+        <span class="nl">background-color</span><span class="p">:</span> <span class="nf">nth</span><span class="p">(</span><span class="nf">map-get</span><span class="p">(</span><span class="nv">$color</span><span class="o">,</span> <span class="n">assistantColor</span><span class="p">)</span><span class="o">,</span> <span class="m">2</span><span class="p">)</span><span class="err">;</span>
+    <span class="err">}</span>
+<span class="err">}</span>
+<span class="nc">.div3</span> <span class="err">{</span>
+    <span class="nl">background-color</span><span class="p">:</span> <span class="nf">nth</span><span class="p">(</span><span class="nf">map-get</span><span class="p">(</span><span class="nv">$color</span><span class="o">,</span> <span class="n">weakColor</span><span class="p">)</span><span class="o">,</span> <span class="m">1</span><span class="p">)</span><span class="err">;</span>
+    <span class="k">&amp;</span><span class="nd">:hover</span> <span class="err">{</span>
+        <span class="nl">background-color</span><span class="p">:</span> <span class="nf">nth</span><span class="p">(</span><span class="nf">map-get</span><span class="p">(</span><span class="nv">$color</span><span class="o">,</span> <span class="n">weakColor</span><span class="p">)</span><span class="o">,</span> <span class="m">2</span><span class="p">)</span><span class="err">;</span>
+    <span class="err">}</span>
+<span class="err">}</span>
+</code></pre>
+</div>
+
+<div class="language-css highlighter-rouge"><pre class="highlight"><code><span class="c">/* css */</span>
+<span class="nc">.div1</span> <span class="p">{</span>
+  <span class="nl">background-color</span><span class="p">:</span> <span class="m">#333</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="nc">.div1</span><span class="nd">:hover</span> <span class="p">{</span>
+  <span class="nl">background-color</span><span class="p">:</span> <span class="m">#666</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="nc">.div2</span> <span class="p">{</span>
+  <span class="nl">background-color</span><span class="p">:</span> <span class="m">#666</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="nc">.div2</span><span class="nd">:hover</span> <span class="p">{</span>
+  <span class="nl">background-color</span><span class="p">:</span> <span class="m">#999</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="nc">.div3</span> <span class="p">{</span>
+  <span class="nl">background-color</span><span class="p">:</span> <span class="m">#999</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="nc">.div3</span><span class="nd">:hover</span> <span class="p">{</span>
+  <span class="nl">background-color</span><span class="p">:</span> <span class="m">#CCC</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<hr />
+
+<h2 id="二嵌套">二、嵌套</h2>
+
+<p>增强文件的结构性及可读性，防止优先级过高</p>
+
+<h4 id="at-root">@at-root</h4>
+
+<div class="language-sass highlighter-rouge"><pre class="highlight"><code><span class="cm">/* sass */
+</span><span class="nc">.demo</span> <span class="err">{</span>
+    <span class="nl">animation</span><span class="p">:</span> <span class="n">motion</span> <span class="m">1s</span> <span class="n">infinite</span><span class="err">;</span>
+    <span class="k">@at-root</span> <span class="err">{</span>
+        <span class="k">@keyframes</span> <span class="nt">motion</span> <span class="err">{</span>
+            <span class="na">0</span><span class="err">% {</span><span class="nl">background-color</span><span class="p">:</span> <span class="no">red</span><span class="err">;}</span>
+            <span class="na">100</span><span class="err">% {</span><span class="nl">background-color</span><span class="p">:</span> <span class="no">yellow</span><span class="err">;}</span>
+        <span class="err">}</span>
+    <span class="err">}</span>
+<span class="err">}</span>
+</code></pre>
+</div>
+
+<div class="language-css highlighter-rouge"><pre class="highlight"><code><span class="c">/* css */</span>
+<span class="nc">.demo</span> <span class="p">{</span>
+    <span class="nl">animation</span><span class="p">:</span> <span class="n">motion</span> <span class="m">1s</span> <span class="n">infinite</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="k">@keyframes</span> <span class="n">motion</span> <span class="p">{</span>
+    <span class="nt">0</span><span class="o">%</span> <span class="p">{</span><span class="nl">background-color</span><span class="p">:</span> <span class="no">red</span><span class="p">;}</span>
+    <span class="nt">100</span><span class="o">%</span> <span class="p">{</span><span class="nl">background-color</span><span class="p">:</span> <span class="no">yellow</span><span class="p">;}</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+</article>
+<footer>
+    <a href="/garden/views/posts" class="js_goto_posts">返回目录 - 我的印记</a>
+</footer>
+<div class="browser js_browser">
+    <img src="" />
+</div>
+
+<script src="/garden/assets/script/main.js"></script>
+</body>
+</html>

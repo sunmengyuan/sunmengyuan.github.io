@@ -196,6 +196,113 @@
 </code></pre>
 </div>
 
+<hr />
+
+<h2 id="三继承">三、继承</h2>
+
+<p>@mixin @include 参数 参数默认值</p>
+
+<p>% @extend 公共类</p>
+
+<h4 id="占位选择器-">占位选择器 %</h4>
+
+<p>未调用时不产生多余 css</p>
+
+<hr />
+
+<h2 id="四函数">四、函数</h2>
+
+<p>产生值，非属性</p>
+
+<div class="language-sass highlighter-rouge"><pre class="highlight"><code><span class="cm">/* sass */
+</span><span class="k">@function</span> <span class="nf">x2</span> <span class="p">(</span><span class="nv">$val</span><span class="p">)</span> <span class="err">{</span>
+    <span class="k">@return</span> <span class="m">2</span> <span class="o">*</span> <span class="nv">$val</span><span class="err">;</span>
+<span class="err">}</span>
+<span class="nt">body</span> <span class="err">{</span>
+    <span class="nl">font-size</span><span class="p">:</span> <span class="nf">x2</span><span class="p">(</span><span class="m">12px</span><span class="p">)</span><span class="err">;</span>
+<span class="err">}</span>
+</code></pre>
+</div>
+
+<div class="language-css highlighter-rouge"><pre class="highlight"><code><span class="c">/* css */</span>
+<span class="nt">body</span> <span class="p">{</span>
+    <span class="nl">font-size</span><span class="p">:</span> <span class="m">24px</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<hr />
+
+<h2 id="五语句">五、语句</h2>
+
+<p>@if  @else if  @else</p>
+
+<p>三目判断 if($condition, $if_true, $if_false)</p>
+
+<h4 id="for">@for</h4>
+
+<p>for 循环的书写形式有两种：</p>
+
+<ul>
+  <li>
+    <p>@for <strong>$var</strong> from <strong>start</strong> through <strong>end</strong></p>
+  </li>
+  <li>
+    <p>@for <strong>$var</strong> from <strong>start</strong> to <strong>end</strong></p>
+  </li>
+</ul>
+
+<p>第一种在循环遍历时会对第 <strong>end</strong> 项进行操作，第二种则不会。本人认为习惯使用一种即可，不然易混淆。</p>
+
+<h5 id="应用场景">应用场景</h5>
+
+<p>我司喜好做 “固定模板” 需求：运营同学会将一张图片裁切成 n 个区域，点击每一区域的行为有所不同。比如一张美女的面部图，点击其眼睛时会推荐一些双眼皮项目，点击其鼻子时会推荐一些鼻综合项目等等（我司是做微整形交易平台的）。</p>
+
+<p>区域划分是有一定规则的，如下图：当前行仅含一张图片时图片宽度为 100%，两张时为 50%，… n 张时为 (100 / n)%。</p>
+
+<p><img src="http://onppksal8.bkt.clouddn.com/static-template.jpg" alt="固定模板" /></p>
+
+<p>实现代码如下：</p>
+
+<div class="language-sass highlighter-rouge"><pre class="highlight"><code><span class="nv">%clear-float</span> <span class="err">{</span>
+    <span class="k">&amp;</span><span class="nd">:after</span> <span class="err">{</span>
+        <span class="nl">content</span><span class="p">:</span> <span class="s2">""</span><span class="err">;</span>
+        <span class="nl">display</span><span class="p">:</span> <span class="nb">block</span><span class="err">;</span>
+        <span class="nl">height</span><span class="p">:</span> <span class="m">0</span><span class="err">;</span>
+        <span class="nl">clear</span><span class="p">:</span> <span class="nb">both</span><span class="err">;</span>
+        <span class="nl">visibility</span><span class="p">:</span> <span class="nb">hidden</span><span class="err">;</span>
+    <span class="err">}</span>
+<span class="err">}</span>
+<span class="nv">%adapt-image</span> <span class="err">{</span>
+    <span class="nl">display</span><span class="p">:</span> <span class="nb">block</span><span class="err">;</span>
+    <span class="nl">width</span><span class="p">:</span> <span class="m">100%</span><span class="err">;</span>
+<span class="err">}</span>
+<span class="nv">%static-template</span> <span class="err">{</span>
+    <span class="nt">div</span> <span class="err">{</span>
+        <span class="k">@extend</span> <span class="nv">%clear-float</span><span class="o">;</span>
+        <span class="nt">a</span> <span class="err">{</span>
+            <span class="nl">float</span><span class="p">:</span> <span class="nb">left</span><span class="err">;</span>           
+            <span class="nt">img</span> <span class="err">{</span>
+                <span class="k">@extend</span> <span class="nv">%adapt-image</span><span class="o">;</span>
+            <span class="err">}</span>
+        <span class="err">}</span>
+    <span class="err">}</span>
+    <span class="k">@for</span> <span class="nv">$itemCount</span> <span class="ow">from</span> <span class="m">1</span> <span class="ow">through</span> <span class="m">3</span> <span class="err">{</span>
+        <span class="nc">.count</span><span class="si">#{</span><span class="nv">$itemCount</span><span class="si">}</span> <span class="err">{</span>
+            <span class="nt">a</span> <span class="err">{</span>
+                <span class="nl">width</span><span class="p">:</span> <span class="m">100%</span><span class="o">/</span><span class="nv">$itemCount</span><span class="err">;</span>
+            <span class="err">}</span>
+        <span class="err">}</span>
+    <span class="err">}</span>
+<span class="err">}</span>
+<span class="nt">section</span><span class="nc">.static-template</span> <span class="err">{</span>
+    <span class="k">@extend</span> <span class="nv">%static-template</span><span class="o">;</span>
+<span class="err">}</span>
+</code></pre>
+</div>
+
+<h4 id="each">@each</h4>
+
 </article>
 <footer>
     <a href="/garden/views/posts" class="js_goto_posts">返回目录 - 我的印记</a>

@@ -331,6 +331,36 @@
 
 <h4 id="each">@each</h4>
 
+<p>each 可循环遍历两种数据类型：</p>
+
+<ul>
+  <li>
+    <p>@each <strong>$var</strong> in <strong>list</strong></p>
+  </li>
+  <li>
+    <p>@each <strong>$var</strong> in <strong>map</strong></p>
+  </li>
+</ul>
+
+<h5 id="应用场景-1">应用场景</h5>
+
+<p>通常，一个站点含多套配色方案，以按钮的配色为例：主色、辅助色、弱色。每套配色又由多种状态色组成：常态色、点击色、失效色。</p>
+
+<p><img src="http://onppksal8.bkt.clouddn.com/btn-group.jpg" alt="" /></p>
+
+<p>我们可以将这些色值按照一定的规则储存在 map 中，这样做的优势为：</p>
+
+<ul>
+  <li>
+    <p>结构及语义清晰，增强了可读性且易于修改。</p>
+  </li>
+  <li>
+    <p>添加新的配色方案相当于添加配置项，无需撰写大量代码。</p>
+  </li>
+</ul>
+
+<p>相关代码：</p>
+
 <div class="language-sass highlighter-rouge"><pre class="highlight"><code><span class="cm">/* sass */
 </span><span class="nv">$btnColor</span><span class="p">:</span> <span class="p">(</span>
     <span class="na">main</span><span class="p">:</span> <span class="p">(</span>
@@ -426,8 +456,6 @@
 <span class="p">}</span>
 </code></pre>
 </div>
-
-<p><img src="http://onppksal8.bkt.clouddn.com/btn-group.jpg" alt="" /></p>
 
 </article>
 <footer>

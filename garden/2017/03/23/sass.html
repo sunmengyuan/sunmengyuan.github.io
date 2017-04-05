@@ -56,7 +56,7 @@
 <h4 id="变量默认值">变量默认值</h4>
 
 <blockquote>
-  <p>变量默认值的价值在于进行组件化开发</p>
+  <p>变量默认值的价值在于进行组件化开发。</p>
 </blockquote>
 
 <h4 id="特殊变量">特殊变量</h4>
@@ -70,40 +70,6 @@
   </li>
 </ul>
 
-<div class="language-sass highlighter-rouge"><pre class="highlight"><code><span class="cm">/* sass */
-</span><span class="nv">$fontSize</span><span class="p">:</span> <span class="m">12px</span><span class="err">;</span>
-<span class="nv">$lineHeight</span><span class="p">:</span> <span class="m">20px</span><span class="err">;</span>
-<span class="nt">body</span> <span class="err">{</span>
-    <span class="nl">font</span><span class="p">:</span> <span class="si">#{</span><span class="nv">$fontSize</span><span class="si">}</span><span class="o">/</span><span class="si">#{</span><span class="nv">$lineHeight</span><span class="si">}</span> <span class="n">arial</span><span class="err">;</span>
-<span class="err">}</span>
-</code></pre>
-</div>
-
-<div class="language-css highlighter-rouge"><pre class="highlight"><code><span class="c">/* css */</span>
-<span class="nt">body</span> <span class="p">{</span>
-    <span class="nl">font</span><span class="p">:</span> <span class="m">12px</span><span class="p">/</span><span class="m">20px</span> <span class="n">arial</span><span class="p">;</span>
-<span class="p">}</span>
-</code></pre>
-</div>
-
-<p>当变量 $fontSize 及变量 $lineHeight 不作为特殊变量处理时，符号 / 会被解析为除号：</p>
-
-<div class="language-sass highlighter-rouge"><pre class="highlight"><code><span class="cm">/* sass */
-</span><span class="nv">$fontSize</span><span class="p">:</span> <span class="m">12px</span><span class="err">;</span>
-<span class="nv">$lineHeight</span><span class="p">:</span> <span class="m">20px</span><span class="err">;</span>
-<span class="nt">body</span> <span class="err">{</span>
-    <span class="nl">font</span><span class="p">:</span> <span class="nv">$fontSize</span><span class="o">/</span><span class="nv">$lineHeight</span> <span class="n">arial</span><span class="err">;</span>
-<span class="err">}</span>
-</code></pre>
-</div>
-
-<div class="language-css highlighter-rouge"><pre class="highlight"><code><span class="c">/* css */</span>
-<span class="nt">body</span> <span class="p">{</span>
-    <span class="nl">font</span><span class="p">:</span> <span class="m">0.6</span> <span class="n">arial</span><span class="p">;</span>
-<span class="p">}</span>
-</code></pre>
-</div>
-
 <h4 id="多值变量">多值变量</h4>
 
 <ul>
@@ -115,60 +81,11 @@
   </li>
 </ul>
 
-<div class="language-sass highlighter-rouge"><pre class="highlight"><code><span class="cm">/* sass */
-</span><span class="nv">$color</span><span class="p">:</span> <span class="p">(</span>
-    <span class="na">mainColor</span><span class="p">:</span> <span class="p">(</span><span class="mh">#333</span><span class="o">,</span> <span class="mh">#666</span><span class="p">)</span><span class="o">,</span>
-    <span class="na">assistantColor</span><span class="p">:</span> <span class="p">(</span><span class="mh">#666</span><span class="o">,</span> <span class="mh">#999</span><span class="p">)</span><span class="o">,</span>
-    <span class="na">weakColor</span><span class="p">:</span> <span class="p">(</span><span class="mh">#999</span><span class="o">,</span> <span class="mh">#CCC</span><span class="p">)</span>
-<span class="o">);</span>
-<span class="nc">.div1</span> <span class="err">{</span>
-    <span class="nl">background-color</span><span class="p">:</span> <span class="nf">nth</span><span class="p">(</span><span class="nf">map-get</span><span class="p">(</span><span class="nv">$color</span><span class="o">,</span> <span class="n">mainColor</span><span class="p">)</span><span class="o">,</span> <span class="m">1</span><span class="p">)</span><span class="err">;</span>
-    <span class="k">&amp;</span><span class="nd">:hover</span> <span class="err">{</span>
-        <span class="nl">background-color</span><span class="p">:</span> <span class="nf">nth</span><span class="p">(</span><span class="nf">map-get</span><span class="p">(</span><span class="nv">$color</span><span class="o">,</span> <span class="n">mainColor</span><span class="p">)</span><span class="o">,</span> <span class="m">2</span><span class="p">)</span><span class="err">;</span>
-    <span class="err">}</span>
-<span class="err">}</span>
-<span class="nc">.div2</span> <span class="err">{</span>
-    <span class="nl">background-color</span><span class="p">:</span> <span class="nf">nth</span><span class="p">(</span><span class="nf">map-get</span><span class="p">(</span><span class="nv">$color</span><span class="o">,</span> <span class="n">assistantColor</span><span class="p">)</span><span class="o">,</span> <span class="m">1</span><span class="p">)</span><span class="err">;</span>
-    <span class="k">&amp;</span><span class="nd">:hover</span> <span class="err">{</span>
-        <span class="nl">background-color</span><span class="p">:</span> <span class="nf">nth</span><span class="p">(</span><span class="nf">map-get</span><span class="p">(</span><span class="nv">$color</span><span class="o">,</span> <span class="n">assistantColor</span><span class="p">)</span><span class="o">,</span> <span class="m">2</span><span class="p">)</span><span class="err">;</span>
-    <span class="err">}</span>
-<span class="err">}</span>
-<span class="nc">.div3</span> <span class="err">{</span>
-    <span class="nl">background-color</span><span class="p">:</span> <span class="nf">nth</span><span class="p">(</span><span class="nf">map-get</span><span class="p">(</span><span class="nv">$color</span><span class="o">,</span> <span class="n">weakColor</span><span class="p">)</span><span class="o">,</span> <span class="m">1</span><span class="p">)</span><span class="err">;</span>
-    <span class="k">&amp;</span><span class="nd">:hover</span> <span class="err">{</span>
-        <span class="nl">background-color</span><span class="p">:</span> <span class="nf">nth</span><span class="p">(</span><span class="nf">map-get</span><span class="p">(</span><span class="nv">$color</span><span class="o">,</span> <span class="n">weakColor</span><span class="p">)</span><span class="o">,</span> <span class="m">2</span><span class="p">)</span><span class="err">;</span>
-    <span class="err">}</span>
-<span class="err">}</span>
-</code></pre>
-</div>
-
-<div class="language-css highlighter-rouge"><pre class="highlight"><code><span class="c">/* css */</span>
-<span class="nc">.div1</span> <span class="p">{</span>
-  <span class="nl">background-color</span><span class="p">:</span> <span class="m">#333</span><span class="p">;</span>
-<span class="p">}</span>
-<span class="nc">.div1</span><span class="nd">:hover</span> <span class="p">{</span>
-  <span class="nl">background-color</span><span class="p">:</span> <span class="m">#666</span><span class="p">;</span>
-<span class="p">}</span>
-<span class="nc">.div2</span> <span class="p">{</span>
-  <span class="nl">background-color</span><span class="p">:</span> <span class="m">#666</span><span class="p">;</span>
-<span class="p">}</span>
-<span class="nc">.div2</span><span class="nd">:hover</span> <span class="p">{</span>
-  <span class="nl">background-color</span><span class="p">:</span> <span class="m">#999</span><span class="p">;</span>
-<span class="p">}</span>
-<span class="nc">.div3</span> <span class="p">{</span>
-  <span class="nl">background-color</span><span class="p">:</span> <span class="m">#999</span><span class="p">;</span>
-<span class="p">}</span>
-<span class="nc">.div3</span><span class="nd">:hover</span> <span class="p">{</span>
-  <span class="nl">background-color</span><span class="p">:</span> <span class="m">#CCC</span><span class="p">;</span>
-<span class="p">}</span>
-</code></pre>
-</div>
-
 <hr />
 
 <h2 id="二嵌套">二、嵌套</h2>
 
-<p>增强文件的结构性及可读性，防止优先级过高</p>
+<p>增强文件的结构性及可读性，防止优先级过高。</p>
 
 <h4 id="at-root">@at-root</h4>
 
@@ -214,30 +131,15 @@
 
 <p>产生值，非属性</p>
 
-<div class="language-sass highlighter-rouge"><pre class="highlight"><code><span class="cm">/* sass */
-</span><span class="k">@function</span> <span class="nf">x2</span> <span class="p">(</span><span class="nv">$val</span><span class="p">)</span> <span class="err">{</span>
-    <span class="k">@return</span> <span class="m">2</span> <span class="o">*</span> <span class="nv">$val</span><span class="err">;</span>
-<span class="err">}</span>
-<span class="nt">body</span> <span class="err">{</span>
-    <span class="nl">font-size</span><span class="p">:</span> <span class="nf">x2</span><span class="p">(</span><span class="m">12px</span><span class="p">)</span><span class="err">;</span>
-<span class="err">}</span>
-</code></pre>
-</div>
-
-<div class="language-css highlighter-rouge"><pre class="highlight"><code><span class="c">/* css */</span>
-<span class="nt">body</span> <span class="p">{</span>
-    <span class="nl">font-size</span><span class="p">:</span> <span class="m">24px</span><span class="p">;</span>
-<span class="p">}</span>
-</code></pre>
-</div>
-
 <hr />
 
 <h2 id="五语句">五、语句</h2>
 
-<p>@if  @else if  @else</p>
+<h4 id="三目判断">三目判断</h4>
 
-<p>三目判断 if($condition, $if_true, $if_false)</p>
+<p>莫名觉得会很常用。</p>
+
+<h4 id="if">@if</h4>
 
 <h4 id="for">@for</h4>
 

@@ -55,7 +55,10 @@
 
 <ul>
   <li>
-    <p>组件化：<strong>@mixin</strong> 及 <strong>%</strong> 的应用使得代码复用性更强，且未调用时不产生冗余 CSS 代码。</p>
+    <p>模块化：<strong>@mixin</strong> 及 <strong>%</strong> 的应用使得代码复用性更强，且未调用时不产生冗余 CSS 代码。</p>
+  </li>
+  <li>
+    <p>组件化：</p>
   </li>
   <li>
     <p>结构化：嵌套使得层级关系更加清晰，<strong>@at-root</strong> 可避免产生过高优先级的选择器；多值变量的应用使得属性的修改转化为配置项的修改。</p>
@@ -71,6 +74,79 @@
 <blockquote>
   <p>变量默认值的价值在于进行组件化开发。</p>
 </blockquote>
+
+<h5 id="应用场景">应用场景</h5>
+
+<p>一个站点内的公用模块在不同页面的展现形式会有些许不同。例如：一个列表模块中列表项的分隔方式在不同页面存在差异。</p>
+
+<p><img src="http://onppksal8.bkt.clouddn.com/module-list.jpg" alt="" /></p>
+
+<p>传统做法：</p>
+
+<div class="language-css highlighter-rouge"><pre class="highlight"><code><span class="c">/* m-module-list.css 文件中 */</span>
+<span class="nc">.module-list</span> <span class="p">{</span>
+    <span class="err">li</span> <span class="err">{</span>
+        <span class="nl">font-size</span><span class="p">:</span> <span class="m">14px</span><span class="p">;</span>
+        <span class="nl">line-height</span><span class="p">:</span> <span class="m">22px</span><span class="p">;</span>
+        <span class="nl">color</span><span class="p">:</span> <span class="m">#666</span><span class="p">;</span>
+        <span class="nl">padding</span><span class="p">:</span> <span class="m">15px</span><span class="p">;</span>
+        <span class="nl">background-color</span><span class="p">:</span> <span class="m">#FFF</span><span class="p">;</span>
+        <span class="nl">border-bottom</span><span class="p">:</span> <span class="m">1px</span> <span class="nb">solid</span> <span class="m">#F0F0F0</span><span class="p">;</span>
+        <span class="nl">margin-bottom</span><span class="p">:</span> <span class="nb">none</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="err">}</span>
+
+<span class="c">/* style.css 文件中 */</span>
+<span class="k">@import</span> <span class="s2">'m-module-list.css'</span><span class="p">;</span>
+
+<span class="nc">.module-list</span> <span class="nt">li</span> <span class="p">{</span>
+    <span class="nl">border-bottom</span><span class="p">:</span> <span class="nb">none</span><span class="p">;</span>
+    <span class="nl">margin-bottom</span><span class="p">:</span> <span class="m">10px</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<p>显而易见，传统做法会产生冗余代码。</p>
+
+<p>使用变量默认值：</p>
+
+<div class="language-sass highlighter-rouge"><pre class="highlight"><code><span class="cm">/* m-module-list.scss 文件中 */
+</span><span class="nv">$borderBottomStyle</span><span class="p">:</span> <span class="m">1px</span> <span class="nb">solid</span> <span class="mh">#F0F0F0</span> <span class="o">!</span><span class="nb">default</span><span class="err">;</span>
+<span class="nv">$marginBottomStyle</span><span class="p">:</span> <span class="nb">none</span> <span class="o">!</span><span class="nb">default</span><span class="err">;</span>
+
+<span class="nc">.module-list</span> <span class="err">{</span>
+    <span class="nt">li</span> <span class="err">{</span>
+        <span class="nl">font-size</span><span class="p">:</span> <span class="m">14px</span><span class="err">;</span>
+        <span class="nl">line-height</span><span class="p">:</span> <span class="m">22px</span><span class="err">;</span>
+        <span class="nl">color</span><span class="p">:</span> <span class="mh">#666</span><span class="err">;</span>
+        <span class="nl">padding</span><span class="p">:</span> <span class="m">15px</span><span class="err">;</span>
+        <span class="nl">background-color</span><span class="p">:</span> <span class="mh">#FFF</span><span class="err">;</span>
+        <span class="nl">border-bottom</span><span class="p">:</span> <span class="nv">$borderBottomStyle</span><span class="err">;</span>
+        <span class="nl">margin-bottom</span><span class="p">:</span> <span class="nv">$marginBottomStyle</span><span class="err">;</span>
+    <span class="err">}</span>
+<span class="err">}</span>
+
+<span class="cm">/* style.scss 文件中 */
+</span><span class="nv">$borderBottomStyle</span><span class="p">:</span> <span class="nb">none</span><span class="err">;</span>
+<span class="nv">$marginBottomStyle</span><span class="p">:</span> <span class="m">10px</span><span class="err">;</span>
+
+<span class="k">@import</span> <span class="s">'m-module-list';</span>
+</code></pre>
+</div>
+
+<p>解析后的 CSS 代码：</p>
+
+<div class="language-css highlighter-rouge"><pre class="highlight"><code><span class="nc">.module-list</span> <span class="nt">li</span> <span class="p">{</span>
+    <span class="nl">font-size</span><span class="p">:</span> <span class="m">14px</span><span class="p">;</span>
+    <span class="nl">line-height</span><span class="p">:</span> <span class="m">22px</span><span class="p">;</span>
+    <span class="nl">color</span><span class="p">:</span> <span class="m">#666</span><span class="p">;</span>
+    <span class="nl">padding</span><span class="p">:</span> <span class="m">15px</span><span class="p">;</span>
+    <span class="nl">background-color</span><span class="p">:</span> <span class="m">#FFF</span><span class="p">;</span>
+    <span class="nl">border-bottom</span><span class="p">:</span> <span class="nb">none</span><span class="p">;</span>
+    <span class="nl">margin-bottom</span><span class="p">:</span> <span class="m">10px</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre>
+</div>
 
 <h4 id="特殊变量">特殊变量</h4>
 
@@ -169,7 +245,7 @@
 
 <p>第一种在循环遍历时会对第 <strong>end</strong> 项进行操作，第二种则不会。本人认为习惯使用一种即可，不然易混淆。</p>
 
-<h5 id="应用场景">应用场景</h5>
+<h5 id="应用场景-1">应用场景</h5>
 
 <p>我司喜好做 “固定模板” 需求：运营同学会将一张图片裁切成 n 个区域，点击每一区域的行为有所不同。比如一张美女的面部图，点击其眼睛时会推荐一些双眼皮项目，点击其鼻子时会推荐一些鼻综合项目等等（我司是做微整形交易平台的）。</p>
 
@@ -179,8 +255,7 @@
 
 <p>相关代码：</p>
 
-<div class="language-sass highlighter-rouge"><pre class="highlight"><code><span class="cm">/* sass */
-</span><span class="nv">%clear-float</span> <span class="err">{</span>
+<div class="language-sass highlighter-rouge"><pre class="highlight"><code><span class="nv">%clear-float</span> <span class="err">{</span>
     <span class="k">&amp;</span><span class="nd">:after</span> <span class="err">{</span>
         <span class="nl">content</span><span class="p">:</span> <span class="s2">""</span><span class="err">;</span>
         <span class="nl">display</span><span class="p">:</span> <span class="nb">block</span><span class="err">;</span>
@@ -217,8 +292,9 @@
 </code></pre>
 </div>
 
-<div class="language-css highlighter-rouge"><pre class="highlight"><code><span class="c">/* css */</span>
-<span class="nt">section</span><span class="nc">.static-template</span> <span class="nt">div</span><span class="nd">:after</span> <span class="p">{</span>
+<p>解析后的 CSS 代码：</p>
+
+<div class="language-css highlighter-rouge"><pre class="highlight"><code><span class="nt">section</span><span class="nc">.static-template</span> <span class="nt">div</span><span class="nd">:after</span> <span class="p">{</span>
     <span class="nl">content</span><span class="p">:</span> <span class="s1">""</span><span class="p">;</span>
     <span class="nl">display</span><span class="p">:</span> <span class="nb">block</span><span class="p">;</span>
     <span class="nl">height</span><span class="p">:</span> <span class="m">0</span><span class="p">;</span>
@@ -257,7 +333,7 @@
   </li>
 </ul>
 
-<h5 id="应用场景-1">应用场景</h5>
+<h5 id="应用场景-2">应用场景</h5>
 
 <p>通常，一个站点含多套配色方案，以按钮的配色为例：主色、辅助色、弱色。每套配色又由多种状态色组成：常态色、点击色、失效色。</p>
 
@@ -276,8 +352,7 @@
 
 <p>相关代码：</p>
 
-<div class="language-sass highlighter-rouge"><pre class="highlight"><code><span class="cm">/* sass */
-</span><span class="nv">$btnColor</span><span class="p">:</span> <span class="p">(</span>
+<div class="language-sass highlighter-rouge"><pre class="highlight"><code><span class="nv">$btnColor</span><span class="p">:</span> <span class="p">(</span>
     <span class="na">main</span><span class="p">:</span> <span class="p">(</span>
         <span class="na">normal</span><span class="p">:</span> <span class="p">(</span>
             <span class="nl">font</span><span class="p">:</span> <span class="mh">#C53336</span><span class="o">,</span>
@@ -338,8 +413,9 @@
 </code></pre>
 </div>
 
-<div class="language-css highlighter-rouge"><pre class="highlight"><code><span class="c">/* css */</span>
-<span class="nt">a</span><span class="nc">.btn-main</span> <span class="p">{</span>
+<p>解析后的 CSS 代码：</p>
+
+<div class="language-css highlighter-rouge"><pre class="highlight"><code><span class="nt">a</span><span class="nc">.btn-main</span> <span class="p">{</span>
     <span class="nl">color</span><span class="p">:</span> <span class="m">#C53336</span><span class="p">;</span>
     <span class="nl">border-color</span><span class="p">:</span> <span class="m">#C53336</span><span class="p">;</span>
     <span class="nl">background-color</span><span class="p">:</span> <span class="m">#FFF</span><span class="p">;</span>

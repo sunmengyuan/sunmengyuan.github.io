@@ -174,9 +174,93 @@
 
 <h2 id="二嵌套">二、嵌套</h2>
 
-<p>增强文件的结构性及可读性，防止优先级过高。</p>
+<p>嵌套可增强文件的结构性及可读性，但嵌套层级过多却是大忌，@at-root 可解决该问题。</p>
 
 <h4 id="at-root">@at-root</h4>
+
+<blockquote>
+  <p>@at-root 可防止选择器的优先级过高。</p>
+</blockquote>
+
+<p>先看一段很糟糕的代码，嵌套层级过多。层级关系的展现虽清晰，却莫名加高了选择器的优先级。那么在重置样式的时候便需要加更高的优先级，由此恶性循环。</p>
+
+<div class="language-sass highlighter-rouge"><pre class="highlight"><code><span class="nc">.parent</span> <span class="err">{</span>
+    <span class="nc">.child1</span> <span class="err">{</span>
+        <span class="nl">width</span><span class="p">:</span> <span class="m">20px</span><span class="err">;</span>
+        <span class="nc">.child1-1</span> <span class="err">{</span>
+            <span class="nl">width</span><span class="p">:</span> <span class="m">20px</span><span class="err">;</span> 
+            <span class="nc">.child1-1-1</span> <span class="err">{</span>
+                <span class="nl">width</span><span class="p">:</span> <span class="m">20px</span><span class="err">;</span>
+            <span class="err">}</span>
+        <span class="err">}</span>
+    <span class="err">}</span>
+<span class="err">}</span>
+</code></pre>
+</div>
+
+<p>解析后的 CSS 代码：</p>
+
+<div class="language-css highlighter-rouge"><pre class="highlight"><code><span class="nc">.parent</span> <span class="nc">.child1</span> <span class="p">{</span>
+    <span class="nl">width</span><span class="p">:</span> <span class="m">20px</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="nc">.parent</span> <span class="nc">.child1</span> <span class="nc">.child1-1</span> <span class="p">{</span>
+    <span class="nl">width</span><span class="p">:</span> <span class="m">20px</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="nc">.parent</span> <span class="nc">.child1</span> <span class="nc">.child1-1</span> <span class="nc">.child1-1-1</span> <span class="p">{</span>
+    <span class="nl">width</span><span class="p">:</span> <span class="m">20px</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<p>显然，.parent .child1 .child1-1 .child1-1-1 的优先级很高却完全没必要，我们需要做的便是降级。</p>
+
+<div class="language-sass highlighter-rouge"><pre class="highlight"><code><span class="nc">.parent</span> <span class="err">{</span>
+    <span class="nc">.child1</span> <span class="err">{</span>
+        <span class="nl">width</span><span class="p">:</span> <span class="m">20px</span><span class="err">;</span>
+        <span class="k">@at-root</span> <span class="nc">.child1-1</span> <span class="err">{</span>
+            <span class="nl">width</span><span class="p">:</span> <span class="m">20px</span><span class="err">;</span>
+            <span class="k">@at-root</span> <span class="nc">.child1-1-1</span> <span class="err">{</span>
+                <span class="nl">width</span><span class="p">:</span> <span class="m">20px</span><span class="err">;</span>
+            <span class="err">}</span>
+        <span class="err">}</span>
+    <span class="err">}</span>
+<span class="err">}</span>
+</code></pre>
+</div>
+
+<p>解析后的 CSS 代码：</p>
+
+<div class="language-css highlighter-rouge"><pre class="highlight"><code><span class="nc">.parent</span> <span class="nc">.child1</span> <span class="p">{</span>
+    <span class="nl">width</span><span class="p">:</span> <span class="m">20px</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="nc">.child1-1</span> <span class="p">{</span>
+    <span class="nl">width</span><span class="p">:</span> <span class="m">20px</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="nc">.child1-1-1</span> <span class="p">{</span>
+    <span class="nl">width</span><span class="p">:</span> <span class="m">20px</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<p>其实这并不是我想要的，我想要的是：</p>
+
+<div class="language-css highlighter-rouge"><pre class="highlight"><code><span class="nc">.parent</span> <span class="nc">.child1</span> <span class="p">{</span>
+    <span class="nl">width</span><span class="p">:</span> <span class="m">20px</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="nc">.parent</span> <span class="nc">.child1-1</span> <span class="p">{</span>
+    <span class="nl">width</span><span class="p">:</span> <span class="m">20px</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="nc">.parent</span> <span class="nc">.child1-1-1</span> <span class="p">{</span>
+    <span class="nl">width</span><span class="p">:</span> <span class="m">20px</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<p>显然 @at-root 无法控制跳出的级数，无奈。</p>
+
+<p>@at-root 的另一应用场景便是 @keyframes。动画的专属性较强，嵌套的写法能清晰的标明其被应用之处。在做功能删除时只需直接干掉一整段代码，无需查找对应的 @keyframes 顺便思考其影响范围，省时高效。</p>
+
+<p>示例代码：</p>
 
 <div class="language-sass highlighter-rouge"><pre class="highlight"><code><span class="cm">/* sass */
 </span><span class="nc">.demo</span> <span class="err">{</span>
@@ -191,6 +275,8 @@
 </code></pre>
 </div>
 
+<p>解析后的 CSS 代码：</p>
+
 <div class="language-css highlighter-rouge"><pre class="highlight"><code><span class="c">/* css */</span>
 <span class="nc">.demo</span> <span class="p">{</span>
     <span class="nl">animation</span><span class="p">:</span> <span class="n">motion</span> <span class="m">1s</span> <span class="n">infinite</span><span class="p">;</span>
@@ -201,6 +287,20 @@
 <span class="p">}</span>
 </code></pre>
 </div>
+
+<p>其实上述是 v3.3 之前的做法，自 v3.4 这样书写即可：</p>
+
+<div class="language-sass highlighter-rouge"><pre class="highlight"><code><span class="nc">.demo</span> <span class="err">{</span>
+    <span class="nl">animation</span><span class="p">:</span> <span class="n">motion</span> <span class="m">1s</span> <span class="n">infinite</span><span class="err">;</span>
+    <span class="k">@keyframes</span> <span class="nt">motion</span> <span class="err">{</span>
+        <span class="na">0</span><span class="err">% {</span><span class="nl">background-color</span><span class="p">:</span> <span class="no">red</span><span class="err">;}</span>
+        <span class="na">100</span><span class="err">% {</span><span class="nl">background-color</span><span class="p">:</span> <span class="no">yellow</span><span class="err">;}</span>
+    <span class="err">}</span>
+<span class="err">}</span>
+</code></pre>
+</div>
+
+<p>@keyframes 会自动跳出父级的限制。</p>
 
 <hr />
 

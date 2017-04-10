@@ -219,12 +219,60 @@
 <h4 id="多值变量">多值变量</h4>
 
 <ul>
-  <li>
-    <p>List 类型</p>
-  </li>
-  <li>
-    <p>Map 类型</p>
-  </li>
+  <li>List 类型</li>
+</ul>
+
+<div class="language-sass highlighter-rouge"><pre class="highlight"><code><span class="nv">$thumbType</span><span class="p">:</span> <span class="nb">default</span><span class="o">,</span> <span class="n">activity</span><span class="o">,</span> <span class="n">special</span><span class="err">;</span>
+<span class="k">@each</span> <span class="nv">$type</span> <span class="n">in</span> <span class="nv">$thumbType</span> <span class="err">{</span>
+    <span class="nv">%</span><span class="si">#{</span><span class="nv">$type</span><span class="si">}</span><span class="nv">-thumb</span> <span class="err">{</span>
+        <span class="nl">background</span><span class="p">:</span> <span class="sx">url("../img/</span><span class="si">#{</span><span class="nv">$type</span><span class="si">}</span><span class="sx">-nothumb.jpg")</span> <span class="nb">no-repeat</span> <span class="m">0</span> <span class="m">0</span><span class="err">;</span>
+        <span class="nl">background-size</span><span class="p">:</span> <span class="m">100%</span> <span class="nb">auto</span><span class="err">;</span>
+        <span class="nl">padding-bottom</span><span class="p">:</span> <span class="m">100%</span><span class="err">;</span>
+        <span class="nl">height</span><span class="p">:</span> <span class="m">0</span><span class="err">;</span>
+        <span class="nl">overflow</span><span class="p">:</span> <span class="nb">hidden</span><span class="err">;</span>
+    <span class="err">}</span>
+<span class="err">}</span>
+
+<span class="nc">.section1</span> <span class="nc">.thumb</span> <span class="err">{</span>
+    <span class="k">@extend</span> <span class="nv">%default-thumb</span><span class="o">;</span>
+<span class="err">}</span>
+<span class="nc">.section2</span> <span class="nc">.thumb</span> <span class="err">{</span>
+    <span class="k">@extend</span> <span class="nv">%activity-thumb</span><span class="o">;</span>
+<span class="err">}</span>
+<span class="nc">.section3</span> <span class="nc">.thumb</span> <span class="err">{</span>
+    <span class="k">@extend</span> <span class="nv">%special-thumb</span><span class="o">;</span>
+<span class="err">}</span>
+</code></pre>
+</div>
+
+<p>解析后的 CSS 代码：</p>
+
+<div class="language-css highlighter-rouge"><pre class="highlight"><code><span class="nc">.section1</span> <span class="nc">.thumb</span> <span class="p">{</span>
+    <span class="nl">background</span><span class="p">:</span> <span class="sx">url("../img/default-nothumb.jpg")</span> <span class="nb">no-repeat</span> <span class="m">0</span> <span class="m">0</span><span class="p">;</span>
+    <span class="nl">background-size</span><span class="p">:</span> <span class="m">100%</span> <span class="nb">auto</span><span class="p">;</span>
+    <span class="nl">padding-bottom</span><span class="p">:</span> <span class="m">100%</span><span class="p">;</span>
+    <span class="nl">height</span><span class="p">:</span> <span class="m">0</span><span class="p">;</span>
+    <span class="nl">overflow</span><span class="p">:</span> <span class="nb">hidden</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="nc">.section2</span> <span class="nc">.thumb</span> <span class="p">{</span>
+    <span class="nl">background</span><span class="p">:</span> <span class="sx">url("../img/activity-nothumb.jpg")</span> <span class="nb">no-repeat</span> <span class="m">0</span> <span class="m">0</span><span class="p">;</span>
+    <span class="nl">background-size</span><span class="p">:</span> <span class="m">100%</span> <span class="nb">auto</span><span class="p">;</span>
+    <span class="nl">padding-bottom</span><span class="p">:</span> <span class="m">100%</span><span class="p">;</span>
+    <span class="nl">height</span><span class="p">:</span> <span class="m">0</span><span class="p">;</span>
+    <span class="nl">overflow</span><span class="p">:</span> <span class="nb">hidden</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="nc">.section3</span> <span class="nc">.thumb</span> <span class="p">{</span>
+    <span class="nl">background</span><span class="p">:</span> <span class="sx">url("../img/special-nothumb.jpg")</span> <span class="nb">no-repeat</span> <span class="m">0</span> <span class="m">0</span><span class="p">;</span>
+    <span class="nl">background-size</span><span class="p">:</span> <span class="m">100%</span> <span class="nb">auto</span><span class="p">;</span>
+    <span class="nl">padding-bottom</span><span class="p">:</span> <span class="m">100%</span><span class="p">;</span>
+    <span class="nl">height</span><span class="p">:</span> <span class="m">0</span><span class="p">;</span>
+    <span class="nl">overflow</span><span class="p">:</span> <span class="nb">hidden</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<ul>
+  <li>Map 类型</li>
 </ul>
 
 <hr />
@@ -375,51 +423,40 @@
   <p>用于定义通用样式最为合适。</p>
 </blockquote>
 
-<div class="language-sass highlighter-rouge"><pre class="highlight"><code><span class="nv">$thumbType</span><span class="p">:</span> <span class="nb">default</span><span class="o">,</span> <span class="n">activity</span><span class="o">,</span> <span class="n">special</span><span class="err">;</span>
-<span class="k">@each</span> <span class="nv">$type</span> <span class="n">in</span> <span class="nv">$thumbType</span> <span class="err">{</span>
-    <span class="nv">%</span><span class="si">#{</span><span class="nv">$type</span><span class="si">}</span><span class="nv">-thumb</span> <span class="err">{</span>
-        <span class="nl">background</span><span class="p">:</span> <span class="sx">url("../img/</span><span class="si">#{</span><span class="nv">$type</span><span class="si">}</span><span class="sx">-nothumb.jpg")</span> <span class="nb">no-repeat</span> <span class="m">0</span> <span class="m">0</span><span class="err">;</span>
-        <span class="nl">background-size</span><span class="p">:</span> <span class="m">100%</span> <span class="nb">auto</span><span class="err">;</span>
-        <span class="nl">padding-bottom</span><span class="p">:</span> <span class="m">100%</span><span class="err">;</span>
+<div class="language-sass highlighter-rouge"><pre class="highlight"><code><span class="nv">%horizontal-scroll</span> <span class="err">{</span>
+    <span class="nl">white-space</span><span class="p">:</span> <span class="nb">nowrap</span><span class="err">;</span>
+    <span class="nl">overflow-x</span><span class="p">:</span> <span class="nb">scroll</span><span class="err">;</span>
+    <span class="nt">li</span> <span class="err">{</span>
+        <span class="nl">display</span><span class="p">:</span> <span class="n">inline-block</span><span class="err">;</span>
+        <span class="nl">vertical-align</span><span class="p">:</span> <span class="nb">middle</span><span class="err">;</span>
+    <span class="err">}</span>
+    <span class="err">&amp;</span><span class="p">:</span><span class="o">:-</span><span class="n">webkit-scrollbar</span> <span class="err">{</span>
+        <span class="nl">width</span><span class="p">:</span> <span class="m">0</span><span class="err">;</span>
         <span class="nl">height</span><span class="p">:</span> <span class="m">0</span><span class="err">;</span>
-        <span class="nl">overflow</span><span class="p">:</span> <span class="nb">hidden</span><span class="err">;</span>
+        <span class="nl">opacity</span><span class="p">:</span> <span class="m">0</span><span class="err">;</span>
     <span class="err">}</span>
 <span class="err">}</span>
 
-<span class="nc">.section1</span> <span class="nc">.thumb</span> <span class="err">{</span>
-    <span class="k">@extend</span> <span class="nv">%default-thumb</span><span class="o">;</span>
-<span class="err">}</span>
-<span class="nc">.section2</span> <span class="nc">.thumb</span> <span class="err">{</span>
-    <span class="k">@extend</span> <span class="nv">%activity-thumb</span><span class="o">;</span>
-<span class="err">}</span>
-<span class="nc">.section3</span> <span class="nc">.thumb</span> <span class="err">{</span>
-    <span class="k">@extend</span> <span class="nv">%special-thumb</span><span class="o">;</span>
+<span class="nt">section</span><span class="nc">.horizontal-scroll</span> <span class="err">{</span>
+    <span class="k">@extend</span> <span class="nv">%horizontal-scroll</span><span class="o">;</span>
 <span class="err">}</span>
 </code></pre>
 </div>
 
 <p>解析后的 CSS 代码：</p>
 
-<div class="language-css highlighter-rouge"><pre class="highlight"><code><span class="nc">.section1</span> <span class="nc">.thumb</span> <span class="p">{</span>
-    <span class="nl">background</span><span class="p">:</span> <span class="sx">url("../img/default-nothumb.jpg")</span> <span class="nb">no-repeat</span> <span class="m">0</span> <span class="m">0</span><span class="p">;</span>
-    <span class="nl">background-size</span><span class="p">:</span> <span class="m">100%</span> <span class="nb">auto</span><span class="p">;</span>
-    <span class="nl">padding-bottom</span><span class="p">:</span> <span class="m">100%</span><span class="p">;</span>
-    <span class="nl">height</span><span class="p">:</span> <span class="m">0</span><span class="p">;</span>
-    <span class="nl">overflow</span><span class="p">:</span> <span class="nb">hidden</span><span class="p">;</span>
+<div class="language-css highlighter-rouge"><pre class="highlight"><code><span class="nt">section</span><span class="nc">.horizontal-scroll</span> <span class="p">{</span>
+    <span class="nl">white-space</span><span class="p">:</span> <span class="nb">nowrap</span><span class="p">;</span>
+    <span class="nl">overflow-x</span><span class="p">:</span> <span class="nb">scroll</span><span class="p">;</span>
 <span class="p">}</span>
-<span class="nc">.section2</span> <span class="nc">.thumb</span> <span class="p">{</span>
-    <span class="nl">background</span><span class="p">:</span> <span class="sx">url("../img/activity-nothumb.jpg")</span> <span class="nb">no-repeat</span> <span class="m">0</span> <span class="m">0</span><span class="p">;</span>
-    <span class="nl">background-size</span><span class="p">:</span> <span class="m">100%</span> <span class="nb">auto</span><span class="p">;</span>
-    <span class="nl">padding-bottom</span><span class="p">:</span> <span class="m">100%</span><span class="p">;</span>
-    <span class="nl">height</span><span class="p">:</span> <span class="m">0</span><span class="p">;</span>
-    <span class="nl">overflow</span><span class="p">:</span> <span class="nb">hidden</span><span class="p">;</span>
+<span class="nt">section</span><span class="nc">.horizontal-scroll</span> <span class="nt">li</span> <span class="p">{</span>
+    <span class="nl">display</span><span class="p">:</span> <span class="n">inline-block</span><span class="p">;</span>
+    <span class="nl">vertical-align</span><span class="p">:</span> <span class="nb">middle</span><span class="p">;</span>
 <span class="p">}</span>
-<span class="nc">.section3</span> <span class="nc">.thumb</span> <span class="p">{</span>
-    <span class="nl">background</span><span class="p">:</span> <span class="sx">url("../img/special-nothumb.jpg")</span> <span class="nb">no-repeat</span> <span class="m">0</span> <span class="m">0</span><span class="p">;</span>
-    <span class="nl">background-size</span><span class="p">:</span> <span class="m">100%</span> <span class="nb">auto</span><span class="p">;</span>
-    <span class="nl">padding-bottom</span><span class="p">:</span> <span class="m">100%</span><span class="p">;</span>
+<span class="nt">section</span><span class="nc">.horizontal-scroll</span><span class="nd">::-webkit-scrollbar</span> <span class="p">{</span>
+    <span class="nl">width</span><span class="p">:</span> <span class="m">0</span><span class="p">;</span>
     <span class="nl">height</span><span class="p">:</span> <span class="m">0</span><span class="p">;</span>
-    <span class="nl">overflow</span><span class="p">:</span> <span class="nb">hidden</span><span class="p">;</span>
+    <span class="nl">opacity</span><span class="p">:</span> <span class="m">0</span><span class="p">;</span>
 <span class="p">}</span>
 </code></pre>
 </div>
@@ -671,10 +708,10 @@
     <span class="err">}</span>
 <span class="err">}</span>
 
-<span class="nc">.section1</span> <span class="nt">a</span> <span class="err">{</span>
+<span class="nt">a</span><span class="nc">.btn-main</span> <span class="err">{</span>
     <span class="k">@extend</span> <span class="nv">%btn-main</span><span class="o">;</span>
 <span class="err">}</span>
-<span class="nc">.section2</span> <span class="nt">a</span> <span class="err">{</span>
+<span class="nt">a</span><span class="nc">.btn-weak</span> <span class="err">{</span>
     <span class="k">@extend</span> <span class="nv">%btn-weak</span><span class="o">;</span>
 <span class="err">}</span>
 </code></pre>
@@ -682,32 +719,32 @@
 
 <p>解析后的 CSS 代码：</p>
 
-<div class="language-css highlighter-rouge"><pre class="highlight"><code><span class="nc">.section1</span> <span class="nt">a</span> <span class="p">{</span>
+<div class="language-css highlighter-rouge"><pre class="highlight"><code><span class="nt">a</span><span class="nc">.btn-main</span> <span class="p">{</span>
     <span class="nl">color</span><span class="p">:</span> <span class="m">#C53336</span><span class="p">;</span>
     <span class="nl">border-color</span><span class="p">:</span> <span class="m">#C53336</span><span class="p">;</span>
     <span class="nl">background-color</span><span class="p">:</span> <span class="m">#FFF</span><span class="p">;</span>
 <span class="p">}</span>
-<span class="nc">.section1</span> <span class="nt">a</span><span class="nd">:active</span> <span class="p">{</span>
+<span class="nt">a</span><span class="nc">.btn-main</span><span class="nd">:active</span> <span class="p">{</span>
     <span class="nl">color</span><span class="p">:</span> <span class="m">#FFF</span><span class="p">;</span>
     <span class="nl">border-color</span><span class="p">:</span> <span class="m">#C53336</span><span class="p">;</span>
     <span class="nl">background-color</span><span class="p">:</span> <span class="m">#C53336</span><span class="p">;</span>
 <span class="p">}</span>
-<span class="nc">.section1</span> <span class="nt">a</span><span class="nc">.disabled</span> <span class="p">{</span>
+<span class="nt">a</span><span class="nc">.disabled.btn-main</span> <span class="p">{</span>
     <span class="nl">color</span><span class="p">:</span> <span class="m">#999</span><span class="p">;</span>
     <span class="nl">border-color</span><span class="p">:</span> <span class="m">#F5F5F5</span><span class="p">;</span>
     <span class="nl">background-color</span><span class="p">:</span> <span class="m">#F5F5F5</span><span class="p">;</span>
 <span class="p">}</span>
-<span class="nc">.section2</span> <span class="nt">a</span> <span class="p">{</span>
+<span class="nt">a</span><span class="nc">.btn-weak</span> <span class="p">{</span>
     <span class="nl">color</span><span class="p">:</span> <span class="m">#333</span><span class="p">;</span>
     <span class="nl">border-color</span><span class="p">:</span> <span class="m">#666</span><span class="p">;</span>
     <span class="nl">background-color</span><span class="p">:</span> <span class="m">#FFF</span><span class="p">;</span>
 <span class="p">}</span>
-<span class="nc">.section2</span> <span class="nt">a</span><span class="nd">:active</span> <span class="p">{</span>
+<span class="nt">a</span><span class="nc">.btn-weak</span><span class="nd">:active</span> <span class="p">{</span>
     <span class="nl">color</span><span class="p">:</span> <span class="m">#FFF</span><span class="p">;</span>
     <span class="nl">border-color</span><span class="p">:</span> <span class="m">#666</span><span class="p">;</span>
     <span class="nl">background-color</span><span class="p">:</span> <span class="m">#666</span><span class="p">;</span>
 <span class="p">}</span>
-<span class="nc">.section2</span> <span class="nt">a</span><span class="nc">.disabled</span> <span class="p">{</span>
+<span class="nt">a</span><span class="nc">.disabled.btn-weak</span> <span class="p">{</span>
     <span class="nl">color</span><span class="p">:</span> <span class="m">#999</span><span class="p">;</span>
     <span class="nl">border-color</span><span class="p">:</span> <span class="m">#CCC</span><span class="p">;</span>
     <span class="nl">background-color</span><span class="p">:</span> <span class="m">#FFF</span><span class="p">;</span>

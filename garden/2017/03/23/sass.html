@@ -365,17 +365,70 @@
 
 <h4 id="mixin--include">@mixin + @include</h4>
 
-<p>感觉类似于 Javascript 中的函数，可传递参数，可设置参数默认值。</p>
+<blockquote>
+  <p>可传递参数，可设置参数默认值。</p>
+</blockquote>
 
 <h4 id="--extend">% + @extend</h4>
 
-<p>用于定义通用样式最为合适。</p>
+<blockquote>
+  <p>用于定义通用样式最为合适。</p>
+</blockquote>
+
+<div class="language-sass highlighter-rouge"><pre class="highlight"><code><span class="nv">$thumbType</span><span class="p">:</span> <span class="nb">default</span><span class="o">,</span> <span class="n">activity</span><span class="o">,</span> <span class="n">special</span><span class="err">;</span>
+<span class="k">@each</span> <span class="nv">$type</span> <span class="n">in</span> <span class="nv">$thumbType</span> <span class="err">{</span>
+    <span class="nv">%</span><span class="si">#{</span><span class="nv">$type</span><span class="si">}</span><span class="nv">-thumb</span> <span class="err">{</span>
+        <span class="nl">background</span><span class="p">:</span> <span class="sx">url("../img/</span><span class="si">#{</span><span class="nv">$type</span><span class="si">}</span><span class="sx">-nothumb.jpg")</span> <span class="nb">no-repeat</span> <span class="m">0</span> <span class="m">0</span><span class="err">;</span>
+        <span class="nl">background-size</span><span class="p">:</span> <span class="m">100%</span> <span class="nb">auto</span><span class="err">;</span>
+        <span class="nl">padding-bottom</span><span class="p">:</span> <span class="m">100%</span><span class="err">;</span>
+        <span class="nl">height</span><span class="p">:</span> <span class="m">0</span><span class="err">;</span>
+        <span class="nl">overflow</span><span class="p">:</span> <span class="nb">hidden</span><span class="err">;</span>
+    <span class="err">}</span>
+<span class="err">}</span>
+
+<span class="nc">.section1</span> <span class="nc">.thumb</span> <span class="err">{</span>
+    <span class="k">@extend</span> <span class="nv">%default-thumb</span><span class="o">;</span>
+<span class="err">}</span>
+<span class="nc">.section2</span> <span class="nc">.thumb</span> <span class="err">{</span>
+    <span class="k">@extend</span> <span class="nv">%activity-thumb</span><span class="o">;</span>
+<span class="err">}</span>
+<span class="nc">.section3</span> <span class="nc">.thumb</span> <span class="err">{</span>
+    <span class="k">@extend</span> <span class="nv">%special-thumb</span><span class="o">;</span>
+<span class="err">}</span>
+</code></pre>
+</div>
+
+<p>解析后的 CSS 代码：</p>
+
+<div class="language-css highlighter-rouge"><pre class="highlight"><code><span class="nc">.section1</span> <span class="nc">.thumb</span> <span class="p">{</span>
+    <span class="nl">background</span><span class="p">:</span> <span class="sx">url("../img/default-nothumb.jpg")</span> <span class="nb">no-repeat</span> <span class="m">0</span> <span class="m">0</span><span class="p">;</span>
+    <span class="nl">background-size</span><span class="p">:</span> <span class="m">100%</span> <span class="nb">auto</span><span class="p">;</span>
+    <span class="nl">padding-bottom</span><span class="p">:</span> <span class="m">100%</span><span class="p">;</span>
+    <span class="nl">height</span><span class="p">:</span> <span class="m">0</span><span class="p">;</span>
+    <span class="nl">overflow</span><span class="p">:</span> <span class="nb">hidden</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="nc">.section2</span> <span class="nc">.thumb</span> <span class="p">{</span>
+    <span class="nl">background</span><span class="p">:</span> <span class="sx">url("../img/activity-nothumb.jpg")</span> <span class="nb">no-repeat</span> <span class="m">0</span> <span class="m">0</span><span class="p">;</span>
+    <span class="nl">background-size</span><span class="p">:</span> <span class="m">100%</span> <span class="nb">auto</span><span class="p">;</span>
+    <span class="nl">padding-bottom</span><span class="p">:</span> <span class="m">100%</span><span class="p">;</span>
+    <span class="nl">height</span><span class="p">:</span> <span class="m">0</span><span class="p">;</span>
+    <span class="nl">overflow</span><span class="p">:</span> <span class="nb">hidden</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="nc">.section3</span> <span class="nc">.thumb</span> <span class="p">{</span>
+    <span class="nl">background</span><span class="p">:</span> <span class="sx">url("../img/special-nothumb.jpg")</span> <span class="nb">no-repeat</span> <span class="m">0</span> <span class="m">0</span><span class="p">;</span>
+    <span class="nl">background-size</span><span class="p">:</span> <span class="m">100%</span> <span class="nb">auto</span><span class="p">;</span>
+    <span class="nl">padding-bottom</span><span class="p">:</span> <span class="m">100%</span><span class="p">;</span>
+    <span class="nl">height</span><span class="p">:</span> <span class="m">0</span><span class="p">;</span>
+    <span class="nl">overflow</span><span class="p">:</span> <span class="nb">hidden</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre>
+</div>
 
 <hr />
 
 <h2 id="四函数">四、函数</h2>
 
-<p>产生值，非属性</p>
+<p>产生值，非属性。</p>
 
 <hr />
 
@@ -387,67 +440,53 @@
 
 <h4 id="if">@if</h4>
 
-<div class="language-sass highlighter-rouge"><pre class="highlight"><code><span class="nc">.overflow-ellipsis</span> <span class="err">{</span>
-    <span class="nl">overflow</span><span class="p">:</span> <span class="nb">hidden</span><span class="err">;</span>
-    
-    <span class="k">@mixin</span> <span class="nf">overflow-ellipsis-multiple</span> <span class="p">(</span><span class="nv">$lineCount</span><span class="p">)</span> <span class="err">{</span>
-        <span class="nl">display</span><span class="p">:</span> <span class="o">-</span><span class="n">webkit-box</span><span class="err">;</span>
-        <span class="nl">text-overflow</span><span class="p">:</span> <span class="o">-</span><span class="n">o-ellipsis-lastline</span><span class="err">;</span>
-        <span class="na">-webkit-box-orient</span><span class="p">:</span> <span class="n">vertical</span><span class="err">;</span>
-        <span class="na">-webkit-line-clamp</span><span class="p">:</span> <span class="nv">$lineCount</span><span class="err">;</span>
-    <span class="err">}</span>
-    <span class="k">@for</span> <span class="nv">$lineCount</span> <span class="ow">from</span> <span class="m">1</span> <span class="ow">through</span> <span class="m">6</span> <span class="err">{</span>
-        <span class="k">&amp;</span><span class="nc">.row</span><span class="si">#{</span><span class="nv">$lineCount</span><span class="si">}</span> <span class="err">{</span>
-            <span class="k">@if</span> <span class="nv">$lineCount</span> <span class="o">==</span> <span class="m">1</span> <span class="err">{</span>
-                <span class="nl">white-space</span><span class="p">:</span> <span class="nb">nowrap</span><span class="err">;</span>
-                <span class="nl">text-overflow</span><span class="p">:</span> <span class="n">ellipsis</span><span class="err">;</span>
-            <span class="err">}</span> <span class="o">@</span><span class="nt">else</span> <span class="err">{</span>
-                <span class="k">@include</span> <span class="nd">overflow-ellipsis-multiple</span><span class="p">(</span><span class="nv">$lineCount</span><span class="p">)</span><span class="err">;</span>
-            <span class="err">}</span>
+<div class="language-sass highlighter-rouge"><pre class="highlight"><code><span class="k">@for</span> <span class="nv">$lineCount</span> <span class="ow">from</span> <span class="m">1</span> <span class="ow">through</span> <span class="m">3</span> <span class="err">{</span>
+    <span class="nv">%ellipsis-row</span><span class="si">#{</span><span class="nv">$lineCount</span><span class="si">}</span> <span class="err">{</span>
+        <span class="nl">overflow</span><span class="p">:</span> <span class="nb">hidden</span><span class="err">;</span>
+        <span class="k">@if</span> <span class="nv">$lineCount</span> <span class="o">==</span> <span class="m">1</span> <span class="err">{</span>
+            <span class="nl">white-space</span><span class="p">:</span> <span class="nb">nowrap</span><span class="err">;</span>
+            <span class="nl">text-overflow</span><span class="p">:</span> <span class="n">ellipsis</span><span class="err">;</span>
+        <span class="err">}</span> <span class="o">@</span><span class="nt">else</span> <span class="err">{</span>
+            <span class="nl">display</span><span class="p">:</span> <span class="o">-</span><span class="n">webkit-box</span><span class="err">;</span>
+            <span class="nl">text-overflow</span><span class="p">:</span> <span class="o">-</span><span class="n">o-ellipsis-lastline</span><span class="err">;</span>
+            <span class="na">-webkit-box-orient</span><span class="p">:</span> <span class="n">vertical</span><span class="err">;</span>
+            <span class="na">-webkit-line-clamp</span><span class="p">:</span> <span class="nv">$lineCount</span><span class="err">;</span>
         <span class="err">}</span>
     <span class="err">}</span>
+<span class="err">}</span>
+
+<span class="nc">.section1</span> <span class="nt">p</span> <span class="err">{</span>
+    <span class="k">@extend</span> <span class="nv">%ellipsis-row1</span><span class="o">;</span>
+<span class="err">}</span>
+<span class="nc">.section2</span> <span class="nt">p</span> <span class="err">{</span>
+    <span class="k">@extend</span> <span class="nv">%ellipsis-row2</span><span class="o">;</span>
+<span class="err">}</span>
+<span class="nc">.section3</span> <span class="nt">p</span> <span class="err">{</span>
+    <span class="k">@extend</span> <span class="nv">%ellipsis-row3</span><span class="o">;</span>
 <span class="err">}</span>
 </code></pre>
 </div>
 
 <p>解析后的 CSS 代码：</p>
 
-<div class="language-css highlighter-rouge"><pre class="highlight"><code><span class="nc">.overflow-ellipsis</span> <span class="p">{</span>
+<div class="language-css highlighter-rouge"><pre class="highlight"><code><span class="nc">.section1</span> <span class="nt">p</span> <span class="p">{</span>
     <span class="nl">overflow</span><span class="p">:</span> <span class="nb">hidden</span><span class="p">;</span>
-<span class="p">}</span>
-<span class="nc">.overflow-ellipsis.row1</span> <span class="p">{</span>
     <span class="nl">white-space</span><span class="p">:</span> <span class="nb">nowrap</span><span class="p">;</span>
     <span class="nl">text-overflow</span><span class="p">:</span> <span class="n">ellipsis</span><span class="p">;</span>
 <span class="p">}</span>
-<span class="nc">.overflow-ellipsis.row2</span> <span class="p">{</span>
+<span class="nc">.section2</span> <span class="nt">p</span> <span class="p">{</span>
+    <span class="nl">overflow</span><span class="p">:</span> <span class="nb">hidden</span><span class="p">;</span>
     <span class="nl">display</span><span class="p">:</span> <span class="n">-webkit-box</span><span class="p">;</span>
     <span class="nl">text-overflow</span><span class="p">:</span> <span class="n">-o-ellipsis-lastline</span><span class="p">;</span>
     <span class="nl">-webkit-box-orient</span><span class="p">:</span> <span class="n">vertical</span><span class="p">;</span>
     <span class="nl">-webkit-line-clamp</span><span class="p">:</span> <span class="m">2</span><span class="p">;</span>
 <span class="p">}</span>
-<span class="nc">.overflow-ellipsis.row3</span> <span class="p">{</span>
+<span class="nc">.section3</span> <span class="nt">p</span> <span class="p">{</span>
+    <span class="nl">overflow</span><span class="p">:</span> <span class="nb">hidden</span><span class="p">;</span>
     <span class="nl">display</span><span class="p">:</span> <span class="n">-webkit-box</span><span class="p">;</span>
     <span class="nl">text-overflow</span><span class="p">:</span> <span class="n">-o-ellipsis-lastline</span><span class="p">;</span>
     <span class="nl">-webkit-box-orient</span><span class="p">:</span> <span class="n">vertical</span><span class="p">;</span>
     <span class="nl">-webkit-line-clamp</span><span class="p">:</span> <span class="m">3</span><span class="p">;</span>
-<span class="p">}</span>
-<span class="nc">.overflow-ellipsis.row4</span> <span class="p">{</span>
-    <span class="nl">display</span><span class="p">:</span> <span class="n">-webkit-box</span><span class="p">;</span>
-    <span class="nl">text-overflow</span><span class="p">:</span> <span class="n">-o-ellipsis-lastline</span><span class="p">;</span>
-    <span class="nl">-webkit-box-orient</span><span class="p">:</span> <span class="n">vertical</span><span class="p">;</span>
-    <span class="nl">-webkit-line-clamp</span><span class="p">:</span> <span class="m">4</span><span class="p">;</span>
-<span class="p">}</span>
-<span class="nc">.overflow-ellipsis.row5</span> <span class="p">{</span>
-    <span class="nl">display</span><span class="p">:</span> <span class="n">-webkit-box</span><span class="p">;</span>
-    <span class="nl">text-overflow</span><span class="p">:</span> <span class="n">-o-ellipsis-lastline</span><span class="p">;</span>
-    <span class="nl">-webkit-box-orient</span><span class="p">:</span> <span class="n">vertical</span><span class="p">;</span>
-    <span class="nl">-webkit-line-clamp</span><span class="p">:</span> <span class="m">5</span><span class="p">;</span>
-<span class="p">}</span>
-<span class="nc">.overflow-ellipsis.row6</span> <span class="p">{</span>
-    <span class="nl">display</span><span class="p">:</span> <span class="n">-webkit-box</span><span class="p">;</span>
-    <span class="nl">text-overflow</span><span class="p">:</span> <span class="n">-o-ellipsis-lastline</span><span class="p">;</span>
-    <span class="nl">-webkit-box-orient</span><span class="p">:</span> <span class="n">vertical</span><span class="p">;</span>
-    <span class="nl">-webkit-line-clamp</span><span class="p">:</span> <span class="m">6</span><span class="p">;</span>
 <span class="p">}</span>
 </code></pre>
 </div>
@@ -615,9 +654,8 @@
     <span class="nl">border-color</span><span class="p">:</span> <span class="nv">$border</span><span class="err">;</span>
     <span class="nl">background-color</span><span class="p">:</span> <span class="nv">$background</span><span class="err">;</span>
 <span class="err">}</span>
-
 <span class="k">@each</span> <span class="nv">$type</span><span class="o">,</span> <span class="nv">$status</span> <span class="n">in</span> <span class="nv">$btnColor</span> <span class="err">{</span>
-    <span class="nt">a</span><span class="nc">.btn-</span><span class="si">#{</span><span class="nv">$type</span><span class="si">}</span> <span class="err">{</span>
+    <span class="nv">%btn-</span><span class="si">#{</span><span class="nv">$type</span><span class="si">}</span> <span class="err">{</span>
         <span class="nv">$normal</span><span class="p">:</span> <span class="nf">map-get</span><span class="p">(</span><span class="nv">$status</span><span class="o">,</span> <span class="nb">normal</span><span class="p">)</span><span class="err">;</span>
         <span class="nv">$active</span><span class="p">:</span> <span class="nf">map-get</span><span class="p">(</span><span class="nv">$status</span><span class="o">,</span> <span class="n">active</span><span class="p">)</span><span class="err">;</span>
         <span class="nv">$disabled</span><span class="p">:</span> <span class="nf">map-get</span><span class="p">(</span><span class="nv">$status</span><span class="o">,</span> <span class="n">disabled</span><span class="p">)</span><span class="err">;</span>
@@ -632,37 +670,44 @@
         <span class="err">}</span>
     <span class="err">}</span>
 <span class="err">}</span>
+
+<span class="nc">.section1</span> <span class="nt">a</span> <span class="err">{</span>
+    <span class="k">@extend</span> <span class="nv">%btn-main</span><span class="o">;</span>
+<span class="err">}</span>
+<span class="nc">.section2</span> <span class="nt">a</span> <span class="err">{</span>
+    <span class="k">@extend</span> <span class="nv">%btn-weak</span><span class="o">;</span>
+<span class="err">}</span>
 </code></pre>
 </div>
 
 <p>解析后的 CSS 代码：</p>
 
-<div class="language-css highlighter-rouge"><pre class="highlight"><code><span class="nt">a</span><span class="nc">.btn-main</span> <span class="p">{</span>
+<div class="language-css highlighter-rouge"><pre class="highlight"><code><span class="nc">.section1</span> <span class="nt">a</span> <span class="p">{</span>
     <span class="nl">color</span><span class="p">:</span> <span class="m">#C53336</span><span class="p">;</span>
     <span class="nl">border-color</span><span class="p">:</span> <span class="m">#C53336</span><span class="p">;</span>
     <span class="nl">background-color</span><span class="p">:</span> <span class="m">#FFF</span><span class="p">;</span>
 <span class="p">}</span>
-<span class="nt">a</span><span class="nc">.btn-main</span><span class="nd">:active</span> <span class="p">{</span>
+<span class="nc">.section1</span> <span class="nt">a</span><span class="nd">:active</span> <span class="p">{</span>
     <span class="nl">color</span><span class="p">:</span> <span class="m">#FFF</span><span class="p">;</span>
     <span class="nl">border-color</span><span class="p">:</span> <span class="m">#C53336</span><span class="p">;</span>
     <span class="nl">background-color</span><span class="p">:</span> <span class="m">#C53336</span><span class="p">;</span>
 <span class="p">}</span>
-<span class="nt">a</span><span class="nc">.btn-main.disabled</span> <span class="p">{</span>
+<span class="nc">.section1</span> <span class="nt">a</span><span class="nc">.disabled</span> <span class="p">{</span>
     <span class="nl">color</span><span class="p">:</span> <span class="m">#999</span><span class="p">;</span>
     <span class="nl">border-color</span><span class="p">:</span> <span class="m">#F5F5F5</span><span class="p">;</span>
     <span class="nl">background-color</span><span class="p">:</span> <span class="m">#F5F5F5</span><span class="p">;</span>
 <span class="p">}</span>
-<span class="nt">a</span><span class="nc">.btn-weak</span> <span class="p">{</span>
+<span class="nc">.section2</span> <span class="nt">a</span> <span class="p">{</span>
     <span class="nl">color</span><span class="p">:</span> <span class="m">#333</span><span class="p">;</span>
     <span class="nl">border-color</span><span class="p">:</span> <span class="m">#666</span><span class="p">;</span>
     <span class="nl">background-color</span><span class="p">:</span> <span class="m">#FFF</span><span class="p">;</span>
 <span class="p">}</span>
-<span class="nt">a</span><span class="nc">.btn-weak</span><span class="nd">:active</span> <span class="p">{</span>
+<span class="nc">.section2</span> <span class="nt">a</span><span class="nd">:active</span> <span class="p">{</span>
     <span class="nl">color</span><span class="p">:</span> <span class="m">#FFF</span><span class="p">;</span>
     <span class="nl">border-color</span><span class="p">:</span> <span class="m">#666</span><span class="p">;</span>
     <span class="nl">background-color</span><span class="p">:</span> <span class="m">#666</span><span class="p">;</span>
 <span class="p">}</span>
-<span class="nt">a</span><span class="nc">.btn-weak.disabled</span> <span class="p">{</span>
+<span class="nc">.section2</span> <span class="nt">a</span><span class="nc">.disabled</span> <span class="p">{</span>
     <span class="nl">color</span><span class="p">:</span> <span class="m">#999</span><span class="p">;</span>
     <span class="nl">border-color</span><span class="p">:</span> <span class="m">#CCC</span><span class="p">;</span>
     <span class="nl">background-color</span><span class="p">:</span> <span class="m">#FFF</span><span class="p">;</span>

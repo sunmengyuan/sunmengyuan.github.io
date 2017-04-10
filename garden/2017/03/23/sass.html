@@ -363,13 +363,13 @@
 
 <h2 id="三继承">三、继承</h2>
 
-<p>@mixin @include 参数 参数默认值</p>
+<h4 id="mixin--include">@mixin + @include</h4>
 
-<p>% @extend 公共类</p>
+<p>感觉类似于 Javascript 中的函数，可传递参数，可设置参数默认值。</p>
 
-<h4 id="占位选择器-">占位选择器 %</h4>
+<h4 id="--extend">% + @extend</h4>
 
-<p>未调用时不产生冗余 CSS</p>
+<p>用于定义通用样式最为合适。</p>
 
 <hr />
 
@@ -386,6 +386,71 @@
 <p>莫名觉得会很常用。</p>
 
 <h4 id="if">@if</h4>
+
+<div class="language-sass highlighter-rouge"><pre class="highlight"><code><span class="nc">.overflow-ellipsis</span> <span class="err">{</span>
+    <span class="nl">overflow</span><span class="p">:</span> <span class="nb">hidden</span><span class="err">;</span>
+    
+    <span class="k">@mixin</span> <span class="nf">overflow-ellipsis-multiple</span> <span class="p">(</span><span class="nv">$lineCount</span><span class="p">)</span> <span class="err">{</span>
+        <span class="nl">display</span><span class="p">:</span> <span class="o">-</span><span class="n">webkit-box</span><span class="err">;</span>
+        <span class="nl">text-overflow</span><span class="p">:</span> <span class="o">-</span><span class="n">o-ellipsis-lastline</span><span class="err">;</span>
+        <span class="na">-webkit-box-orient</span><span class="p">:</span> <span class="n">vertical</span><span class="err">;</span>
+        <span class="na">-webkit-line-clamp</span><span class="p">:</span> <span class="nv">$lineCount</span><span class="err">;</span>
+    <span class="err">}</span>
+    <span class="k">@for</span> <span class="nv">$lineCount</span> <span class="ow">from</span> <span class="m">1</span> <span class="ow">through</span> <span class="m">6</span> <span class="err">{</span>
+        <span class="k">&amp;</span><span class="nc">.row</span><span class="si">#{</span><span class="nv">$lineCount</span><span class="si">}</span> <span class="err">{</span>
+            <span class="k">@if</span> <span class="nv">$lineCount</span> <span class="o">==</span> <span class="m">1</span> <span class="err">{</span>
+                <span class="nl">white-space</span><span class="p">:</span> <span class="nb">nowrap</span><span class="err">;</span>
+                <span class="nl">text-overflow</span><span class="p">:</span> <span class="n">ellipsis</span><span class="err">;</span>
+            <span class="err">}</span> <span class="o">@</span><span class="nt">else</span> <span class="err">{</span>
+                <span class="k">@include</span> <span class="nd">overflow-ellipsis-multiple</span><span class="p">(</span><span class="nv">$lineCount</span><span class="p">)</span><span class="err">;</span>
+            <span class="err">}</span>
+        <span class="err">}</span>
+    <span class="err">}</span>
+<span class="err">}</span>
+</code></pre>
+</div>
+
+<p>解析后的 CSS 代码：</p>
+
+<div class="language-css highlighter-rouge"><pre class="highlight"><code><span class="nc">.overflow-ellipsis</span> <span class="p">{</span>
+    <span class="nl">overflow</span><span class="p">:</span> <span class="nb">hidden</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="nc">.overflow-ellipsis.row1</span> <span class="p">{</span>
+    <span class="nl">white-space</span><span class="p">:</span> <span class="nb">nowrap</span><span class="p">;</span>
+    <span class="nl">text-overflow</span><span class="p">:</span> <span class="n">ellipsis</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="nc">.overflow-ellipsis.row2</span> <span class="p">{</span>
+    <span class="nl">display</span><span class="p">:</span> <span class="n">-webkit-box</span><span class="p">;</span>
+    <span class="nl">text-overflow</span><span class="p">:</span> <span class="n">-o-ellipsis-lastline</span><span class="p">;</span>
+    <span class="nl">-webkit-box-orient</span><span class="p">:</span> <span class="n">vertical</span><span class="p">;</span>
+    <span class="nl">-webkit-line-clamp</span><span class="p">:</span> <span class="m">2</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="nc">.overflow-ellipsis.row3</span> <span class="p">{</span>
+    <span class="nl">display</span><span class="p">:</span> <span class="n">-webkit-box</span><span class="p">;</span>
+    <span class="nl">text-overflow</span><span class="p">:</span> <span class="n">-o-ellipsis-lastline</span><span class="p">;</span>
+    <span class="nl">-webkit-box-orient</span><span class="p">:</span> <span class="n">vertical</span><span class="p">;</span>
+    <span class="nl">-webkit-line-clamp</span><span class="p">:</span> <span class="m">3</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="nc">.overflow-ellipsis.row4</span> <span class="p">{</span>
+    <span class="nl">display</span><span class="p">:</span> <span class="n">-webkit-box</span><span class="p">;</span>
+    <span class="nl">text-overflow</span><span class="p">:</span> <span class="n">-o-ellipsis-lastline</span><span class="p">;</span>
+    <span class="nl">-webkit-box-orient</span><span class="p">:</span> <span class="n">vertical</span><span class="p">;</span>
+    <span class="nl">-webkit-line-clamp</span><span class="p">:</span> <span class="m">4</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="nc">.overflow-ellipsis.row5</span> <span class="p">{</span>
+    <span class="nl">display</span><span class="p">:</span> <span class="n">-webkit-box</span><span class="p">;</span>
+    <span class="nl">text-overflow</span><span class="p">:</span> <span class="n">-o-ellipsis-lastline</span><span class="p">;</span>
+    <span class="nl">-webkit-box-orient</span><span class="p">:</span> <span class="n">vertical</span><span class="p">;</span>
+    <span class="nl">-webkit-line-clamp</span><span class="p">:</span> <span class="m">5</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="nc">.overflow-ellipsis.row6</span> <span class="p">{</span>
+    <span class="nl">display</span><span class="p">:</span> <span class="n">-webkit-box</span><span class="p">;</span>
+    <span class="nl">text-overflow</span><span class="p">:</span> <span class="n">-o-ellipsis-lastline</span><span class="p">;</span>
+    <span class="nl">-webkit-box-orient</span><span class="p">:</span> <span class="n">vertical</span><span class="p">;</span>
+    <span class="nl">-webkit-line-clamp</span><span class="p">:</span> <span class="m">6</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre>
+</div>
 
 <h4 id="for">@for</h4>
 

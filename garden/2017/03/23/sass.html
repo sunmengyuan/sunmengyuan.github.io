@@ -51,17 +51,15 @@
     </div>
 </header>
 <article class="js_article">
-    <p>SASS 的优势在于：</p>
-
-<ul>
+    <ul>
   <li>
-    <p>模块化：<strong>@mixin</strong> 及 <strong>%</strong> 的应用使得代码复用性更强，且未调用时不产生冗余 CSS 代码。</p>
+    <p>结构化：</p>
+  </li>
+  <li>
+    <p>模块化：</p>
   </li>
   <li>
     <p>组件化：</p>
-  </li>
-  <li>
-    <p>结构化：嵌套使得层级关系更加清晰，<strong>@at-root</strong> 可避免产生过高优先级的选择器；多值变量的应用使得属性的修改转化为配置项的修改。</p>
   </li>
 </ul>
 
@@ -161,7 +159,7 @@
 </code></pre>
 </div>
 
-<p>v3.3 解析后的 CSS 代码：</p>
+<p>Sass v3.3 解析后的 CSS 代码：</p>
 
 <div class="language-css highlighter-rouge"><pre class="highlight"><code><span class="nt">p</span> <span class="p">{</span>
     <span class="nl">color</span><span class="p">:</span> <span class="no">yellow</span><span class="p">;</span>
@@ -172,7 +170,7 @@
 </code></pre>
 </div>
 
-<p>v3.4 解析后的 CSS 代码：</p>
+<p>Sass v3.4 解析后的 CSS 代码：</p>
 
 <div class="language-css highlighter-rouge"><pre class="highlight"><code><span class="nt">p</span> <span class="p">{</span>
     <span class="nl">color</span><span class="p">:</span> <span class="no">yellow</span><span class="p">;</span>
@@ -183,7 +181,9 @@
 </code></pre>
 </div>
 
-<p>自 v3.4 SASS 对于变量的解析方法产生了变化，其设计思路相当于：</p>
+<p>自 Sass v3.4 变量的解析遵循：底层作用域内声明的变量相当于局部变量，不影响全局变量。</p>
+
+<p>使用 Javascript 解释：</p>
 
 <div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">a</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> 
 <span class="p">(</span><span class="kd">function</span> <span class="p">()</span> <span class="p">{</span> 
@@ -193,7 +193,9 @@
 </code></pre>
 </div>
 
-<p>而 v3.3 及以前的设计思路相当于：</p>
+<p>而 Sass v3.3 及以前的设计思路为：在底层作用域声明变量相当于修改全局变量，它处调用该变量时会使用覆盖的新值。</p>
+
+<p>使用 Javascript 解释：</p>
 
 <div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">a</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> 
 <span class="p">(</span><span class="kd">function</span> <span class="p">()</span> <span class="p">{</span> 

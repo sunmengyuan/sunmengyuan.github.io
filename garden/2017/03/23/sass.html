@@ -2,10 +2,10 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="keywords" content="前端开发,sass" />
+    <meta name="keywords" content="前端开发,sass,css 预处理器" />
     <meta name="description" content="" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0" />
-    <title>呆恋小喵的后花园 - </title>
+    <title>呆恋小喵的后花园 - 对于 Sass 各特性应用场景的思考</title>
     <link rel="shortcut icon" href="http://oij8a9ql4.bkt.clouddn.com/shortcut.ico" />
     <link rel="stylesheet" href="https://cdn.bootcss.com/highlight.js/8.0/styles/sunburst.min.css" />
     <link rel="stylesheet/less" href="/garden/assets/style/style.less" />
@@ -40,12 +40,14 @@
 <a href="javascript:;" class="gotop js_gotop"></a>
 <header class="post" style="background-image: url('http://oij8a9ql4.bkt.clouddn.com/banner.jpg')">
     <div>
-        <h2></h2>
+        <h2>对于 Sass 各特性应用场景的思考</h2>
         <time>23 Mar 2017</time>
         <p class="abstract"></p>
         <ul class="c-fix">
             
             <li>sass</li>
+            
+            <li>css 预处理器</li>
             
         </ul>
     </div>
@@ -72,6 +74,8 @@
 <blockquote>
   <p>变量默认值的价值在于进行组件化开发。</p>
 </blockquote>
+
+<h5 id="应用场景">应用场景</h5>
 
 <p>一个站点内的公用模块在不同页面的展现形式会有些许不同。例如：一个列表模块中列表项的分隔方式在不同页面存在差异。</p>
 
@@ -212,7 +216,7 @@
     <p>应用于选择器</p>
   </li>
   <li>
-    <p>应用于属性名或属性值</p>
+    <p>应用于属性</p>
   </li>
 </ul>
 
@@ -274,6 +278,127 @@
 <ul>
   <li>Map 类型</li>
 </ul>
+
+<h5 id="应用场景-1">应用场景</h5>
+
+<p>通常，一个站点含多套配色方案，以按钮的配色为例：主色、辅助色、弱色。每套配色又由多种状态色组成：常态色、点击色、失效色。</p>
+
+<p><img src="http://onppksal8.bkt.clouddn.com/btn-group.jpg" alt="" /></p>
+
+<p>我们可以将这些色值按照一定的规则储存在 map 中，这样做的优势为：</p>
+
+<ul>
+  <li>
+    <p>结构及语义清晰，增强了可读性且易于修改。</p>
+  </li>
+  <li>
+    <p>添加新的配色方案相当于添加配置项，无需撰写大量代码。</p>
+  </li>
+</ul>
+
+<p>相关代码：</p>
+
+<div class="language-sass highlighter-rouge"><pre class="highlight"><code><span class="nv">$btnColor</span><span class="p">:</span> <span class="p">(</span>
+    <span class="na">main</span><span class="p">:</span> <span class="p">(</span>
+        <span class="na">normal</span><span class="p">:</span> <span class="p">(</span>
+            <span class="nl">font</span><span class="p">:</span> <span class="mh">#C53336</span><span class="o">,</span>
+            <span class="nl">border</span><span class="p">:</span> <span class="mh">#C53336</span><span class="o">,</span>
+            <span class="nl">background</span><span class="p">:</span> <span class="mh">#FFF</span>
+        <span class="o">),</span>
+        <span class="na">active</span><span class="p">:</span> <span class="p">(</span>
+            <span class="nl">font</span><span class="p">:</span> <span class="mh">#FFF</span><span class="o">,</span>
+            <span class="nl">border</span><span class="p">:</span> <span class="mh">#C53336</span><span class="o">,</span>
+            <span class="nl">background</span><span class="p">:</span> <span class="mh">#C53336</span>
+        <span class="o">),</span>
+        <span class="na">disabled</span><span class="p">:</span> <span class="p">(</span>
+            <span class="nl">font</span><span class="p">:</span> <span class="mh">#999</span><span class="o">,</span>
+            <span class="nl">border</span><span class="p">:</span> <span class="mh">#F5F5F5</span><span class="o">,</span>
+            <span class="nl">background</span><span class="p">:</span> <span class="mh">#F5F5F5</span>
+        <span class="o">)</span>
+    <span class="o">),</span>
+    <span class="na">weak</span><span class="p">:</span> <span class="p">(</span>
+        <span class="na">normal</span><span class="p">:</span> <span class="p">(</span>
+            <span class="nl">font</span><span class="p">:</span> <span class="mh">#333</span><span class="o">,</span>
+            <span class="nl">border</span><span class="p">:</span> <span class="mh">#666</span><span class="o">,</span>
+            <span class="nl">background</span><span class="p">:</span> <span class="mh">#FFF</span>
+        <span class="o">),</span>
+        <span class="na">active</span><span class="p">:</span> <span class="p">(</span>
+            <span class="nl">font</span><span class="p">:</span> <span class="mh">#FFF</span><span class="o">,</span>
+            <span class="nl">border</span><span class="p">:</span> <span class="mh">#666</span><span class="o">,</span>
+            <span class="nl">background</span><span class="p">:</span> <span class="mh">#666</span>
+        <span class="o">),</span>
+        <span class="na">disabled</span><span class="p">:</span> <span class="p">(</span>
+            <span class="nl">font</span><span class="p">:</span> <span class="mh">#999</span><span class="o">,</span>
+            <span class="nl">border</span><span class="p">:</span> <span class="mh">#CCC</span><span class="o">,</span>
+            <span class="nl">background</span><span class="p">:</span> <span class="mh">#FFF</span>
+        <span class="o">)</span>
+    <span class="o">)</span>
+<span class="o">);</span>
+<span class="k">@mixin</span> <span class="nf">btnColor</span> <span class="p">(</span><span class="nv">$font</span><span class="o">,</span> <span class="nv">$border</span><span class="o">,</span> <span class="nv">$background</span><span class="p">)</span> <span class="err">{</span>
+    <span class="nl">color</span><span class="p">:</span> <span class="nv">$font</span><span class="err">;</span>
+    <span class="nl">border-color</span><span class="p">:</span> <span class="nv">$border</span><span class="err">;</span>
+    <span class="nl">background-color</span><span class="p">:</span> <span class="nv">$background</span><span class="err">;</span>
+<span class="err">}</span>
+<span class="k">@each</span> <span class="nv">$type</span><span class="o">,</span> <span class="nv">$status</span> <span class="n">in</span> <span class="nv">$btnColor</span> <span class="err">{</span>
+    <span class="nv">%btn-</span><span class="si">#{</span><span class="nv">$type</span><span class="si">}</span> <span class="err">{</span>
+        <span class="nv">$normal</span><span class="p">:</span> <span class="nf">map-get</span><span class="p">(</span><span class="nv">$status</span><span class="o">,</span> <span class="nb">normal</span><span class="p">)</span><span class="err">;</span>
+        <span class="nv">$active</span><span class="p">:</span> <span class="nf">map-get</span><span class="p">(</span><span class="nv">$status</span><span class="o">,</span> <span class="n">active</span><span class="p">)</span><span class="err">;</span>
+        <span class="nv">$disabled</span><span class="p">:</span> <span class="nf">map-get</span><span class="p">(</span><span class="nv">$status</span><span class="o">,</span> <span class="n">disabled</span><span class="p">)</span><span class="err">;</span>
+        
+        <span class="k">@include</span> <span class="nd">btnColor</span><span class="p">(</span><span class="nf">map-values</span><span class="p">(</span><span class="nv">$normal</span><span class="p">)</span><span class="o">...</span><span class="p">)</span><span class="err">;</span>
+        
+        <span class="k">&amp;</span><span class="nd">:active</span> <span class="err">{</span>
+            <span class="k">@include</span> <span class="nd">btnColor</span><span class="p">(</span><span class="nf">map-values</span><span class="p">(</span><span class="nv">$active</span><span class="p">)</span><span class="o">...</span><span class="p">)</span><span class="err">;</span>
+        <span class="err">}</span>
+        <span class="k">&amp;</span><span class="nc">.disabled</span> <span class="err">{</span>
+            <span class="k">@include</span> <span class="nd">btnColor</span><span class="p">(</span><span class="nf">map-values</span><span class="p">(</span><span class="nv">$disabled</span><span class="p">)</span><span class="o">...</span><span class="p">)</span><span class="err">;</span>
+        <span class="err">}</span>
+    <span class="err">}</span>
+<span class="err">}</span>
+
+<span class="nt">a</span><span class="nc">.btn-main</span> <span class="err">{</span>
+    <span class="k">@extend</span> <span class="nv">%btn-main</span><span class="o">;</span>
+<span class="err">}</span>
+<span class="nt">a</span><span class="nc">.btn-weak</span> <span class="err">{</span>
+    <span class="k">@extend</span> <span class="nv">%btn-weak</span><span class="o">;</span>
+<span class="err">}</span>
+</code></pre>
+</div>
+
+<p>解析后的 CSS 代码：</p>
+
+<div class="language-css highlighter-rouge"><pre class="highlight"><code><span class="nt">a</span><span class="nc">.btn-main</span> <span class="p">{</span>
+    <span class="nl">color</span><span class="p">:</span> <span class="m">#C53336</span><span class="p">;</span>
+    <span class="nl">border-color</span><span class="p">:</span> <span class="m">#C53336</span><span class="p">;</span>
+    <span class="nl">background-color</span><span class="p">:</span> <span class="m">#FFF</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="nt">a</span><span class="nc">.btn-main</span><span class="nd">:active</span> <span class="p">{</span>
+    <span class="nl">color</span><span class="p">:</span> <span class="m">#FFF</span><span class="p">;</span>
+    <span class="nl">border-color</span><span class="p">:</span> <span class="m">#C53336</span><span class="p">;</span>
+    <span class="nl">background-color</span><span class="p">:</span> <span class="m">#C53336</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="nt">a</span><span class="nc">.disabled.btn-main</span> <span class="p">{</span>
+    <span class="nl">color</span><span class="p">:</span> <span class="m">#999</span><span class="p">;</span>
+    <span class="nl">border-color</span><span class="p">:</span> <span class="m">#F5F5F5</span><span class="p">;</span>
+    <span class="nl">background-color</span><span class="p">:</span> <span class="m">#F5F5F5</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="nt">a</span><span class="nc">.btn-weak</span> <span class="p">{</span>
+    <span class="nl">color</span><span class="p">:</span> <span class="m">#333</span><span class="p">;</span>
+    <span class="nl">border-color</span><span class="p">:</span> <span class="m">#666</span><span class="p">;</span>
+    <span class="nl">background-color</span><span class="p">:</span> <span class="m">#FFF</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="nt">a</span><span class="nc">.btn-weak</span><span class="nd">:active</span> <span class="p">{</span>
+    <span class="nl">color</span><span class="p">:</span> <span class="m">#FFF</span><span class="p">;</span>
+    <span class="nl">border-color</span><span class="p">:</span> <span class="m">#666</span><span class="p">;</span>
+    <span class="nl">background-color</span><span class="p">:</span> <span class="m">#666</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="nt">a</span><span class="nc">.disabled.btn-weak</span> <span class="p">{</span>
+    <span class="nl">color</span><span class="p">:</span> <span class="m">#999</span><span class="p">;</span>
+    <span class="nl">border-color</span><span class="p">:</span> <span class="m">#CCC</span><span class="p">;</span>
+    <span class="nl">background-color</span><span class="p">:</span> <span class="m">#FFF</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre>
+</div>
 
 <hr />
 
@@ -575,7 +700,7 @@
 
 <p>第一种在循环遍历时会对第 <strong>end</strong> 项进行操作，第二种则不会。本人认为习惯使用一种即可，不然易混淆。</p>
 
-<h5 id="应用场景">应用场景</h5>
+<h5 id="应用场景-2">应用场景</h5>
 
 <p>我司喜好做 “固定模板” 需求：运营同学会将一张图片裁切成 n 个区域，点击每一区域的行为有所不同。比如一张美女的面部图，点击其眼睛时会推荐一些双眼皮项目，点击其鼻子时会推荐一些鼻综合项目等等（我司是做微整形交易平台的）。</p>
 
@@ -662,127 +787,6 @@
     <p>@each <strong>$var</strong> in <strong>map</strong></p>
   </li>
 </ul>
-
-<h5 id="应用场景-1">应用场景</h5>
-
-<p>通常，一个站点含多套配色方案，以按钮的配色为例：主色、辅助色、弱色。每套配色又由多种状态色组成：常态色、点击色、失效色。</p>
-
-<p><img src="http://onppksal8.bkt.clouddn.com/btn-group.jpg" alt="" /></p>
-
-<p>我们可以将这些色值按照一定的规则储存在 map 中，这样做的优势为：</p>
-
-<ul>
-  <li>
-    <p>结构及语义清晰，增强了可读性且易于修改。</p>
-  </li>
-  <li>
-    <p>添加新的配色方案相当于添加配置项，无需撰写大量代码。</p>
-  </li>
-</ul>
-
-<p>相关代码：</p>
-
-<div class="language-sass highlighter-rouge"><pre class="highlight"><code><span class="nv">$btnColor</span><span class="p">:</span> <span class="p">(</span>
-    <span class="na">main</span><span class="p">:</span> <span class="p">(</span>
-        <span class="na">normal</span><span class="p">:</span> <span class="p">(</span>
-            <span class="nl">font</span><span class="p">:</span> <span class="mh">#C53336</span><span class="o">,</span>
-            <span class="nl">border</span><span class="p">:</span> <span class="mh">#C53336</span><span class="o">,</span>
-            <span class="nl">background</span><span class="p">:</span> <span class="mh">#FFF</span>
-        <span class="o">),</span>
-        <span class="na">active</span><span class="p">:</span> <span class="p">(</span>
-            <span class="nl">font</span><span class="p">:</span> <span class="mh">#FFF</span><span class="o">,</span>
-            <span class="nl">border</span><span class="p">:</span> <span class="mh">#C53336</span><span class="o">,</span>
-            <span class="nl">background</span><span class="p">:</span> <span class="mh">#C53336</span>
-        <span class="o">),</span>
-        <span class="na">disabled</span><span class="p">:</span> <span class="p">(</span>
-            <span class="nl">font</span><span class="p">:</span> <span class="mh">#999</span><span class="o">,</span>
-            <span class="nl">border</span><span class="p">:</span> <span class="mh">#F5F5F5</span><span class="o">,</span>
-            <span class="nl">background</span><span class="p">:</span> <span class="mh">#F5F5F5</span>
-        <span class="o">)</span>
-    <span class="o">),</span>
-    <span class="na">weak</span><span class="p">:</span> <span class="p">(</span>
-        <span class="na">normal</span><span class="p">:</span> <span class="p">(</span>
-            <span class="nl">font</span><span class="p">:</span> <span class="mh">#333</span><span class="o">,</span>
-            <span class="nl">border</span><span class="p">:</span> <span class="mh">#666</span><span class="o">,</span>
-            <span class="nl">background</span><span class="p">:</span> <span class="mh">#FFF</span>
-        <span class="o">),</span>
-        <span class="na">active</span><span class="p">:</span> <span class="p">(</span>
-            <span class="nl">font</span><span class="p">:</span> <span class="mh">#FFF</span><span class="o">,</span>
-            <span class="nl">border</span><span class="p">:</span> <span class="mh">#666</span><span class="o">,</span>
-            <span class="nl">background</span><span class="p">:</span> <span class="mh">#666</span>
-        <span class="o">),</span>
-        <span class="na">disabled</span><span class="p">:</span> <span class="p">(</span>
-            <span class="nl">font</span><span class="p">:</span> <span class="mh">#999</span><span class="o">,</span>
-            <span class="nl">border</span><span class="p">:</span> <span class="mh">#CCC</span><span class="o">,</span>
-            <span class="nl">background</span><span class="p">:</span> <span class="mh">#FFF</span>
-        <span class="o">)</span>
-    <span class="o">)</span>
-<span class="o">);</span>
-<span class="k">@mixin</span> <span class="nf">btnColor</span> <span class="p">(</span><span class="nv">$font</span><span class="o">,</span> <span class="nv">$border</span><span class="o">,</span> <span class="nv">$background</span><span class="p">)</span> <span class="err">{</span>
-    <span class="nl">color</span><span class="p">:</span> <span class="nv">$font</span><span class="err">;</span>
-    <span class="nl">border-color</span><span class="p">:</span> <span class="nv">$border</span><span class="err">;</span>
-    <span class="nl">background-color</span><span class="p">:</span> <span class="nv">$background</span><span class="err">;</span>
-<span class="err">}</span>
-<span class="k">@each</span> <span class="nv">$type</span><span class="o">,</span> <span class="nv">$status</span> <span class="n">in</span> <span class="nv">$btnColor</span> <span class="err">{</span>
-    <span class="nv">%btn-</span><span class="si">#{</span><span class="nv">$type</span><span class="si">}</span> <span class="err">{</span>
-        <span class="nv">$normal</span><span class="p">:</span> <span class="nf">map-get</span><span class="p">(</span><span class="nv">$status</span><span class="o">,</span> <span class="nb">normal</span><span class="p">)</span><span class="err">;</span>
-        <span class="nv">$active</span><span class="p">:</span> <span class="nf">map-get</span><span class="p">(</span><span class="nv">$status</span><span class="o">,</span> <span class="n">active</span><span class="p">)</span><span class="err">;</span>
-        <span class="nv">$disabled</span><span class="p">:</span> <span class="nf">map-get</span><span class="p">(</span><span class="nv">$status</span><span class="o">,</span> <span class="n">disabled</span><span class="p">)</span><span class="err">;</span>
-        
-        <span class="k">@include</span> <span class="nd">btnColor</span><span class="p">(</span><span class="nf">map-values</span><span class="p">(</span><span class="nv">$normal</span><span class="p">)</span><span class="o">...</span><span class="p">)</span><span class="err">;</span>
-        
-        <span class="k">&amp;</span><span class="nd">:active</span> <span class="err">{</span>
-            <span class="k">@include</span> <span class="nd">btnColor</span><span class="p">(</span><span class="nf">map-values</span><span class="p">(</span><span class="nv">$active</span><span class="p">)</span><span class="o">...</span><span class="p">)</span><span class="err">;</span>
-        <span class="err">}</span>
-        <span class="k">&amp;</span><span class="nc">.disabled</span> <span class="err">{</span>
-            <span class="k">@include</span> <span class="nd">btnColor</span><span class="p">(</span><span class="nf">map-values</span><span class="p">(</span><span class="nv">$disabled</span><span class="p">)</span><span class="o">...</span><span class="p">)</span><span class="err">;</span>
-        <span class="err">}</span>
-    <span class="err">}</span>
-<span class="err">}</span>
-
-<span class="nt">a</span><span class="nc">.btn-main</span> <span class="err">{</span>
-    <span class="k">@extend</span> <span class="nv">%btn-main</span><span class="o">;</span>
-<span class="err">}</span>
-<span class="nt">a</span><span class="nc">.btn-weak</span> <span class="err">{</span>
-    <span class="k">@extend</span> <span class="nv">%btn-weak</span><span class="o">;</span>
-<span class="err">}</span>
-</code></pre>
-</div>
-
-<p>解析后的 CSS 代码：</p>
-
-<div class="language-css highlighter-rouge"><pre class="highlight"><code><span class="nt">a</span><span class="nc">.btn-main</span> <span class="p">{</span>
-    <span class="nl">color</span><span class="p">:</span> <span class="m">#C53336</span><span class="p">;</span>
-    <span class="nl">border-color</span><span class="p">:</span> <span class="m">#C53336</span><span class="p">;</span>
-    <span class="nl">background-color</span><span class="p">:</span> <span class="m">#FFF</span><span class="p">;</span>
-<span class="p">}</span>
-<span class="nt">a</span><span class="nc">.btn-main</span><span class="nd">:active</span> <span class="p">{</span>
-    <span class="nl">color</span><span class="p">:</span> <span class="m">#FFF</span><span class="p">;</span>
-    <span class="nl">border-color</span><span class="p">:</span> <span class="m">#C53336</span><span class="p">;</span>
-    <span class="nl">background-color</span><span class="p">:</span> <span class="m">#C53336</span><span class="p">;</span>
-<span class="p">}</span>
-<span class="nt">a</span><span class="nc">.disabled.btn-main</span> <span class="p">{</span>
-    <span class="nl">color</span><span class="p">:</span> <span class="m">#999</span><span class="p">;</span>
-    <span class="nl">border-color</span><span class="p">:</span> <span class="m">#F5F5F5</span><span class="p">;</span>
-    <span class="nl">background-color</span><span class="p">:</span> <span class="m">#F5F5F5</span><span class="p">;</span>
-<span class="p">}</span>
-<span class="nt">a</span><span class="nc">.btn-weak</span> <span class="p">{</span>
-    <span class="nl">color</span><span class="p">:</span> <span class="m">#333</span><span class="p">;</span>
-    <span class="nl">border-color</span><span class="p">:</span> <span class="m">#666</span><span class="p">;</span>
-    <span class="nl">background-color</span><span class="p">:</span> <span class="m">#FFF</span><span class="p">;</span>
-<span class="p">}</span>
-<span class="nt">a</span><span class="nc">.btn-weak</span><span class="nd">:active</span> <span class="p">{</span>
-    <span class="nl">color</span><span class="p">:</span> <span class="m">#FFF</span><span class="p">;</span>
-    <span class="nl">border-color</span><span class="p">:</span> <span class="m">#666</span><span class="p">;</span>
-    <span class="nl">background-color</span><span class="p">:</span> <span class="m">#666</span><span class="p">;</span>
-<span class="p">}</span>
-<span class="nt">a</span><span class="nc">.disabled.btn-weak</span> <span class="p">{</span>
-    <span class="nl">color</span><span class="p">:</span> <span class="m">#999</span><span class="p">;</span>
-    <span class="nl">border-color</span><span class="p">:</span> <span class="m">#CCC</span><span class="p">;</span>
-    <span class="nl">background-color</span><span class="p">:</span> <span class="m">#FFF</span><span class="p">;</span>
-<span class="p">}</span>
-</code></pre>
-</div>
 
 </article>
 <footer>

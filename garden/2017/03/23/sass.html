@@ -69,7 +69,7 @@
 
 <p>传统做法：</p>
 
-<div class="language-css highlighter-rouge"><pre class="highlight"><code><span class="c">/* m-module-list.css 文件中 */</span>
+<div class="language-css highlighter-rouge"><pre class="highlight"><code><span class="c">/* m-module-list.css */</span>
 <span class="nc">.module-list</span> <span class="nt">li</span> <span class="p">{</span>
     <span class="nl">font-size</span><span class="p">:</span> <span class="m">14px</span><span class="p">;</span>
     <span class="nl">line-height</span><span class="p">:</span> <span class="m">22px</span><span class="p">;</span>
@@ -80,7 +80,7 @@
     <span class="nl">margin-bottom</span><span class="p">:</span> <span class="nb">none</span><span class="p">;</span>
 <span class="p">}</span>
 
-<span class="c">/* style.css 文件中 */</span>
+<span class="c">/* style.css */</span>
 <span class="k">@import</span> <span class="s2">'m-module-list.css'</span><span class="p">;</span>
 
 <span class="nc">.module-list</span> <span class="nt">li</span> <span class="p">{</span>
@@ -94,7 +94,7 @@
 
 <p>使用变量默认值：</p>
 
-<div class="language-sass highlighter-rouge"><pre class="highlight"><code><span class="cm">/* m-module-list.scss 文件中 */
+<div class="language-sass highlighter-rouge"><pre class="highlight"><code><span class="cm">/* m-module-list.scss */
 </span><span class="nv">$borderBottom</span><span class="p">:</span> <span class="m">1px</span> <span class="nb">solid</span> <span class="mh">#F0F0F0</span> <span class="o">!</span><span class="nb">default</span><span class="err">;</span>
 <span class="nv">$marginBottom</span><span class="p">:</span> <span class="nb">none</span> <span class="o">!</span><span class="nb">default</span><span class="err">;</span>
 
@@ -110,7 +110,7 @@
     <span class="err">}</span>
 <span class="err">}</span>
 
-<span class="cm">/* style.scss 文件中 */
+<span class="cm">/* style.scss */
 </span><span class="nv">$borderBottom</span><span class="p">:</span> <span class="nb">none</span><span class="err">;</span>
 <span class="nv">$marginBottom</span><span class="p">:</span> <span class="m">10px</span><span class="err">;</span>
 
@@ -204,7 +204,7 @@
   </li>
 </ul>
 
-<p>特殊变量的应用十分广泛，在此不做特别介绍。请自行留意文中 #{} 这样的书写方式，那就是所谓的特殊变量。</p>
+<p>特殊变量的应用十分广泛，在此不做特别介绍。请自行留意文中 <strong><em>#{$var}</em></strong> 这样的书写方式，那就是所谓的特殊变量。</p>
 
 <h4 id="多值变量">多值变量</h4>
 

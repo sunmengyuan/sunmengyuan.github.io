@@ -4,7 +4,7 @@ title: "对于 Sass 各特性应用场景的思考"
 date: "2017-05-17"
 abstract: "sass 的语法细节不在此文赘述，有疑问请移驾至 http://sass-lang.com 自行查阅。本人认为，sass 的优势在于结构化、组件化、继承。结构化即层级关系更清晰，代码可读性更强；组件化即公用模块的提取；继承即公用样式的提取。"
 keywords: ["sass", "css 预处理器"]
-thumb: "http://onppksal8.bkt.clouddn.com/thumb.jpg"
+thumb: "http://oq3gh0x7v.bkt.clouddn.com/thumb.jpg"
 ---
 
 进入正文前，先为大家推荐一枚神奇的网站：<https://www.sassmeister.com/>。
@@ -19,7 +19,7 @@ thumb: "http://onppksal8.bkt.clouddn.com/thumb.jpg"
 
 一个站点内的公用模块在不同页面的展现形式会有些许不同，例如一个列表模块中列表项的分隔方式在不同页面存在差异。
 
-![](http://onppksal8.bkt.clouddn.com/module-list.jpg)
+![](http://oq3gh0x7v.bkt.clouddn.com/module-list.jpg)
 
 传统做法：
 
@@ -163,19 +163,19 @@ console.log(a); // -> 5
 
 由于存在图片失效或尺寸不合规定的情况，我们通常需要为图片添加默认底色及占位。举个例子：
 
-![](http://onppksal8.bkt.clouddn.com/img-placeholder.png)
+![](http://oq3gh0x7v.bkt.clouddn.com/img-placeholder.png)
 
 浮动布局中元素尺寸的变化会扰乱呈现效果，当某张图片失效时：
 
-![](http://onppksal8.bkt.clouddn.com/img-placeholder-disabled.png)
+![](http://oq3gh0x7v.bkt.clouddn.com/img-placeholder-disabled.png)
 
 当某张图片尺寸不合规定时：
 
-![](http://onppksal8.bkt.clouddn.com/img-placeholder-anti.png)
+![](http://oq3gh0x7v.bkt.clouddn.com/img-placeholder-anti.png)
 
 当然，上述问题可以通过清除浮动等方法解决，我们在此讲述的是占位方法，效果如下：
 
-![](http://onppksal8.bkt.clouddn.com/img-placeholder-normal.png)
+![](http://oq3gh0x7v.bkt.clouddn.com/img-placeholder-normal.png)
 
 在不同的业务场景下，占位图风格各异。例如我司的常规需求、活动类需求、专题类需求所启用的占位图就在颜色及底纹上存在差异。
 
@@ -238,7 +238,7 @@ $thumbType: default, activity, special;
 
 通常，一个站点含多套配色方案，以按钮的配色为例：主色、辅助色、弱色。每套配色又由多种状态色组成：常态色、点击色、失效色。
 
-![](http://onppksal8.bkt.clouddn.com/btn-group.jpg)
+![](http://oq3gh0x7v.bkt.clouddn.com/btn-group.jpg)
 
 我们可以将这些色值按照一定的规则储存在 __Map 类型变量__ 中，这样做的优势为：
 
@@ -700,7 +700,7 @@ for 循环的书写形式有两种：
 
 区域划分是有一定规则的，如下图：当前行仅含一张图片时图片宽度为 100%，两张时为 50%，... n 张时为 (100 / n)%。
 
-![固定模板](http://onppksal8.bkt.clouddn.com/static-template.jpg)
+![固定模板](http://oq3gh0x7v.bkt.clouddn.com/static-template.jpg)
 
 相关代码：
 
@@ -789,4 +789,4 @@ each 可循环遍历两种数据类型：
 
 我的 github：<https://github.com/sunmengyuan>
 
-原文链接：<https://sunmengyuan.github.io/garden/2017/05/17/sass.html>
+原文链接：<https://sunmengyuan.github.io/garden/2017/05/17/sass-example.html>

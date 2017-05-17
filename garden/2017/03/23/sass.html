@@ -680,6 +680,34 @@
 
 <h4 id="if">@if</h4>
 
+<h5 id="应用场景-5">应用场景</h5>
+
+<p>定义多行省略时（以 3 行为例），变更显示行数只需修改 line-clamp 属性值，代码如下：</p>
+
+<div class="language-css highlighter-rouge"><pre class="highlight"><code><span class="nc">.ellipsis-row3</span> <span class="p">{</span>
+    <span class="nl">overflow</span><span class="p">:</span> <span class="nb">hidden</span><span class="p">;</span>
+    <span class="nl">display</span><span class="p">:</span> <span class="n">-webkit-box</span><span class="p">;</span>
+    <span class="nl">text-overflow</span><span class="p">:</span> <span class="n">-o-ellipsis-lastline</span><span class="p">;</span>
+    <span class="nl">-webkit-box-orient</span><span class="p">:</span> <span class="n">vertical</span><span class="p">;</span>
+    <span class="nl">-webkit-line-clamp</span><span class="p">:</span> <span class="m">3</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<p>而定义单行省略只需如下 3 行：</p>
+
+<div class="language-css highlighter-rouge"><pre class="highlight"><code><span class="nc">.ellipsis-row1</span> <span class="p">{</span>
+    <span class="nl">overflow</span><span class="p">:</span> <span class="nb">hidden</span><span class="p">;</span>
+    <span class="nl">white-space</span><span class="p">:</span> <span class="nb">nowrap</span><span class="p">;</span>
+    <span class="nl">text-overflow</span><span class="p">:</span> <span class="n">ellipsis</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<p>两段代码差异较大，而我们又想将多行与单行的情况融合在一个通用样式内。此时，可以使用 if 语句将单行省略单独定义。</p>
+
+<p>相关代码：</p>
+
 <div class="language-sass highlighter-rouge"><pre class="highlight"><code><span class="k">@for</span> <span class="nv">$lineCount</span> <span class="ow">from</span> <span class="m">1</span> <span class="ow">through</span> <span class="m">3</span> <span class="err">{</span>
     <span class="nv">%ellipsis-row</span><span class="si">#{</span><span class="nv">$lineCount</span><span class="si">}</span> <span class="err">{</span>
         <span class="nl">overflow</span><span class="p">:</span> <span class="nb">hidden</span><span class="err">;</span>
@@ -707,7 +735,7 @@
 </code></pre>
 </div>
 
-<p>解析后的 CSS 代码：</p>
+<p>解析后的 css 代码：</p>
 
 <div class="language-css highlighter-rouge"><pre class="highlight"><code><span class="nc">.section1</span> <span class="nt">p</span> <span class="p">{</span>
     <span class="nl">overflow</span><span class="p">:</span> <span class="nb">hidden</span><span class="p">;</span>
@@ -746,7 +774,7 @@
 
 <p>第一种在循环遍历时会对第 <strong>end</strong> 项进行操作，第二种则不会。本人认为习惯使用一种即可，不然易混淆。</p>
 
-<h5 id="应用场景-5">应用场景</h5>
+<h5 id="应用场景-6">应用场景</h5>
 
 <p>我司喜好做 “固定模板” 需求：运营同学会将一张图片裁切成 n 个区域，点击每一区域的行为有所不同。比如一张美女的面部图，点击其眼睛时会推荐一些双眼皮项目，点击其鼻子时会推荐一些鼻综合项目等等（我司是做微整形交易平台的）。</p>
 

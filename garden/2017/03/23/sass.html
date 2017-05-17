@@ -551,6 +551,14 @@
   <p>可传递参数，可设置参数默认值。</p>
 </blockquote>
 
+<h5 id="应用场景-3">应用场景</h5>
+
+<p>相信大家都很反感在使用 transition、transform 这类 css3 属性时需要巴拉巴拉添加一堆前缀。</p>
+
+<p>有了 sass 我们便可以定义一个自动添加前缀的方法啦！引用时，只需传入属性名及属性值，非常方便。且欲添加新的所须兼容的浏览器时，只需在 $compatibleBrowser 中添加配置项。若是使用传统做法，想象下某天老板要我们兼容 ms 了，你是要把全站代码改一遍？</p>
+
+<p>相关代码：</p>
+
 <div class="language-sass highlighter-rouge"><pre class="highlight"><code><span class="nv">$compatibleBrowser</span><span class="p">:</span> <span class="n">webkit</span><span class="o">,</span> <span class="n">moz</span><span class="o">,</span> <span class="n">o</span><span class="err">;</span>
 <span class="k">@mixin</span> <span class="nf">addPrefix</span> <span class="p">(</span><span class="nv">$property</span><span class="o">,</span> <span class="nv">$value</span><span class="p">)</span> <span class="err">{</span>
     <span class="k">@each</span> <span class="nv">$prefix</span> <span class="n">in</span> <span class="nv">$compatibleBrowser</span> <span class="err">{</span>
@@ -568,7 +576,7 @@
 </code></pre>
 </div>
 
-<p>解析后的 CSS 代码：</p>
+<p>解析后的 css 代码：</p>
 
 <div class="language-css highlighter-rouge"><pre class="highlight"><code><span class="nc">.demo</span> <span class="p">{</span>
     <span class="nl">background-color</span><span class="p">:</span> <span class="no">red</span><span class="p">;</span>
@@ -709,7 +717,7 @@
 
 <p>第一种在循环遍历时会对第 <strong>end</strong> 项进行操作，第二种则不会。本人认为习惯使用一种即可，不然易混淆。</p>
 
-<h5 id="应用场景-3">应用场景</h5>
+<h5 id="应用场景-4">应用场景</h5>
 
 <p>我司喜好做 “固定模板” 需求：运营同学会将一张图片裁切成 n 个区域，点击每一区域的行为有所不同。比如一张美女的面部图，点击其眼睛时会推荐一些双眼皮项目，点击其鼻子时会推荐一些鼻综合项目等等（我司是做微整形交易平台的）。</p>
 

@@ -41,7 +41,7 @@
 <header class="post" style="background-image: url('http://oij8a9ql4.bkt.clouddn.com/banner.jpg')">
     <div>
         <h2>对于 Sass 各特性应用场景的思考</h2>
-        <time>23 Mar 2017</time>
+        <time>17 May 2017</time>
         <p class="abstract"></p>
         <ul class="c-fix">
             
@@ -90,7 +90,7 @@
 </code></pre>
 </div>
 
-<p>显而易见，传统做法会产生冗余代码。</p>
+<p>显而易见，传统做法会产生 <strong>冗余</strong> 代码。</p>
 
 <p>使用变量默认值：</p>
 
@@ -132,7 +132,7 @@
 </code></pre>
 </div>
 
-<p>上述方法是存在缺陷的：定义全局变量很容易造成污染。但自 sass v3.4 便不存在这样的问题了，为什么这样讲？</p>
+<p>上述方法是存在缺陷的：定义 <strong>全局变量</strong> 很容易造成 <strong>污染</strong>。但自 sass v3.4 便不存在这样的问题了，为什么这样讲？</p>
 
 <p>先看一段示例：</p>
 
@@ -232,7 +232,7 @@
 
 <p>在不同的业务场景下，占位图风格各异。例如我司的常规需求、活动类需求、专题类需求所启用的占位图就在颜色及底纹上存在差异。</p>
 
-<p>我们可以定义 3 种图片类型 default、activity、special 存储在 List 类型变量 $thumbType 中，这样书写语义清晰、利于拓展、精简代码。</p>
+<p>我们可以定义 3 种图片类型 default、activity、special 存储在 <strong>List 类型变量</strong> $thumbType 中，这样书写语义清晰、利于拓展、精简代码。</p>
 
 <p>相关代码：</p>
 
@@ -295,7 +295,7 @@
 
 <p><img src="http://onppksal8.bkt.clouddn.com/btn-group.jpg" alt="" /></p>
 
-<p>我们可以将这些色值按照一定的规则储存在 Map 类型变量中，这样做的优势为：</p>
+<p>我们可以将这些色值按照一定的规则储存在 <strong>Map 类型变量</strong> 中，这样做的优势为：</p>
 
 <ul>
   <li>
@@ -422,7 +422,7 @@
   <p>@at-root 可防止选择器的优先级过高。</p>
 </blockquote>
 
-<p>先看一段很糟糕的代码，嵌套层级过多。层级关系的展现虽清晰，却莫名加高了选择器的优先级。那么在重置样式的时候便需要加更高的优先级，由此恶性循环。</p>
+<p>先看一段很糟糕的代码，嵌套层级过多。层级关系的展现虽清晰，却莫名加高了选择器的 <strong>优先级</strong>。那么在重置样式的时候便需要加更高的优先级，由此恶性循环。</p>
 
 <div class="language-sass highlighter-rouge"><pre class="highlight"><code><span class="nc">.parent</span> <span class="err">{</span>
     <span class="nc">.child1</span> <span class="err">{</span>
@@ -676,7 +676,7 @@
   <li>if(<strong>条件</strong>, <strong>条件为真所取值</strong>, <strong>条件为假所取值</strong>)</li>
 </ul>
 
-<p>莫名觉得会很常用，与 javascript 中的 ? : 作用相同。</p>
+<p>莫名觉得会很常用，与 javascript 中的 <strong>? :</strong> 作用相同。</p>
 
 <h4 id="if">@if</h4>
 
@@ -849,7 +849,7 @@
 </code></pre>
 </div>
 
-<p>上述其实是多列布局的一个实例，多列布局的应用很广泛。</p>
+<p>上述其实是 <strong>多列布局</strong> 的一个实例，<strong>多列布局</strong> 的应用很广泛。</p>
 
 <h4 id="each">@each</h4>
 
@@ -863,6 +863,8 @@
     <p>@each <strong>$var</strong> in <strong>map</strong></p>
   </li>
 </ul>
+
+<p>具体实例请向上翻至 <strong>多值变量</strong>。</p>
 
 </article>
 <footer>

@@ -597,6 +597,12 @@
   <p>用于定义通用样式最为合适。</p>
 </blockquote>
 
+<h5 id="应用场景-4">应用场景</h5>
+
+<p>通常，我们会创建这样一个文件 common.css 来定义一些通用样式，引用时在对应元素的 html 标签上添加相应的 class 即可。</p>
+
+<p>而 sass 的做法如下：</p>
+
 <div class="language-sass highlighter-rouge"><pre class="highlight"><code><span class="nv">%horizontal-scroll</span> <span class="err">{</span>
     <span class="nl">white-space</span><span class="p">:</span> <span class="nb">nowrap</span><span class="err">;</span>
     <span class="nl">overflow-x</span><span class="p">:</span> <span class="nb">scroll</span><span class="err">;</span>
@@ -617,7 +623,7 @@
 </code></pre>
 </div>
 
-<p>解析后的 CSS 代码：</p>
+<p>解析后的 css 代码：</p>
 
 <div class="language-css highlighter-rouge"><pre class="highlight"><code><span class="nt">section</span><span class="nc">.horizontal-scroll</span> <span class="p">{</span>
     <span class="nl">white-space</span><span class="p">:</span> <span class="nb">nowrap</span><span class="p">;</span>
@@ -634,6 +640,19 @@
 <span class="p">}</span>
 </code></pre>
 </div>
+
+<p>这样做的优势为：</p>
+
+<ul>
+  <li>
+    <p>css 样式与 html 结构解耦。</p>
+  </li>
+  <li>
+    <p>去除冗余 css 代码。</p>
+  </li>
+</ul>
+
+<p>第一条优势显而易见，下面来为大家解释第二条：在代码被压缩上线时，传统做法会使得未被引用的通用样式一同被上线，而 sass 在被解析为 css 时会去除由 % 定义的未被引用的通用样式。</p>
 
 <hr />
 
@@ -717,7 +736,7 @@
 
 <p>第一种在循环遍历时会对第 <strong>end</strong> 项进行操作，第二种则不会。本人认为习惯使用一种即可，不然易混淆。</p>
 
-<h5 id="应用场景-4">应用场景</h5>
+<h5 id="应用场景-5">应用场景</h5>
 
 <p>我司喜好做 “固定模板” 需求：运营同学会将一张图片裁切成 n 个区域，点击每一区域的行为有所不同。比如一张美女的面部图，点击其眼睛时会推荐一些双眼皮项目，点击其鼻子时会推荐一些鼻综合项目等等（我司是做微整形交易平台的）。</p>
 

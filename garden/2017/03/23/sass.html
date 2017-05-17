@@ -234,6 +234,8 @@
 
 <p>我们可以定义 3 种图片类型 default、activity、special 存储在 List 类型变量 $thumbType 中，这样书写语义清晰、利于拓展、精简代码。</p>
 
+<p>相关代码：</p>
+
 <div class="language-sass highlighter-rouge"><pre class="highlight"><code><span class="nv">$thumbType</span><span class="p">:</span> <span class="nb">default</span><span class="o">,</span> <span class="n">activity</span><span class="o">,</span> <span class="n">special</span><span class="err">;</span>
 <span class="k">@each</span> <span class="nv">$type</span> <span class="n">in</span> <span class="nv">$thumbType</span> <span class="err">{</span>
     <span class="nv">%</span><span class="si">#{</span><span class="nv">$type</span><span class="si">}</span><span class="nv">-thumb</span> <span class="err">{</span>
@@ -293,7 +295,7 @@
 
 <p><img src="http://onppksal8.bkt.clouddn.com/btn-group.jpg" alt="" /></p>
 
-<p>我们可以将这些色值按照一定的规则储存在 map 中，这样做的优势为：</p>
+<p>我们可以将这些色值按照一定的规则储存在 Map 类型变量中，这样做的优势为：</p>
 
 <ul>
   <li>
@@ -373,7 +375,7 @@
 </code></pre>
 </div>
 
-<p>解析后的 CSS 代码：</p>
+<p>解析后的 css 代码：</p>
 
 <div class="language-css highlighter-rouge"><pre class="highlight"><code><span class="nt">a</span><span class="nc">.btn-main</span> <span class="p">{</span>
     <span class="nl">color</span><span class="p">:</span> <span class="m">#C53336</span><span class="p">;</span>

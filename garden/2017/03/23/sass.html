@@ -212,6 +212,28 @@
   <li>List 类型</li>
 </ul>
 
+<h5 id="应用场景-1">应用场景</h5>
+
+<p>由于存在图片失效或尺寸不合规定的情况，我们通常需要为图片添加默认底色及占位。举个例子：</p>
+
+<p><img src="http://onppksal8.bkt.clouddn.com/img-placeholder.png" alt="" /></p>
+
+<p>浮动布局中元素尺寸的变化会扰乱呈现效果，当某张图片失效时：</p>
+
+<p><img src="http://onppksal8.bkt.clouddn.com/img-placeholder-disabled.png" alt="" /></p>
+
+<p>当某张图片尺寸不合规定时：</p>
+
+<p><img src="http://onppksal8.bkt.clouddn.com/img-placeholder-anti.png" alt="" /></p>
+
+<p>当然，上述问题可以通过清除浮动等方法解决，我们在此讲述的是占位方法，效果如下：</p>
+
+<p><img src="http://onppksal8.bkt.clouddn.com/img-placeholder-normal.png" alt="" /></p>
+
+<p>在不同的业务场景下，占位图风格各异。例如我司的常规需求、活动类需求、专题类需求所启用的占位图就在颜色及底纹上存在差异。</p>
+
+<p>我们可以定义 3 种图片类型 default、activity、special 存储在 List 类型变量 $thumbType 中，这样书写语义清晰、利于拓展、精简代码。</p>
+
 <div class="language-sass highlighter-rouge"><pre class="highlight"><code><span class="nv">$thumbType</span><span class="p">:</span> <span class="nb">default</span><span class="o">,</span> <span class="n">activity</span><span class="o">,</span> <span class="n">special</span><span class="err">;</span>
 <span class="k">@each</span> <span class="nv">$type</span> <span class="n">in</span> <span class="nv">$thumbType</span> <span class="err">{</span>
     <span class="nv">%</span><span class="si">#{</span><span class="nv">$type</span><span class="si">}</span><span class="nv">-thumb</span> <span class="err">{</span>
@@ -235,7 +257,7 @@
 </code></pre>
 </div>
 
-<p>解析后的 CSS 代码：</p>
+<p>解析后的 css 代码：</p>
 
 <div class="language-css highlighter-rouge"><pre class="highlight"><code><span class="nc">.section1</span> <span class="nc">.thumb</span> <span class="p">{</span>
     <span class="nl">background</span><span class="p">:</span> <span class="sx">url("../img/default-nothumb.jpg")</span> <span class="nb">no-repeat</span> <span class="m">0</span> <span class="m">0</span><span class="p">;</span>
@@ -265,7 +287,7 @@
   <li>Map 类型</li>
 </ul>
 
-<h5 id="应用场景-1">应用场景</h5>
+<h5 id="应用场景-2">应用场景</h5>
 
 <p>通常，一个站点含多套配色方案，以按钮的配色为例：主色、辅助色、弱色。每套配色又由多种状态色组成：常态色、点击色、失效色。</p>
 
@@ -686,7 +708,7 @@
 
 <p>第一种在循环遍历时会对第 <strong>end</strong> 项进行操作，第二种则不会。本人认为习惯使用一种即可，不然易混淆。</p>
 
-<h5 id="应用场景-2">应用场景</h5>
+<h5 id="应用场景-3">应用场景</h5>
 
 <p>我司喜好做 “固定模板” 需求：运营同学会将一张图片裁切成 n 个区域，点击每一区域的行为有所不同。比如一张美女的面部图，点击其眼睛时会推荐一些双眼皮项目，点击其鼻子时会推荐一些鼻综合项目等等（我司是做微整形交易平台的）。</p>
 

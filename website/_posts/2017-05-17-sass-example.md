@@ -447,7 +447,6 @@ a.disabled.btn-weak {
 解析后的 css 代码：
 
 ```css
-/* css */
 .demo {
     animation: motion 1s infinite;
 }

@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="keywords" content="前端开发,sass,css 预处理器" />
-    <meta name="description" content="sass 的语法细节不在此文赘述，有疑问请移驾至 http://sass-lang.com 自行查阅。本人认为，sass 的优势在于结构化、组件化、继承。结构化即层级关系更清晰，代码可读性更强；组件化即公用模块的提取；继承即公用样式的提取。" />
+    <meta name="description" content="本文以 sass 语法点为主线展开，但语法细节不在此赘述，如有疑问请移驾至 http://sass-lang.com 自行查阅。我所认为的 sass 的优势：结构化（层级关系更清晰）、组件化（公用模块的提取）、继承（公用样式的提取），希望读者能在浏览完此文后有所体会。" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0" />
-    <title>呆恋小喵的后花园 - 对于 Sass 各特性应用场景的思考</title>
+    <title>呆恋小喵的后花园 - Sass 学习笔记（应用场景的思考）</title>
     <link rel="shortcut icon" href="http://oij8a9ql4.bkt.clouddn.com/shortcut.ico" />
     <link rel="stylesheet" href="https://cdn.bootcss.com/highlight.js/8.0/styles/sunburst.min.css" />
     <link rel="stylesheet/less" href="/garden/assets/style/style.less" />
@@ -40,9 +40,9 @@
 <a href="javascript:;" class="gotop js_gotop"></a>
 <header class="post" style="background-image: url('http://oij8a9ql4.bkt.clouddn.com/banner.jpg')">
     <div>
-        <h2>对于 Sass 各特性应用场景的思考</h2>
+        <h2>Sass 学习笔记（应用场景的思考）</h2>
         <time>17 May 2017</time>
-        <p class="abstract">sass 的语法细节不在此文赘述，有疑问请移驾至 http://sass-lang.com 自行查阅。本人认为，sass 的优势在于结构化、组件化、继承。结构化即层级关系更清晰，代码可读性更强；组件化即公用模块的提取；继承即公用样式的提取。</p>
+        <p class="abstract">本文以 sass 语法点为主线展开，但语法细节不在此赘述，如有疑问请移驾至 http://sass-lang.com 自行查阅。我所认为的 sass 的优势：结构化（层级关系更清晰）、组件化（公用模块的提取）、继承（公用样式的提取），希望读者能在浏览完此文后有所体会。</p>
         <ul class="c-fix">
             
             <li>sass</li>
@@ -67,7 +67,7 @@
 
 <p>一个站点内的公用模块在不同页面的展现形式会有些许不同，例如一个列表模块中列表项的分隔方式在不同页面存在差异。</p>
 
-<p><img src="http://oq3gh0x7v.bkt.clouddn.com/module-list.jpg" alt="" /></p>
+<p><img src="http://oq4xwrn7d.bkt.clouddn.com/module-list.jpg" alt="" /></p>
 
 <p>传统做法：</p>
 
@@ -92,7 +92,7 @@
 </code></pre>
 </div>
 
-<p>显而易见，传统做法会产生 <strong>冗余</strong> 代码。</p>
+<p>显然，传统做法会产生 <strong>冗余</strong> 代码。对 .module-list li 的 border-bottom 及 margin-bottom 定义了两次（很好的体现了 css <strong>层叠</strong> 的理念）。</p>
 
 <p>使用变量默认值：</p>
 
@@ -183,7 +183,7 @@
 </code></pre>
 </div>
 
-<p>而 sass v3.3 及以前的设计思路为：在底层作用域声明变量相当于修改全局变量，它处调用该变量时会使用覆盖的新值。</p>
+<p>而 sass v3.3 及以前对变量的设计思路为：在底层作用域声明变量相当于修改全局变量，它处调用该变量时会使用覆盖的新值。</p>
 
 <p>使用 javascript 解释：</p>
 
@@ -216,21 +216,13 @@
 
 <h5 id="应用场景-1">应用场景</h5>
 
-<p>由于存在图片失效或尺寸不合规定的情况，我们通常需要为图片添加默认底色及占位。举个例子：</p>
+<p>由于存在图片失效或尺寸不合规定的情况，我们通常需要为图片添加默认底色及占位。例如浮动布局中元素尺寸的变化会扰乱呈现效果：</p>
 
-<p><img src="http://oq3gh0x7v.bkt.clouddn.com/img-placeholder.png" alt="" /></p>
+<p><img src="http://oq4xwrn7d.bkt.clouddn.com/img-placeholder-anti.jpg" alt="" /></p>
 
-<p>浮动布局中元素尺寸的变化会扰乱呈现效果，当某张图片失效时：</p>
+<p>当然，上述问题可以通过为左侧元素清除浮动或延时加载图片等方法解决。在此，我们仅讲述为图片添加占位这一方法，效果如下：</p>
 
-<p><img src="http://oq3gh0x7v.bkt.clouddn.com/img-placeholder-disabled.png" alt="" /></p>
-
-<p>当某张图片尺寸不合规定时：</p>
-
-<p><img src="http://oq3gh0x7v.bkt.clouddn.com/img-placeholder-anti.png" alt="" /></p>
-
-<p>当然，上述问题可以通过清除浮动等方法解决，我们在此讲述的是占位方法，效果如下：</p>
-
-<p><img src="http://oq3gh0x7v.bkt.clouddn.com/img-placeholder-normal.png" alt="" /></p>
+<p><img src="http://oq4xwrn7d.bkt.clouddn.com/img-placeholder.jpg" alt="" /></p>
 
 <p>在不同的业务场景下，占位图风格各异。例如我司的常规需求、活动类需求、专题类需求所启用的占位图就在颜色及底纹上存在差异。</p>
 
@@ -295,7 +287,7 @@
 
 <p>通常，一个站点含多套配色方案，以按钮的配色为例：主色、辅助色、弱色。每套配色又由多种状态色组成：常态色、点击色、失效色。</p>
 
-<p><img src="http://oq3gh0x7v.bkt.clouddn.com/btn-group.jpg" alt="" /></p>
+<p><img src="http://oq4xwrn7d.bkt.clouddn.com/btn-group.jpg" alt="" /></p>
 
 <p>我们可以将这些色值按照一定的规则储存在 <strong>Map 类型变量</strong> 中，这样做的优势为：</p>
 
@@ -557,7 +549,7 @@
 
 <p>相信大家都很反感在使用 transition、transform 这类 css3 属性时需要巴拉巴拉添加一堆前缀。</p>
 
-<p>有了 sass 我们便可以定义一个自动添加前缀的方法啦！引用时，只需传入属性名及属性值，非常方便。且欲添加新的所须兼容的浏览器时，只需在 $compatibleBrowser 中添加配置项。若是使用传统做法，想象下某天老板要我们兼容 ms 了，你是要把全站代码改一遍？</p>
+<p>有了 sass 我们便可以定义一个自动添加前缀的方法啦！引用时，只需传入属性名及属性值，非常方便。且欲添加新的所须兼容的浏览器时，只需在 $compatibleBrowser 中添加配置项。若是使用传统做法，想象下某天老板要我们兼容 ms 了，你是要把全站代码修改一遍？</p>
 
 <p>相关代码：</p>
 
@@ -782,7 +774,7 @@
 
 <p>区域划分是有一定规则的，如下图：当前行仅含一张图片时图片宽度为 100%，两张时为 50%，… n 张时为 (100 / n)%。</p>
 
-<p><img src="http://oq3gh0x7v.bkt.clouddn.com/static-template.jpg" alt="固定模板" /></p>
+<p><img src="http://oq4xwrn7d.bkt.clouddn.com/static-template.jpg" alt="固定模板" /></p>
 
 <p>相关代码：</p>
 
@@ -851,7 +843,9 @@
 </code></pre>
 </div>
 
-<p>上述其实是 <strong>多列布局</strong> 的一个实例，<strong>多列布局</strong> 的应用很广泛。</p>
+<p>上述其实是 <strong>多列布局</strong> 的一个实例，<strong>多列布局</strong> 的应用很广泛，比如导航栏：</p>
+
+<p><img src="http://oq4xwrn7d.bkt.clouddn.com/col-nav.jpg" alt="" /></p>
 
 <h4 id="each">@each</h4>
 

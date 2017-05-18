@@ -1,10 +1,10 @@
 ---
 layout: post
-title: "对于 Sass 各特性应用场景的思考"
+title: "Sass 学习笔记（应用场景的思考）"
 date: "2017-05-17"
-abstract: "sass 的语法细节不在此文赘述，有疑问请移驾至 http://sass-lang.com 自行查阅。本人认为，sass 的优势在于结构化、组件化、继承。结构化即层级关系更清晰，代码可读性更强；组件化即公用模块的提取；继承即公用样式的提取。"
+abstract: "本文以 sass 语法点为主线展开，但语法细节不在此赘述，如有疑问请移驾至 http://sass-lang.com 自行查阅。我所认为的 sass 的优势：结构化（层级关系更清晰）、组件化（公用模块的提取）、继承（公用样式的提取），希望读者能在浏览完此文后有所体会。"
 keywords: ["sass", "css 预处理器"]
-thumb: "http://oq3gh0x7v.bkt.clouddn.com/thumb.jpg"
+thumb: "http://oq4xwrn7d.bkt.clouddn.com/thumb.jpg"
 ---
 
 进入正文前，先为大家推荐一枚神奇的网站：<https://www.sassmeister.com/>。
@@ -19,7 +19,7 @@ thumb: "http://oq3gh0x7v.bkt.clouddn.com/thumb.jpg"
 
 一个站点内的公用模块在不同页面的展现形式会有些许不同，例如一个列表模块中列表项的分隔方式在不同页面存在差异。
 
-![](http://oq3gh0x7v.bkt.clouddn.com/module-list.jpg)
+![](http://oq4xwrn7d.bkt.clouddn.com/module-list.jpg)
 
 传统做法：
 
@@ -44,7 +44,7 @@ thumb: "http://oq3gh0x7v.bkt.clouddn.com/thumb.jpg"
 }
 ```
 
-显而易见，传统做法会产生 __冗余__ 代码。
+显然，传统做法会产生 __冗余__ 代码。对 .module-list li 的 border-bottom 及 margin-bottom 定义了两次（很好的体现了 css __层叠__ 的理念）。
 
 使用变量默认值：
 
@@ -135,7 +135,7 @@ var a = 1;
 console.log(a); // -> 1
 ```
 
-而 sass v3.3 及以前的设计思路为：在底层作用域声明变量相当于修改全局变量，它处调用该变量时会使用覆盖的新值。
+而 sass v3.3 及以前对变量的设计思路为：在底层作用域声明变量相当于修改全局变量，它处调用该变量时会使用覆盖的新值。
 
 使用 javascript 解释：
 
@@ -161,21 +161,13 @@ console.log(a); // -> 5
 
 ##### 应用场景
 
-由于存在图片失效或尺寸不合规定的情况，我们通常需要为图片添加默认底色及占位。举个例子：
+由于存在图片失效或尺寸不合规定的情况，我们通常需要为图片添加默认底色及占位。例如浮动布局中元素尺寸的变化会扰乱呈现效果：
 
-![](http://oq3gh0x7v.bkt.clouddn.com/img-placeholder.png)
+![](http://oq4xwrn7d.bkt.clouddn.com/img-placeholder-anti.jpg)
 
-浮动布局中元素尺寸的变化会扰乱呈现效果，当某张图片失效时：
+当然，上述问题可以通过为左侧元素清除浮动或延时加载图片等方法解决。在此，我们仅讲述为图片添加占位这一方法，效果如下：
 
-![](http://oq3gh0x7v.bkt.clouddn.com/img-placeholder-disabled.png)
-
-当某张图片尺寸不合规定时：
-
-![](http://oq3gh0x7v.bkt.clouddn.com/img-placeholder-anti.png)
-
-当然，上述问题可以通过清除浮动等方法解决，我们在此讲述的是占位方法，效果如下：
-
-![](http://oq3gh0x7v.bkt.clouddn.com/img-placeholder-normal.png)
+![](http://oq4xwrn7d.bkt.clouddn.com/img-placeholder.jpg)
 
 在不同的业务场景下，占位图风格各异。例如我司的常规需求、活动类需求、专题类需求所启用的占位图就在颜色及底纹上存在差异。
 
@@ -238,7 +230,7 @@ $thumbType: default, activity, special;
 
 通常，一个站点含多套配色方案，以按钮的配色为例：主色、辅助色、弱色。每套配色又由多种状态色组成：常态色、点击色、失效色。
 
-![](http://oq3gh0x7v.bkt.clouddn.com/btn-group.jpg)
+![](http://oq4xwrn7d.bkt.clouddn.com/btn-group.jpg)
 
 我们可以将这些色值按照一定的规则储存在 __Map 类型变量__ 中，这样做的优势为：
 
@@ -491,7 +483,7 @@ a.disabled.btn-weak {
 
 相信大家都很反感在使用 transition、transform 这类 css3 属性时需要巴拉巴拉添加一堆前缀。
 
-有了 sass 我们便可以定义一个自动添加前缀的方法啦！引用时，只需传入属性名及属性值，非常方便。且欲添加新的所须兼容的浏览器时，只需在 $compatibleBrowser 中添加配置项。若是使用传统做法，想象下某天老板要我们兼容 ms 了，你是要把全站代码改一遍？
+有了 sass 我们便可以定义一个自动添加前缀的方法啦！引用时，只需传入属性名及属性值，非常方便。且欲添加新的所须兼容的浏览器时，只需在 $compatibleBrowser 中添加配置项。若是使用传统做法，想象下某天老板要我们兼容 ms 了，你是要把全站代码修改一遍？
 
 相关代码：
 
@@ -700,7 +692,7 @@ for 循环的书写形式有两种：
 
 区域划分是有一定规则的，如下图：当前行仅含一张图片时图片宽度为 100%，两张时为 50%，... n 张时为 (100 / n)%。
 
-![固定模板](http://oq3gh0x7v.bkt.clouddn.com/static-template.jpg)
+![固定模板](http://oq4xwrn7d.bkt.clouddn.com/static-template.jpg)
 
 相关代码：
 
@@ -769,7 +761,9 @@ section.static-template .count3 a {
 }
 ```
 
-上述其实是 __多列布局__ 的一个实例，__多列布局__ 的应用很广泛。
+上述其实是 __多列布局__ 的一个实例，__多列布局__ 的应用很广泛，比如导航栏：
+
+![](http://oq4xwrn7d.bkt.clouddn.com/col-nav.jpg)
 
 #### @each
 

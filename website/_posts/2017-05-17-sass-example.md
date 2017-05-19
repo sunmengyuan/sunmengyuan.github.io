@@ -163,11 +163,11 @@ console.log(a); // -> 5
 
 由于存在图片失效或尺寸不合规定的情况，我们通常需要为图片添加默认底色及占位。例如浮动布局中元素尺寸的变化会扰乱呈现效果：
 
-![](http://oq4xwrn7d.bkt.clouddn.com/img-placeholder-anti.jpg)
+![](http://oq4xwrn7d.bkt.clouddn.com/thumb-placeholder-anti.jpg)
 
 当然，上述问题可以通过为左侧元素清除浮动或延时加载图片等方法解决。在此，我们仅讲述为图片添加占位这一方法，效果如下：
 
-![](http://oq4xwrn7d.bkt.clouddn.com/img-placeholder.jpg)
+![](http://oq4xwrn7d.bkt.clouddn.com/thumb-placeholder.jpg)
 
 在不同的业务场景下，占位图风格各异。例如我司的常规需求、活动类需求、专题类需求所启用的占位图就在颜色及底纹上存在差异。
 
@@ -762,7 +762,7 @@ section.static-template .count3 a {
 
 上述其实是 __多列布局__ 的一个实例，__多列布局__ 的应用很广泛，比如导航栏：
 
-![](http://oq4xwrn7d.bkt.clouddn.com/col-nav.jpg)
+![](http://oq4xwrn7d.bkt.clouddn.com/column-nav.jpg)
 
 #### @each
 

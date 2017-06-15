@@ -782,4 +782,4 @@ each 可循环遍历两种数据类型：
 
 我的 github：<https://github.com/sunmengyuan>
 
-原文链接：<https://sunmengyuan.github.io/garden/2017/05/17/sass-example.html>
+原文链接：<https://sunmengyuan.github.io/garden/2017/05/17/sass-application.html>

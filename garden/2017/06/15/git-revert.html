@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="keywords" content="前端开发,git,代码回滚" />
+    <meta name="description" content="本文讲述了如何使用 git rebase -i 及 git cherry-pick 实现代码回滚。代码回滚属于高危操作，建议慎用！" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0" />
+    <title>呆恋小喵的后花园 - 谈谈 Git 代码回滚</title>
+    <link rel="shortcut icon" href="http://oij8a9ql4.bkt.clouddn.com/shortcut.ico" />
+    <link rel="stylesheet" href="https://cdn.bootcss.com/highlight.js/8.0/styles/sunburst.min.css" />
+    <link rel="stylesheet/less" href="/garden/assets/style/style.less" />
+    <script src="https://lib.sinaapp.com/js/jquery/1.9.1/jquery-1.9.1.min.js"></script>
+    <script src="https://cdn.bootcss.com/less.js/1.7.0/less.min.js"></script>
+    <script src="https://cdn.bootcss.com/highlight.js/8.0/highlight.min.js"></script>
+</head>
+<body>
+<script>
+    var pageData = {};
+    var _hmt = _hmt || [];
+    (function () {
+        var hm = document.createElement('script');
+        hm.src = 'https://hm.baidu.com/hm.js?6b9830e6ab8073ce1a44ad49a03d8596';
+        var s = document.getElementsByTagName('script')[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+<img src="http://oij8a9ql4.bkt.clouddn.com/portrait.jpg" alt="呆恋小喵" width="0" height="0" />
+<nav>
+    <a href="javascript:;" class="js_menu_btn">
+        <span></span>
+        <span></span>
+        <span></span>
+    </a>
+    <ul class="js_menu">
+        <li><a href="/garden/">Home</a></li>
+        <li><a href="/garden/views/posts" class="js_goto_posts">Posts</a></li>
+        <li><a href="/garden/views/about">About</a></li>
+    </ul>
+</nav>
+<a href="javascript:;" class="gotop js_gotop"></a>
+<header class="post" style="background-image: url('http://oij8a9ql4.bkt.clouddn.com/banner.jpg')">
+    <div>
+        <h2>谈谈 Git 代码回滚</h2>
+        <time>15 Jun 2017</time>
+        <p class="abstract">本文讲述了如何使用 git rebase -i 及 git cherry-pick 实现代码回滚。代码回滚属于高危操作，建议慎用！</p>
+        <ul class="c-fix">
+            
+            <li>git</li>
+            
+            <li>代码回滚</li>
+            
+        </ul>
+    </div>
+</header>
+<article class="js_article">
+    <p><a href="http://orkxnrvmk.bkt.clouddn.com/project.zip">下载示例源文件</a></p>
+
+<p>为什么会写这样一篇文章？其实是有一段历史的：在一次迭代中并行开发着 n 个需求，到提测之时各需求的代码陆陆续续被合并到了测试分支。生活本来很平静，但两天后测试的头目说“我们组发生了点状况，本次迭代的需求在规定时间内无法测完，但老板又强制要求了上线时间，我们把优先级较低的需求的代码从测试分支抽出去吧！”。当时真是心中一万只 XXX 飘过…</p>
+
+<p>我们来模拟一下上述场景：迭代中并行开发着 3 个需求 feature1、feature2、feature3，在各自的开发分支上相安无事。</p>
+
+<p><img src="http://orkxnrvmk.bkt.clouddn.com/dev-features.jpg" alt="" /></p>
+
+<p>其中 feature2 与 feature3 需要修改同一文件，我们故意制造了一个冲突：</p>
+
+<p><img src="http://orkxnrvmk.bkt.clouddn.com/create-conflict-feature2-feature3.jpg" alt="" /></p>
+
+<p>提测时间到了，feature1 的代码被合并到了测试分支：</p>
+
+<p><img src="http://orkxnrvmk.bkt.clouddn.com/merge-feature1.jpg" alt="" /></p>
+
+<p>在 feature1 修复了 1 个 bug 后，feature2 也提测了：</p>
+
+<p><img src="http://orkxnrvmk.bkt.clouddn.com/merge-feature2.jpg" alt="" /></p>
+
+<p>而后 feature3 也提测了，在合并 feature3 的代码时，刚刚制造的冲突爆发了：</p>
+
+<p><img src="http://orkxnrvmk.bkt.clouddn.com/conflict-detail-file5.jpg" alt="" /></p>
+
+<p>我们需要解决冲突后再合并代码：</p>
+
+<p><img src="http://orkxnrvmk.bkt.clouddn.com/merge-conflict-feature3.jpg" alt="" /></p>
+
+<p>在 feature3 提测后，我们又修复了几个 bug：</p>
+
+<p><img src="http://orkxnrvmk.bkt.clouddn.com/bug-file5-feature3.jpg" alt="" /></p>
+
+<p>当然，feature2 虽已提测但并未进入测试，bug 的修复均是针对 feature1 与 feature3 的。</p>
+
+<p>此时，feature2 的测试无法正常进行，需要将代码从测试分支上抽出…</p>
+
+<p>以防万一，先将 feature2 分支备份：</p>
+
+<p><img src="http://orkxnrvmk.bkt.clouddn.com/copy-feature2.jpg" alt="" /></p>
+
+<p>我们来查看一下 feature2-copy 分支的提交记录：</p>
+
+<p><img src="http://orkxnrvmk.bkt.clouddn.com/log-feature2.jpg" alt="" /></p>
+
+<p>我们需要回滚最新的 3 个提交（因为 3 个 feature 的开发分支均是从第一个提交的时间点上切出的），当然现实中针对某需求的提交绝不止 3 个。若是将提交逐一 revert 那么工作量感人，我们何不将 n 个 commit 合并为一个 commit 然后一同 revert 呢？</p>
+
+<p>使用 git rebase -i 来合并 commit，需要拼接回滚至的 commit 的 hashcode：</p>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code>git rebase -i e08ddaf558b9ad84422db5e4b620dcab97623fde
+</code></pre>
+</div>
+
+<p>而后出现如下对话框：</p>
+
+<p><img src="http://orkxnrvmk.bkt.clouddn.com/merge-commit-init-feature2.jpg" alt="" /></p>
+
+<p>我们需要将最新 2 次提交的 command 更改为 s：</p>
+
+<p><img src="http://orkxnrvmk.bkt.clouddn.com/merge-commit-feature2.jpg" alt="" /></p>
+
+<p>修改后保存并退出进入如下对话框：</p>
+
+<p><img src="http://orkxnrvmk.bkt.clouddn.com/change-commit-init-feature2.jpg" alt="" /></p>
+
+<p>我们需要修改最初一次提交的 commit message：</p>
+
+<p><img src="http://orkxnrvmk.bkt.clouddn.com/change-commit-feature2.jpg" alt="" /></p>
+
+<p>修改后保存并退出，再次查看 feature2-copy 分支的提交记录：</p>
+
+<p><img src="http://orkxnrvmk.bkt.clouddn.com/merge-commit-log-feature2.jpg" alt="" /></p>
+
+<p>3 次提交被成功合并，可喜可贺！接下来我们需要 revert 被合并的提交：</p>
+
+<p><img src="http://orkxnrvmk.bkt.clouddn.com/revert-commit-feature2.jpg" alt="" /></p>
+
+<p><img src="http://orkxnrvmk.bkt.clouddn.com/revert-commit-log-feature2.jpg" alt="" /></p>
+
+<p>此时天真的我认为将 feature2-copy 合并到测试分支即可成功抽去 feature2 的代码，其实不然。正确的做法是使用 git cherry-pick 将 feature2-copy 分支上 revert 提交合并到测试分支上：</p>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code>git cherry-pick 83203f83ad2099adf1653ef876e5fc3544687812
+</code></pre>
+</div>
+
+<p>此时，feature2 的代码成功从测试分支上抽离。</p>
+
+<p><img src="http://orkxnrvmk.bkt.clouddn.com/pick-success-feature2.jpg" alt="" /></p>
+
+<p>最后为大家推荐一枚 Git 图形化客户端：<a href="http://gitup.co/">GitUp</a></p>
+
+<hr />
+
+<p>作者：呆恋小喵</p>
+
+<p>我的后花园：<a href="https://sunmengyuan.github.io/garden/">https://sunmengyuan.github.io/garden/</a></p>
+
+<p>我的 github：<a href="https://github.com/sunmengyuan">https://github.com/sunmengyuan</a></p>
+
+<p>原文链接：<a href="https://sunmengyuan.github.io/garden/2017/06/15/git-revert.html">https://sunmengyuan.github.io/garden/2017/06/15/git-revert.html</a></p>
+
+</article>
+<footer>
+    <a href="/garden/views/posts" class="js_goto_posts">返回目录 - 我的印记</a>
+</footer>
+<div class="browser js_browser">
+    <img src="" />
+</div>
+
+<script src="/garden/assets/script/main.js"></script>
+</body>
+</html>

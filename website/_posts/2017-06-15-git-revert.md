@@ -4,7 +4,7 @@ title: "谈谈 Git 代码回滚"
 date: "2017-06-15"
 abstract: "本文讲述了如何使用 git rebase -i 及 git cherry-pick 实现代码回滚。代码回滚属于高危操作，建议慎用！"
 keywords: ["git", "代码回滚"]
-thumb: "http://oij8a9ql4.bkt.clouddn.com/default-fe.jpg"
+thumb: "http://orkxnrvmk.bkt.clouddn.com/thumb.jpg"
 ---
 
 [下载示例源文件](http://orkxnrvmk.bkt.clouddn.com/project.zip)

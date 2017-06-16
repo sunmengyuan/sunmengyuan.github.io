@@ -45,9 +45,18 @@ thumb: "http://orkxnrvmk.bkt.clouddn.com/thumb.jpg"
 
 以防万一，先将 feature2 分支备份：
 
+```bash
+git checkout feature2
+git checkout -b feature2-copy
+```
+
 ![](http://orkxnrvmk.bkt.clouddn.com/copy-feature2.jpg)
 
 我们来查看一下 feature2-copy 分支的提交记录：
+
+```bash
+git log
+```
 
 ![](http://orkxnrvmk.bkt.clouddn.com/log-feature2.jpg)
 

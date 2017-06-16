@@ -81,14 +81,21 @@ git rebase -i e08ddaf558b9ad84422db5e4b620dcab97623fde
 
 3 次提交被成功合并，可喜可贺！接下来我们需要 revert 被合并的提交：
 
+```bash
+git revert e544464c3de69adef5ca7556001abebaf40b218b
+```
+
 ![](http://orkxnrvmk.bkt.clouddn.com/revert-commit-feature2.jpg)
+
+保存并退出，再次查看 feature2-copy 分支的提交记录：
 
 ![](http://orkxnrvmk.bkt.clouddn.com/revert-commit-log-feature2.jpg)
 
 此时天真的我认为将 feature2-copy 合并到测试分支即可成功抽去 feature2 的代码，其实不然。正确的做法是使用 git cherry-pick 将 feature2-copy 分支上 revert 提交合并到测试分支上：
 
 ```bash
-git cherry-pick 83203f83ad2099adf1653ef876e5fc3544687812
+git checkout master
+git cherry-pick b309f7944d2422d8fe647dca61bda518b192628f
 ```
 
 此时，feature2 的代码成功从测试分支上抽离。

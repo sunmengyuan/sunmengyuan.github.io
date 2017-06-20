@@ -101,9 +101,35 @@
     </div>
   </li>
   <li>
-    <p>多人聊天室 <a href="https://github.com/sunmengyuan/note/tree/master/node/chat">code</a></p>
+    <p>多人聊天室 <a href="https://github.com/sunmengyuan/note/tree/master/node/chat">代码</a></p>
 
-    <p>Node.js 结合了 WebSocket 的简易多人聊天室，感兴趣的同学可以自行高仿个 QQ 出来。</p>
+    <p><img src="http://oru3b8jlz.bkt.clouddn.com/effect-chat.jpg" alt="" /></p>
+
+    <p>项目名称 <strong>chat</strong></p>
+
+    <p>Node.js 结合了 <a href="https://socket.io/">WebSocket</a> 的简易多人聊天室，感兴趣的同学可以自行高仿个 QQ 出来。</p>
+
+    <p>启动方法：</p>
+
+    <p>需要<a href="https://www.mongodb.com/download-center?jmp=homepage#community">安装 MongoDB</a>。不了解 MongoDB 的同学可移驾<a href="https://www.mongodb.com/">官网</a>，英语欠佳的请点击<a href="http://www.runoob.com/mongodb/mongodb-tutorial.html">此处</a>。</p>
+
+    <p>需要创建数据库（database）<strong>chat</strong>，数据表（collection）<strong>users</strong>。具体方法请参见 <a href="http://www.runoob.com/mongodb/mongodb-databases-documents-collections.html">MongoDB 概念解析</a>。</p>
+
+    <div class="language-bash highlighter-rouge"><pre class="highlight"><code>  // 启动 mongodb
+  <span class="nb">cd </span>mongodb
+  mkdir -p data/db
+  <span class="nb">cd </span>mongodb/bin
+  ./mongod --dbpath ../data/db
+</code></pre>
+    </div>
+
+    <div class="highlighter-rouge"><pre class="highlight"><code>  // 启动 chat
+  cd chat
+  npm install
+  cd bin
+  ./www
+</code></pre>
+    </div>
   </li>
 </ul>
 

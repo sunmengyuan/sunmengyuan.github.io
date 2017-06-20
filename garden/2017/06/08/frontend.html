@@ -70,7 +70,7 @@
 
 <ul>
   <li>
-    <p>简易博客系统 <a href="https://github.com/sunmengyuan/note/tree/master/node/expo">代码</a></p>
+    <p>简易博客系统 <a href="https://github.com/sunmengyuan/note/tree/master/node/expo">code</a></p>
 
     <p><img src="http://oru3b8jlz.bkt.clouddn.com/effect-expo.jpg" alt="" /></p>
 
@@ -101,7 +101,7 @@
     </div>
   </li>
   <li>
-    <p>多人聊天室 <a href="https://github.com/sunmengyuan/note/tree/master/node/chat">代码</a></p>
+    <p>多人聊天室 <a href="https://github.com/sunmengyuan/note/tree/master/node/chat">code</a></p>
 
     <p><img src="http://oru3b8jlz.bkt.clouddn.com/effect-chat.jpg" alt="" /></p>
 
@@ -135,7 +135,7 @@
 
 <hr />
 
-<h3 id="vue">Vue</h3>
+<h3 id="vuejs">Vue.js</h3>
 
 <h5 id="参考资料-1">参考资料</h5>
 
@@ -149,7 +149,37 @@
   <li>
     <p>简易个人空间 <a href="https://github.com/sunmengyuan/note/tree/master/vue/zone">code</a></p>
 
-    <p>与上面提到的博客系统类似，纯粹的学习 Vue.js 时的练习项目。背景设计使用了 <a href="https://github.com/qrohlf/trianglify">Trianglify</a>，在此推荐。</p>
+    <p><img src="http://oru3b8jlz.bkt.clouddn.com/effect-zone.jpg" alt="" /></p>
+
+    <p>项目名称 <strong>zone</strong></p>
+
+    <p>与上面提到的博客系统类似，教科书级别的增删改查功能。背景设计使用了 <a href="https://github.com/qrohlf/trianglify">Trianglify</a>，在此推荐。</p>
+
+    <p>启动方法：</p>
+
+    <p>需要<a href="https://www.mongodb.com/download-center?jmp=homepage#community">安装 MongoDB</a>。不了解 MongoDB 的同学可移驾<a href="https://www.mongodb.com/">官网</a>，英语欠佳的请点击<a href="http://www.runoob.com/mongodb/mongodb-tutorial.html">此处</a>。</p>
+
+    <p>需要创建数据库（database）<strong>zone</strong>，数据表（collection）<strong>users</strong>、<strong>articles</strong>。具体方法请参见 <a href="http://www.runoob.com/mongodb/mongodb-databases-documents-collections.html">MongoDB 概念解析</a>。</p>
+
+    <div class="language-bash highlighter-rouge"><pre class="highlight"><code>  // 启动 mongodb
+  <span class="nb">cd </span>mongodb
+  mkdir -p data/db
+  <span class="nb">cd </span>mongodb/bin
+  ./mongod --dbpath ../data/db
+</code></pre>
+    </div>
+
+    <div class="highlighter-rouge"><pre class="highlight"><code>  // 启动 zone
+  cd zone
+  npm install
+  cd bin
+  ./www
+    
+  cd zone/fe
+  npm install
+  npm run dev
+</code></pre>
+    </div>
   </li>
   <li>
     <p>简易视频播放器 <a href="https://github.com/sunmengyuan/note/tree/master/vue/videoPlayer">code</a> <a href="https://sunmengyuan.github.io/demos/vue/videoPlayer">demo</a></p>

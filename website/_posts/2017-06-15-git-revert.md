@@ -11,7 +11,7 @@ thumb: "http://orkxnrvmk.bkt.clouddn.com/thumb.jpg"
 
 为什么会写这样一篇文章？其实是有一段历史的：在一次迭代中并行开发着 n 个需求，到提测之时各需求的代码陆陆续续被合并到了测试分支。生活本来很平静，但两天后测试的头目说“我们组发生了点状况，本次迭代的需求在规定时间内无法测完，但老板又强制要求了上线时间，我们把优先级较低的需求的代码从测试分支抽出去吧！”。当时真是心中一万只 XXX 飘过...
 
-我们来模拟一下上述场景：迭代中并行开发着 3 个需求 feature1、feature2、feature3，在各自的开发分支上相安无事。
+我们来模拟一下上述场景：迭代中并行开发着 3 个需求 feature1、feature2、feature3，在各自的开发分支上相安无事（假定测试分支为 master）。
 
 ![](http://orkxnrvmk.bkt.clouddn.com/dev-features.jpg)
 

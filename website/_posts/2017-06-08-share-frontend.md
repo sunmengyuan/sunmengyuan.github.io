@@ -295,4 +295,4 @@ __开启自恋模式__ 欢迎欣赏本人深度好文：[Sass 学习笔记（应
 
 我的 github：<https://github.com/sunmengyuan>
 
-原文链接：<https://sunmengyuan.github.io/garden/2017/06/08/frontend.html>
+原文链接：<https://sunmengyuan.github.io/garden/2017/06/08/share-frontend.html>

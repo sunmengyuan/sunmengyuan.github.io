@@ -281,9 +281,9 @@ __开启自恋模式__ 欢迎欣赏本人深度好文：[Sass 学习笔记（应
 
 ##### 示例 #####
 
-+ 中国高校学科排名统计 [code](https://github.com/sunmengyuan/note/tree/master/webpack/university) [demo](https://sunmengyuan.github.io/demos/webpack/university)
++ 中国高校学科排名统计 [code](https://github.com/sunmengyuan/note/tree/master/echarts/university) [demo](https://sunmengyuan.github.io/demos/echarts/university)
 
-+ 全国空气质量调查 [code](https://github.com/sunmengyuan/note/tree/master/webpack/airpollution) [demo](https://sunmengyuan.github.io/demos/webpack/airpollution)
++ 全国空气质量调查 [code](https://github.com/sunmengyuan/note/tree/master/echarts/airpollution) [demo](https://sunmengyuan.github.io/demos/echarts/airpollution)
 
 上面两个是基友的大作业啦，属于友情开发。
 

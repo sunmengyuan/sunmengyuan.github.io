@@ -19,7 +19,7 @@ thumb: "http://oij8a9ql4.bkt.clouddn.com/default-fe.jpg"
 
 ##### 示例 #####
 
-+ 简易博客系统 [code](https://github.com/sunmengyuan/note/tree/master/node/expo)
++ __简易博客系统 [code](https://github.com/sunmengyuan/note/tree/master/node/expo)__
 
     ![](http://oru3b8jlz.bkt.clouddn.com/effect-expo.jpg)
     
@@ -27,7 +27,7 @@ thumb: "http://oij8a9ql4.bkt.clouddn.com/default-fe.jpg"
     
     相关知识：[Express](http://www.expressjs.com.cn/)、[File System](http://nodejs.cn/api/fs.html)、[MongoDB](https://www.mongodb.com/)、[Mongoose](http://www.nodeclass.com/api/mongoose.html)
 
-+ 多人聊天室 [code](https://github.com/sunmengyuan/note/tree/master/node/chat)
++ __多人聊天室 [code](https://github.com/sunmengyuan/note/tree/master/node/chat)__
 
     ![](http://oru3b8jlz.bkt.clouddn.com/effect-chat.jpg)
 
@@ -45,7 +45,7 @@ thumb: "http://oij8a9ql4.bkt.clouddn.com/default-fe.jpg"
 
 ##### 示例 #####
 
-+ 简易个人空间 [code](https://github.com/sunmengyuan/note/tree/master/vue/zone)
++ __简易个人空间 [code](https://github.com/sunmengyuan/note/tree/master/vue/zone)__
 
     ![](http://oru3b8jlz.bkt.clouddn.com/effect-zone.jpg)
     
@@ -55,7 +55,9 @@ thumb: "http://oij8a9ql4.bkt.clouddn.com/default-fe.jpg"
 
     相关知识：[Node.js](http://nodejs.cn/)、[Express](http://www.expressjs.com.cn/)、[File System](http://nodejs.cn/api/fs.html)、[MongoDB](https://www.mongodb.com/)、[Mongoose](http://www.nodeclass.com/api/mongoose.html)、[Webpack](https://webpack.github.io/docs/)
 
-+ 简易视频播放器 [code](https://github.com/sunmengyuan/note/tree/master/vue/videoPlayer) [demo](https://sunmengyuan.github.io/demos/vue/videoPlayer)
++ __简易视频播放器 [code](https://github.com/sunmengyuan/note/tree/master/vue/videoPlayer) [demo](https://sunmengyuan.github.io/demos/vue/videoPlayer)__
+    
+    ![](http://oru3b8jlz.bkt.clouddn.com/effect-videoPlayer.png)
     
     基于 Vue.js 组件化的思想，将播放器控件封装。并尝试了 Vue.js 的打包上线流程，遇到了点小挫折，压缩后静态资源地址错误...[详情](https://github.com/sunmengyuan/note/tree/master/vue/videoPlayer)
     
@@ -71,8 +73,10 @@ thumb: "http://oij8a9ql4.bkt.clouddn.com/default-fe.jpg"
 
 ##### 示例 #####
 
-+ 待办事项 [code](https://github.com/sunmengyuan/note/tree/master/react/todos) [demo](https://sunmengyuan.github.io/demos/react/todos)
++ __待办事项 [code](https://github.com/sunmengyuan/note/tree/master/react/todos) [demo](https://sunmengyuan.github.io/demos/react/todos)__
 
+    ![](http://oru3b8jlz.bkt.clouddn.com/effect-todos.png)
+    
     教科书级别的待办事项记事本，不多解释。[详情](https://github.com/sunmengyuan/note/tree/master/react/todos)
     
     相关知识：[Webpack](https://webpack.github.io/docs/)
@@ -97,13 +101,15 @@ React Native 环境搭建指南，正在撰写中，敬请期待。
 
 ##### 示例 #####
 
-+ 画板 [code](https://github.com/sunmengyuan/note/blob/master/canvas/drawing.html) [demo](https://sunmengyuan.github.io/demos/canvas/drawing.html)
++ __画板 [code](https://github.com/sunmengyuan/note/blob/master/canvas/drawing.html) [demo](https://sunmengyuan.github.io/demos/canvas/drawing.html)__
     
-+ 贝塞尔曲线 [code](https://github.com/sunmengyuan/note/blob/master/canvas/bezierCurve.html) [demo](https://sunmengyuan.github.io/demos/canvas/bezierCurve.html)
+    ![](http://oru3b8jlz.bkt.clouddn.com/effect-drawing.png)
+    
++ __贝塞尔曲线 [code](https://github.com/sunmengyuan/note/blob/master/canvas/bezierCurve.html) [demo](https://sunmengyuan.github.io/demos/canvas/bezierCurve.html)__
 
     想起计算机图形学老师的一句话“咱们数字媒体技术专业知道而其他专业同学不知道的概念比如贝塞尔曲线”，现在想想老师也是蛮自恋的...
 
-+ 使用 Canvas 实现元素拖拽 [code](https://github.com/sunmengyuan/note/blob/master/canvas/drag.html) [demo](https://sunmengyuan.github.io/demos/canvas/drag.html)
++ __使用 Canvas 实现元素拖拽 [code](https://github.com/sunmengyuan/note/blob/master/canvas/drag.html) [demo](https://sunmengyuan.github.io/demos/canvas/drag.html)__
 
     使用 Canvas 实现交互非常麻烦，因为无法直接获取触发事件的元素，需要通过 [isPointInPath](http://www.runoob.com/jsref/met-canvas-ispointinpath.html) 方法得知。
 
@@ -115,11 +121,13 @@ React Native 环境搭建指南，正在撰写中，敬请期待。
 
 ##### 示例 #####
 
-+ 线描动画 [code](https://github.com/sunmengyuan/note/blob/master/svg/cat.html) [demo](https://sunmengyuan.github.io/demos/svg/cat.html)
++ __线描动画 [code](https://github.com/sunmengyuan/note/blob/master/svg/cat.html) [demo](https://sunmengyuan.github.io/demos/svg/cat.html)__
 
-+ 路径动画加蒙板实现橡皮擦特效 [code](https://github.com/sunmengyuan/note/blob/master/svg/paint.html) [demo](https://sunmengyuan.github.io/demos/svg/paint.html)
++ __路径动画加蒙板实现橡皮擦特效 [code](https://github.com/sunmengyuan/note/blob/master/svg/paint.html) [demo](https://sunmengyuan.github.io/demos/svg/paint.html)__
 
-+ Loading 动画 [code](https://github.com/sunmengyuan/note/blob/master/svg/loading.html) [demo](https://sunmengyuan.github.io/demos/svg/loading.html)
++ __Loading 动画 [code](https://github.com/sunmengyuan/note/blob/master/svg/loading.html) [demo](https://sunmengyuan.github.io/demos/svg/loading.html)__
+
+![](http://oru3b8jlz.bkt.clouddn.com/effect-loading.png)
 
 使用 Svg 绘制的图标无限放大后不模糊这点很赞。但其更强大的功能在于动画，可惜我的示例比较简易无法体现这点...
 
@@ -133,8 +141,10 @@ React Native 环境搭建指南，正在撰写中，敬请期待。
 
 ##### 示例 #####
 
-+ 三维旋转钟 [code](https://github.com/sunmengyuan/note/blob/master/three/clock.html) [demo](https://sunmengyuan.github.io/demos/three/clock.html)
-
++ __三维旋转钟 [code](https://github.com/sunmengyuan/note/blob/master/three/clock.html) [demo](https://sunmengyuan.github.io/demos/three/clock.html)__
+    
+    ![](http://oru3b8jlz.bkt.clouddn.com/effect-clock.png)
+    
     该示例为 Canvas 与 Three.js 结合而生。表盘由 Canvas 绘制，而建模使用 Three.js。其实 Three.js 基于 Canvas，上述不太准确，意会便好。
 
 *****
@@ -147,7 +157,9 @@ React Native 环境搭建指南，正在撰写中，敬请期待。
 
 ##### 示例 #####
 
-+ 跷跷板 [code](https://github.com/sunmengyuan/note/blob/master/matter/seesaw.html) [demo](https://sunmengyuan.github.io/demos/matter/seesaw.html)
++ __跷跷板 [code](https://github.com/sunmengyuan/note/blob/master/matter/seesaw.html) [demo](https://sunmengyuan.github.io/demos/matter/seesaw.html)__
+
+    ![](http://oru3b8jlz.bkt.clouddn.com/effect-seesaw.png)
 
     一个最基本的 Matter.js 示例，类似的甚至更炫丽的在官网上有很多很多...
 
@@ -179,9 +191,11 @@ __开启自恋模式__ 欢迎欣赏本人深度好文：[Sass 学习笔记（应
 
 ##### 示例 #####
 
-+ 中国高校学科排名统计 [code](https://github.com/sunmengyuan/note/tree/master/echarts/university) [demo](https://sunmengyuan.github.io/demos/echarts/university)
++ __中国高校学科排名统计 [code](https://github.com/sunmengyuan/note/tree/master/echarts/university) [demo](https://sunmengyuan.github.io/demos/echarts/university)__
 
-+ 全国空气质量调查 [code](https://github.com/sunmengyuan/note/tree/master/echarts/airpollution) [demo](https://sunmengyuan.github.io/demos/echarts/airpollution)
++ __全国空气质量调查 [code](https://github.com/sunmengyuan/note/tree/master/echarts/airpollution) [demo](https://sunmengyuan.github.io/demos/echarts/airpollution)__
+
+![](http://oru3b8jlz.bkt.clouddn.com/effect-airpollution.png)
 
 上面两个是基友的大作业啦，属于友情开发。
 

@@ -187,7 +187,7 @@ React Native 环境搭建指南，正在撰写中，敬请期待。
 
 + [Sass 入门 - Sass 教程](http://www.w3cplus.com/sassguide/)
 
-__开启自恋模式__ 欢迎欣赏本人深度好文：[Sass 学习笔记（应用场景的思考）](https://sunmengyuan.github.io/garden/2017/05/17/sass-example.html)
+__开启自恋模式__ 欢迎欣赏本人深度好文：[Sass 学习笔记（应用场景的思考）](https://sunmengyuan.github.io/garden/2017/05/17/sass-application.html)
 
 *****
 

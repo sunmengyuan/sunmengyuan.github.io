@@ -55,9 +55,9 @@ thumb: "http://oij8a9ql4.bkt.clouddn.com/default-fe.jpg"
     
     与上面提到的博客系统类似，教科书级别的增删改查功能。[详情](https://github.com/sunmengyuan/note/tree/master/vue/zone)
     
-    相关知识：[Node.js](http://nodejs.cn/)、[File System](http://nodejs.cn/api/fs.html)、[MongoDB](https://www.mongodb.com/)、[Mongoose](http://www.nodeclass.com/api/mongoose.html)、[Webpack](https://webpack.github.io/docs/)
+    相关知识：[Node.js](http://nodejs.cn/)、[Express](http://www.expressjs.com.cn/)、[File System](http://nodejs.cn/api/fs.html)、[MongoDB](https://www.mongodb.com/)、[Mongoose](http://www.nodeclass.com/api/mongoose.html)、[Webpack](https://webpack.github.io/docs/)
 
-    该项目客户端使用 Vue.js 搭建，服务端使用 Node.js 搭建，使用 MongoDB 存储数据。图片上传涉及文件存储请查阅 [Node.js 文件系统](http://nodejs.cn/api/fs.html)。工程构建使用 [Webpack](https://webpack.github.io/docs/) 建议了解。背景设计使用 [Trianglify](https://github.com/qrohlf/trianglify) 在此推荐。
+    该项目客户端使用 Vue.js 搭建，服务端使用 Express.js 搭建，使用 MongoDB 存储数据。图片上传涉及文件存储请查阅 [Node.js 文件系统](http://nodejs.cn/api/fs.html)。工程构建使用 [Webpack](https://webpack.github.io/docs/) 建议了解。背景设计使用 [Trianglify](https://github.com/qrohlf/trianglify) 在此推荐。
 
 + __简易视频播放器 [code](https://github.com/sunmengyuan/note/tree/master/vue/videoPlayer) [demo](https://sunmengyuan.github.io/demos/vue/videoPlayer)__
 

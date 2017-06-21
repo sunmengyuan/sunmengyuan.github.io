@@ -21,7 +21,7 @@ thumb: "http://oij8a9ql4.bkt.clouddn.com/default-fe.jpg"
 
 + __简易博客系统 [code](https://github.com/sunmengyuan/note/tree/master/node/expo)__
 
-    ![](http://oru3b8jlz.bkt.clouddn.com/effect-expo.jpg)
+    ![](http://oru3b8jlz.bkt.clouddn.com/screenshot-expo.jpg)
     
     这是一个简易的博客系统，用户在该站注册后即可发布个人日记，日记可以被登录用户点赞。功能较简易，外观未经雕琢，纯粹的练习项目。[详情](https://github.com/sunmengyuan/note/tree/master/node/expo)
     
@@ -31,7 +31,7 @@ thumb: "http://oij8a9ql4.bkt.clouddn.com/default-fe.jpg"
 
 + __多人聊天室 [code](https://github.com/sunmengyuan/note/tree/master/node/chat)__
 
-    ![](http://oru3b8jlz.bkt.clouddn.com/effect-chat.jpg)
+    ![](http://oru3b8jlz.bkt.clouddn.com/screenshot-chat.jpg)
 
     Node.js 结合了 Websocket 的简易多人聊天室，感兴趣的同学可以自行高仿个 QQ 出来。[详情](https://github.com/sunmengyuan/note/tree/master/node/chat)
     
@@ -51,7 +51,7 @@ thumb: "http://oij8a9ql4.bkt.clouddn.com/default-fe.jpg"
 
 + __简易个人空间 [code](https://github.com/sunmengyuan/note/tree/master/vue/zone)__
 
-    ![](http://oru3b8jlz.bkt.clouddn.com/effect-zone.jpg)
+    ![](http://oru3b8jlz.bkt.clouddn.com/screenshot-zone.jpg)
     
     与上面提到的博客系统类似，教科书级别的增删改查功能。[详情](https://github.com/sunmengyuan/note/tree/master/vue/zone)
     
@@ -61,7 +61,7 @@ thumb: "http://oij8a9ql4.bkt.clouddn.com/default-fe.jpg"
 
 + __简易视频播放器 [code](https://github.com/sunmengyuan/note/tree/master/vue/videoPlayer) [demo](https://sunmengyuan.github.io/demos/vue/videoPlayer)__
 
-    ![](http://oru3b8jlz.bkt.clouddn.com/effect-videoPlayer.jpg)
+    ![](http://oru3b8jlz.bkt.clouddn.com/screenshot-videoPlayer.jpg)
     
     基于 Vue.js 组件化的思想，将播放器控件封装。并尝试了 Vue.js 的打包上线流程，遇到了点小挫折，压缩后静态资源地址错误...[详情](https://github.com/sunmengyuan/note/tree/master/vue/videoPlayer)
     
@@ -81,7 +81,7 @@ thumb: "http://oij8a9ql4.bkt.clouddn.com/default-fe.jpg"
 
 + __待办事项 [code](https://github.com/sunmengyuan/note/tree/master/react/todos) [demo](https://sunmengyuan.github.io/demos/react/todos)__
 
-    ![](http://oru3b8jlz.bkt.clouddn.com/effect-todos.jpg)
+    ![](http://oru3b8jlz.bkt.clouddn.com/screenshot-todos.jpg)
     
     教科书级别的待办事项记事本，不多解释。[详情](https://github.com/sunmengyuan/note/tree/master/react/todos)
     
@@ -111,7 +111,7 @@ React Native 环境搭建指南，正在撰写中，敬请期待。
 
 + __画板 [code](https://github.com/sunmengyuan/note/blob/master/canvas/drawing.html) [demo](https://sunmengyuan.github.io/demos/canvas/drawing.html)__
 
-    ![](http://oru3b8jlz.bkt.clouddn.com/effect-drawing.jpg)
+    ![](http://oru3b8jlz.bkt.clouddn.com/screenshot-drawing.jpg)
     
 + __贝塞尔曲线 [code](https://github.com/sunmengyuan/note/blob/master/canvas/bezierCurve.html) [demo](https://sunmengyuan.github.io/demos/canvas/bezierCurve.html)__
 
@@ -135,7 +135,7 @@ React Native 环境搭建指南，正在撰写中，敬请期待。
 
 + __Loading 动画 [code](https://github.com/sunmengyuan/note/blob/master/svg/loading.html) [demo](https://sunmengyuan.github.io/demos/svg/loading.html)__
 
-    ![](http://oru3b8jlz.bkt.clouddn.com/effect-loading.jpg)
+    ![](http://oru3b8jlz.bkt.clouddn.com/screenshot-loading.jpg)
 
 使用 Svg 绘制的图标无限放大后不模糊这点很赞。但其更强大的功能在于动画，可惜我的示例比较简易无法体现这点...
 
@@ -151,7 +151,7 @@ React Native 环境搭建指南，正在撰写中，敬请期待。
 
 + __三维旋转钟 [code](https://github.com/sunmengyuan/note/blob/master/three/clock.html) [demo](https://sunmengyuan.github.io/demos/three/clock.html)__
 
-    ![](http://oru3b8jlz.bkt.clouddn.com/effect-clock.jpg)
+    ![](http://oru3b8jlz.bkt.clouddn.com/screenshot-clock.jpg)
     
     该示例为 Canvas 与 Three.js 结合而生。表盘由 Canvas 绘制，而建模使用 Three.js。其实 Three.js 基于 Canvas，上述不太准确，意会便好。
 
@@ -167,7 +167,7 @@ React Native 环境搭建指南，正在撰写中，敬请期待。
 
 + __跷跷板 [code](https://github.com/sunmengyuan/note/blob/master/matter/seesaw.html) [demo](https://sunmengyuan.github.io/demos/matter/seesaw.html)__
 
-    ![](http://oru3b8jlz.bkt.clouddn.com/effect-seesaw.jpg)
+    ![](http://oru3b8jlz.bkt.clouddn.com/screenshot-seesaw.jpg)
 
     一个最基本的 Matter.js 示例，类似的甚至更炫丽的在官网上有很多很多...
 
@@ -203,7 +203,7 @@ __开启自恋模式__ 欢迎欣赏本人深度好文：[Sass 学习笔记（应
 
 + __全国空气质量调查 [code](https://github.com/sunmengyuan/note/tree/master/echarts/airpollution) [demo](https://sunmengyuan.github.io/demos/echarts/airpollution)__
 
-![](http://oru3b8jlz.bkt.clouddn.com/effect-airpollution.jpg)
+![](http://oru3b8jlz.bkt.clouddn.com/screenshot-airpollution.jpg)
 
 上面两个是基友的大作业啦，属于友情开发。
 

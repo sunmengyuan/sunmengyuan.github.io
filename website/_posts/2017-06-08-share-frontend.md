@@ -27,6 +27,8 @@ thumb: "http://oij8a9ql4.bkt.clouddn.com/default-fe.jpg"
     
     相关知识：[Express](http://www.expressjs.com.cn/)、[File System](http://nodejs.cn/api/fs.html)、[MongoDB](https://www.mongodb.com/)、[Mongoose](http://www.nodeclass.com/api/mongoose.html)
 
+    该项目使用 Express 框架搭建，使用 MongoDB 存储数据。图片上传涉及文件存储请查阅 [Node.js 文件系统](http://nodejs.cn/api/fs.html)。
+
 + __多人聊天室 [code](https://github.com/sunmengyuan/note/tree/master/node/chat)__
 
     ![](http://oru3b8jlz.bkt.clouddn.com/effect-chat.jpg)
@@ -35,6 +37,8 @@ thumb: "http://oij8a9ql4.bkt.clouddn.com/default-fe.jpg"
     
     相关知识：[Express](http://www.expressjs.com.cn/)、[Websocket](https://socket.io/)、[MongoDB](https://www.mongodb.com/)、[Mongoose](http://www.nodeclass.com/api/mongoose.html)
    
+    该项目使用 Express 框架搭建，使用 MongoDB 存储数据。核心内容在于全双工通讯请查阅 [Websocket](https://socket.io/)。
+    
 *****
 
 ### Vue.js ###
@@ -51,17 +55,19 @@ thumb: "http://oij8a9ql4.bkt.clouddn.com/default-fe.jpg"
     
     与上面提到的博客系统类似，教科书级别的增删改查功能。[详情](https://github.com/sunmengyuan/note/tree/master/vue/zone)
     
-    背景设计使用了 [Trianglify](https://github.com/qrohlf/trianglify)，在此推荐。
+    相关知识：[Node.js](http://nodejs.cn/)、[File System](http://nodejs.cn/api/fs.html)、[MongoDB](https://www.mongodb.com/)、[Mongoose](http://www.nodeclass.com/api/mongoose.html)、[Webpack](https://webpack.github.io/docs/)
 
-    相关知识：[Node.js](http://nodejs.cn/)、[Express](http://www.expressjs.com.cn/)、[File System](http://nodejs.cn/api/fs.html)、[MongoDB](https://www.mongodb.com/)、[Mongoose](http://www.nodeclass.com/api/mongoose.html)、[Webpack](https://webpack.github.io/docs/)
+    该项目客户端使用 Vue.js 搭建，服务端使用 Node.js 搭建，使用 MongoDB 存储数据。图片上传涉及文件存储请查阅 [Node.js 文件系统](http://nodejs.cn/api/fs.html)。工程构建使用 [Webpack](https://webpack.github.io/docs/) 建议了解。背景设计使用 [Trianglify](https://github.com/qrohlf/trianglify) 在此推荐。
 
 + __简易视频播放器 [code](https://github.com/sunmengyuan/note/tree/master/vue/videoPlayer) [demo](https://sunmengyuan.github.io/demos/vue/videoPlayer)__
-    
+
     ![](http://oru3b8jlz.bkt.clouddn.com/effect-videoPlayer.jpg)
     
     基于 Vue.js 组件化的思想，将播放器控件封装。并尝试了 Vue.js 的打包上线流程，遇到了点小挫折，压缩后静态资源地址错误...[详情](https://github.com/sunmengyuan/note/tree/master/vue/videoPlayer)
     
     相关知识：[HTML5 Video](https://developer.mozilla.org/zh-CN/docs/Web/Guide/HTML/Using_HTML5_audio_and_video)、[Webpack](https://webpack.github.io/docs/)
+    
+    该项目不涉及服务端，完全使用 Vue.js 搭建。工程构建使用 [Webpack](https://webpack.github.io/docs/) 建议了解。
     
 *****
 
@@ -80,6 +86,8 @@ thumb: "http://oij8a9ql4.bkt.clouddn.com/default-fe.jpg"
     教科书级别的待办事项记事本，不多解释。[详情](https://github.com/sunmengyuan/note/tree/master/react/todos)
     
     相关知识：[Webpack](https://webpack.github.io/docs/)
+    
+    该项目不涉及服务端，完全使用 React 搭建。工程构建使用 [Webpack](https://webpack.github.io/docs/) 建议了解。
 
 *****
 
@@ -102,7 +110,7 @@ React Native 环境搭建指南，正在撰写中，敬请期待。
 ##### 示例 #####
 
 + __画板 [code](https://github.com/sunmengyuan/note/blob/master/canvas/drawing.html) [demo](https://sunmengyuan.github.io/demos/canvas/drawing.html)__
-    
+
     ![](http://oru3b8jlz.bkt.clouddn.com/effect-drawing.jpg)
     
 + __贝塞尔曲线 [code](https://github.com/sunmengyuan/note/blob/master/canvas/bezierCurve.html) [demo](https://sunmengyuan.github.io/demos/canvas/bezierCurve.html)__
@@ -111,7 +119,7 @@ React Native 环境搭建指南，正在撰写中，敬请期待。
 
 + __使用 Canvas 实现元素拖拽 [code](https://github.com/sunmengyuan/note/blob/master/canvas/drag.html) [demo](https://sunmengyuan.github.io/demos/canvas/drag.html)__
 
-    使用 Canvas 实现交互非常麻烦，因为无法直接获取触发事件的元素，需要通过 [isPointInPath](http://www.runoob.com/jsref/met-canvas-ispointinpath.html) 方法得知。
+    使用 Canvas 实现交互非常麻烦，因为无法直接获取触发事件的元素，需要通过 [isPointInPath](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/isPointInPath) 方法得知。
 
 本人学习 Canvas 最大的收获便是领悟到其实现交互的方式无非旋转画布啊，重绘啊，巴拉巴拉...
 
@@ -142,7 +150,7 @@ React Native 环境搭建指南，正在撰写中，敬请期待。
 ##### 示例 #####
 
 + __三维旋转钟 [code](https://github.com/sunmengyuan/note/blob/master/three/clock.html) [demo](https://sunmengyuan.github.io/demos/three/clock.html)__
-    
+
     ![](http://oru3b8jlz.bkt.clouddn.com/effect-clock.jpg)
     
     该示例为 Canvas 与 Three.js 结合而生。表盘由 Canvas 绘制，而建模使用 Three.js。其实 Three.js 基于 Canvas，上述不太准确，意会便好。

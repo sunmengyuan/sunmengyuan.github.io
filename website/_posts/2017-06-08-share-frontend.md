@@ -127,7 +127,7 @@ React Native 环境搭建指南，正在撰写中，敬请期待。
 
 + __Loading 动画 [code](https://github.com/sunmengyuan/note/blob/master/svg/loading.html) [demo](https://sunmengyuan.github.io/demos/svg/loading.html)__
 
-![](http://oru3b8jlz.bkt.clouddn.com/effect-loading.png)
+    ![](http://oru3b8jlz.bkt.clouddn.com/effect-loading.png)
 
 使用 Svg 绘制的图标无限放大后不模糊这点很赞。但其更强大的功能在于动画，可惜我的示例比较简易无法体现这点...
 

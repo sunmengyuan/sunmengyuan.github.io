@@ -25,9 +25,9 @@ thumb: "http://oij8a9ql4.bkt.clouddn.com/default-fe.jpg"
     
     这是一个简易的博客系统，用户在该站注册后即可发布个人日记，日记可以被登录用户点赞。功能较简易，外观未经雕琢，纯粹的练习项目。[详情](https://github.com/sunmengyuan/note/tree/master/node/expo)
     
-    相关知识：[Express](http://www.expressjs.com.cn/)、[File System](http://nodejs.cn/api/fs.html)、[MongoDB](https://www.mongodb.com/)、[Mongoose](http://www.nodeclass.com/api/mongoose.html)
+    相关知识：[Express.js](http://www.expressjs.com.cn/)、[File System](http://nodejs.cn/api/fs.html)、[MongoDB](https://www.mongodb.com/)、[Mongoose](http://www.nodeclass.com/api/mongoose.html)
 
-    该项目使用 Express 框架搭建，使用 MongoDB 存储数据。图片上传涉及文件存储请查阅 [Node.js 文件系统](http://nodejs.cn/api/fs.html)。
+    该项目使用 Express.js 框架搭建，使用 MongoDB 存储数据。图片上传涉及文件存储请查阅 [Node.js 文件系统](http://nodejs.cn/api/fs.html)。
 
 + __多人聊天室 [code](https://github.com/sunmengyuan/note/tree/master/node/chat)__
 
@@ -35,9 +35,9 @@ thumb: "http://oij8a9ql4.bkt.clouddn.com/default-fe.jpg"
 
     Node.js 结合了 Websocket 的简易多人聊天室，感兴趣的同学可以自行高仿个 QQ 出来。[详情](https://github.com/sunmengyuan/note/tree/master/node/chat)
     
-    相关知识：[Express](http://www.expressjs.com.cn/)、[Websocket](https://socket.io/)、[MongoDB](https://www.mongodb.com/)、[Mongoose](http://www.nodeclass.com/api/mongoose.html)
+    相关知识：[Express.js](http://www.expressjs.com.cn/)、[Websocket](https://socket.io/)、[MongoDB](https://www.mongodb.com/)、[Mongoose](http://www.nodeclass.com/api/mongoose.html)
    
-    该项目使用 Express 框架搭建，使用 MongoDB 存储数据。核心内容在于全双工通讯请查阅 [Websocket](https://socket.io/)。
+    该项目使用 Express.js 框架搭建，使用 MongoDB 存储数据。核心内容在于全双工通讯请查阅 [Websocket](https://socket.io/)。
     
 *****
 
@@ -55,7 +55,7 @@ thumb: "http://oij8a9ql4.bkt.clouddn.com/default-fe.jpg"
     
     与上面提到的博客系统类似，教科书级别的增删改查功能。[详情](https://github.com/sunmengyuan/note/tree/master/vue/zone)
     
-    相关知识：[Node.js](http://nodejs.cn/)、[Express](http://www.expressjs.com.cn/)、[File System](http://nodejs.cn/api/fs.html)、[MongoDB](https://www.mongodb.com/)、[Mongoose](http://www.nodeclass.com/api/mongoose.html)、[Webpack](https://webpack.github.io/docs/)
+    相关知识：[Node.js](http://nodejs.cn/)、[Express.js](http://www.expressjs.com.cn/)、[File System](http://nodejs.cn/api/fs.html)、[MongoDB](https://www.mongodb.com/)、[Mongoose](http://www.nodeclass.com/api/mongoose.html)、[Webpack](https://webpack.github.io/docs/)
 
     该项目客户端使用 Vue.js 搭建，服务端使用 Express.js 搭建，使用 MongoDB 存储数据。图片上传涉及文件存储请查阅 [Node.js 文件系统](http://nodejs.cn/api/fs.html)。工程构建使用 [Webpack](https://webpack.github.io/docs/) 建议了解。背景设计使用 [Trianglify](https://github.com/qrohlf/trianglify) 在此推荐。
 

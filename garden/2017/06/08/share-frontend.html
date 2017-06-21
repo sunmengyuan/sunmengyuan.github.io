@@ -59,10 +59,13 @@
 
 <ul>
   <li>
-    <p><a href="http://okj45byt5.bkt.clouddn.com/Node.js%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%97.pdf">Node.js开发指南</a></p>
+    <p><a href="http://okj45byt5.bkt.clouddn.com/Node.js%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%97.pdf">Node.js 开发指南</a></p>
   </li>
   <li>
-    <p><a href="http://okj45byt5.bkt.clouddn.com/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BANode.js.pdf">深入浅出Node.js</a></p>
+    <p><a href="http://okj45byt5.bkt.clouddn.com/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BANode.js.pdf">深入浅出 Node.js</a></p>
+  </li>
+  <li>
+    <p><a href="http://nodejs.cn/">Node.js 中文网</a></p>
   </li>
 </ul>
 
@@ -74,62 +77,18 @@
 
     <p><img src="http://oru3b8jlz.bkt.clouddn.com/effect-expo.jpg" alt="" /></p>
 
-    <p>项目名称 <strong>expo</strong></p>
+    <p>这是一个简易的博客系统，用户在该站注册后即可发布个人日记，日记可以被登录用户点赞。功能较简易，外观未经雕琢，纯粹的练习项目。<a href="https://github.com/sunmengyuan/note/tree/master/node/expo">详情</a></p>
 
-    <p>这是一个简易的博客系统，用户在该站注册后即可发布个人日记，日记可以被登录用户点赞。功能较简易，外观未经雕琢，纯粹的练习项目。</p>
-
-    <p>启动方法：</p>
-
-    <p>需要<a href="https://www.mongodb.com/download-center?jmp=homepage#community">安装 MongoDB</a>。不了解 MongoDB 的同学可移驾<a href="https://www.mongodb.com/">官网</a>，英语欠佳的请点击<a href="http://www.runoob.com/mongodb/mongodb-tutorial.html">此处</a>。</p>
-
-    <p>需要创建数据库（database）<strong>expo</strong>，数据表（collection）<strong>users</strong>、<strong>diaries</strong>。具体方法请参见 <a href="http://www.runoob.com/mongodb/mongodb-databases-documents-collections.html">MongoDB 概念解析</a>。</p>
-
-    <div class="language-bash highlighter-rouge"><pre class="highlight"><code>  // 启动 mongodb
-  <span class="nb">cd </span>mongodb
-  mkdir -p data/db
-  <span class="nb">cd </span>mongodb/bin
-  ./mongod --dbpath ../data/db
-</code></pre>
-    </div>
-
-    <div class="highlighter-rouge"><pre class="highlight"><code>  // 启动 expo
-  cd expo
-  npm install
-  cd bin
-  ./www
-</code></pre>
-    </div>
+    <p>相关知识：<a href="http://www.expressjs.com.cn/">Express</a>、<a href="http://nodejs.cn/api/fs.html">File System</a>、<a href="https://www.mongodb.com/">MongoDB</a>、<a href="http://www.nodeclass.com/api/mongoose.html">Mongoose</a></p>
   </li>
   <li>
     <p>多人聊天室 <a href="https://github.com/sunmengyuan/note/tree/master/node/chat">code</a></p>
 
     <p><img src="http://oru3b8jlz.bkt.clouddn.com/effect-chat.jpg" alt="" /></p>
 
-    <p>项目名称 <strong>chat</strong></p>
+    <p>Node.js 结合了 Websocket 的简易多人聊天室，感兴趣的同学可以自行高仿个 QQ 出来。<a href="https://github.com/sunmengyuan/note/tree/master/node/chat">详情</a></p>
 
-    <p>Node.js 结合了 <a href="https://socket.io/">WebSocket</a> 的简易多人聊天室，感兴趣的同学可以自行高仿个 QQ 出来。</p>
-
-    <p>启动方法：</p>
-
-    <p>需要<a href="https://www.mongodb.com/download-center?jmp=homepage#community">安装 MongoDB</a>。不了解 MongoDB 的同学可移驾<a href="https://www.mongodb.com/">官网</a>，英语欠佳的请点击<a href="http://www.runoob.com/mongodb/mongodb-tutorial.html">此处</a>。</p>
-
-    <p>需要创建数据库（database）<strong>chat</strong>，数据表（collection）<strong>users</strong>。具体方法请参见 <a href="http://www.runoob.com/mongodb/mongodb-databases-documents-collections.html">MongoDB 概念解析</a>。</p>
-
-    <div class="language-bash highlighter-rouge"><pre class="highlight"><code>  // 启动 mongodb
-  <span class="nb">cd </span>mongodb
-  mkdir -p data/db
-  <span class="nb">cd </span>mongodb/bin
-  ./mongod --dbpath ../data/db
-</code></pre>
-    </div>
-
-    <div class="highlighter-rouge"><pre class="highlight"><code>  // 启动 chat
-  cd chat
-  npm install
-  cd bin
-  ./www
-</code></pre>
-    </div>
+    <p>相关知识：<a href="http://www.expressjs.com.cn/">Express</a>、<a href="https://socket.io/">Websocket</a>、<a href="https://www.mongodb.com/">MongoDB</a>、<a href="http://www.nodeclass.com/api/mongoose.html">Mongoose</a></p>
   </li>
 </ul>
 
@@ -151,60 +110,18 @@
 
     <p><img src="http://oru3b8jlz.bkt.clouddn.com/effect-zone.jpg" alt="" /></p>
 
-    <p>项目名称 <strong>zone</strong></p>
+    <p>与上面提到的博客系统类似，教科书级别的增删改查功能。<a href="https://github.com/sunmengyuan/note/tree/master/vue/zone">详情</a></p>
 
-    <p>与上面提到的博客系统类似，教科书级别的增删改查功能。背景设计使用了 <a href="https://github.com/qrohlf/trianglify">Trianglify</a>，在此推荐。</p>
+    <p>背景设计使用了 <a href="https://github.com/qrohlf/trianglify">Trianglify</a>，在此推荐。</p>
 
-    <p>启动方法：</p>
-
-    <p>需要<a href="https://www.mongodb.com/download-center?jmp=homepage#community">安装 MongoDB</a>。不了解 MongoDB 的同学可移驾<a href="https://www.mongodb.com/">官网</a>，英语欠佳的请点击<a href="http://www.runoob.com/mongodb/mongodb-tutorial.html">此处</a>。</p>
-
-    <p>需要创建数据库（database）<strong>zone</strong>，数据表（collection）<strong>users</strong>、<strong>articles</strong>。具体方法请参见 <a href="http://www.runoob.com/mongodb/mongodb-databases-documents-collections.html">MongoDB 概念解析</a>。</p>
-
-    <div class="language-bash highlighter-rouge"><pre class="highlight"><code>  // 启动 mongodb
-  <span class="nb">cd </span>mongodb
-  mkdir -p data/db
-  <span class="nb">cd </span>mongodb/bin
-  ./mongod --dbpath ../data/db
-</code></pre>
-    </div>
-
-    <div class="highlighter-rouge"><pre class="highlight"><code>  // 启动 zone
-  cd zone
-  npm install
-  cd bin
-  ./www
-    
-  cd zone/fe
-  npm install
-  npm run dev
-</code></pre>
-    </div>
+    <p>相关知识：<a href="http://nodejs.cn/">Node.js</a>、<a href="http://www.expressjs.com.cn/">Express</a>、<a href="http://nodejs.cn/api/fs.html">File System</a>、<a href="https://www.mongodb.com/">MongoDB</a>、<a href="http://www.nodeclass.com/api/mongoose.html">Mongoose</a>、<a href="https://webpack.github.io/docs/">Webpack</a></p>
   </li>
   <li>
     <p>简易视频播放器 <a href="https://github.com/sunmengyuan/note/tree/master/vue/videoPlayer">code</a> <a href="https://sunmengyuan.github.io/demos/vue/videoPlayer">demo</a></p>
 
-    <p>项目名称 <strong>videoPlayer</strong></p>
+    <p>基于 Vue.js 组件化的思想，将播放器控件封装。并尝试了 Vue.js 的打包上线流程，遇到了点小挫折，压缩后静态资源地址错误…<a href="https://github.com/sunmengyuan/note/tree/master/vue/videoPlayer">详情</a></p>
 
-    <p>基于 Vue.js 组件化的思想，将播放器控件封装。并尝试了 Vue.js 的打包上线流程，遇到了点小挫折，压缩后静态资源地址错误…</p>
-
-    <p>启动方法：</p>
-
-    <div class="language-bash highlighter-rouge"><pre class="highlight"><code>  <span class="nb">cd </span>videoPlayer
-  npm install
-  npm run dev
-</code></pre>
-    </div>
-
-    <p>打包方法：</p>
-
-    <div class="language-bash highlighter-rouge"><pre class="highlight"><code>  <span class="nb">cd </span>videoPlayer
-  npm install
-  npm run build
-</code></pre>
-    </div>
-
-    <p>打包后的文件在 <strong>dist</strong> 文件夹内。建议了解一下 <a href="https://www.npmjs.com/">Npm</a> 及 <a href="https://webpack.github.io/docs/">Webpack</a>。</p>
+    <p>相关知识：<a href="https://developer.mozilla.org/zh-CN/docs/Web/Guide/HTML/Using_HTML5_audio_and_video">HTML5 Video</a>、<a href="https://webpack.github.io/docs/">Webpack</a></p>
   </li>
 </ul>
 
@@ -224,27 +141,9 @@
   <li>
     <p>待办事项 <a href="https://github.com/sunmengyuan/note/tree/master/react/todos">code</a> <a href="https://sunmengyuan.github.io/demos/react/todos">demo</a></p>
 
-    <p>项目名称 <strong>todos</strong></p>
+    <p>教科书级别的待办事项记事本，不多解释。<a href="https://github.com/sunmengyuan/note/tree/master/react/todos">详情</a></p>
 
-    <p>教科书级别的待办事项记事本，不多解释。</p>
-
-    <p>启动方法：</p>
-
-    <div class="language-bash highlighter-rouge"><pre class="highlight"><code>  <span class="nb">cd </span>todos
-  npm install
-  npm run dev
-</code></pre>
-    </div>
-
-    <p>打包方法：</p>
-
-    <div class="language-bash highlighter-rouge"><pre class="highlight"><code>  <span class="nb">cd </span>todos
-  npm install
-  npm run build
-</code></pre>
-    </div>
-
-    <p>打包后的文件在 <strong>dist</strong> 文件夹内。建议了解一下 <a href="https://www.npmjs.com/">Npm</a> 及 <a href="https://webpack.github.io/docs/">Webpack</a>。</p>
+    <p>相关知识：<a href="https://webpack.github.io/docs/">Webpack</a></p>
   </li>
 </ul>
 
@@ -267,7 +166,7 @@
 <h5 id="参考资料-4">参考资料</h5>
 
 <ul>
-  <li><a href="http://okj45byt5.bkt.clouddn.com/HTML5%20Canvas%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF.pdf">HTML5 Canvas核心技术</a></li>
+  <li><a href="http://okj45byt5.bkt.clouddn.com/HTML5%20Canvas%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF.pdf">HTML5 Canvas 核心技术</a></li>
 </ul>
 
 <h5 id="示例-3">示例</h5>
@@ -298,17 +197,17 @@
 
 <ul>
   <li>
-    <p>路径动画 <a href="https://github.com/sunmengyuan/note/blob/master/svg/cat.html">code</a> <a href="https://sunmengyuan.github.io/demos/svg/cat.html">demo</a></p>
+    <p>线描动画 <a href="https://github.com/sunmengyuan/note/blob/master/svg/cat.html">code</a> <a href="https://sunmengyuan.github.io/demos/svg/cat.html">demo</a></p>
   </li>
   <li>
     <p>路径动画加蒙板实现橡皮擦特效 <a href="https://github.com/sunmengyuan/note/blob/master/svg/paint.html">code</a> <a href="https://sunmengyuan.github.io/demos/svg/paint.html">demo</a></p>
   </li>
   <li>
-    <p>loading 动画 <a href="https://github.com/sunmengyuan/note/blob/master/svg/loading.html">code</a> <a href="https://sunmengyuan.github.io/demos/svg/loading.html">demo</a></p>
+    <p>Loading 动画 <a href="https://github.com/sunmengyuan/note/blob/master/svg/loading.html">code</a> <a href="https://sunmengyuan.github.io/demos/svg/loading.html">demo</a></p>
   </li>
 </ul>
 
-<p>使用 Svg 绘制的 icon 无限放大后不模糊这点很赞。但其更强大的功能在于动画，可惜我的示例比较简易无法体现这点…</p>
+<p>使用 Svg 绘制的图标无限放大后不模糊这点很赞。但其更强大的功能在于动画，可惜我的示例比较简易无法体现这点…</p>
 
 <hr />
 
@@ -317,7 +216,7 @@
 <h5 id="参考资料-5">参考资料</h5>
 
 <ul>
-  <li><a href="https://read.douban.com/reader/ebook/7412854/">Three.js入门指南</a></li>
+  <li><a href="https://read.douban.com/reader/ebook/7412854/">Three.js 入门指南</a></li>
 </ul>
 
 <h5 id="示例-5">示例</h5>
@@ -357,7 +256,7 @@
 <h5 id="参考资料-7">参考资料</h5>
 
 <ul>
-  <li><a href="http://lesscss.cn/">Less中文网</a></li>
+  <li><a href="http://lesscss.cn/">Less 中文网</a></li>
 </ul>
 
 <hr />
@@ -367,7 +266,7 @@
 <h5 id="参考资料-8">参考资料</h5>
 
 <ul>
-  <li><a href="http://www.w3cplus.com/sassguide/">Sass入门 - Sass教程</a></li>
+  <li><a href="http://www.w3cplus.com/sassguide/">Sass 入门 - Sass 教程</a></li>
 </ul>
 
 <p><strong>开启自恋模式</strong> 欢迎欣赏本人深度好文：<a href="https://sunmengyuan.github.io/garden/2017/05/17/sass-example.html">Sass 学习笔记（应用场景的思考）</a></p>

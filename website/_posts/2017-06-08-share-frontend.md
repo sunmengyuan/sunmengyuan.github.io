@@ -11,9 +11,11 @@ thumb: "http://oij8a9ql4.bkt.clouddn.com/default-fe.jpg"
 
 ##### 参考资料 #####
 
-+ [Node.js开发指南](http://okj45byt5.bkt.clouddn.com/Node.js%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%97.pdf)
++ [Node.js 开发指南](http://okj45byt5.bkt.clouddn.com/Node.js%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%97.pdf)
 
-+ [深入浅出Node.js](http://okj45byt5.bkt.clouddn.com/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BANode.js.pdf)
++ [深入浅出 Node.js](http://okj45byt5.bkt.clouddn.com/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BANode.js.pdf)
+
++ [Node.js 中文网](http://nodejs.cn/)
 
 ##### 示例 #####
 
@@ -21,62 +23,18 @@ thumb: "http://oij8a9ql4.bkt.clouddn.com/default-fe.jpg"
 
     ![](http://oru3b8jlz.bkt.clouddn.com/effect-expo.jpg)
     
-    项目名称 __expo__
-
-    这是一个简易的博客系统，用户在该站注册后即可发布个人日记，日记可以被登录用户点赞。功能较简易，外观未经雕琢，纯粹的练习项目。
+    这是一个简易的博客系统，用户在该站注册后即可发布个人日记，日记可以被登录用户点赞。功能较简易，外观未经雕琢，纯粹的练习项目。[详情](https://github.com/sunmengyuan/note/tree/master/node/expo)
     
-    启动方法：
-    
-    需要[安装 MongoDB](https://www.mongodb.com/download-center?jmp=homepage#community)。不了解 MongoDB 的同学可移驾[官网](https://www.mongodb.com/)，英语欠佳的请点击[此处](http://www.runoob.com/mongodb/mongodb-tutorial.html)。
-
-    需要创建数据库（database）__expo__，数据表（collection）__users__、__diaries__。具体方法请参见 [MongoDB 概念解析](http://www.runoob.com/mongodb/mongodb-databases-documents-collections.html)。
-
-    ```bash
-    // 启动 mongodb
-    cd mongodb
-    mkdir -p data/db
-    cd mongodb/bin
-    ./mongod --dbpath ../data/db
-    ```
-    
-    ```
-    // 启动 expo
-    cd expo
-    npm install
-    cd bin
-    ./www
-    ```
+    相关知识：[Express](http://www.expressjs.com.cn/)、[File System](http://nodejs.cn/api/fs.html)、[MongoDB](https://www.mongodb.com/)、[Mongoose](http://www.nodeclass.com/api/mongoose.html)
 
 + 多人聊天室 [code](https://github.com/sunmengyuan/note/tree/master/node/chat)
 
     ![](http://oru3b8jlz.bkt.clouddn.com/effect-chat.jpg)
 
-    项目名称 __chat__
-
-    Node.js 结合了 [WebSocket](https://socket.io/) 的简易多人聊天室，感兴趣的同学可以自行高仿个 QQ 出来。
+    Node.js 结合了 Websocket 的简易多人聊天室，感兴趣的同学可以自行高仿个 QQ 出来。[详情](https://github.com/sunmengyuan/note/tree/master/node/chat)
     
-    启动方法：
-    
-    需要[安装 MongoDB](https://www.mongodb.com/download-center?jmp=homepage#community)。不了解 MongoDB 的同学可移驾[官网](https://www.mongodb.com/)，英语欠佳的请点击[此处](http://www.runoob.com/mongodb/mongodb-tutorial.html)。
-
-    需要创建数据库（database）__chat__，数据表（collection）__users__。具体方法请参见 [MongoDB 概念解析](http://www.runoob.com/mongodb/mongodb-databases-documents-collections.html)。
-
-    ```bash
-    // 启动 mongodb
-    cd mongodb
-    mkdir -p data/db
-    cd mongodb/bin
-    ./mongod --dbpath ../data/db
-    ```
-    
-    ```
-    // 启动 chat
-    cd chat
-    npm install
-    cd bin
-    ./www
-    ```
-
+    相关知识：[Express](http://www.expressjs.com.cn/)、[Websocket](https://socket.io/)、[MongoDB](https://www.mongodb.com/)、[Mongoose](http://www.nodeclass.com/api/mongoose.html)
+   
 *****
 
 ### Vue.js ###
@@ -91,59 +49,17 @@ thumb: "http://oij8a9ql4.bkt.clouddn.com/default-fe.jpg"
 
     ![](http://oru3b8jlz.bkt.clouddn.com/effect-zone.jpg)
     
-    项目名称 __zone__
-
-    与上面提到的博客系统类似，教科书级别的增删改查功能。背景设计使用了 [Trianglify](https://github.com/qrohlf/trianglify)，在此推荐。
-
-    启动方法：
+    与上面提到的博客系统类似，教科书级别的增删改查功能。[详情](https://github.com/sunmengyuan/note/tree/master/vue/zone)
     
-    需要[安装 MongoDB](https://www.mongodb.com/download-center?jmp=homepage#community)。不了解 MongoDB 的同学可移驾[官网](https://www.mongodb.com/)，英语欠佳的请点击[此处](http://www.runoob.com/mongodb/mongodb-tutorial.html)。
+    背景设计使用了 [Trianglify](https://github.com/qrohlf/trianglify)，在此推荐。
 
-    需要创建数据库（database）__zone__，数据表（collection）__users__、__articles__。具体方法请参见 [MongoDB 概念解析](http://www.runoob.com/mongodb/mongodb-databases-documents-collections.html)。
-
-    ```bash
-    // 启动 mongodb
-    cd mongodb
-    mkdir -p data/db
-    cd mongodb/bin
-    ./mongod --dbpath ../data/db
-    ```
-    
-    ```
-    // 启动 zone
-    cd zone
-    npm install
-    cd bin
-    ./www
-    
-    cd zone/fe
-    npm install
-    npm run dev
-    ```
+    相关知识：[Node.js](http://nodejs.cn/)、[Express](http://www.expressjs.com.cn/)、[File System](http://nodejs.cn/api/fs.html)、[MongoDB](https://www.mongodb.com/)、[Mongoose](http://www.nodeclass.com/api/mongoose.html)、[Webpack](https://webpack.github.io/docs/)
 
 + 简易视频播放器 [code](https://github.com/sunmengyuan/note/tree/master/vue/videoPlayer) [demo](https://sunmengyuan.github.io/demos/vue/videoPlayer)
-
-    项目名称 __videoPlayer__
     
-    基于 Vue.js 组件化的思想，将播放器控件封装。并尝试了 Vue.js 的打包上线流程，遇到了点小挫折，压缩后静态资源地址错误...
+    基于 Vue.js 组件化的思想，将播放器控件封装。并尝试了 Vue.js 的打包上线流程，遇到了点小挫折，压缩后静态资源地址错误...[详情](https://github.com/sunmengyuan/note/tree/master/vue/videoPlayer)
     
-    启动方法：
-    
-    ```bash
-    cd videoPlayer
-    npm install
-    npm run dev
-    ```
-    
-    打包方法：
-    
-    ```bash
-    cd videoPlayer
-    npm install
-    npm run build
-    ```
-    
-    打包后的文件在 __dist__ 文件夹内。建议了解一下 [Npm](https://www.npmjs.com/) 及 [Webpack](https://webpack.github.io/docs/)。
+    相关知识：[HTML5 Video](https://developer.mozilla.org/zh-CN/docs/Web/Guide/HTML/Using_HTML5_audio_and_video)、[Webpack](https://webpack.github.io/docs/)
     
 *****
 
@@ -157,28 +73,10 @@ thumb: "http://oij8a9ql4.bkt.clouddn.com/default-fe.jpg"
 
 + 待办事项 [code](https://github.com/sunmengyuan/note/tree/master/react/todos) [demo](https://sunmengyuan.github.io/demos/react/todos)
 
-    项目名称 __todos__
+    教科书级别的待办事项记事本，不多解释。[详情](https://github.com/sunmengyuan/note/tree/master/react/todos)
+    
+    相关知识：[Webpack](https://webpack.github.io/docs/)
 
-    教科书级别的待办事项记事本，不多解释。
-    
-    启动方法：
-    
-    ```bash
-    cd todos
-    npm install
-    npm run dev
-    ```
-    
-    打包方法：
-    
-    ```bash
-    cd todos
-    npm install
-    npm run build
-    ```
-    
-    打包后的文件在 __dist__ 文件夹内。建议了解一下 [Npm](https://www.npmjs.com/) 及 [Webpack](https://webpack.github.io/docs/)。
-    
 *****
 
 ### React Native ###
@@ -195,7 +93,7 @@ React Native 环境搭建指南，正在撰写中，敬请期待。
 
 ##### 参考资料 #####
 
-+ [HTML5 Canvas核心技术](http://okj45byt5.bkt.clouddn.com/HTML5%20Canvas%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF.pdf)
++ [HTML5 Canvas 核心技术](http://okj45byt5.bkt.clouddn.com/HTML5%20Canvas%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF.pdf)
 
 ##### 示例 #####
 
@@ -217,13 +115,13 @@ React Native 环境搭建指南，正在撰写中，敬请期待。
 
 ##### 示例 #####
 
-+ 路径动画 [code](https://github.com/sunmengyuan/note/blob/master/svg/cat.html) [demo](https://sunmengyuan.github.io/demos/svg/cat.html)
++ 线描动画 [code](https://github.com/sunmengyuan/note/blob/master/svg/cat.html) [demo](https://sunmengyuan.github.io/demos/svg/cat.html)
 
 + 路径动画加蒙板实现橡皮擦特效 [code](https://github.com/sunmengyuan/note/blob/master/svg/paint.html) [demo](https://sunmengyuan.github.io/demos/svg/paint.html)
 
-+ loading 动画 [code](https://github.com/sunmengyuan/note/blob/master/svg/loading.html) [demo](https://sunmengyuan.github.io/demos/svg/loading.html)
++ Loading 动画 [code](https://github.com/sunmengyuan/note/blob/master/svg/loading.html) [demo](https://sunmengyuan.github.io/demos/svg/loading.html)
 
-使用 Svg 绘制的 icon 无限放大后不模糊这点很赞。但其更强大的功能在于动画，可惜我的示例比较简易无法体现这点...
+使用 Svg 绘制的图标无限放大后不模糊这点很赞。但其更强大的功能在于动画，可惜我的示例比较简易无法体现这点...
 
 *****
 
@@ -231,7 +129,7 @@ React Native 环境搭建指南，正在撰写中，敬请期待。
 
 ##### 参考资料 #####
 
-+ [Three.js入门指南](https://read.douban.com/reader/ebook/7412854/)
++ [Three.js 入门指南](https://read.douban.com/reader/ebook/7412854/)
 
 ##### 示例 #####
 
@@ -259,7 +157,7 @@ React Native 环境搭建指南，正在撰写中，敬请期待。
 
 ##### 参考资料 ####
 
-+ [Less中文网](http://lesscss.cn/)
++ [Less 中文网](http://lesscss.cn/)
 
 *****
 
@@ -267,7 +165,7 @@ React Native 环境搭建指南，正在撰写中，敬请期待。
 
 ##### 参考资料 #####
 
-+ [Sass入门 - Sass教程](http://www.w3cplus.com/sassguide/)
++ [Sass 入门 - Sass 教程](http://www.w3cplus.com/sassguide/)
 
 __开启自恋模式__ 欢迎欣赏本人深度好文：[Sass 学习笔记（应用场景的思考）](https://sunmengyuan.github.io/garden/2017/05/17/sass-example.html)
 

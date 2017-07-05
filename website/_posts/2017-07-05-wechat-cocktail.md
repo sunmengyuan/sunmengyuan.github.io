@@ -4,7 +4,7 @@ title: "尝试开发微信小程序（心得）"
 date: "2017-07-05"
 abstract: "业余时间开发了一枚调制鸡尾酒的小游戏，具体技术细节不在此赘述，谈些个人感受。"
 keywords: ["微信小程序"]
-thumb: ""
+thumb: "http://osm0bpix4.bkt.clouddn.com/thumb.jpg"
 ---
 
 首先欢迎大家捧场：

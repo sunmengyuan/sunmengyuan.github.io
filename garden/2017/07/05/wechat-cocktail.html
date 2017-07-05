@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="keywords" content="前端开发,微信小程序" />
+    <meta name="description" content="业余时间开发了一枚调制鸡尾酒的小游戏，具体技术细节不在此赘述，谈些个人感受。" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0" />
+    <title>呆恋小喵的后花园 - 尝试开发微信小程序（心得）</title>
+    <link rel="shortcut icon" href="http://oij8a9ql4.bkt.clouddn.com/shortcut.ico" />
+    <link rel="stylesheet" href="https://cdn.bootcss.com/highlight.js/8.0/styles/sunburst.min.css" />
+    <link rel="stylesheet/less" href="/garden/assets/style/style.less" />
+    <script src="https://lib.sinaapp.com/js/jquery/1.9.1/jquery-1.9.1.min.js"></script>
+    <script src="https://cdn.bootcss.com/less.js/1.7.0/less.min.js"></script>
+    <script src="https://cdn.bootcss.com/highlight.js/8.0/highlight.min.js"></script>
+</head>
+<body>
+<script>
+    var pageData = {};
+    var _hmt = _hmt || [];
+    (function () {
+        var hm = document.createElement('script');
+        hm.src = 'https://hm.baidu.com/hm.js?6b9830e6ab8073ce1a44ad49a03d8596';
+        var s = document.getElementsByTagName('script')[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+<img src="http://oij8a9ql4.bkt.clouddn.com/portrait.jpg" alt="呆恋小喵" width="0" height="0" />
+<nav>
+    <a href="javascript:;" class="js_menu_btn">
+        <span></span>
+        <span></span>
+        <span></span>
+    </a>
+    <ul class="js_menu">
+        <li><a href="/garden/">Home</a></li>
+        <li><a href="/garden/views/posts" class="js_goto_posts">Posts</a></li>
+        <li><a href="/garden/views/about">About</a></li>
+    </ul>
+</nav>
+<a href="javascript:;" class="gotop js_gotop"></a>
+<header class="post" style="background-image: url('http://oij8a9ql4.bkt.clouddn.com/banner.jpg')">
+    <div>
+        <h2>尝试开发微信小程序（心得）</h2>
+        <time>05 Jul 2017</time>
+        <p class="abstract">业余时间开发了一枚调制鸡尾酒的小游戏，具体技术细节不在此赘述，谈些个人感受。</p>
+        <ul class="c-fix">
+            
+            <li>微信小程序</li>
+            
+        </ul>
+    </div>
+</header>
+<article class="js_article">
+    <p>首先欢迎大家捧场：</p>
+
+<p><img src="http://osm0bpix4.bkt.clouddn.com/qrcode.jpg" alt="" /></p>
+
+<p><a href="https://github.com/sunmengyuan/note/tree/master/wechat/cocktail">源码</a></p>
+
+<p><a href="https://mp.weixin.qq.com/cgi-bin/wx">微信小程序文档</a></p>
+
+<hr />
+
+<p>在调试时遇到的一些兼容问题：</p>
+
+<ul>
+  <li>
+    <p><strong>hover-class</strong> 属性部分不支持</p>
+  </li>
+  <li>
+    <p><strong>open-type</strong> 属性部分不支持</p>
+  </li>
+  <li>
+    <p><strong>css3 渐变</strong> 部分不支持</p>
+  </li>
+</ul>
+
+<hr />
+
+<p><strong>hover-class</strong> 可控制元素被点击时的瞬间状态，对此我大开脑洞：是不是设置 <strong>hover-stay-time</strong> 的值为正无穷 <strong>Number.POSITIVE_INFINITY</strong> 便可以使瞬间状态转化为常态…很遗憾失败了。</p>
+
+<p>正确的做法如下：</p>
+
+<p><img src="http://osm0bpix4.bkt.clouddn.com/example1-code1.png" alt="" /></p>
+
+<p><img src="http://osm0bpix4.bkt.clouddn.com/example1-code2.png" alt="" /></p>
+
+<p>上述其实是使用 <strong>Data</strong> 状态控制 <strong>Dom</strong> 表现的通用思路，与 <strong>jQuery</strong> 大大不同。顺便说下 <strong>wx:for</strong> 是个好东西，对于列表结构较多的页面大大节省了 <strong>wxml</strong> 代码量，当然其他框架也有类似的循环语句。</p>
+
+<p>小程序中含类似事件代理的思想，详见<a href="https://mp.weixin.qq.com/debug/wxadoc/dev/framework/view/wxml/event.html">链接</a>中的事件对象。可将事件绑定于父元素，事件触发在于子元素。上例中的 <strong>e.target</strong> 获取的便是子元素，而使用 <strong>e.currentTarget</strong> 获取父元素。</p>
+
+<hr />
+
+<p>接下来谈谈图片缓存：</p>
+
+<p>该项目的图片资源使用七牛管理，七牛本身也有缓存，但在清除七牛缓存后发现小程序内的图片缓存仍在。故点击了微信开发者工具中的如下几个按钮：</p>
+
+<p><img src="http://osm0bpix4.bkt.clouddn.com/clear-cache.jpg" alt="" /></p>
+
+<p>并不奏效…</p>
+
+<p>最终的解决方案是在图片链接后加一个不痛不痒的参数，例如：http://osm0bpix4.bkt.clouddn.com/clear-cache.jpg?refresh。</p>
+
+<hr />
+
+<p>最后谈谈微信小程序的分享功能：</p>
+
+<p>在分享 <strong>title</strong> 中加入了微信用户的昵称。当时考虑若用户拒绝被获取个人信息，那么分享 <strong>title</strong> 便是“我调制了一杯【鸡尾酒】，你也来试试吧！”。事实证明多此一举，当用户拒绝被获取个人信息时，分享 <strong>title</strong> 就是小程序名称，而不是 <strong>onShareAppMessage</strong> 中设置的 <strong>title</strong> 值。</p>
+
+<div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">app</span> <span class="o">=</span> <span class="nx">getApp</span><span class="p">();</span>
+<span class="nx">Page</span><span class="p">({</span>
+    <span class="na">data</span><span class="p">:</span> <span class="p">{</span>
+        <span class="na">cocktailName</span><span class="p">:</span> <span class="s1">'鸡尾酒'</span>
+    <span class="p">},</span>
+    <span class="na">onShareAppMessage</span><span class="p">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="na">title</span><span class="p">:</span> <span class="p">(</span><span class="nx">app</span><span class="p">.</span><span class="nx">globalData</span><span class="p">.</span><span class="nx">userInfo</span><span class="p">.</span><span class="nx">nickName</span> <span class="o">||</span> <span class="s1">'我'</span><span class="p">)</span> <span class="o">+</span> <span class="s1">'调制了一杯【'</span> <span class="o">+</span> <span class="k">this</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="nx">cocktailName</span> <span class="o">+</span> <span class="s1">'】，你也来试试吧！'</span><span class="p">,</span>
+            <span class="na">desc</span><span class="p">:</span> <span class="s1">'调制你的专属鸡尾酒'</span><span class="p">,</span>
+            <span class="na">path</span><span class="p">:</span> <span class="s1">'/pages/welcome/welcome'</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">});</span>
+</code></pre>
+</div>
+
+<p>未完待续…踩到新坑会更文~</p>
+
+<hr />
+
+<p>作者：呆恋小喵</p>
+
+<p>我的后花园：<a href="https://sunmengyuan.github.io/garden/">https://sunmengyuan.github.io/garden/</a></p>
+
+<p>我的 github：<a href="https://github.com/sunmengyuan">https://github.com/sunmengyuan</a></p>
+
+<p>原文链接：<a href="https://sunmengyuan.github.io/garden/2017/07/05/wechat-cocktail.html">https://sunmengyuan.github.io/garden/2017/07/05/wechat-cocktail.html</a></p>
+
+</article>
+<footer>
+    <a href="/garden/views/posts" class="js_goto_posts">返回目录 - 我的印记</a>
+</footer>
+<div class="browser js_browser">
+    <img src="" />
+</div>
+
+<script src="/garden/assets/script/main.js"></script>
+</body>
+</html>

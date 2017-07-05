@@ -31,9 +31,9 @@ __hover-class__ 可控制元素被点击时的瞬间状态，对此我大开脑�
 
 正确的做法如下：
 
-![](http://osm0bpix4.bkt.clouddn.com/example1-code1.png)
+![](http://osm0bpix4.bkt.clouddn.com/example1-code1.jpg)
 
-![](http://osm0bpix4.bkt.clouddn.com/example1-code2.png)
+![](http://osm0bpix4.bkt.clouddn.com/example1-code2.jpg)
 
 上述其实是使用 __Data__ 状态控制 __Dom__ 表现的通用思路，与 __jQuery__ 大大不同。顺便说下 __wx:for__ 是个好东西，对于列表结构较多的页面大大节省了 __wxml__ 代码量，当然其他框架也有类似的循环语句。
 

@@ -35,7 +35,7 @@ __hover-class__ 可控制元素被点击时的瞬间状态，对此我大开脑�
 
 ![](http://osm0bpix4.bkt.clouddn.com/example1-code2.jpg)
 
-上述其实是使用 __Data__ 状态控制 __Dom__ 表现的通用思路，与 __jQuery__ 大大不同。微信小程序的设计思想接近于 __React__ 或者 __Vue__ ，属于数据驱动且含生命周期的概念，不了解的同学请自行科普...
+上述其实是使用 __Data__ 控制 __Dom__ 表现的通用思路，与 __jQuery__ 大大不同。微信小程序的设计思想接近于 [React](https://facebook.github.io/react/) 或者 [Vue](http://cn.vuejs.org/)，属于数据驱动且含生命周期的概念，不了解的同学请自行科普...
 
 但使用 __this.setData()__ 更新数据仅可带动 __wxml__ 元素的状态变化，并没有类似 __Vue__ 中 [vm.$watch](http://cn.vuejs.org/v2/api/#vm-watch) 这样的方法。欲监测到某一数据更新时执行某段逻辑似乎不可能。例如在 __app.js__ 内获取微信用户信息存储至 __globalData__ 中，当首页监听到用户信息获取成功时执行 loading...
 
@@ -49,7 +49,7 @@ __hover-class__ 可控制元素被点击时的瞬间状态，对此我大开脑�
 
 接下来谈谈图片缓存：
 
-该项目的图片资源使用七牛管理，七牛本身也有缓存，但在清除七牛缓存后发现小程序内的图片缓存仍在。故点击了微信开发者工具中的如下几个按钮：
+该项目的图片资源使用[七牛](https://portal.qiniu.com)管理，七牛本身也有缓存，但在清除七牛缓存后发现小程序内的图片缓存仍在。故点击了微信开发者工具中的如下几个按钮：
 
 ![](http://osm0bpix4.bkt.clouddn.com/clear-cache.jpg)
 

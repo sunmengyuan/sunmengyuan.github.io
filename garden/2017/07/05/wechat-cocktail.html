@@ -85,7 +85,7 @@
 
 <p><img src="http://osm0bpix4.bkt.clouddn.com/example1-code2.jpg" alt="" /></p>
 
-<p>上述其实是使用 <strong>Data</strong> 状态控制 <strong>Dom</strong> 表现的通用思路，与 <strong>jQuery</strong> 大大不同。微信小程序的设计思想接近于 <strong>React</strong> 或者 <strong>Vue</strong> ，属于数据驱动且含生命周期的概念，不了解的同学请自行科普…</p>
+<p>上述其实是使用 <strong>Data</strong> 控制 <strong>Dom</strong> 表现的通用思路，与 <strong>jQuery</strong> 大大不同。微信小程序的设计思想接近于 <a href="https://facebook.github.io/react/">React</a> 或者 <a href="http://cn.vuejs.org/">Vue</a>，属于数据驱动且含生命周期的概念，不了解的同学请自行科普…</p>
 
 <p>但使用 <strong>this.setData()</strong> 更新数据仅可带动 <strong>wxml</strong> 元素的状态变化，并没有类似 <strong>Vue</strong> 中 <a href="http://cn.vuejs.org/v2/api/#vm-watch">vm.$watch</a> 这样的方法。欲监测到某一数据更新时执行某段逻辑似乎不可能。例如在 <strong>app.js</strong> 内获取微信用户信息存储至 <strong>globalData</strong> 中，当首页监听到用户信息获取成功时执行 loading…</p>
 
@@ -99,7 +99,7 @@
 
 <p>接下来谈谈图片缓存：</p>
 
-<p>该项目的图片资源使用七牛管理，七牛本身也有缓存，但在清除七牛缓存后发现小程序内的图片缓存仍在。故点击了微信开发者工具中的如下几个按钮：</p>
+<p>该项目的图片资源使用<a href="https://portal.qiniu.com">七牛</a>管理，七牛本身也有缓存，但在清除七牛缓存后发现小程序内的图片缓存仍在。故点击了微信开发者工具中的如下几个按钮：</p>
 
 <p><img src="http://osm0bpix4.bkt.clouddn.com/clear-cache.jpg" alt="" /></p>
 

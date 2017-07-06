@@ -41,7 +41,7 @@ __hover-class__ 可控制元素被点击时的瞬间状态，对此我大开脑�
 
 小程序中含类似事件代理的思想，详见[链接](https://mp.weixin.qq.com/debug/wxadoc/dev/framework/view/wxml/event.html)中的事件对象。可将事件绑定于父元素，事件触发在于子元素。上例中 __e.target__ 获取的是子元素，而 __e.currentTarget__ 获取的是父元素。
 
-顺便说下 __wx:for__ 是个好东西，对于列表结构较多的页面大大节省了 __wxml__ 代码量，当然其它框架也有类似的循环语句。__wx:for__ 可多重嵌套，使用 __wx:for-item__ 变更循环变量名以防止混淆。
+顺便说下 __wx:for__ 是个好东西，对于列表结构较多的页面大大节省了 __wxml__ 代码量，当然其它框架也有类似的循环语句。语句 __wx:for__ 可多重嵌套，使用 __wx:for-item__ 变更循环变量名以防止混淆。
 
 ![](http://osm0bpix4.bkt.clouddn.com/example2-code.jpg)
 

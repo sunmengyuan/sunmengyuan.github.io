@@ -5,7 +5,7 @@
     <meta name="keywords" content="前端开发,微信小程序" />
     <meta name="description" content="业余时间开发了一枚调制鸡尾酒的小游戏，具体技术细节不在此赘述，谈些个人感受。" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0" />
-    <title>呆恋小喵的后花园 - 尝试开发微信小程序（心得）</title>
+    <title>呆恋小喵的后花园 - 微信小程序开发心得</title>
     <link rel="shortcut icon" href="http://oij8a9ql4.bkt.clouddn.com/shortcut.ico" />
     <link rel="stylesheet" href="https://cdn.bootcss.com/highlight.js/8.0/styles/sunburst.min.css" />
     <link rel="stylesheet/less" href="/garden/assets/style/style.less" />
@@ -40,7 +40,7 @@
 <a href="javascript:;" class="gotop js_gotop"></a>
 <header class="post" style="background-image: url('http://oij8a9ql4.bkt.clouddn.com/banner.jpg')">
     <div>
-        <h2>尝试开发微信小程序（心得）</h2>
+        <h2>微信小程序开发心得</h2>
         <time>05 Jul 2017</time>
         <p class="abstract">业余时间开发了一枚调制鸡尾酒的小游戏，具体技术细节不在此赘述，谈些个人感受。</p>
         <ul class="c-fix">
@@ -53,11 +53,11 @@
 <article class="js_article">
     <p>首先欢迎大家捧场：</p>
 
-<p><img src="http://osm0bpix4.bkt.clouddn.com/qrcode.jpg" alt="" /></p>
+<p><img src="http://osm0bpix4.bkt.clouddn.com/wxcode.jpg" alt="" /></p>
 
 <p><a href="https://github.com/sunmengyuan/note/tree/master/wechat/cocktail">源码</a></p>
 
-<p><a href="https://mp.weixin.qq.com/cgi-bin/wx">微信小程序文档</a></p>
+<p><a href="https://mp.weixin.qq.com/debug/wxadoc/introduction/index.html?t=2017621">微信小程序文档</a></p>
 
 <hr />
 
@@ -71,7 +71,7 @@
     <p><strong>open-type</strong> 属性部分不支持</p>
   </li>
   <li>
-    <p><strong>css3 渐变</strong> 部分不支持</p>
+    <p><strong>css3 gradient</strong> 部分不支持</p>
   </li>
 </ul>
 
@@ -79,21 +79,21 @@
 
 <p><strong>hover-class</strong> 可控制元素被点击时的瞬间状态，对此我大开脑洞：是不是设置 <strong>hover-stay-time</strong> 的值为正无穷 <strong>Number.POSITIVE_INFINITY</strong> 便可以使瞬间状态转化为常态…很遗憾失败了。</p>
 
-<p>正确的做法如下：</p>
+<p>正确做法如下：</p>
 
 <p><img src="http://osm0bpix4.bkt.clouddn.com/example1-code1.jpg" alt="" /></p>
 
 <p><img src="http://osm0bpix4.bkt.clouddn.com/example1-code2.jpg" alt="" /></p>
 
-<p>上述其实是使用 <strong>Data</strong> 状态控制 <strong>Dom</strong> 表现的通用思路，与 <strong>jQuery</strong> 大大不同。顺便说下 <strong>wx:for</strong> 是个好东西，对于列表结构较多的页面大大节省了 <strong>wxml</strong> 代码量，当然其他框架也有类似的循环语句。</p>
+<p>上述其实是使用 <strong>Data</strong> 状态控制 <strong>Dom</strong> 表现的通用思路，与 <strong>jQuery</strong> 大大不同。微信小程序的设计思想接近于 <strong>React</strong> 或者 <strong>Vue</strong> ，属于数据驱动且含生命周期的概念，不了解的同学请自行科普…</p>
 
-<p>小程序中含类似事件代理的思想，详见<a href="https://mp.weixin.qq.com/debug/wxadoc/dev/framework/view/wxml/event.html">链接</a>中的事件对象。可将事件绑定于父元素，事件触发在于子元素。上例中的 <strong>e.target</strong> 获取的便是子元素，而使用 <strong>e.currentTarget</strong> 获取父元素。</p>
+<p>但使用 <strong>this.setData()</strong> 更新数据仅可带动 <strong>wxml</strong> 元素的状态变化，并没有类似 <strong>Vue</strong> 中 <a href="http://cn.vuejs.org/v2/api/#vm-watch">vm.$watch</a> 这样的方法。欲监测到某一数据更新时执行某段逻辑似乎不可能。例如在 <strong>app.js</strong> 内获取微信用户信息存储至 <strong>globalData</strong> 中，当首页监听到用户信息获取成功时执行 loading…</p>
 
-<hr />
+<p>小程序中含类似事件代理的思想，详见<a href="https://mp.weixin.qq.com/debug/wxadoc/dev/framework/view/wxml/event.html">链接</a>中的事件对象。可将事件绑定于父元素，事件触发在于子元素。上例中 <strong>e.target</strong> 获取的是子元素，而 <strong>e.currentTarget</strong> 获取的是父元素。</p>
 
-<p>微信小程序的设计思想接近于 <strong>React</strong> 或者 <strong>Vue</strong>，属于数据驱动且含生命周期的概念，不了解的同学请自行百度…</p>
+<p>顺便说下 <strong>wx:for</strong> 是个好东西，对于列表结构较多的页面大大节省了 <strong>wxml</strong> 代码量，当然其它框架也有类似的循环语句。<strong>wx:for</strong> 可多重嵌套，使用 <strong>wx:for-item</strong> 变更循环变量名以防止混淆。</p>
 
-<p>但使用 <strong>this.setData()</strong> 更新数据仅能带动 <strong>wxml</strong> 元素的状态变化，并没有类似 Vue 中 <strong>vm.$watch</strong> 这样的方法。欲检测到某一数据变化时执行某段逻辑似乎不可能。</p>
+<p><img src="http://osm0bpix4.bkt.clouddn.com/example2-code.jpg" alt="" /></p>
 
 <hr />
 
@@ -105,13 +105,13 @@
 
 <p>并不奏效…</p>
 
-<p>最终的解决方案是在图片链接后加一个不痛不痒的参数，例如：http://osm0bpix4.bkt.clouddn.com/clear-cache.jpg?refresh。</p>
+<p>最终的解决方案是在图片链接后加一个不痛不痒的参数，例如：http://osm0bpix4.bkt.clouddn.com/clear-cache.jpg?refresh</p>
 
 <hr />
 
 <p>最后谈谈微信小程序的分享功能：</p>
 
-<p>在分享 <strong>title</strong> 中加入了微信用户的昵称。当时考虑若用户拒绝被获取个人信息，那么分享 <strong>title</strong> 便是“我调制了一杯【鸡尾酒】，你也来试试吧！”。事实证明多此一举，当用户拒绝被获取个人信息时，分享 <strong>title</strong> 就是小程序名称，而不是 <strong>onShareAppMessage</strong> 中设置的 <strong>title</strong> 值。</p>
+<p>在分享 <strong>title</strong> 中加入了微信用户的昵称。当时考虑若用户拒绝被获取个人信息，那么分享 <strong>title</strong> 便是“我调制了一杯【鸡尾酒】，你也来试试吧！”。事实证明多此一举，当用户拒绝被获取个人信息时，分享 <strong>title</strong> 为小程序名称，并非 <strong>onShareAppMessage</strong> 中设置的 <strong>title</strong> 值。</p>
 
 <div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">app</span> <span class="o">=</span> <span class="nx">getApp</span><span class="p">();</span>
 <span class="nx">Page</span><span class="p">({</span>

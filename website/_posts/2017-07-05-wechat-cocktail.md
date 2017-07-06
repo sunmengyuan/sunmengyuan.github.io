@@ -51,11 +51,11 @@ __hover-class__ 可控制元素被点击时的瞬间状态，对此我大开脑�
 
 该项目的图片资源使用[七牛](https://portal.qiniu.com)管理，七牛本身也有缓存，但在清除七牛缓存后发现小程序内的图片缓存仍在。故点击了微信开发者工具中的如下几个按钮：
 
-![](http://osm0bpix4.bkt.clouddn.com/clear-cache.jpg)
+![](http://osm0bpix4.bkt.clouddn.com/clean-cache.jpg)
 
 并不奏效...
 
-最终的解决方案是在图片链接后加一个不痛不痒的参数，例如：http://osm0bpix4.bkt.clouddn.com/clear-cache.jpg?refresh
+最终的解决方案是在图片链接后加一个不痛不痒的参数，例如：http://osm0bpix4.bkt.clouddn.com/clean-cache.jpg?refresh
 
 *****
 

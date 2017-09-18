@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="keywords" content="前端开发,mock server,node" />
+    <meta name="description" content="业余时间基于 Node.js 搭建了 Mock Server 一枚，功能较简易，非常非常非常小白级，但可满足绝大多需求。追求更强大的体验请移驾 Easy Mock（https://easy-mock.com/）。" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0" />
+    <title>呆恋小喵的后花园 - 我的 Mock Server - Meow Mock</title>
+    <link rel="shortcut icon" href="http://oij8a9ql4.bkt.clouddn.com/shortcut.ico" />
+    <link rel="stylesheet" href="https://cdn.bootcss.com/highlight.js/8.0/styles/sunburst.min.css" />
+    <link rel="stylesheet/less" href="/garden/assets/style/style.less" />
+    <script src="https://lib.sinaapp.com/js/jquery/1.9.1/jquery-1.9.1.min.js"></script>
+    <script src="https://cdn.bootcss.com/less.js/1.7.0/less.min.js"></script>
+    <script src="https://cdn.bootcss.com/highlight.js/8.0/highlight.min.js"></script>
+</head>
+<body>
+<script>
+    var pageData = {};
+    var _hmt = _hmt || [];
+    (function () {
+        var hm = document.createElement('script');
+        hm.src = 'https://hm.baidu.com/hm.js?6b9830e6ab8073ce1a44ad49a03d8596';
+        var s = document.getElementsByTagName('script')[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+<img src="http://oij8a9ql4.bkt.clouddn.com/portrait.jpg" alt="呆恋小喵" width="0" height="0" />
+<nav>
+    <a href="javascript:;" class="js_menu_btn">
+        <span></span>
+        <span></span>
+        <span></span>
+    </a>
+    <ul class="js_menu">
+        <li><a href="/garden/">Home</a></li>
+        <li><a href="/garden/views/posts" class="js_goto_posts">Posts</a></li>
+        <li><a href="/garden/views/about">About</a></li>
+    </ul>
+</nav>
+<a href="javascript:;" class="gotop js_gotop"></a>
+<header class="post" style="background-image: url('http://oij8a9ql4.bkt.clouddn.com/banner.jpg')">
+    <div>
+        <h2>我的 Mock Server - Meow Mock</h2>
+        <time>15 Sep 2017</time>
+        <p class="abstract">业余时间基于 Node.js 搭建了 Mock Server 一枚，功能较简易，非常非常非常小白级，但可满足绝大多需求。追求更强大的体验请移驾 Easy Mock（https://easy-mock.com/）。</p>
+        <ul class="c-fix">
+            
+            <li>mock server</li>
+            
+            <li>node</li>
+            
+        </ul>
+    </div>
+</header>
+<article class="js_article">
+    <p>业余时间基于 Node.js 搭建了 Mock Server 一枚，功能较简易，但可满足绝大多需求。<a href="https://github.com/sunmengyuan/note/tree/master/node/meow-mock">源码</a></p>
+
+<p><strong>特性</strong></p>
+
+<ul>
+  <li>
+    <p>请求类型支持 GET、POST。其中 GET 请求返回列表数据支持分页，两套参数可选：page + count、start_num + count，具体差别稍后阐述。</p>
+  </li>
+  <li>
+    <p>数据类型支持数值、布尔值、字符串、图片、富文本、字典、列表。所有数据均可动态生成，但仍支持定义为固定值。</p>
+  </li>
+</ul>
+
+<p><strong>价值</strong></p>
+
+<ul>
+  <li>
+    <p>避免等待：前端与服务端的开发进度往往不同步。前端可使用 Mock Server 根据约定仿制假接口以不受服务端进度的约束。</p>
+  </li>
+  <li>
+    <p>代替接口文档：接口文件可按业务类型划分，文档内容可渲染于前台方便查阅。</p>
+  </li>
+</ul>
+
+<hr />
+
+<p><strong>启动方式</strong></p>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code><span class="nb">cd </span>meow-mock
+npm install
+npm run start
+</code></pre>
+</div>
+
+<p>默认端口号 8888，可在 <strong>/bin/www</strong> 文件中修改：</p>
+
+<div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">port</span> <span class="o">=</span> <span class="nx">normalizePort</span><span class="p">(</span><span class="nx">process</span><span class="p">.</span><span class="nx">env</span><span class="p">.</span><span class="nx">PORT</span> <span class="o">||</span> <span class="s1">'8888'</span><span class="p">);</span>
+</code></pre>
+</div>
+
+<hr />
+
+<h3 id="使用方法">使用方法</h3>
+
+<p>在 <strong>/data</strong> 文件夹内创建 .js 接口文件，例如 example.js。打开 <strong>route.js</strong> 添加如下代码：</p>
+
+<div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">example</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'./data/example'</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">requestGatherLst</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="nx">example</span>
+<span class="p">];</span>
+</code></pre>
+</div>
+
+<p>可理解为在该服务中注册了刚刚创建的接口文件。我们可以创建多个接口文件 module1.js、module2.jd、module3.js…</p>
+
+<p>假定 example.js 代码如下：</p>
+
+<div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">type</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'../type'</span><span class="p">);</span>
+<span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="na">example1</span><span class="p">:</span> <span class="p">{</span>
+        <span class="na">url</span><span class="p">:</span> <span class="s1">'/example1/_data'</span><span class="p">,</span>
+        <span class="na">type</span><span class="p">:</span> <span class="s1">'GET'</span><span class="p">,</span>
+        <span class="na">data</span><span class="p">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="p">{}</span>
+        <span class="p">}</span>
+    <span class="p">},</span>
+    <span class="na">example2</span><span class="p">:</span> <span class="p">{</span>
+        <span class="na">url</span><span class="p">:</span> <span class="s1">'/example2/_data'</span><span class="p">,</span>
+        <span class="na">type</span><span class="p">:</span> <span class="s1">'POST'</span><span class="p">,</span>
+        <span class="na">data</span><span class="p">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="p">{}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<p>显然，需要定义每一接口的 <strong>url</strong> 及 <strong>type</strong>，返回数据的讲究在于 data 回调函数的返回值。</p>
+
+<p>举个板栗：</p>
+
+<div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="nx">example1</span><span class="err">:</span> <span class="p">{</span>
+    <span class="nl">url</span><span class="p">:</span> <span class="s1">'/example1/_data'</span><span class="p">,</span>
+    <span class="nx">type</span><span class="err">:</span> <span class="s1">'GET'</span><span class="p">,</span>
+    <span class="nx">data</span><span class="err">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="na">message</span><span class="p">:</span> <span class="s1">'请求成功'</span><span class="p">,</span>
+            <span class="na">error</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+            <span class="na">data</span><span class="p">:</span> <span class="p">{</span>
+                <span class="na">id</span><span class="p">:</span> <span class="nx">type</span><span class="p">.</span><span class="nx">id</span><span class="p">(),</span> <span class="c1">// 返回 id</span>
+                <span class="na">number</span><span class="p">:</span> <span class="nx">type</span><span class="p">.</span><span class="nx">number</span><span class="p">({</span> <span class="c1">// 返回数值</span>
+                    <span class="na">min</span><span class="p">:</span> <span class="mi">288</span><span class="p">,</span>
+                    <span class="na">max</span><span class="p">:</span> <span class="mi">999</span>
+                <span class="p">}),</span>
+                <span class="na">bool</span><span class="p">:</span> <span class="nx">type</span><span class="p">.</span><span class="nx">bool</span><span class="p">(),</span> <span class="c1">// 返回布尔值</span>
+                <span class="na">string1</span><span class="p">:</span> <span class="nx">type</span><span class="p">.</span><span class="nx">string</span><span class="p">([</span> <span class="c1">// 返回字符串</span>
+                    <span class="s1">'文案一'</span><span class="p">,</span>
+                    <span class="s1">'文案二'</span><span class="p">,</span>
+                    <span class="s1">'文案三'</span>
+                <span class="p">]),</span>
+                <span class="na">string2</span><span class="p">:</span> <span class="nx">type</span><span class="p">.</span><span class="nx">string</span><span class="p">({</span> <span class="c1">// 返回字符串</span>
+                    <span class="na">minL</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
+                    <span class="na">maxL</span><span class="p">:</span> <span class="mi">16</span>
+                <span class="p">}),</span>
+                <span class="na">image1</span><span class="p">:</span> <span class="nx">type</span><span class="p">.</span><span class="nx">image</span><span class="p">([</span> <span class="c1">// 返回图片链接</span>
+                    <span class="s1">'http://oij8a9ql4.bkt.clouddn.com/default-fe.jpg'</span><span class="p">,</span>
+                    <span class="s1">'http://osm0bpix4.bkt.clouddn.com/thumb.jpg'</span>
+                <span class="p">]),</span>
+                <span class="na">image2</span><span class="p">:</span> <span class="nx">type</span><span class="p">.</span><span class="nx">image</span><span class="p">({</span> <span class="c1">// 返回图片链接</span>
+                    <span class="na">type</span><span class="p">:</span> <span class="s1">'-thumb'</span>
+                <span class="p">}),</span>
+                <span class="na">list1</span><span class="p">:</span> <span class="nx">type</span><span class="p">.</span><span class="nx">list</span><span class="p">({</span> <span class="c1">// 返回列表</span>
+                    <span class="na">length</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
+                    <span class="na">data</span><span class="p">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+                        <span class="k">return</span> <span class="nx">type</span><span class="p">.</span><span class="nx">number</span><span class="p">()</span>
+                    <span class="p">}</span>
+                <span class="p">}),</span>
+                <span class="na">list2</span><span class="p">:</span> <span class="nx">type</span><span class="p">.</span><span class="nx">list</span><span class="p">({</span> <span class="c1">// 返回列表</span>
+                    <span class="na">length</span><span class="p">:</span> <span class="mi">22</span><span class="p">,</span>
+                    <span class="na">index</span><span class="p">:</span> <span class="p">{</span>
+                        <span class="na">name</span><span class="p">:</span> <span class="s1">'idx'</span><span class="p">,</span>
+                        <span class="na">format</span><span class="p">:</span> <span class="s1">'0\d'</span>
+                    <span class="p">},</span>
+                    <span class="na">data</span><span class="p">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+                        <span class="k">return</span> <span class="p">{</span>
+                            <span class="na">pro1</span><span class="p">:</span> <span class="nx">type</span><span class="p">.</span><span class="nx">number</span><span class="p">(),</span>
+                            <span class="na">pro2</span><span class="p">:</span> <span class="nx">type</span><span class="p">.</span><span class="nx">string</span><span class="p">()</span>
+                        <span class="p">}</span>
+                    <span class="p">}</span>
+                <span class="p">})</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<p><strong><em>所有数据均可动态生成</em></strong></p>
+
+<ul>
+  <li>
+    <p><strong>id -&gt;</strong> 返回 id，为避免重复使用时间戳。</p>
+  </li>
+  <li>
+    <p><strong>number -&gt;</strong> 返回数值，可使用 min、max 配置项规定其取值范围，默认范围 1 ~ 11。</p>
+  </li>
+  <li>
+    <p><strong>bool -&gt;</strong> 返回布尔值。</p>
+  </li>
+  <li>
+    <p><strong>string1 -&gt;</strong> 返回字符串，可从配置列表中随机选取一值。</p>
+  </li>
+  <li>
+    <p><strong>string2 -&gt;</strong> 返回字符串，可使用 minL、maxL 配置项规定其长度范围，默认范围 1 ~ 11。</p>
+  </li>
+  <li>
+    <p><strong>image1 -&gt;</strong> 返回图片链接，可从配置列表中随机选取一值。</p>
+  </li>
+  <li>
+    <p><strong>image2 -&gt;</strong> 返回图片链接，可使用 type 配置项规定图片尺寸，目前支持：640 * 307（-w）、320 * 320（-half）、120 * 120（-thumb），默认值为 -half。</p>
+  </li>
+  <li>
+    <p><strong>list1 -&gt;</strong> 返回列表，可使用 length 配置项规定其长度，默认长度为 0。</p>
+  </li>
+  <li>
+    <p><strong>list2 -&gt;</strong> 返回列表，可使用 length 配置项规定其长度，默认长度为 0。</p>
+  </li>
+</ul>
+
+<p>打开 <a href="http://localhost:8888/example1/_data">http://localhost:8888/example1/_data</a> 查看返回数据如下：</p>
+
+<p><img src="http://owgticoe8.bkt.clouddn.com/code-example1.jpg" alt="" /></p>
+
+<p>由于数据是动态生成的，你所看到的结果可能与我的不同嗷~</p>
+
+<p>但在重启服务之前，同一 URL 下，刷新浏览器是不会影响返回数据的，除非改变参数值或添加新的参数。</p>
+
+<p>打开 <a href="http://localhost:8888/example1/_data?a=1">http://localhost:8888/example1/_data?a=1</a> 体会下！</p>
+
+<p>再打开 <a href="http://localhost:8888/example1/_data?a=2">http://localhost:8888/example1/_data?a=2</a> 体会下！</p>
+
+<hr />
+
+<h3 id="list-类型特殊说明">List 类型特殊说明</h3>
+
+<h5 id="列表项-index">列表项 index</h5>
+
+<p>渲染列表数据时，往往需要渲染其序号，例如排行榜：</p>
+
+<p><img src="http://owgticoe8.bkt.clouddn.com/rank-example.jpg" alt="" /></p>
+
+<p>index 配置项便是为上述需求而生：</p>
+
+<div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="nx">index</span><span class="err">:</span> <span class="p">{</span>
+    <span class="nl">name</span><span class="p">:</span> <span class="s1">'idx'</span><span class="p">,</span>
+    <span class="nx">format</span><span class="err">:</span> <span class="s1">'\d'</span><span class="p">,</span>
+    <span class="nx">type</span><span class="err">:</span> <span class="s1">'int'</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<ul>
+  <li>
+    <p><strong>index.name -&gt;</strong> 规定命名，默认值为 index。</p>
+  </li>
+  <li>
+    <p><strong>index.format -&gt;</strong> 规定格式，目前支持：\d、0\d、00\d，默认值为 \d。</p>
+  </li>
+  <li>
+    <p><strong>index.type -&gt;</strong> 规定变量类型，目前支持：int、string，默认值取决于 index 格式。</p>
+  </li>
+</ul>
+
+<p><strong>关于 format</strong></p>
+
+<ul>
+  <li>
+    <p><strong>\d</strong> 格式：index 值为 1, 2, 3, 4, …（默认变量类型 int）</p>
+  </li>
+  <li>
+    <p><strong>0\d</strong> 格式：index 值为 01, 02, 03, … 10, 11, …（变量类型仅有 string）</p>
+  </li>
+  <li>
+    <p><strong>00\d</strong> 格式：index 值为 001, 002, … 010, 011, … 099, 100, 101, …（变量类型仅有 string）</p>
+  </li>
+</ul>
+
+<p>具体效果形如：</p>
+
+<p><img src="http://owgticoe8.bkt.clouddn.com/index-example.jpg" alt="" /></p>
+
+<h5 id="注意-data-配置项写法">注意 data 配置项写法</h5>
+
+<p><strong>推荐：</strong></p>
+
+<div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="nx">list</span><span class="err">:</span> <span class="nx">type</span><span class="p">.</span><span class="nx">list</span><span class="p">({</span>
+    <span class="na">length</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
+    <span class="na">data</span><span class="p">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="nx">type</span><span class="p">.</span><span class="nx">number</span><span class="p">()</span>
+    <span class="p">}</span>
+<span class="p">})</span>
+</code></pre>
+</div>
+
+<p>返回列表值不同：</p>
+
+<p><img src="http://owgticoe8.bkt.clouddn.com/listdata-example1.jpg" alt="" /></p>
+
+<p><strong>不推荐：</strong></p>
+
+<div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="nx">list</span><span class="err">:</span> <span class="nx">type</span><span class="p">.</span><span class="nx">list</span><span class="p">({</span>
+    <span class="na">length</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
+    <span class="na">data</span><span class="p">:</span> <span class="nx">type</span><span class="p">.</span><span class="nx">number</span><span class="p">()</span>
+<span class="p">})</span>
+</code></pre>
+</div>
+
+<p>返回列表值相同：</p>
+
+<p><img src="http://owgticoe8.bkt.clouddn.com/listdata-example2.jpg" alt="" /></p>
+
+<p>多数情况我们不喜欢这样的结果~</p>
+
+<hr />
+
+<h3 id="get-请求列表数据分页">GET 请求列表数据分页</h3>
+
+<p>首先说明列表数据请求接口对象写法：</p>
+
+<div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="nx">example2</span><span class="err">:</span> <span class="p">{</span>
+    <span class="nl">url</span><span class="p">:</span> <span class="s1">'/example2/_data'</span><span class="p">,</span>
+    <span class="nx">type</span><span class="err">:</span> <span class="s1">'GET'</span><span class="p">,</span>
+    <span class="nx">list_name</span><span class="err">:</span> <span class="s1">'items'</span><span class="p">,</span>
+    <span class="nx">data</span><span class="err">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="na">message</span><span class="p">:</span> <span class="s1">'请求成功'</span><span class="p">,</span>
+            <span class="na">error</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+            <span class="na">items</span><span class="p">:</span> <span class="nx">type</span><span class="p">.</span><span class="nx">list</span><span class="p">({</span>
+                <span class="na">length</span><span class="p">:</span> <span class="mi">36</span><span class="p">,</span>
+                <span class="na">index</span><span class="p">:</span> <span class="p">{</span>
+                    <span class="na">name</span><span class="p">:</span> <span class="s1">'idx'</span><span class="p">,</span>
+                    <span class="na">format</span><span class="p">:</span> <span class="s1">'0\d'</span>
+                <span class="p">},</span>
+                <span class="na">data</span><span class="p">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+                    <span class="k">return</span> <span class="p">{</span>
+                        <span class="na">id</span><span class="p">:</span> <span class="nx">type</span><span class="p">.</span><span class="nx">id</span><span class="p">(),</span>
+                        <span class="na">number</span><span class="p">:</span> <span class="nx">type</span><span class="p">.</span><span class="nx">number</span><span class="p">(),</span>
+                        <span class="na">string</span><span class="p">:</span> <span class="nx">type</span><span class="p">.</span><span class="nx">string</span><span class="p">(),</span>
+                        <span class="na">image</span><span class="p">:</span> <span class="nx">type</span><span class="p">.</span><span class="nx">image</span><span class="p">()</span>
+                    <span class="p">}</span>
+                <span class="p">}</span>
+            <span class="p">})</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<p><strong>list_name</strong> 配置项决定了返回数据中究竟哪个字段是待分段的 list，其默认值为 data。</p>
+
+<h4 id="两套分页参数">两套分页参数</h4>
+
+<h5 id="page--count">page + count</h5>
+
+<p>假如数据总长 36，每一分页数据长度 count=10，那么：</p>
+
+<p>page=1 时，返回第 1 ~ 10 条数据；</p>
+
+<p>page=2 时，返回第 11 ~ 20 条数据；</p>
+
+<p>page=3 时，返回第 21 ~ 30 条数据；</p>
+
+<p>page=4 时，返回第 31 ~ 36 条数据；</p>
+
+<p>page &gt; 4 时，返回空列表。</p>
+
+<p>打开 <a href="http://localhost:8888/example2/_data?page=1&amp;count=10">http://localhost:8888/example2/_data?page=1&amp;count=10</a> 体会下！</p>
+
+<h5 id="start_num--count">start_num + count</h5>
+
+<p>截取列表中第 <strong>start_num + 1</strong> 至 <strong>start_num + count</strong> 条数据。假如 ?start_num=6&amp;count=5，那么返回第 7 ~ 11 条数据。</p>
+
+<p>打开 <a href="http://localhost:8888/example2/_data?start_num=6&amp;count=5">http://localhost:8888/example2/_data?start_num=6&amp;count=5</a> 体会下！</p>
+
+<p>备注：</p>
+
+<ul>
+  <li>
+    <p>无分页参数时默认返回所有数据。</p>
+  </li>
+  <li>
+    <p>无 count 参数时默认返回 10 条数据。</p>
+  </li>
+</ul>
+
+<hr />
+
+<p>作者：呆恋小喵</p>
+
+<p>我的后花园：<a href="https://sunmengyuan.github.io/garden/">https://sunmengyuan.github.io/garden/</a></p>
+
+<p>我的 github：<a href="https://github.com/sunmengyuan">https://github.com/sunmengyuan</a></p>
+
+<p>原文链接：<a href="https://sunmengyuan.github.io/garden/2017/09/15/meow-mock.html">https://sunmengyuan.github.io/garden/2017/09/15/meow-mock.html</a></p>
+
+</article>
+<footer>
+    <a href="/garden/views/posts" class="js_goto_posts">返回目录 - 我的印记</a>
+</footer>
+<div class="browser js_browser">
+    <img src="" />
+</div>
+
+<script src="/garden/assets/script/main.js"></script>
+</body>
+</html>

@@ -145,6 +145,10 @@ npm run start
 
 <p>举个板栗：</p>
 
+<blockquote>
+  <p>所有数据均可动态生成</p>
+</blockquote>
+
 <div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="nx">example1</span><span class="err">:</span> <span class="p">{</span>
     <span class="nl">url</span><span class="p">:</span> <span class="s1">'/example1/_data'</span><span class="p">,</span>
     <span class="nx">type</span><span class="err">:</span> <span class="s1">'GET'</span><span class="p">,</span>
@@ -201,11 +205,35 @@ npm run start
 </code></pre>
 </div>
 
-<p><strong><em>所有数据均可动态生成</em></strong></p>
-
 <ul>
   <li>
     <p><strong>id -&gt;</strong> 返回 id，为避免重复使用时间戳。</p>
+
+    <p>此处有坑！假定一列表长度为 n，列表项含字段 id。生成每一列表项的时间差非常非常非常小，那么：</p>
+
+    <p><img src="http://owgticoe8.bkt.clouddn.com/id-example.jpg" alt="" /></p>
+
+    <p>id 怎么可以重复…想办法去重喽~</p>
+
+    <div class="language-js highlighter-rouge"><pre class="highlight"><code>  <span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="p">{</span>
+      <span class="na">timestamps</span><span class="p">:</span> <span class="p">{},</span>
+      <span class="na">id</span><span class="p">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+          <span class="kd">var</span> <span class="nx">_this</span> <span class="o">=</span> <span class="k">this</span><span class="p">;</span>
+          <span class="kd">var</span> <span class="nx">curtime</span> <span class="o">=</span> <span class="p">(</span><span class="k">new</span> <span class="nb">Date</span><span class="p">()).</span><span class="nx">valueOf</span><span class="p">();</span>
+          <span class="kd">var</span> <span class="nx">recursion</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">key</span><span class="p">)</span> <span class="p">{</span>
+              <span class="k">if</span> <span class="p">(</span><span class="nx">_this</span><span class="p">.</span><span class="nx">timestamps</span><span class="p">[</span><span class="nx">key</span><span class="p">])</span> <span class="p">{</span>
+                  <span class="kd">var</span> <span class="nx">tmp</span> <span class="o">=</span> <span class="nx">recursion</span><span class="p">(</span><span class="nx">key</span> <span class="o">+</span> <span class="mi">1</span><span class="p">);</span>
+              <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+                  <span class="nx">_this</span><span class="p">.</span><span class="nx">timestamps</span><span class="p">[</span><span class="nx">key</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+                  <span class="k">return</span> <span class="nx">key</span><span class="p">;</span>
+              <span class="p">}</span>
+              <span class="k">return</span> <span class="nx">tmp</span><span class="p">;</span>
+          <span class="p">};</span>
+          <span class="k">return</span> <span class="nx">recursion</span><span class="p">(</span><span class="nx">curtime</span><span class="p">);</span>
+      <span class="p">}</span>
+  <span class="p">}</span>
+</code></pre>
+    </div>
   </li>
   <li>
     <p><strong>number -&gt;</strong> 返回数值，可使用 min、max 配置项规定其取值范围，默认范围 1 ~ 11。</p>
@@ -237,7 +265,7 @@ npm run start
 
 <p><img src="http://owgticoe8.bkt.clouddn.com/code-example1.jpg" alt="" /></p>
 
-<p>由于数据是动态生成的，你所看到的结果可能与我的不同嗷~</p>
+<p>由于数据是 <strong>动态生成</strong> 的，你所看到的结果可能与我的不同嗷~</p>
 
 <p>但在重启服务之前，同一 URL 下，刷新浏览器是不会影响返回数据的，除非改变参数值或添加新的参数。</p>
 

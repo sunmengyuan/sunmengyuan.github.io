@@ -53,7 +53,7 @@
     </div>
 </header>
 <article class="js_article">
-    <p><a href="https://github.com/sunmengyuan/note/tree/master/node/meow-mock">Meow Mock 源码</a></p>
+    <p><a href="https://github.com/sunmengyuan/metis/tree/master/node/meow-mock">Meow Mock 源码</a></p>
 
 <h5 id="价值">价值</h5>
 
@@ -206,35 +206,36 @@ npm run start
 </div>
 
 <ul>
-  <li>
-    <p><strong>id -&gt;</strong> 返回 id，为避免重复使用时间戳。</p>
+  <li><strong>id -&gt;</strong> 返回 id，为避免重复使用时间戳。</li>
+</ul>
 
-    <p>此处有坑！假定一列表长度为 n，列表项含字段 id。生成每一列表项的时间差非常非常非常小，那么：</p>
+<p>此处有坑！假定一列表长度为 n，列表项含字段 id。生成每一列表项的时间差非常非常非常小，那么：</p>
 
-    <p><img src="http://owgticoe8.bkt.clouddn.com/id-example.jpg" alt="" /></p>
+<p><img src="http://owgticoe8.bkt.clouddn.com/id-example.jpg" alt="" /></p>
 
-    <p>id 怎么可以重复…想办法去重喽~</p>
+<p>id 怎么可以重复…想办法去重喽~</p>
 
-    <div class="language-js highlighter-rouge"><pre class="highlight"><code>  <span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="p">{</span>
-      <span class="na">timestamps</span><span class="p">:</span> <span class="p">{},</span>
-      <span class="na">id</span><span class="p">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
-          <span class="kd">var</span> <span class="nx">_this</span> <span class="o">=</span> <span class="k">this</span><span class="p">;</span>
-          <span class="kd">var</span> <span class="nx">curtime</span> <span class="o">=</span> <span class="p">(</span><span class="k">new</span> <span class="nb">Date</span><span class="p">()).</span><span class="nx">valueOf</span><span class="p">();</span>
-          <span class="kd">var</span> <span class="nx">recursion</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">key</span><span class="p">)</span> <span class="p">{</span>
-              <span class="k">if</span> <span class="p">(</span><span class="nx">_this</span><span class="p">.</span><span class="nx">timestamps</span><span class="p">[</span><span class="nx">key</span><span class="p">])</span> <span class="p">{</span>
-                  <span class="kd">var</span> <span class="nx">tmp</span> <span class="o">=</span> <span class="nx">recursion</span><span class="p">(</span><span class="nx">key</span> <span class="o">+</span> <span class="mi">1</span><span class="p">);</span>
-              <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-                  <span class="nx">_this</span><span class="p">.</span><span class="nx">timestamps</span><span class="p">[</span><span class="nx">key</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
-                  <span class="k">return</span> <span class="nx">key</span><span class="p">;</span>
-              <span class="p">}</span>
-              <span class="k">return</span> <span class="nx">tmp</span><span class="p">;</span>
-          <span class="p">};</span>
-          <span class="k">return</span> <span class="nx">recursion</span><span class="p">(</span><span class="nx">curtime</span><span class="p">);</span>
-      <span class="p">}</span>
-  <span class="p">}</span>
+<div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="na">timestamps</span><span class="p">:</span> <span class="p">{},</span>
+    <span class="na">id</span><span class="p">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+        <span class="kd">var</span> <span class="nx">_this</span> <span class="o">=</span> <span class="k">this</span><span class="p">;</span>
+        <span class="kd">var</span> <span class="nx">curtime</span> <span class="o">=</span> <span class="p">(</span><span class="k">new</span> <span class="nb">Date</span><span class="p">()).</span><span class="nx">valueOf</span><span class="p">();</span>
+        <span class="kd">var</span> <span class="nx">recursion</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">key</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">if</span> <span class="p">(</span><span class="nx">_this</span><span class="p">.</span><span class="nx">timestamps</span><span class="p">[</span><span class="nx">key</span><span class="p">])</span> <span class="p">{</span>
+                <span class="kd">var</span> <span class="nx">tmp</span> <span class="o">=</span> <span class="nx">recursion</span><span class="p">(</span><span class="nx">key</span> <span class="o">+</span> <span class="mi">1</span><span class="p">);</span>
+            <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+                <span class="nx">_this</span><span class="p">.</span><span class="nx">timestamps</span><span class="p">[</span><span class="nx">key</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+                <span class="k">return</span> <span class="nx">key</span><span class="p">;</span>
+            <span class="p">}</span>
+            <span class="k">return</span> <span class="nx">tmp</span><span class="p">;</span>
+        <span class="p">};</span>
+        <span class="k">return</span> <span class="nx">recursion</span><span class="p">(</span><span class="nx">curtime</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
 </code></pre>
-    </div>
-  </li>
+</div>
+
+<ul>
   <li>
     <p><strong>number -&gt;</strong> 返回数值，可使用 min、max 配置项规定其取值范围，默认范围 1 ~ 11。</p>
   </li>

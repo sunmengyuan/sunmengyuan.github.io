@@ -19,21 +19,21 @@ thumb: "http://oij8a9ql4.bkt.clouddn.com/default-fe.jpg"
 
 ##### 示例 #####
 
-+ __简易博客系统 [code](https://github.com/sunmengyuan/note/tree/master/node/expo)__
++ __简易博客系统 [code](https://github.com/sunmengyuan/metis/tree/master/node/expo)__
 
     ![](http://oru3b8jlz.bkt.clouddn.com/screenshot-expo.jpg)
     
-    这是一个简易的博客系统，用户在该站注册后即可发布个人日记，日记可以被登录用户点赞。功能较简易，外观未经雕琢，纯粹的练习项目。[详情](https://github.com/sunmengyuan/note/tree/master/node/expo)
+    这是一个简易的博客系统，用户在该站注册后即可发布个人日记，日记可以被登录用户点赞。功能较简易，外观未经雕琢，纯粹的练习项目。[详情](https://github.com/sunmengyuan/metis/tree/master/node/expo)
     
     相关知识：[Express.js](http://www.expressjs.com.cn/)、[File System](http://nodejs.cn/api/fs.html)、[MongoDB](https://www.mongodb.com/)、[Mongoose](http://www.nodeclass.com/api/mongoose.html)
 
     该项目使用 Express.js 框架搭建，使用 MongoDB 存储数据。图片上传涉及文件存储请查阅 [Node.js 文件系统](http://nodejs.cn/api/fs.html)。
 
-+ __多人聊天室 [code](https://github.com/sunmengyuan/note/tree/master/node/chat)__
++ __多人聊天室 [code](https://github.com/sunmengyuan/metis/tree/master/node/chat)__
 
     ![](http://oru3b8jlz.bkt.clouddn.com/screenshot-chat.jpg)
 
-    Node.js 结合了 Websocket 的简易多人聊天室，感兴趣的同学可以自行高仿个 QQ 出来。[详情](https://github.com/sunmengyuan/note/tree/master/node/chat)
+    Node.js 结合了 Websocket 的简易多人聊天室，感兴趣的同学可以自行高仿个 QQ 出来。[详情](https://github.com/sunmengyuan/metis/tree/master/node/chat)
     
     相关知识：[Express.js](http://www.expressjs.com.cn/)、[Websocket](https://socket.io/)、[MongoDB](https://www.mongodb.com/)、[Mongoose](http://www.nodeclass.com/api/mongoose.html)
    
@@ -49,21 +49,21 @@ thumb: "http://oij8a9ql4.bkt.clouddn.com/default-fe.jpg"
 
 ##### 示例 #####
 
-+ __简易个人空间 [code](https://github.com/sunmengyuan/note/tree/master/vue/zone)__
++ __简易个人空间 [code](https://github.com/sunmengyuan/metis/tree/master/vue/zone)__
 
     ![](http://oru3b8jlz.bkt.clouddn.com/screenshot-zone.jpg)
     
-    与上面提到的博客系统类似，教科书级别的增删改查功能。[详情](https://github.com/sunmengyuan/note/tree/master/vue/zone)
+    与上面提到的博客系统类似，教科书级别的增删改查功能。[详情](https://github.com/sunmengyuan/metis/tree/master/vue/zone)
     
     相关知识：[Node.js](http://nodejs.cn/)、[Express.js](http://www.expressjs.com.cn/)、[File System](http://nodejs.cn/api/fs.html)、[MongoDB](https://www.mongodb.com/)、[Mongoose](http://www.nodeclass.com/api/mongoose.html)、[Webpack](https://webpack.github.io/docs/)
 
     该项目客户端使用 Vue.js 搭建，服务端使用 Express.js 搭建，使用 MongoDB 存储数据。图片上传涉及文件存储请查阅 [Node.js 文件系统](http://nodejs.cn/api/fs.html)。工程构建使用 [Webpack](https://webpack.github.io/docs/) 建议了解。背景设计使用 [Trianglify](https://github.com/qrohlf/trianglify) 在此推荐。
 
-+ __简易视频播放器 [code](https://github.com/sunmengyuan/note/tree/master/vue/videoPlayer) [demo](https://sunmengyuan.github.io/demos/vue/videoPlayer)__
++ __简易视频播放器 [code](https://github.com/sunmengyuan/metis/tree/master/vue/videoPlayer) [demo](https://sunmengyuan.github.io/demos/vue/videoPlayer)__
 
     ![](http://oru3b8jlz.bkt.clouddn.com/screenshot-videoPlayer.jpg)
     
-    基于 Vue.js 组件化的思想，将播放器控件封装。并尝试了 Vue.js 的打包上线流程，遇到了点小挫折，压缩后静态资源地址错误...[详情](https://github.com/sunmengyuan/note/tree/master/vue/videoPlayer)
+    基于 Vue.js 组件化的思想，将播放器控件封装。并尝试了 Vue.js 的打包上线流程，遇到了点小挫折，压缩后静态资源地址错误...[详情](https://github.com/sunmengyuan/metis/tree/master/vue/videoPlayer)
     
     相关知识：[HTML5 Video](https://developer.mozilla.org/zh-CN/docs/Web/Guide/HTML/Using_HTML5_audio_and_video)、[Webpack](https://webpack.github.io/docs/)
     
@@ -79,11 +79,11 @@ thumb: "http://oij8a9ql4.bkt.clouddn.com/default-fe.jpg"
 
 ##### 示例 #####
 
-+ __待办事项 [code](https://github.com/sunmengyuan/note/tree/master/react/todos) [demo](https://sunmengyuan.github.io/demos/react/todos)__
++ __待办事项 [code](https://github.com/sunmengyuan/metis/tree/master/react/todos) [demo](https://sunmengyuan.github.io/demos/react/todos)__
 
     ![](http://oru3b8jlz.bkt.clouddn.com/screenshot-todos.jpg)
     
-    教科书级别的待办事项记事本，不多解释。[详情](https://github.com/sunmengyuan/note/tree/master/react/todos)
+    教科书级别的待办事项记事本，不多解释。[详情](https://github.com/sunmengyuan/metis/tree/master/react/todos)
     
     相关知识：[Webpack](https://webpack.github.io/docs/)
     
@@ -109,15 +109,15 @@ React Native 环境搭建指南，正在撰写中，敬请期待。
 
 ##### 示例 #####
 
-+ __画板 [code](https://github.com/sunmengyuan/note/blob/master/canvas/drawing.html) [demo](https://sunmengyuan.github.io/demos/canvas/drawing.html)__
++ __画板 [code](https://github.com/sunmengyuan/metis/blob/master/canvas/drawing.html) [demo](https://sunmengyuan.github.io/demos/canvas/drawing.html)__
 
     ![](http://oru3b8jlz.bkt.clouddn.com/screenshot-drawing.jpg)
     
-+ __贝塞尔曲线 [code](https://github.com/sunmengyuan/note/blob/master/canvas/bezierCurve.html) [demo](https://sunmengyuan.github.io/demos/canvas/bezierCurve.html)__
++ __贝塞尔曲线 [code](https://github.com/sunmengyuan/metis/blob/master/canvas/bezierCurve.html) [demo](https://sunmengyuan.github.io/demos/canvas/bezierCurve.html)__
 
     想起计算机图形学老师的一句话“咱们数字媒体技术专业知道而其他专业同学不知道的概念比如贝塞尔曲线”，现在想想老师也是蛮自恋的...
 
-+ __使用 Canvas 实现元素拖拽 [code](https://github.com/sunmengyuan/note/blob/master/canvas/drag.html) [demo](https://sunmengyuan.github.io/demos/canvas/drag.html)__
++ __使用 Canvas 实现元素拖拽 [code](https://github.com/sunmengyuan/metis/blob/master/canvas/drag.html) [demo](https://sunmengyuan.github.io/demos/canvas/drag.html)__
 
     使用 Canvas 实现交互非常麻烦，因为无法直接获取触发事件的元素，需要通过 [isPointInPath](https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/isPointInPath) 方法得知。
 
@@ -129,11 +129,11 @@ React Native 环境搭建指南，正在撰写中，敬请期待。
 
 ##### 示例 #####
 
-+ __线描动画 [code](https://github.com/sunmengyuan/note/blob/master/svg/cat.html) [demo](https://sunmengyuan.github.io/demos/svg/cat.html)__
++ __线描动画 [code](https://github.com/sunmengyuan/metis/blob/master/svg/cat.html) [demo](https://sunmengyuan.github.io/demos/svg/cat.html)__
 
-+ __路径动画加蒙板实现橡皮擦特效 [code](https://github.com/sunmengyuan/note/blob/master/svg/paint.html) [demo](https://sunmengyuan.github.io/demos/svg/paint.html)__
++ __路径动画加蒙板实现橡皮擦特效 [code](https://github.com/sunmengyuan/metis/blob/master/svg/paint.html) [demo](https://sunmengyuan.github.io/demos/svg/paint.html)__
 
-+ __Loading 动画 [code](https://github.com/sunmengyuan/note/blob/master/svg/loading.html) [demo](https://sunmengyuan.github.io/demos/svg/loading.html)__
++ __Loading 动画 [code](https://github.com/sunmengyuan/metis/blob/master/svg/loading.html) [demo](https://sunmengyuan.github.io/demos/svg/loading.html)__
 
     ![](http://oru3b8jlz.bkt.clouddn.com/screenshot-loading.jpg)
 
@@ -149,7 +149,7 @@ React Native 环境搭建指南，正在撰写中，敬请期待。
 
 ##### 示例 #####
 
-+ __三维旋转钟 [code](https://github.com/sunmengyuan/note/blob/master/three/clock.html) [demo](https://sunmengyuan.github.io/demos/three/clock.html)__
++ __三维旋转钟 [code](https://github.com/sunmengyuan/metis/blob/master/three/clock.html) [demo](https://sunmengyuan.github.io/demos/three/clock.html)__
 
     ![](http://oru3b8jlz.bkt.clouddn.com/screenshot-clock.jpg)
     
@@ -165,7 +165,7 @@ React Native 环境搭建指南，正在撰写中，敬请期待。
 
 ##### 示例 #####
 
-+ __跷跷板 [code](https://github.com/sunmengyuan/note/blob/master/matter/seesaw.html) [demo](https://sunmengyuan.github.io/demos/matter/seesaw.html)__
++ __跷跷板 [code](https://github.com/sunmengyuan/metis/blob/master/matter/seesaw.html) [demo](https://sunmengyuan.github.io/demos/matter/seesaw.html)__
 
     ![](http://oru3b8jlz.bkt.clouddn.com/screenshot-seesaw.jpg)
 
@@ -199,9 +199,9 @@ __开启自恋模式__ 欢迎欣赏本人深度好文：[Sass 学习笔记（应
 
 ##### 示例 #####
 
-+ __中国高校学科排名统计 [code](https://github.com/sunmengyuan/note/tree/master/echarts/university) [demo](https://sunmengyuan.github.io/demos/echarts/university)__
++ __中国高校学科排名统计 [code](https://github.com/sunmengyuan/metis/tree/master/echarts/university) [demo](https://sunmengyuan.github.io/demos/echarts/university)__
 
-+ __全国空气质量调查 [code](https://github.com/sunmengyuan/note/tree/master/echarts/airpollution) [demo](https://sunmengyuan.github.io/demos/echarts/airpollution)__
++ __全国空气质量调查 [code](https://github.com/sunmengyuan/metis/tree/master/echarts/airpollution) [demo](https://sunmengyuan.github.io/demos/echarts/airpollution)__
 
 ![](http://oru3b8jlz.bkt.clouddn.com/screenshot-airpollution.jpg)
 

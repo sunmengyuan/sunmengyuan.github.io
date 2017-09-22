@@ -11,7 +11,7 @@ thumb: "http://osm0bpix4.bkt.clouddn.com/thumb.jpg"
 
 ![](http://osm0bpix4.bkt.clouddn.com/wxcode.jpg)
 
-[源码](https://github.com/sunmengyuan/note/tree/master/wechat/cocktail) 
+[源码](https://github.com/sunmengyuan/metis/tree/master/wechat/cocktail) 
 
 [微信小程序文档](https://mp.weixin.qq.com/debug/wxadoc/introduction/index.html?t=2017621)
 

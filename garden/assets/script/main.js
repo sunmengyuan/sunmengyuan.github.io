@@ -75,16 +75,16 @@ var main = {
                 } else {
                     pos -= dPos;
                 }
-                $body.scrollTop(pos);
+                $win.scrollTop(pos);
             }, 16);
         };
         $btn.on('click', function () {
-            scrolling($body.scrollTop());
+            scrolling($win.scrollTop());
         });
         $win.on('scroll', function () {
             if (timeout == null) {
                 timeout = setTimeout(function () {
-                    dbase <= $body.scrollTop() ? $btn.show() : $btn.hide();
+                    dbase <= $win.scrollTop() ? $btn.show() : $btn.hide();
                     timeout = null;
                 }, 16);
             }

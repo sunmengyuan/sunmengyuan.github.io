@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="keywords" content="前端开发,node.js,cheerio,simple git,pm2" />
+    <meta name="description" content="初尝 Node.js 开发，使用到了一些小工具，在此与大家分享。一篇小白出品的小白文，欢迎大神们慷慨指导！" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0" />
+    <title>呆恋小喵的后花园 - NodeJS 小工具推荐</title>
+    <link rel="shortcut icon" href="http://oij8a9ql4.bkt.clouddn.com/shortcut.ico" />
+    <link rel="stylesheet" href="https://cdn.bootcss.com/highlight.js/8.0/styles/sunburst.min.css" />
+    <link rel="stylesheet/less" href="/garden/assets/style/style.less" />
+    <script src="https://lib.sinaapp.com/js/jquery/1.9.1/jquery-1.9.1.min.js"></script>
+    <script src="https://cdn.bootcss.com/less.js/1.7.0/less.min.js"></script>
+    <script src="https://cdn.bootcss.com/highlight.js/8.0/highlight.min.js"></script>
+</head>
+<body>
+<script>
+    var pageData = {};
+    var _hmt = _hmt || [];
+    (function () {
+        var hm = document.createElement('script');
+        hm.src = 'https://hm.baidu.com/hm.js?6b9830e6ab8073ce1a44ad49a03d8596';
+        var s = document.getElementsByTagName('script')[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+<img src="http://oij8a9ql4.bkt.clouddn.com/portrait.jpg" alt="呆恋小喵" width="0" height="0" />
+<nav>
+    <a href="javascript:;" class="js_menu_btn">
+        <span></span>
+        <span></span>
+        <span></span>
+    </a>
+    <ul class="js_menu">
+        <li><a href="/garden/">Home</a></li>
+        <li><a href="/garden/views/posts" class="js_goto_posts">Posts</a></li>
+        <li><a href="/garden/views/about">About</a></li>
+    </ul>
+</nav>
+<a href="javascript:;" class="gotop js_gotop"></a>
+<header class="post" style="background-image: url('http://oij8a9ql4.bkt.clouddn.com/banner.jpg')">
+    <div>
+        <h2>NodeJS 小工具推荐</h2>
+        <time>20 Oct 2017</time>
+        <p class="abstract">初尝 Node.js 开发，使用到了一些小工具，在此与大家分享。一篇小白出品的小白文，欢迎大神们慷慨指导！</p>
+        <ul class="c-fix">
+            
+            <li>node.js</li>
+            
+            <li>cheerio</li>
+            
+            <li>simple git</li>
+            
+            <li>pm2</li>
+            
+        </ul>
+    </div>
+</header>
+<article class="js_article">
+    <p>首先介绍具体需求：使用 .html 模板根据配置内容生成定制的静态网页，这些静态网页被部署至 n 台服务器上供访问。</p>
+
+<p>为何要生成大量相似度极高的静态文件，而非使用数据库并通过请求渲染模板呢？项目背景如此，不必纠结吐槽，本文重点在于分享几款实用小工具。</p>
+
+<hr />
+
+<h3 id="cheerio">Cheerio</h3>
+
+<p>使用 .html 模板生成静态网页，我们需要解析模板文件，根据配置替换相应元素。</p>
+
+<p>假定该模板文件名为 template.html，我们这样读取它：</p>
+
+<div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="nx">fs</span><span class="p">.</span><span class="nx">readFile</span><span class="p">(</span><span class="s1">'template.html'</span><span class="p">,</span> <span class="s1">'utf8'</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">// code</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">data</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">});</span>
+</code></pre>
+</div>
+
+<p><img src="http://oy4688ju4.bkt.clouddn.com/readfile-utf8.png" alt="" /></p>
+
+<p>需要指定字符编码为 <strong>utf8</strong>，不然 data 值如下：</p>
+
+<p><img src="http://oy4688ju4.bkt.clouddn.com/readfile-buffer.png" alt="" /></p>
+
+<p>获取到 .html 模板内容后如何解析并定位元素呢？正则匹配是可行的，但有更好的方法：使用 <a href="https://github.com/cheeriojs/cheerio">Cheerio</a>。</p>
+
+<div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">cheerio</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'cheerio'</span><span class="p">);</span>
+<span class="nx">fs</span><span class="p">.</span><span class="nx">readFile</span><span class="p">(</span><span class="s1">'template.html'</span><span class="p">,</span> <span class="s1">'utf8'</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">// code</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="kd">var</span> <span class="nx">$</span> <span class="o">=</span> <span class="nx">cheerio</span><span class="p">.</span><span class="nx">load</span><span class="p">(</span><span class="nx">data</span><span class="p">);</span>
+        <span class="kd">var</span> <span class="nx">$elem</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s1">'.elem'</span><span class="p">);</span>
+        <span class="c1">// code</span>
+    <span class="p">}</span>
+<span class="p">});</span>
+</code></pre>
+</div>
+
+<p>其中 <strong>$</strong> 的使用与 jQuery 中的并无太大差异。</p>
+
+<hr />
+
+<h3 id="simple-git">Simple Git</h3>
+
+<p>机智的你发现我仅操作了一台服务器上的文件，而为实现负载均衡用户会访问至其中一台服务器，那么如何同步 n 台服务器的资源呢？</p>
+
+<p>使用 Github 作为媒介：</p>
+
+<p>这里是图片</p>
+
+<p>文件的增删改在服务器 A 上进行，而后提交至 Github，服务器 B 从 Github 上拉取更新即可完成资源同步。</p>
+
+<p>可使用 <a href="https://github.com/steveukx/git-js">Simple Git</a> 以执行函数代替在终端内执行 Git 命令行。</p>
+
+<blockquote>
+  <p>Simple Git: A light weight interface for running git commands in any node.js application.</p>
+</blockquote>
+
+<div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">git</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'simple-git'</span><span class="p">);</span>
+<span class="nx">git</span><span class="p">(</span><span class="nx">path</span><span class="p">)</span>
+    <span class="p">.</span><span class="nx">checkout</span><span class="p">(</span><span class="nx">branch</span><span class="p">)</span>
+    <span class="p">.</span><span class="nx">pull</span><span class="p">(</span><span class="s1">'origin'</span><span class="p">,</span> <span class="nx">branch</span><span class="p">)</span>
+    <span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="s1">'.'</span><span class="p">)</span>
+    <span class="p">.</span><span class="nx">commit</span><span class="p">(</span><span class="nx">message</span><span class="p">)</span>
+    <span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="s1">'origin'</span><span class="p">,</span> <span class="nx">branch</span><span class="p">);</span>
+</code></pre>
+</div>
+
+<hr />
+
+<h3 id="pm2">PM2</h3>
+
+<p>NodeJS 服务部署至服务器时需要开启 <strong>Daemon</strong> 模式，即进程始终运行于后台。</p>
+
+<p>当使用 <strong>node ./bin/www</strong> 开启服务时：</p>
+
+<p><img src="http://oy4688ju4.bkt.clouddn.com/anti-deamon.png" alt="" /></p>
+
+<p>此时执行其它命令需另起终端窗口，服务器上非多任务于是…</p>
+
+<p>可使用 <a href="https://github.com/Unitech/pm2">PM2</a> 实现 NodeJS 服务的进程管理。</p>
+
+<p>执行如下命令开启服务并为该进程命名：</p>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code>pm2 start ./bin/www --name <span class="o">[</span>名称]
+</code></pre>
+</div>
+
+<p><img src="http://oy4688ju4.bkt.clouddn.com/runstart.png" alt="" /></p>
+
+<p>当服务端代码更新时，需要重启服务，执行：</p>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code>pm2 restart <span class="o">[</span>名称]
+</code></pre>
+</div>
+
+<p><img src="http://oy4688ju4.bkt.clouddn.com/restart.png" alt="" /></p>
+
+<p>原先的进程会被 kill，并开启新的进程。故无需通过 lsof 端口号手动 kill 进程。</p>
+
+<hr />
+
+<p>作者：呆恋小喵</p>
+
+<p>我的后花园：<a href="https://sunmengyuan.github.io/garden/">https://sunmengyuan.github.io/garden/</a></p>
+
+<p>我的 github：<a href="https://github.com/sunmengyuan">https://github.com/sunmengyuan</a></p>
+
+<p>原文链接：<a href="https://sunmengyuan.github.io/garden/2017/10/20/node-tool.html">https://sunmengyuan.github.io/garden/2017/10/20/node-tool.html</a></p>
+
+</article>
+<footer>
+    <a href="/garden/views/posts" class="js_goto_posts">返回目录 - 我的印记</a>
+</footer>
+<div class="browser js_browser">
+    <img src="" />
+</div>
+
+<script src="/garden/assets/script/main.js"></script>
+</body>
+</html>

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="keywords" content="前端开发,node.js,cheerio,simple git,pm2" />
+    <meta name="keywords" content="前端开发,node.js,cheerio,simple git,pm2,http proxy" />
     <meta name="description" content="初尝 Node.js 开发，使用到了一些小工具，在此与大家分享。一篇小白出品的小白文，欢迎大神们慷慨指导！" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0" />
     <title>呆恋小喵的后花园 - NodeJS 小工具推荐</title>
@@ -52,6 +52,8 @@
             <li>simple git</li>
             
             <li>pm2</li>
+            
+            <li>http proxy</li>
             
         </ul>
     </div>
@@ -161,6 +163,30 @@
 <p><img src="http://oy4688ju4.bkt.clouddn.com/restart.png" alt="" /></p>
 
 <p>原先的进程会被 kill，并开启新的进程。故无需通过 lsof 端口号手动 kill 进程。</p>
+
+<hr />
+
+<h3 id="express-http-proxy">Express Http Proxy</h3>
+
+<blockquote>
+  <p>Express Http Proxy: Express middleware to proxy request to another host and pass response back to original caller.</p>
+</blockquote>
+
+<p>渲染一个前端页面所需的数据可能来源于 n 个不同域的 n 个接口。浏览器存在跨域行为，跨 n 个域请求 n 个接口不现实。API 层就是要将这些接口和谐统一为一个接口供前端调用。扯远了…需求背景没辣么复杂，需要搬出 RPC（远程调用）这个概念。但希望将来能有机会与大家分享经验。</p>
+
+<p>其实我只想转发一个请求解决跨域问题。使用到了 <a href="https://github.com/villadora/express-http-proxy">Express Http Proxy</a>。</p>
+
+<div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">proxy</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'express-http-proxy'</span><span class="p">);</span>
+<span class="nx">router</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">'/hybrid/topic_reply/:id'</span><span class="p">,</span> <span class="nx">proxy</span><span class="p">(</span><span class="s1">'http://backend.test.env'</span><span class="p">,</span> <span class="p">{</span>
+    <span class="na">userResDecorator</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">proxyRes</span><span class="p">,</span> <span class="nx">proxyResData</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kd">var</span> <span class="nx">data</span> <span class="o">=</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="nx">proxyResData</span><span class="p">.</span><span class="nx">toString</span><span class="p">(</span><span class="s1">'utf8'</span><span class="p">));</span>
+        <span class="k">return</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">data</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}));</span>
+</code></pre>
+</div>
+
+<p>此时访问 <strong>http://[我的域名]/hybrid/topic_reply/:id</strong> 可请求到 <strong>http://backend.test.env/hybrid/topic_reply/:id</strong> 的数据。其中 <strong>data</strong> 可随意修改，<strong>return</strong> 值为请求返回值。</p>
 
 <hr />
 

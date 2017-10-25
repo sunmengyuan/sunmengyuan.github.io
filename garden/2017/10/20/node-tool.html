@@ -177,7 +177,7 @@
 <p>其实我只想转发一个请求解决跨域问题。使用到了 <a href="https://github.com/villadora/express-http-proxy">Express Http Proxy</a>。</p>
 
 <div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">proxy</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'express-http-proxy'</span><span class="p">);</span>
-<span class="nx">router</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">'/hybrid/topic_reply/:id'</span><span class="p">,</span> <span class="nx">proxy</span><span class="p">(</span><span class="s1">'http://backend.test.env'</span><span class="p">,</span> <span class="p">{</span>
+<span class="nx">router</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">'/hybrid/topic_reply/:id'</span><span class="p">,</span> <span class="nx">proxy</span><span class="p">(</span><span class="s1">'backend.test.env'</span><span class="p">,</span> <span class="p">{</span>
     <span class="na">userResDecorator</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">proxyRes</span><span class="p">,</span> <span class="nx">proxyResData</span><span class="p">)</span> <span class="p">{</span>
         <span class="kd">var</span> <span class="nx">data</span> <span class="o">=</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="nx">proxyResData</span><span class="p">.</span><span class="nx">toString</span><span class="p">(</span><span class="s1">'utf8'</span><span class="p">));</span>
         <span class="k">return</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">data</span><span class="p">);</span>
@@ -186,7 +186,7 @@
 </code></pre>
 </div>
 
-<p>此时访问 <strong>http://[我的域名]/hybrid/topic_reply/:id</strong> 可请求到 <strong>http://backend.test.env/hybrid/topic_reply/:id</strong> 的数据。其中 <strong>data</strong> 可随意修改，<strong>return</strong> 值为请求返回值。</p>
+<p>此时访问 <strong>[我的域名]/hybrid/topic_reply/:id</strong> 可请求到 <strong>backend.test.env/hybrid/topic_reply/:id</strong> 的数据。其中 <strong>data</strong> 可随意修改，<strong>return</strong> 值为请求返回值。</p>
 
 <hr />
 

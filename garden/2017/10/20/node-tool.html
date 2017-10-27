@@ -138,7 +138,7 @@
 
 <p>NodeJS 服务部署至服务器时需要开启 <strong>Daemon</strong> 模式，即进程始终运行于后台。</p>
 
-<p>若抛出的异常未被 try {} catch (err) {} 捕获，uncaughtException 事件处理程序可防止进程直接退出。但一些底层错误引发的进程崩溃，uncaughtException 便不再适用。</p>
+<p>若抛出的异常未被 <strong>try {} catch (err) {}</strong> 捕获，<strong>uncaughtException</strong> 事件处理程序可防止进程直接退出。但一些底层错误引发的进程崩溃，<strong>uncaughtException</strong> 便不再适用。</p>
 
 <p>可使用 <a href="https://github.com/Unitech/pm2">PM2</a> 实现 NodeJS 服务的进程管理。当进程异常退出时，PM2 会尝试重启进程保证服务的稳定运行。</p>
 

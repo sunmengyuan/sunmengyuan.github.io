@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="keywords" content="前端开发,分享会,投放系统,node.js" />
-    <meta name="description" content="投放系统分享会概要" />
+    <meta name="description" content="阐述我司投放项目的前世今生，应用于内部分享会。" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0" />
-    <title>呆恋小喵的后花园 - 投放系统</title>
+    <title>呆恋小喵的后花园 - 投放系统分享会概要</title>
     <link rel="shortcut icon" href="http://oij8a9ql4.bkt.clouddn.com/shortcut.ico" />
     <link rel="stylesheet" href="https://cdn.bootcss.com/highlight.js/8.0/styles/sunburst.min.css" />
     <link rel="stylesheet/less" href="/garden/assets/style/style.less" />
@@ -40,9 +40,9 @@
 <a href="javascript:;" class="gotop js_gotop"></a>
 <header class="post" style="background-image: url('http://oij8a9ql4.bkt.clouddn.com/banner.jpg')">
     <div>
-        <h2>投放系统</h2>
+        <h2>投放系统分享会概要</h2>
         <time>06 Nov 2017</time>
-        <p class="abstract">投放系统分享会概要</p>
+        <p class="abstract">阐述我司投放项目的前世今生，应用于内部分享会。</p>
         <ul class="c-fix">
             
             <li>分享会</li>
@@ -55,47 +55,40 @@
     </div>
 </header>
 <article class="js_article">
-    <p><img src="http://oy4688ju4.bkt.clouddn.com/calypso.jpg" alt="" /></p>
+    <p>投放系统如何运作？</p>
+
+<p><img src="http://oy4688ju4.bkt.clouddn.com/calypso.jpg" alt="" /></p>
+
+<p>相关知识：<a href="http://nodejs.cn/api/fs.html">File System</a>、<a href="https://github.com/cheeriojs/cheerio">Cheerio</a>、<a href="https://github.com/steveukx/git-js">Simple Git</a>
+、<a href="https://github.com/Unitech/pm2">PM2</a>、<a href="https://github.com/villadora/express-http-proxy">Express Http Proxy</a></p>
 
 <hr />
 
-<p><a href="http://www.runoob.com/nodejs/nodejs-fs.html">File System</a></p>
+<h4 id="主要功能">主要功能</h4>
 
-<p><a href="https://github.com/cheeriojs/cheerio">Cheerio</a></p>
-
-<p><a href="https://github.com/steveukx/git-js">Simple Git</a></p>
-
-<p><a href="https://github.com/Unitech/pm2">PM2</a></p>
-
-<p><a href="https://github.com/villadora/express-http-proxy">Express Http Proxy</a></p>
-
-<hr />
-
-<h4 id="读取渠道列表">读取渠道列表</h4>
+<h5 id="读取渠道列表">读取渠道列表</h5>
 
 <p><strong>fs.readdir</strong> toufang 文件目录</p>
 
-<p>默认字母排序 -&gt; 时间倒序</p>
+<p>默认按字母排序 -&gt; 按修改时间倒序：<strong>fs.statSync</strong> 同步读取文件修改时间 <strong>mtime</strong>，避免请求返回先于信息读取，但读取失败会造成阻塞…后期将优化为异步。</p>
 
-<p><strong>fs.statSync</strong> 同步读取文件修改时间，请求返回先于信息读取，但读取失败造成阻塞…优化为异步。</p>
-
-<h4 id="添加渠道">添加渠道</h4>
+<h5 id="添加渠道">添加渠道</h5>
 
 <p><strong>fs.readFile</strong> 模板文件 -&gt; 编辑模板文件流 -&gt; <strong>fs.mkdir</strong> 渠道目录 -&gt; <strong>fs.writeFile</strong> 渠道静态网页文件</p>
 
-<p>编辑模板文件流使用 <strong>Cheerio</strong></p>
+<p>编辑模板文件流使用 <a href="https://github.com/cheeriojs/cheerio">Cheerio</a>。</p>
 
-<h4 id="编辑渠道渠道静态网页文件替换">编辑渠道（渠道静态网页文件替换）</h4>
+<h5 id="编辑渠道渠道静态网页文件替换">编辑渠道（渠道静态网页文件替换）</h5>
 
 <p><strong>fs.readFile</strong> 模板文件 -&gt; 编辑模板文件流 -&gt; 查找渠道目录 -&gt; <strong>fs.unlink</strong> 渠道静态网页文件 -&gt; <strong>fs.writeFile</strong> 渠道静态网页文件</p>
 
-<p>清洗不规则目录</p>
+<p>清洗不规则目录及不规范静态网页文件。</p>
 
-<h4 id="读取图片列表">读取图片列表</h4>
+<h5 id="读取图片列表">读取图片列表</h5>
 
 <p><strong>fs.readdir</strong> toufang/upload/images 文件目录</p>
 
-<h4 id="上传图片">上传图片</h4>
+<h5 id="上传图片">上传图片</h5>
 
 <div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">formidable</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'formidable'</span><span class="p">);</span>
 <span class="kd">var</span> <span class="nx">form</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">formidable</span><span class="p">.</span><span class="nx">IncomingForm</span><span class="p">();</span>
@@ -121,19 +114,23 @@
 
 <hr />
 
-<h4 id="前端资源入口">前端资源入口</h4>
+<h5 id="前端资源入口">前端资源入口</h5>
 
 <div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="nx">app</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="nx">express</span><span class="p">.</span><span class="kr">static</span><span class="p">(</span><span class="nx">path</span><span class="p">.</span><span class="nx">join</span><span class="p">(</span><span class="nx">__dirname</span><span class="p">,</span> <span class="s1">'static'</span><span class="p">)));</span>
 </code></pre>
 </div>
 
+<p>__dirname 获取当前服务所在的完整绝对目录。</p>
+
 <hr />
 
-<h4 id="渠道资源同步">渠道资源同步</h4>
+<h4 id="渠道资源同步"><a href="https://github.com/steveukx/git-js">渠道资源同步</a></h4>
 
-<h4 id="进程管理">进程管理</h4>
+<h4 id="进程管理"><a href="https://github.com/Unitech/pm2">进程管理</a></h4>
 
-<h4 id="请求转发">请求转发</h4>
+<h4 id="请求转发"><a href="https://github.com/villadora/express-http-proxy">请求转发</a></h4>
+
+<p>请移驾<a href="https://sunmengyuan.github.io/garden/2017/10/20/node-tool.html">此处</a>。</p>
 
 <hr />
 

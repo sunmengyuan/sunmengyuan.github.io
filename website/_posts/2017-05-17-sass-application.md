@@ -790,7 +790,7 @@ gem install sass
 
 下面介绍如何不翻墙安装 Sass：
 
-+ 配置 __gem sources__
+__配置 gem sources__
 
 ```bash
 # 移除 https://rubygems.org/
@@ -803,11 +803,11 @@ gem sources -a https://gems.ruby-china.org/
 gem sources -l
 ```
 
-+ 下载 __sass.gem__
+__下载 sass.gem__
 
 [下载地址](https://rubygems.org/gems/sass)
 
-+ 安装 __sass.gem__
+__安装 sass.gem__
 
 ```bash
 gem install [sass.gem 路径]/sass.gem

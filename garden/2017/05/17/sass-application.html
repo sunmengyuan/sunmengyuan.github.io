@@ -863,6 +863,51 @@
 
 <hr />
 
+<h6 id="20171106-续更">2017/11/06 续更</h6>
+
+<h2 id="sass-安装">Sass 安装</h2>
+
+<p>Sass 依赖于 Ruby 环境，若未安装 Ruby 请移驾<a href="https://rubyinstaller.org/downloads/">此处</a>下载。安装过程请勾选 <strong>Add Ruby executables to your PATH</strong> 确保添加环境变量。</p>
+
+<p>若你具备翻墙技能请直接：</p>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code>gem install sass
+</code></pre>
+</div>
+
+<p>下面介绍如何不翻墙安装 Sass：</p>
+
+<ul>
+  <li>配置 <strong>gem sources</strong></li>
+</ul>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code><span class="c"># 移除 https://rubygems.org/</span>
+gem sources --remove https://rubygems.org/
+
+<span class="c"># 添加 https://gems.ruby-china.org/</span>
+gem sources -a https://gems.ruby-china.org/
+
+<span class="c"># 查看 sources 确保仅有 https://gems.ruby-china.org/</span>
+gem sources -l
+</code></pre>
+</div>
+
+<ul>
+  <li>下载 <strong>sass.gem</strong></li>
+</ul>
+
+<p><a href="https://rubygems.org/gems/sass">下载地址</a></p>
+
+<ul>
+  <li>安装 <strong>sass.gem</strong></li>
+</ul>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code>gem install <span class="o">[</span>sass.gem 路径]/sass.gem
+</code></pre>
+</div>
+
+<hr />
+
 <p>作者：呆恋小喵</p>
 
 <p>我的后花园：<a href="https://sunmengyuan.github.io/garden/">https://sunmengyuan.github.io/garden/</a></p>

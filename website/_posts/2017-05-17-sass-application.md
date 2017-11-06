@@ -776,6 +776,45 @@ each 可循环遍历两种数据类型：
 
 *****
 
+###### 2017/11/06 续更
+
+## Sass 安装
+
+Sass 依赖于 Ruby 环境，若未安装 Ruby 请移驾[此处](https://rubyinstaller.org/downloads/)下载。安装过程请勾选 __Add Ruby executables to your PATH__ 确保添加环境变量。
+
+若你具备翻墙技能请直接：
+
+```bash
+gem install sass
+```
+
+下面介绍如何不翻墙安装 Sass：
+
++ 配置 __gem sources__
+
+```bash
+# 移除 https://rubygems.org/
+gem sources --remove https://rubygems.org/
+
+# 添加 https://gems.ruby-china.org/
+gem sources -a https://gems.ruby-china.org/
+
+# 查看 sources 确保仅有 https://gems.ruby-china.org/
+gem sources -l
+```
+
++ 下载 __sass.gem__
+
+[下载地址](https://rubygems.org/gems/sass)
+
++ 安装 __sass.gem__
+
+```bash
+gem install [sass.gem 路径]/sass.gem
+```
+
+*****
+
 作者：呆恋小喵
 
 我的后花园：<https://sunmengyuan.github.io/garden/>

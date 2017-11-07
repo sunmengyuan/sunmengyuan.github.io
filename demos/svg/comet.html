@@ -37,17 +37,21 @@
     console.log(circlePathLength);
 
     var totalTime = 3;
+    var percent = 1;
     var circleAnimate = document.getElementById('circleAnimate');
     var tailAnimate = document.getElementById('tailAnimate');
+    var animate = function (target) {
+        percent = target && (target.value / 100) || percent;
+        var durTime = totalTime * percent;
+        circleAnimate.setAttribute('repeatDur', durTime + 's');
+        tailAnimate.setAttribute('repeatDur', durTime + 's');
+        circleAnimate.beginElement();
+        tailAnimate.beginElement();
+    }
+
+    animate();
     document.getElementById('input').onkeydown = function (e) {
-        if (e.keyCode == '13') {
-            var percent = this.value / 100;
-            var durTime = totalTime * percent;
-            circleAnimate.setAttribute('repeatDur', durTime + 's');
-            tailAnimate.setAttribute('repeatDur', durTime + 's');
-            circleAnimate.beginElement();
-            tailAnimate.beginElement();
-        }
+        (e.keyCode == '13') && animate(this);
     }
 </script>
 </body>

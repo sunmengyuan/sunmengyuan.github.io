@@ -6,3 +6,61 @@ abstract: ""
 keywords: ["css", "css3"]
 thumb: "http://oz54mleef.bkt.clouddn.com/thumb.jpg"
 ---
+
+为实现如下效果呕心沥血：
+
+![](http://oz54mleef.bkt.clouddn.com/example.jpg)
+
+当然你可以拥抱 Svg...在此分享如何纯 Css 打造圆环进度条，只需三步！
+
+![](http://oz54mleef.bkt.clouddn.com/coverage.jpg)
+
+此物乃 2 + 1 夹心饼干，蓝绿色部分为果酱。显而易见饼干为两个削成了圆形的 __div__，我们重点演示果酱是怎么制作的：
+
+![](http://oz54mleef.bkt.clouddn.com/elem-sector.jpg)
+
+如图所示，大扇形由 __6__ 个小扇形构成，每一小扇形占整个圆饼的 __1/15__，大扇形占整个圆饼的 __6/15__。我们只需构造一个扇形单元，将其复制 6 份后旋转相应角度连接至一起即可。
+
+如何构造扇形？用三角形伪装...
+
+![](http://oz54mleef.bkt.clouddn.com/real-feature.jpg)
+
+三角形的宽高如何计算？假定圆半径为 100px，小扇形圆心角为 __360deg / 15__。则三角形的高为 100px，宽为 __2 * 100px * tan(360deg / 15 / 2)__，其中 __PI == 360deg / 2__。
+
+```css
+span {
+    width: 0;
+    height: 0;
+    border: $radius solid transparent;
+    $borderWidth: tan(pi() / $count) * $radius;
+    border-left-width: $borderWidth;
+    border-right-width: $borderWidth;
+}
+```
+
+数学欠佳的同学请自行科普...
+
+对于 __$count__ 为 __1__ 或 __2__ 的情况需特殊处理，因为 __tan(PI)__ 及 __tan(PI / 2)__ 为无穷值，不了解的同学请研究正切函数图像：
+
+![](http://oz54mleef.bkt.clouddn.com/tan.jpg)
+
+相关代码：
+
+```css
+span {
+    @if $count == 1 {
+        width: $diameter;
+        height: $diameter;
+    } @else if $count == 2 {
+        width: $diameter;
+        height: $radius;
+    } @else {
+        width: 0;
+        height: 0;
+        border: $radius solid transparent;
+        $borderWidth: tan(pi() / $count) * $radius;
+        border-left-width: $borderWidth;
+        border-right-width: $borderWidth;
+    }
+}
+```

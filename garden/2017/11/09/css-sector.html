@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="keywords" content="前端开发,css,css3" />
+    <meta name="description" content="在此分享如何纯 Css 打造圆环进度条。阅读此文需具备基本数学知识：圆心角、弧度制、三角函数。" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0" />
+    <title>呆恋小喵的后花园 - 纯 Css 绘制扇形</title>
+    <link rel="shortcut icon" href="http://oij8a9ql4.bkt.clouddn.com/shortcut.ico" />
+    <link rel="stylesheet" href="https://cdn.bootcss.com/highlight.js/8.0/styles/sunburst.min.css" />
+    <link rel="stylesheet/less" href="/garden/assets/style/style.less" />
+    <script src="https://lib.sinaapp.com/js/jquery/1.9.1/jquery-1.9.1.min.js"></script>
+    <script src="https://cdn.bootcss.com/less.js/1.7.0/less.min.js"></script>
+    <script src="https://cdn.bootcss.com/highlight.js/8.0/highlight.min.js"></script>
+</head>
+<body>
+<script>
+    var pageData = {};
+    var _hmt = _hmt || [];
+    (function () {
+        var hm = document.createElement('script');
+        hm.src = 'https://hm.baidu.com/hm.js?6b9830e6ab8073ce1a44ad49a03d8596';
+        var s = document.getElementsByTagName('script')[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+<img src="http://oij8a9ql4.bkt.clouddn.com/portrait.jpg" alt="呆恋小喵" width="0" height="0" />
+<nav>
+    <a href="javascript:;" class="js_menu_btn">
+        <span></span>
+        <span></span>
+        <span></span>
+    </a>
+    <ul class="js_menu">
+        <li><a href="/garden/">Home</a></li>
+        <li><a href="/garden/views/posts" class="js_goto_posts">Posts</a></li>
+        <li><a href="/garden/views/about">About</a></li>
+    </ul>
+</nav>
+<a href="javascript:;" class="gotop js_gotop"></a>
+<header class="post" style="background-image: url('http://oij8a9ql4.bkt.clouddn.com/banner.jpg')">
+    <div>
+        <h2>纯 Css 绘制扇形</h2>
+        <time>09 Nov 2017</time>
+        <p class="abstract">在此分享如何纯 Css 打造圆环进度条。阅读此文需具备基本数学知识：圆心角、弧度制、三角函数。</p>
+        <ul class="c-fix">
+            
+            <li>css</li>
+            
+            <li>css3</li>
+            
+        </ul>
+    </div>
+</header>
+<article class="js_article">
+    <p>为实现如下效果呕心沥血：</p>
+
+<p><img src="http://oz54mleef.bkt.clouddn.com/example.jpg" alt="" /></p>
+
+<p>当然你可以拥抱 Svg…在此分享如何纯 Css 打造圆环进度条，只需三步！</p>
+
+<p><img src="http://oz54mleef.bkt.clouddn.com/coverage.jpg" alt="" /></p>
+
+<p>此物乃 2 + 1 夹心饼干，蓝绿色部分为果酱。显而易见饼干为两个削成了圆形的 <strong>div</strong>，我们重点演示果酱是怎么制作的：</p>
+
+<p><img src="http://oz54mleef.bkt.clouddn.com/elem-sector.jpg" alt="" /></p>
+
+<p>如图所示，大扇形由 <strong>6</strong> 个小扇形构成，每一小扇形占整个圆饼的 <strong>1/15</strong>，大扇形占整个圆饼的 <strong>6/15</strong>。我们只需构造一个扇形单元，将其复制 6 份后旋转相应角度连接至一起即可。</p>
+
+<p>如何构造扇形？用三角形伪装…</p>
+
+<p><img src="http://oz54mleef.bkt.clouddn.com/real-feature.jpg" alt="" /></p>
+
+<p>三角形的宽高如何计算？假定圆半径 <strong>$radius</strong> 为 100px，等分数 <strong>$count</strong> 为 15。则小扇形的圆心角为 <strong>360deg / 15</strong>，三角形的高为 100px，宽为 <strong>2 * 100px * tan(360deg / 15 / 2)</strong>。其中 <strong>360deg / 15 / 2</strong> 转化弧度制为 <strong>PI / 15</strong>（PI == 360deg / 2）。</p>
+
+<div class="language-css highlighter-rouge"><pre class="highlight"><code><span class="nt">span</span> <span class="p">{</span>
+    <span class="nl">width</span><span class="p">:</span> <span class="m">0</span><span class="p">;</span>
+    <span class="nl">height</span><span class="p">:</span> <span class="m">0</span><span class="p">;</span>
+    <span class="nl">border</span><span class="p">:</span> <span class="err">$</span><span class="n">radius</span> <span class="nb">solid</span> <span class="nb">transparent</span><span class="p">;</span>
+    <span class="err">$</span><span class="py">borderWidth</span><span class="p">:</span> <span class="no">tan</span><span class="p">(</span><span class="n">pi</span><span class="p">()</span> <span class="p">/</span> <span class="err">$</span><span class="n">count</span><span class="p">)</span> <span class="err">*</span> <span class="err">$</span><span class="n">radius</span><span class="p">;</span>
+    <span class="nl">border-left-width</span><span class="p">:</span> <span class="err">$</span><span class="n">borderWidth</span><span class="p">;</span>
+    <span class="nl">border-right-width</span><span class="p">:</span> <span class="err">$</span><span class="n">borderWidth</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<p>数学欠佳的同学请自行科普…</p>
+
+<p>对于 <strong>$count</strong> 为 <strong>1</strong> 或 <strong>2</strong> 的情况需特殊处理，因为 <strong>tan(PI)</strong> 及 <strong>tan(PI / 2)</strong> 为无穷值，不了解的同学请研究正切函数图像：</p>
+
+<p><img src="http://oz54mleef.bkt.clouddn.com/tan.jpg" alt="" /></p>
+
+<p>相关代码（其中 <strong>$diameter = 2 * $radius</strong> 为圆直径）：</p>
+
+<div class="language-css highlighter-rouge"><pre class="highlight"><code><span class="nt">span</span> <span class="p">{</span>
+    <span class="err">@if</span> <span class="err">$count</span> <span class="err">==</span> <span class="err">1</span> <span class="err">{</span>
+        <span class="nl">width</span><span class="p">:</span> <span class="err">$</span><span class="n">diameter</span><span class="p">;</span>
+        <span class="nl">height</span><span class="p">:</span> <span class="err">$</span><span class="n">diameter</span><span class="p">;</span>
+    <span class="p">}</span> <span class="k">@else</span> <span class="n">if</span> <span class="err">$</span><span class="n">count</span> <span class="err">==</span> <span class="m">2</span> <span class="p">{</span>
+        <span class="nl">width</span><span class="p">:</span> <span class="err">$</span><span class="n">diameter</span><span class="p">;</span>
+        <span class="nl">height</span><span class="p">:</span> <span class="err">$</span><span class="n">radius</span><span class="p">;</span>
+    <span class="p">}</span> <span class="k">@else</span> <span class="p">{</span>
+        <span class="nl">width</span><span class="p">:</span> <span class="m">0</span><span class="p">;</span>
+        <span class="nl">height</span><span class="p">:</span> <span class="m">0</span><span class="p">;</span>
+        <span class="nl">border</span><span class="p">:</span> <span class="err">$</span><span class="n">radius</span> <span class="nb">solid</span> <span class="nb">transparent</span><span class="p">;</span>
+        <span class="err">$</span><span class="py">borderWidth</span><span class="p">:</span> <span class="no">tan</span><span class="p">(</span><span class="n">pi</span><span class="p">()</span> <span class="p">/</span> <span class="err">$</span><span class="n">count</span><span class="p">)</span> <span class="err">*</span> <span class="err">$</span><span class="n">radius</span><span class="p">;</span>
+        <span class="nl">border-left-width</span><span class="p">:</span> <span class="err">$</span><span class="n">borderWidth</span><span class="p">;</span>
+        <span class="nl">border-right-width</span><span class="p">:</span> <span class="err">$</span><span class="n">borderWidth</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="err">}</span>
+</code></pre>
+</div>
+
+<p>最后，复制并逐一旋转扇形单元：</p>
+
+<div class="language-css highlighter-rouge"><pre class="highlight"><code><span class="k">@for</span> <span class="err">$</span><span class="n">index</span> <span class="n">from</span> <span class="m">0</span> <span class="n">to</span> <span class="err">$</span><span class="n">count</span> <span class="p">{</span>
+    <span class="py">span</span><span class="p">:</span><span class="n">nth-child</span><span class="p">(</span><span class="err">#{$</span><span class="n">index</span> <span class="err">+</span> <span class="m">1</span><span class="p">}</span><span class="o">)</span> <span class="p">{</span>
+        <span class="err">$</span><span class="nl">transform</span><span class="p">:</span> <span class="n">translate</span><span class="p">(</span><span class="m">-50%</span><span class="p">,</span> <span class="m">0</span><span class="p">)</span> <span class="n">rotate</span><span class="p">(</span><span class="m">360deg</span> <span class="p">/</span> <span class="err">$</span><span class="n">count</span> <span class="p">/</span> <span class="m">2</span> <span class="err">+</span> <span class="m">360deg</span> <span class="err">*</span> <span class="err">$</span><span class="n">index</span> <span class="p">/</span> <span class="err">$</span><span class="n">count</span><span class="p">);</span>
+        <span class="err">$</span><span class="py">origin</span><span class="p">:</span> <span class="n">if</span><span class="p">(</span><span class="err">$</span><span class="n">count</span> <span class="err">==</span> <span class="m">2</span><span class="p">,</span> <span class="nb">bottom</span><span class="p">,</span> <span class="nb">center</span><span class="p">);</span>
+        <span class="nl">-webkit-transform</span><span class="p">:</span> <span class="err">$</span><span class="n">transform</span><span class="p">;</span>
+                <span class="nl">transform</span><span class="p">:</span> <span class="err">$</span><span class="n">transform</span><span class="p">;</span>
+        <span class="nl">-webkit-transform-origin</span><span class="p">:</span> <span class="err">$</span><span class="n">origin</span><span class="p">;</span>
+                <span class="nl">transform-origin</span><span class="p">:</span> <span class="err">$</span><span class="n">origin</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="err">}</span>
+</code></pre>
+</div>
+
+<p>果酱制作完毕，其它点缀请自行添加喽…本例完整代码<a href="https://github.com/sunmengyuan/metis/tree/master/css/sector">在此</a>。</p>
+
+<hr />
+
+<p>作者：呆恋小喵</p>
+
+<p>我的后花园：<a href="https://sunmengyuan.github.io/garden/">https://sunmengyuan.github.io/garden/</a></p>
+
+<p>我的 github：<a href="https://github.com/sunmengyuan">https://github.com/sunmengyuan</a></p>
+
+<p>原文链接：<a href="https://sunmengyuan.github.io/garden/2017/11/09/css-sector.html">https://sunmengyuan.github.io/garden/2017/11/09/css-sector.html</a></p>
+
+</article>
+<footer>
+    <a href="/garden/views/posts" class="js_goto_posts">返回目录 - 我的印记</a>
+</footer>
+<div class="browser js_browser">
+    <img src="" />
+</div>
+
+<script src="/garden/assets/script/main.js"></script>
+</body>
+</html>

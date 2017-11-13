@@ -2,7 +2,7 @@
 layout: post
 title: "纯 Css 绘制扇形"
 date: "2017-11-09"
-abstract: ""
+abstract: "在此分享如何纯 Css 打造圆环进度条。阅读此文需具备基本数学知识：圆心角、弧度制、三角函数。"
 keywords: ["css", "css3"]
 thumb: "http://oz54mleef.bkt.clouddn.com/thumb.jpg"
 ---
@@ -25,7 +25,7 @@ thumb: "http://oz54mleef.bkt.clouddn.com/thumb.jpg"
 
 ![](http://oz54mleef.bkt.clouddn.com/real-feature.jpg)
 
-三角形的宽高如何计算？假定圆半径为 100px，小扇形圆心角为 __360deg / 15__。则三角形的高为 100px，宽为 __2 * 100px * tan(360deg / 15 / 2)__，其中 __PI == 360deg / 2__。
+三角形的宽高如何计算？假定圆半径 __$radius__ 为 100px，等分数 __$count__ 为 15。则小扇形的圆心角为 __360deg / 15__，三角形的高为 100px，宽为 __2 * 100px * tan(360deg / 15 / 2)__。其中 __360deg / 15 / 2__ 转化弧度制为 __PI / 15__（PI == 360deg / 2）。
 
 ```css
 span {
@@ -44,7 +44,7 @@ span {
 
 ![](http://oz54mleef.bkt.clouddn.com/tan.jpg)
 
-相关代码：
+相关代码（其中 __$diameter = 2 * $radius__ 为圆直径）：
 
 ```css
 span {
@@ -64,3 +64,30 @@ span {
     }
 }
 ```
+
+最后，复制并逐一旋转扇形单元：
+
+```css
+@for $index from 0 to $count {
+    span:nth-child(#{$index + 1}) {
+        $transform: translate(-50%, 0) rotate(360deg / $count / 2 + 360deg * $index / $count);
+        $origin: if($count == 2, bottom, center);
+        -webkit-transform: $transform;
+                transform: $transform;
+        -webkit-transform-origin: $origin;
+                transform-origin: $origin;
+    }
+}
+```
+
+果酱制作完毕，其它点缀请自行添加喽...本例完整代码[在此](https://github.com/sunmengyuan/metis/tree/master/css/sector)。
+
+*****
+
+作者：呆恋小喵
+
+我的后花园：<https://sunmengyuan.github.io/garden/>
+
+我的 github：<https://github.com/sunmengyuan>
+
+原文链接：<https://sunmengyuan.github.io/garden/2017/11/09/css-sector.html>

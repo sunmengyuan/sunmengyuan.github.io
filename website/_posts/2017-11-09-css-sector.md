@@ -88,7 +88,7 @@ span {
 
 由于本例引入了三角函数等数学运算，使用 __Sass__ 预编译。未安装 __Sass__ 的同学可下载经编译的 [源码](http://oz54mleef.bkt.clouddn.com/sector.zip) 开启 __sector.html__ 查看效果。
 
-安装 __Sass__ 请参考 <http://www.jianshu.com/p/9534d06cbd0c> 文章末尾的安装教程。
+安装 __Sass__ 请参考 <https://sunmengyuan.github.io/garden/2017/05/17/sass-application.html> 文章末尾的安装教程。
 
 本例调试方法：
 

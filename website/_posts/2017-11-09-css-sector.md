@@ -84,6 +84,21 @@ span {
 
 *****
 
+###### 2017/11/14 续更
+
+由于本例引入了三角函数等数学运算，使用 __Sass__ 预编译。未安装 __Sass__ 的同学可下载经编译的 [源码](http://oz54mleef.bkt.clouddn.com/sector.zip) 开启 __sector.html__ 查看效果。
+
+安装 __Sass__ 请参考 <http://www.jianshu.com/p/9534d06cbd0c> 文章末尾的安装教程。
+
+本例调试方法：
+
+```bash
+cd sector
+sass --watch style.scss:style.css --debug-info
+```
+
+*****
+
 作者：呆恋小喵
 
 我的后花园：<https://sunmengyuan.github.io/garden/>

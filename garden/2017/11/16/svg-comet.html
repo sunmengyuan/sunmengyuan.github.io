@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="keywords" content="前端开发,svg,路径动画" />
+    <meta name="description" content="尝试使用 Svg 实现简易的动画效果。有关 Svg 的具体知识点不在此文赘述，仅就所举示例的需求点阐述实现思路。" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0" />
+    <title>呆恋小喵的后花园 - Svg 路径动画实现旋转进度条</title>
+    <link rel="shortcut icon" href="http://oij8a9ql4.bkt.clouddn.com/shortcut.ico" />
+    <link rel="stylesheet" href="https://cdn.bootcss.com/highlight.js/8.0/styles/sunburst.min.css" />
+    <link rel="stylesheet/less" href="/garden/assets/style/style.less" />
+    <script src="https://lib.sinaapp.com/js/jquery/1.9.1/jquery-1.9.1.min.js"></script>
+    <script src="https://cdn.bootcss.com/less.js/1.7.0/less.min.js"></script>
+    <script src="https://cdn.bootcss.com/highlight.js/8.0/highlight.min.js"></script>
+</head>
+<body>
+<script>
+    var pageData = {};
+    var _hmt = _hmt || [];
+    (function () {
+        var hm = document.createElement('script');
+        hm.src = 'https://hm.baidu.com/hm.js?6b9830e6ab8073ce1a44ad49a03d8596';
+        var s = document.getElementsByTagName('script')[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+<img src="http://oij8a9ql4.bkt.clouddn.com/portrait.jpg" alt="呆恋小喵" width="0" height="0" />
+<nav>
+    <a href="javascript:;" class="js_menu_btn">
+        <span></span>
+        <span></span>
+        <span></span>
+    </a>
+    <ul class="js_menu">
+        <li><a href="/garden/">Home</a></li>
+        <li><a href="/garden/views/posts" class="js_goto_posts">Posts</a></li>
+        <li><a href="/garden/views/about">About</a></li>
+    </ul>
+</nav>
+<a href="javascript:;" class="gotop js_gotop"></a>
+<header class="post" style="background-image: url('http://oij8a9ql4.bkt.clouddn.com/banner.jpg')">
+    <div>
+        <h2>Svg 路径动画实现旋转进度条</h2>
+        <time>16 Nov 2017</time>
+        <p class="abstract">尝试使用 Svg 实现简易的动画效果。有关 Svg 的具体知识点不在此文赘述，仅就所举示例的需求点阐述实现思路。</p>
+        <ul class="c-fix">
+            
+            <li>svg</li>
+            
+            <li>路径动画</li>
+            
+        </ul>
+    </div>
+</header>
+<article class="js_article">
+    <p>先阐明具体需求：白色轨迹需自起始点旋转至由用户成长值决定的终点。</p>
+
+<p><img src="http://oz54e50y4.bkt.clouddn.com/thumb.jpg" alt="" /></p>
+
+<p>动画效果如下：若无效果请戳<a href="http://oz54e50y4.bkt.clouddn.com/demo.svg">这里</a>。</p>
+
+<p><img src="http://oz54e50y4.bkt.clouddn.com/demo.svg" alt="" /></p>
+
+<p>该动画可拆分为两部分实现：粉红圆环轨迹、粉红圆形尾巴。</p>
+
+<hr />
+
+<h4 id="绘制粉红圆环轨迹">绘制粉红圆环轨迹</h4>
+
+<p>相关代码：</p>
+
+<div class="language-html highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;path</span> <span class="na">d=</span><span class="s">"M 110 10 a 100 100 0 0 1 0 200 a 100 100 0 0 1 0 -200 Z"</span> <span class="na">fill=</span><span class="s">"none"</span> <span class="na">stroke=</span><span class="s">"#FD7991"</span> <span class="na">stroke-width=</span><span class="s">"4"</span> <span class="na">stroke-linecap=</span><span class="s">"round"</span> <span class="na">stroke-dasharray=</span><span class="s">"628.4073486328125"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;animate</span> <span class="na">attributeName=</span><span class="s">"stroke-dashoffset"</span> <span class="na">from=</span><span class="s">"628.4073486328125"</span> <span class="na">to=</span><span class="s">"0"</span> <span class="na">dur=</span><span class="s">"2s"</span> <span class="na">repeatCount=</span><span class="s">"indefinite"</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;/path&gt;</span>
+</code></pre>
+</div>
+
+<p>使用 <strong>path</strong> 绘制半径 <strong>100</strong> 的圆环轨迹。起点 <strong>M 110 10</strong>，右半圆弧 <strong>a 100 100 0 0 1 0 200</strong>，左半圆弧 <strong>a 100 100 0 0 1 0 -200</strong>，闭合路径 <strong>Z</strong>。</p>
+
+<p>不了解 <a href="https://developer.mozilla.org/en-US/docs/Web/SVG/Tutorial/Paths">Svg Paths</a> 的同学建议自行科普~</p>
+
+<ul>
+  <li>
+    <p>M = moveto</p>
+  </li>
+  <li>
+    <p>L = lineto</p>
+  </li>
+  <li>
+    <p>H = horizontal lineto</p>
+  </li>
+  <li>
+    <p>V = vertical lineto</p>
+  </li>
+  <li>
+    <p>C = curveto</p>
+  </li>
+  <li>
+    <p>S = smooth curveto</p>
+  </li>
+  <li>
+    <p>Q = quadratic Belzier curve</p>
+  </li>
+  <li>
+    <p>T = smooth quadratic Belzier curveto</p>
+  </li>
+  <li>
+    <p>A = elliptical Arc</p>
+  </li>
+  <li>
+    <p>Z = closepath</p>
+  </li>
+</ul>
+
+<p>可优先了解 <strong>圆弧 A a</strong>：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>A rx ry x-axis-rotation large-arc-flag sweep-flag x y
+a rx ry x-axis-rotation large-arc-flag sweep-flag dx dy
+</code></pre>
+</div>
+
+<p>路径绘制完毕如何添加描线效果呢？请注意 <strong>stroke-dasharray</strong> 及 <strong>stroke-dashoffset</strong>。</p>
+
+<blockquote>
+  <p>属性 stroke-dasharray 控制描边点划线的图案范式；属性 stroke-dashoffset 指定 dash 模式至路径开始的距离。</p>
+</blockquote>
+
+<p>当 <strong>stroke-dashoffset</strong> 偏移量为 <strong>path</strong> 路径长度时，粉红轨迹完全不可见，逐步减小偏移至 <strong>0</strong> 可使之完全呈现。</p>
+
+<p>这好比在热狗上挤果酱，本应从其左侧挤至右侧。而你却从其右侧开始向右挤，整整偏移了一条热狗的长度。热狗上无半点果酱，只能靠减小偏移来加料喽。</p>
+
+<p>指定 <strong>stroke-dasharray</strong> 为 <strong>path</strong> 路径长度，意味着操作空间为整条热狗。</p>
+
+<p><img src="http://oz54e50y4.bkt.clouddn.com/hotdog.png" alt="" /></p>
+
+<p>友情提示如何获取路径长度：</p>
+
+<div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">pathLength</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s1">'path'</span><span class="p">)[</span><span class="mi">0</span><span class="p">].</span><span class="nx">getTotalLength</span><span class="p">();</span>
+</code></pre>
+</div>
+
+<hr />
+
+<h4 id="绘制粉红圆形尾巴">绘制粉红圆形尾巴</h4>
+
+<p>尾巴可使用图片绘制：</p>
+
+<div class="language-html highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;defs&gt;</span>
+    <span class="nt">&lt;pattern</span> <span class="na">id=</span><span class="s">"tail"</span> <span class="na">width=</span><span class="s">"100%"</span> <span class="na">height=</span><span class="s">"100%"</span> <span class="na">patternContentUnits=</span><span class="s">"objectBoundingBox"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;image</span> <span class="na">width=</span><span class="s">"1"</span> <span class="na">height=</span><span class="s">"1"</span> <span class="na">xlink:href=</span><span class="s">"http://oz54e50y4.bkt.clouddn.com/tail.png"</span> <span class="nt">/&gt;</span>
+    <span class="nt">&lt;/pattern&gt;</span>
+<span class="nt">&lt;/defs&gt;</span>
+<span class="nt">&lt;g&gt;</span>
+    <span class="nt">&lt;circle</span> <span class="na">cx=</span><span class="s">"0"</span> <span class="na">cy=</span><span class="s">"0"</span> <span class="na">r=</span><span class="s">"8"</span> <span class="na">fill=</span><span class="s">"url(#tail)"</span><span class="nt">&gt;&lt;/circle&gt;</span>
+<span class="nt">&lt;/g&gt;</span>
+</code></pre>
+</div>
+
+<p>也可使用渐变绘制：</p>
+
+<div class="language-html highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;defs&gt;</span>
+    <span class="nt">&lt;radialGradient</span> <span class="na">cx=</span><span class="s">"50%"</span> <span class="na">cy=</span><span class="s">"50%"</span> <span class="na">fx=</span><span class="s">"50%"</span> <span class="na">fy=</span><span class="s">"50%"</span> <span class="na">r=</span><span class="s">"60%"</span> <span class="na">id=</span><span class="s">"tail"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;stop</span> <span class="na">stop-opacity=</span><span class="s">"1"</span> <span class="na">stop-color=</span><span class="s">"#FD7991"</span> <span class="na">offset=</span><span class="s">"30%"</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;stop</span> <span class="na">stop-opacity=</span><span class="s">"0.5"</span> <span class="na">stop-color=</span><span class="s">"#fD97AA"</span> <span class="na">offset=</span><span class="s">"40%"</span><span class="nt">/&gt;</span>
+        <span class="nt">&lt;stop</span> <span class="na">stop-opacity=</span><span class="s">"0"</span> <span class="na">stop-color=</span><span class="s">"#FECBD4"</span> <span class="na">offset=</span><span class="s">"80%"</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;/radialGradient&gt;</span>
+<span class="nt">&lt;/defs&gt;</span>
+<span class="nt">&lt;g&gt;</span>
+    <span class="nt">&lt;rect</span> <span class="na">x=</span><span class="s">"-10"</span> <span class="na">y=</span><span class="s">"-10"</span> <span class="na">width=</span><span class="s">"20"</span> <span class="na">height=</span><span class="s">"20"</span> <span class="na">fill=</span><span class="s">"url(#tail)"</span><span class="nt">&gt;&lt;/rect&gt;</span>
+<span class="nt">&lt;/g&gt;</span>
+</code></pre>
+</div>
+
+<p>为尾巴添加动画：</p>
+
+<div class="language-html highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;rect</span> <span class="na">x=</span><span class="s">"-10"</span> <span class="na">y=</span><span class="s">"-10"</span> <span class="na">width=</span><span class="s">"20"</span> <span class="na">height=</span><span class="s">"20"</span> <span class="na">fill=</span><span class="s">"url(#tail)"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;animateMotion</span> <span class="na">path=</span><span class="s">"M 110 10 a 100 100 0 0 1 0 200 a 100 100 0 0 1 0 -200 Z"</span> <span class="na">rotate=</span><span class="s">"auto"</span> <span class="na">dur=</span><span class="s">"2s"</span> <span class="na">repeatCount=</span><span class="s">"indefinite"</span> <span class="nt">/&gt;</span>
+<span class="nt">&lt;/rect&gt;</span>
+</code></pre>
+</div>
+
+<p>动画路径、执行时间、速度曲线等属性与粉红圆环轨迹保持一致即可~</p>
+
+<hr />
+
+<h4 id="控制动画终止位置">控制动画终止位置</h4>
+
+<p>再次阐明具体需求：白色轨迹需自起始点旋转至由用户成长值决定的终点。</p>
+
+<p>假定轨迹描线长度占圆环总长的百分比已知，如何控制动画终止位置？根据百分比计算描线长度然后巴拉巴拉计算坐标点…数学欠佳的还是绕行吧。</p>
+
+<p>控制动画执行次数 <strong>repeatDur</strong> 便可…</p>
+
+<div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">totalTime</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">percent</span> <span class="o">=</span> <span class="mf">0.8</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">runAnimate</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">durTime</span> <span class="o">=</span> <span class="nx">totalTime</span> <span class="o">*</span> <span class="nx">percent</span><span class="p">;</span>
+    <span class="nx">$circleAnimate</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nx">setAttribute</span><span class="p">(</span><span class="s1">'repeatDur'</span><span class="p">,</span> <span class="nx">durTime</span> <span class="o">+</span> <span class="s1">'s'</span><span class="p">);</span>
+    <span class="nx">$tailAnimate</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nx">setAttribute</span><span class="p">(</span><span class="s1">'repeatDur'</span><span class="p">,</span> <span class="nx">durTime</span> <span class="o">+</span> <span class="s1">'s'</span><span class="p">);</span>
+    <span class="nx">$circleAnimate</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nx">beginElement</span><span class="p">();</span>
+    <span class="nx">$tailAnimate</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nx">beginElement</span><span class="p">();</span>
+<span class="p">};</span>
+</code></pre>
+</div>
+
+<p>本例 <a href="https://github.com/sunmengyuan/metis/blob/master/svg/comet.html">源码</a> <a href="https://sunmengyuan.github.io/demos/svg/comet.html">demo</a></p>
+
+<hr />
+
+<p>作者：呆恋小喵</p>
+
+<p>我的后花园：<a href="https://sunmengyuan.github.io/garden/">https://sunmengyuan.github.io/garden/</a></p>
+
+<p>我的 github：<a href="https://github.com/sunmengyuan">https://github.com/sunmengyuan</a></p>
+
+<p>原文链接：<a href="https://sunmengyuan.github.io/garden/2017/11/16/svg-comet.html">https://sunmengyuan.github.io/garden/2017/11/16/svg-comet.html</a></p>
+
+</article>
+<footer>
+    <a href="/garden/views/posts" class="js_goto_posts">返回目录 - 我的印记</a>
+</footer>
+<div class="browser js_browser">
+    <img src="" />
+</div>
+
+<script src="/garden/assets/script/main.js"></script>
+</body>
+</html>

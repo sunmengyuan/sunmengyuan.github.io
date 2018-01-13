@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="keywords" content="前端开发,微信小程序" />
+    <meta name="description" content="超荣幸能够参与我司【更美小程序】的搭建，在此分享些心得希望能够帮助到像我一样的前端界萌新。" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0" />
+    <title>呆恋小喵的后花园 - 入坑微信小程序（项目搭建）</title>
+    <link rel="shortcut icon" href="http://oij8a9ql4.bkt.clouddn.com/shortcut.ico" />
+    <link rel="stylesheet" href="https://cdn.bootcss.com/highlight.js/8.0/styles/sunburst.min.css" />
+    <link rel="stylesheet/less" href="/garden/assets/style/style.less" />
+    <script src="https://lib.sinaapp.com/js/jquery/1.9.1/jquery-1.9.1.min.js"></script>
+    <script src="https://cdn.bootcss.com/less.js/1.7.0/less.min.js"></script>
+    <script src="https://cdn.bootcss.com/highlight.js/8.0/highlight.min.js"></script>
+</head>
+<body>
+<script>
+    var pageData = {};
+    var _hmt = _hmt || [];
+    (function () {
+        var hm = document.createElement('script');
+        hm.src = 'https://hm.baidu.com/hm.js?6b9830e6ab8073ce1a44ad49a03d8596';
+        var s = document.getElementsByTagName('script')[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+<img src="http://oij8a9ql4.bkt.clouddn.com/portrait.jpg" alt="呆恋小喵" width="0" height="0" />
+<nav>
+    <a href="javascript:;" class="js_menu_btn">
+        <span></span>
+        <span></span>
+        <span></span>
+    </a>
+    <ul class="js_menu">
+        <li><a href="/garden/">Home</a></li>
+        <li><a href="/garden/views/posts" class="js_goto_posts">Posts</a></li>
+        <li><a href="/garden/views/about">About</a></li>
+    </ul>
+</nav>
+<a href="javascript:;" class="gotop js_gotop"></a>
+<header class="post" style="background-image: url('http://oij8a9ql4.bkt.clouddn.com/banner.jpg')">
+    <div>
+        <h2>入坑微信小程序（项目搭建）</h2>
+        <time>04 Jan 2018</time>
+        <p class="abstract">超荣幸能够参与我司【更美小程序】的搭建，在此分享些心得希望能够帮助到像我一样的前端界萌新。</p>
+        <ul class="c-fix">
+            
+            <li>微信小程序</li>
+            
+        </ul>
+    </div>
+</header>
+<article class="js_article">
+    <p>因【更美小程序】源码需保密，我仅向大家分享基础建设级别的非业务代码。<a href="https://github.com/sunmengyuan/metis/tree/master/wechat/gm">点我~</a></p>
+
+<p>一个最基本的小程序项目需具备：app.js（入口文件）、app.json（全局配置）、app.wxss（通用样式）、pages/（页面）。pages/ 下的每一页面拥有独自的 .js、.json、.wxss。形如：</p>
+
+<p><img src="http://p20v1ngpr.bkt.clouddn.com/catalog-basic.jpg" alt="" /></p>
+
+<p>想了解更多请参考 <a href="https://mp.weixin.qq.com/debug/wxadoc/dev/quickstart/basic/file.html">微信小程序代码构成</a>。对于中大型项目需明确划分功能模块，我司小程序文件目录如下：</p>
+
+<p><img src="http://p20v1ngpr.bkt.clouddn.com/catalog.jpg" alt="" /></p>
+
+<ul>
+  <li>
+    <p><strong>assets</strong>：静态资源</p>
+
+    <p>&lt;image /&gt; 及 tabBar 支持引用本地静态资源，而 wxss 中 <strong>background-image</strong> 不支持，但支持引用 base64 及网络资源。</p>
+  </li>
+  <li>
+    <p><strong>components</strong>：公用组件</p>
+  </li>
+  <li>
+    <p><strong>templates</strong>：公用模板</p>
+
+    <p><a href="https://mp.weixin.qq.com/debug/wxadoc/dev/framework/custom-component/">组件</a> 与 <a href="https://mp.weixin.qq.com/debug/wxadoc/dev/framework/view/wxml/template.html">模板</a> 的应用场景易混淆。父节点可向组件也可向模板传入 data 控制其视图。然组件的优势在于其 <strong>数据监听</strong>、<strong>事件监听</strong>、<strong>生命周期</strong> 等机制，自行科普 <a href="https://mp.weixin.qq.com/debug/wxadoc/dev/framework/custom-component/component.html">component 构造器</a> 你便明了。</p>
+
+    <p>但构造组件成本较高，json、wxml、wxss、js 需齐备：</p>
+
+    <p><img src="http://p20v1ngpr.bkt.clouddn.com/component.jpg" alt="" /></p>
+
+    <p>反之模板较轻便，构造 wxml 接收 page data 即可：</p>
+
+    <div class="language-html highlighter-rouge"><pre class="highlight"><code>  <span class="nt">&lt;template</span> <span class="na">name=</span><span class="s">"mError"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;view</span> <span class="na">class=</span><span class="s">"mError"</span><span class="nt">&gt;</span>
+          <span class="nt">&lt;image</span> <span class="na">src=</span><span class="s">"/assets/images/holder_error.png"</span><span class="nt">&gt;&lt;/image&gt;</span>
+          <span class="nt">&lt;text&gt;</span>网络错误<span class="nt">&lt;/text&gt;</span>
+      <span class="nt">&lt;/view&gt;</span>
+  <span class="nt">&lt;/template&gt;</span>
+  <span class="nt">&lt;template</span> <span class="na">is=</span><span class="s">"mError"</span> <span class="nt">/&gt;</span>
+</code></pre>
+    </div>
+
+    <p>将模块封装为组件或是模板需开发者分析其特性并结合业务场景定夺（纯粹的视图控制请选择模板）。</p>
+  </li>
+  <li>
+    <p><strong>settings</strong>：配置文件</p>
+
+    <div class="language-js highlighter-rouge"><pre class="highlight"><code>  <span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="p">{</span>
+      <span class="na">version</span><span class="p">:</span> <span class="s1">'1.0.0'</span><span class="p">,</span>
+      <span class="na">server</span><span class="p">:</span> <span class="s1">'https://backend.igengmei.com'</span><span class="p">,</span>
+      <span class="na">release</span><span class="p">:</span> <span class="mi">1</span>
+  <span class="p">}</span>
+</code></pre>
+    </div>
+
+    <p>开发阶段的网络环境往往与生产阶段不同，<strong>settings.js</strong> 配置了生产环境，需自行创建 <strong>settings_local.js</strong>（不入库）配置开发环境。</p>
+
+    <div class="language-js highlighter-rouge"><pre class="highlight"><code>  <span class="kd">var</span> <span class="nx">settings</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'settings'</span><span class="p">);</span>
+  <span class="kd">var</span> <span class="nx">settings_local</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
+  <span class="k">try</span> <span class="p">{</span><span class="nx">settings_local</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'settings_local'</span><span class="p">);}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{}</span>
+  <span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="nx">settings_local</span> <span class="o">||</span> <span class="nx">settings</span>
+</code></pre>
+    </div>
+
+    <p>上述脚本会优先 export <strong>settings_local.js</strong> 内配置。也可将 server 配置为本地服务，然小程序合法域名不支持 localhost…我们可在开发阶段“不校验安全域名、TLS 版本以及 HTTPS 证书”。</p>
+
+    <p><img src="http://p20v1ngpr.bkt.clouddn.com/server.jpg" alt="" /></p>
+  </li>
+  <li>
+    <p><strong>utils</strong>：公用脚本</p>
+
+    <p>utils 类脚本非全局注册需在 page 内 import 方可调用。<strong>app.js</strong> 内注册的全局函数无需 import，可通过 app.method(params) 直接调用：</p>
+
+    <div class="language-js highlighter-rouge"><pre class="highlight"><code>  <span class="c1">// utils 类脚本</span>
+  <span class="kr">import</span> <span class="nx">Common</span> <span class="nx">from</span> <span class="s1">'../../utils/common'</span>
+
+  <span class="kr">const</span> <span class="nx">app</span> <span class="o">=</span> <span class="nx">getApp</span><span class="p">();</span>
+  <span class="nx">Page</span><span class="p">({</span>
+      <span class="na">data</span><span class="p">:</span> <span class="p">{},</span>
+      <span class="p">...</span><span class="nx">Common</span><span class="p">,</span>  
+      <span class="na">onLoad</span><span class="p">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+          <span class="k">this</span><span class="p">.</span><span class="nx">exampleRequest</span><span class="p">();</span>
+          <span class="c1">// 全局注册类脚本</span>
+          <span class="nx">app</span><span class="p">.</span><span class="nx">showToast</span><span class="p">(</span><span class="k">this</span><span class="p">,</span> <span class="p">{</span>
+              <span class="na">message</span><span class="p">:</span> <span class="s1">'呆恋小喵一枚'</span><span class="p">,</span>
+              <span class="na">duration</span><span class="p">:</span> <span class="mi">3000</span><span class="p">,</span>
+              <span class="na">type</span><span class="p">:</span> <span class="s1">'common'</span>
+          <span class="p">});</span>
+      <span class="p">},</span>
+      <span class="na">exampleRequest</span><span class="p">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+          <span class="c1">// 全局注册类脚本  </span>
+          <span class="nx">app</span><span class="p">.</span><span class="nx">request</span><span class="p">({</span>
+              <span class="na">url</span><span class="p">:</span> <span class="s1">'url'</span><span class="p">,</span>
+              <span class="na">method</span><span class="p">:</span> <span class="s1">'GET'</span>
+          <span class="p">});</span>
+      <span class="p">}</span>
+  <span class="p">});</span>  
+</code></pre>
+    </div>
+
+    <p>全局注册使用率高的模块，可减少 page 内的 import，例如 app.request(params)、app.showToast(params) 等：</p>
+
+    <div class="language-js highlighter-rouge"><pre class="highlight"><code>  <span class="kr">import</span> <span class="p">{</span> <span class="nx">getBaseInfo</span> <span class="p">}</span> <span class="nx">from</span> <span class="s1">'utils/baseInfo'</span>
+  <span class="kr">import</span> <span class="nx">Request</span> <span class="nx">from</span> <span class="s1">'utils/request'</span>
+  <span class="kr">import</span> <span class="nx">Toast</span> <span class="nx">from</span> <span class="s1">'utils/toast'</span>
+  
+  <span class="nx">App</span><span class="p">({</span>
+      <span class="na">GLOBAL</span><span class="p">:</span> <span class="p">{</span>
+          <span class="na">baseInfo</span><span class="p">:</span> <span class="nx">getBaseInfo</span><span class="p">()</span>
+      <span class="p">},</span>
+      <span class="na">request</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">params</span><span class="p">)</span> <span class="p">{</span>
+          <span class="nx">Request</span><span class="p">(</span><span class="nx">params</span><span class="p">);</span>
+      <span class="p">},</span>
+      <span class="na">showToast</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">page</span><span class="p">,</span> <span class="nx">opts</span><span class="p">)</span> <span class="p">{</span>
+          <span class="nx">Toast</span><span class="p">.</span><span class="nx">show</span><span class="p">(</span><span class="nx">page</span><span class="p">,</span> <span class="nx">opts</span><span class="p">);</span>
+      <span class="p">}</span>
+  <span class="p">});</span>
+</code></pre>
+    </div>
+
+    <p>也可在 <strong>GLOBAL</strong> 内注册一些全局 data，在 <strong>page</strong> 内通过 <strong>app.GLOBAL</strong> 获取。</p>
+  </li>
+</ul>
+
+<hr />
+
+<h3 id="踩坑札记">踩坑札记</h3>
+
+<h4 id="关于-tabbar">关于 tabBar</h4>
+
+<p>app.json 内可配置 tabBar 的 pagePath、text、iconPath、selectedIconPath，但图标尺寸、文字大小、元素间距不可自定义。icon 尺寸建议为 81px * 81px，若 icon 切图恰好撑满画布，图标与文字便相互紧贴不美观。故 icon 切图底边距需有所保留：</p>
+
+<p><img src="http://p20v1ngpr.bkt.clouddn.com/tabbar.jpg" alt="" /></p>
+
+<h4 id="关于-toast">关于 toast</h4>
+
+<p>小程序自带 <strong>wx.showToast</strong> 必须传入 icon：</p>
+
+<div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="nx">wx</span><span class="p">.</span><span class="nx">showToast</span><span class="p">({</span>
+    <span class="na">title</span><span class="p">:</span> <span class="s1">'成功'</span><span class="p">,</span>
+    <span class="na">icon</span><span class="p">:</span> <span class="s1">'success'</span><span class="p">,</span>
+    <span class="na">duration</span><span class="p">:</span> <span class="mi">2000</span>
+<span class="p">});</span>
+</code></pre>
+</div>
+
+<p>但我想使用朴素的 toast：</p>
+
+<p><img src="http://p20v1ngpr.bkt.clouddn.com/toast.jpg" alt="" /></p>
+
+<p>自行封装 toast 捎带默认类型及自定义类型是个不错的选择：</p>
+
+<div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="k">switch</span> <span class="p">(</span><span class="nx">opts</span><span class="p">.</span><span class="nx">type</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">case</span> <span class="s1">'common'</span><span class="err">:</span>
+        <span class="nx">page</span><span class="p">.</span><span class="nx">setData</span><span class="p">({</span>
+            <span class="s1">'render.toast.show'</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+            <span class="s1">'render.toast.message'</span><span class="p">:</span> <span class="nx">opts</span><span class="p">.</span><span class="nx">message</span>
+        <span class="p">});</span>
+        <span class="kd">let</span> <span class="nx">t</span> <span class="o">=</span> <span class="nx">setTimeout</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+            <span class="nx">page</span><span class="p">.</span><span class="nx">setData</span><span class="p">({</span>
+                <span class="s1">'render.toast.show'</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
+                <span class="s1">'render.toast.message'</span><span class="p">:</span> <span class="s1">''</span>
+            <span class="p">});</span>
+            <span class="nx">opts</span><span class="p">.</span><span class="nx">callback</span><span class="p">();</span>
+        <span class="p">},</span> <span class="nx">opts</span><span class="p">.</span><span class="nx">duration</span><span class="p">);</span>
+        <span class="k">break</span><span class="p">;</span>
+    <span class="k">case</span> <span class="s1">'loading'</span><span class="p">:</span>
+        <span class="nx">wx</span><span class="p">.</span><span class="nx">showToast</span><span class="p">({</span>
+            <span class="na">title</span><span class="p">:</span> <span class="nx">opts</span><span class="p">.</span><span class="nx">message</span><span class="p">,</span>
+            <span class="na">duration</span><span class="p">:</span> <span class="nx">opts</span><span class="p">.</span><span class="nx">duration</span><span class="p">,</span>
+            <span class="na">icon</span><span class="p">:</span> <span class="s1">'loading'</span>
+        <span class="p">});</span>
+        <span class="k">break</span><span class="p">;</span>
+    <span class="k">case</span> <span class="s1">'success'</span><span class="p">:</span>
+        <span class="nx">wx</span><span class="p">.</span><span class="nx">showToast</span><span class="p">({</span>
+            <span class="na">title</span><span class="p">:</span> <span class="nx">opts</span><span class="p">.</span><span class="nx">message</span><span class="p">,</span>
+            <span class="na">duration</span><span class="p">:</span> <span class="nx">opts</span><span class="p">.</span><span class="nx">duration</span><span class="p">,</span>
+            <span class="na">icon</span><span class="p">:</span> <span class="s1">'success'</span>
+        <span class="p">});</span>
+        <span class="k">break</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<h4 id="关于-rich-text-">关于 &lt;rich-text /&gt;</h4>
+
+<p>&lt;rich-text /&gt; 渲染时不会将 nodes 解析为常规标签，你只能拿到这样一大坨：</p>
+
+<p><img src="http://p20v1ngpr.bkt.clouddn.com/richtext.jpg" alt="" /></p>
+
+<p>无法直接获取其中的 dom，且不可在 .wxss 中定义其样式故必须添加内联 style。</p>
+
+<p>且 &lt;rich-text /&gt; 无法对 nodes 自动纠错：例如部分浏览器可解析 <strong>&lt;u&gt;一段错误代码&lt;/u&gt;</strong>， &lt;rich-text /&gt; 则直接过滤错误代码不进行渲染。</p>
+
+<h4 id="关于-onpulldownrefresh">关于 onPullDownRefresh</h4>
+
+<p>enablePullDownRefresh 仅可开启 pulldown 的交互及监听，并非想象中的 <strong>window.location.reload</strong>。我们需要定义自己的 reload：</p>
+
+<div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="nx">reload</span><span class="err">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">page</span><span class="p">,</span> <span class="nx">callback</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">page</span><span class="p">.</span><span class="nx">setData</span><span class="p">({</span>
+        <span class="na">reqError</span><span class="p">:</span> <span class="kc">false</span>
+    <span class="p">});</span>
+    <span class="nx">callback</span> <span class="o">&amp;&amp;</span> <span class="nx">callback</span><span class="p">();</span>
+    <span class="nx">page</span><span class="p">.</span><span class="nx">onLoad</span><span class="p">();</span>
+    <span class="nx">page</span><span class="p">.</span><span class="nx">onReady</span><span class="p">();</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="nx">onPullDownRefresh</span><span class="err">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+    <span class="kr">const</span> <span class="nx">_page</span> <span class="o">=</span> <span class="k">this</span><span class="p">;</span>
+    <span class="nx">Loadmore</span><span class="p">.</span><span class="nx">clear</span><span class="p">(</span><span class="nx">_page</span><span class="p">);</span>
+    <span class="nx">app</span><span class="p">.</span><span class="nx">reload</span><span class="p">(</span><span class="nx">_page</span><span class="p">,</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+        <span class="nx">_page</span><span class="p">.</span><span class="nx">setData</span><span class="p">({</span>
+            <span class="s1">'render.orders'</span><span class="p">:</span> <span class="p">[],</span>
+            <span class="s1">'render.loading'</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+            <span class="s1">'render.empty.show'</span><span class="p">:</span> <span class="kc">false</span>
+        <span class="p">});</span>
+    <span class="p">});</span>
+    <span class="nx">wx</span><span class="p">.</span><span class="nx">stopPullDownRefresh</span><span class="p">();</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<p>小程序无 window 概念，不可调用 <strong>window.location.reload</strong>。其实 reload 无非 <strong>重置 data</strong>、重新调用 <strong>onLoad</strong> 及 <strong>onReady</strong>（原谅我这肤浅的理解，但你可在 callback 中做任何意义上的重置）。</p>
+
+<p>在 onPullDownRefresh 回调执行时 wx.stopPullDownRefresh() 防止用户疯狂 pulldown 导致卡涩。</p>
+
+<h4 id="关于-wxgetsysteminfo">关于 wx.getSystemInfo</h4>
+
+<p>调用 wx.getSystemInfo 可获取设备信息，fail 回调限制了获取失败时的尝试次数：</p>
+
+<div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">getMobileInfo</span><span class="p">(</span><span class="nx">i</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">wx</span><span class="p">.</span><span class="nx">getSystemInfo</span><span class="p">({</span>
+        <span class="na">success</span><span class="p">:</span> <span class="p">(</span><span class="nx">res</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+            <span class="nx">BaseInfo</span><span class="p">.</span><span class="nx">mobile</span> <span class="o">=</span> <span class="nx">res</span><span class="p">.</span><span class="nx">brand</span> <span class="o">+</span> <span class="nx">res</span><span class="p">.</span><span class="nx">model</span><span class="p">;</span>
+            <span class="nx">BaseInfo</span><span class="p">.</span><span class="nx">system</span> <span class="o">=</span> <span class="nx">res</span><span class="p">.</span><span class="nx">platform</span> <span class="o">+</span> <span class="nx">res</span><span class="p">.</span><span class="nx">system</span><span class="p">;</span>
+            <span class="nx">BaseInfo</span><span class="p">.</span><span class="nx">wechat</span> <span class="o">=</span> <span class="nx">res</span><span class="p">.</span><span class="nx">version</span><span class="p">;</span>
+            <span class="nx">BaseInfo</span><span class="p">.</span><span class="nx">winWidth</span> <span class="o">=</span> <span class="nx">res</span><span class="p">.</span><span class="nx">windowWidth</span> <span class="o">/</span> <span class="p">(</span><span class="nx">res</span><span class="p">.</span><span class="nx">windowWidth</span> <span class="o">/</span> <span class="mi">750</span><span class="p">);</span>
+            <span class="nx">BaseInfo</span><span class="p">.</span><span class="nx">winHeight</span> <span class="o">=</span> <span class="nx">res</span><span class="p">.</span><span class="nx">windowHeight</span> <span class="o">/</span> <span class="p">(</span><span class="nx">res</span><span class="p">.</span><span class="nx">windowWidth</span> <span class="o">/</span> <span class="mi">750</span><span class="p">);</span>
+        <span class="p">},</span>
+        <span class="na">fail</span><span class="p">:</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+            <span class="p">(</span><span class="nx">i</span> <span class="o">&lt;</span> <span class="mi">3</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="nx">getMobileInfo</span><span class="p">(</span><span class="nx">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">});</span>
+<span class="p">}</span>
+<span class="nx">getMobileInfo</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+</code></pre>
+</div>
+
+<p>请注意 windowWidth、windowHeight 度量单位为 px，而我司项目规定使用 rpx。为实现单位统一，需对 windowWidth 及 windowHeight 做单位转换：</p>
+
+<div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="nx">BaseInfo</span><span class="p">.</span><span class="nx">winWidth</span> <span class="o">=</span> <span class="nx">res</span><span class="p">.</span><span class="nx">windowWidth</span> <span class="o">/</span> <span class="p">(</span><span class="nx">res</span><span class="p">.</span><span class="nx">windowWidth</span> <span class="o">/</span> <span class="mi">750</span><span class="p">);</span>
+<span class="nx">BaseInfo</span><span class="p">.</span><span class="nx">winHeight</span> <span class="o">=</span> <span class="nx">res</span><span class="p">.</span><span class="nx">windowHeight</span> <span class="o">/</span> <span class="p">(</span><span class="nx">res</span><span class="p">.</span><span class="nx">windowWidth</span> <span class="o">/</span> <span class="mi">750</span><span class="p">);</span>
+</code></pre>
+</div>
+
+<p><strong><em>1rpx = (设备宽度 / 750) px</em></strong></p>
+
+<p><img src="http://p20v1ngpr.bkt.clouddn.com/rpx.jpg" alt="" /></p>
+
+<h4 id="关于-wxgetlocation">关于 wx.getLocation</h4>
+
+<p><strong>首次</strong> 执行 wx.getLocation 小程序将自动调启如下 dialog：</p>
+
+<p><img src="http://p20v1ngpr.bkt.clouddn.com/location.jpg" alt="" /></p>
+
+<p>请注意是 <strong>首次</strong>！无论用户选择“确定”或是“取消”，再次进入“更美测试”均不会被询问是否开启定位（调用 100 次 wx.getLocation 也无济于事）。除非用户手动清理微信缓存、更新微信、切换账号…</p>
+
+<p><img src="http://p20v1ngpr.bkt.clouddn.com/wx-storage.jpg" alt="" /></p>
+
+<p>各种缓存：</p>
+
+<p><img src="http://p20v1ngpr.bkt.clouddn.com/storage.jpg" alt="" /></p>
+
+<p>存在上述问题的 API 绝不止 wx.getLocation 例如 wx.login，遗憾的是，小程序并未开放清理缓存的接口。但可通过 <strong>wx.openSetting</strong> 再次请求用户开启授权：</p>
+
+<p><img src="http://p20v1ngpr.bkt.clouddn.com/setting.jpg" alt="" /></p>
+
+<h4 id="关于-wxreportanalytics">关于 wx.reportAnalytics</h4>
+
+<p>小程序数据分析可通过填写配置上报、API 上报：</p>
+
+<p><img src="http://p20v1ngpr.bkt.clouddn.com/track.jpg" alt="" /></p>
+
+<p>对于填写配置上报，需提交触发动作、触发页面、触发元素、埋点数据等。但埋点数据需从 page data 中获取，看看官方文档是怎么曰的：</p>
+
+<p><img src="http://p20v1ngpr.bkt.clouddn.com/track-data.jpg" alt="" /></p>
+
+<p>OMG…需要在 page data 内维护埋点状态，当埋点量较大时上报数据的复杂度可想而知。我曾傻傻的认为 data 字段值等同 dataset 值：</p>
+
+<div class="language-html highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;text</span>
+    <span class="na">wx:for=</span><span class="s">"{ { areas } }"</span>
+    <span class="na">data-id=</span><span class="s">"{ { item.id } }"</span>
+    <span class="na">data-name=</span><span class="s">"{ { item.name } }"</span>
+    <span class="na">data-idx=</span><span class="s">"{ { index } }"</span>
+    <span class="na">bindtap=</span><span class="s">"tapItem"</span><span class="nt">&gt;</span>{ { item.name } }<span class="nt">&lt;/text&gt;</span>
+</code></pre>
+</div>
+
+<p>未曾想竟为 page 实例中的 data 值：</p>
+
+<div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="nx">Page</span><span class="p">({</span>
+    <span class="na">data</span><span class="p">:</span> <span class="p">{},</span>
+    <span class="na">onLoad</span><span class="p">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{},</span>
+    <span class="na">onReady</span><span class="p">:</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{}</span>
+<span class="p">});</span>
+</code></pre>
+</div>
+
+<p>如此看来 API 上报更简单，为触发元素 dataset 埋点数据并调用 wx.reportAnalytics 传入参数：</p>
+
+<div class="language-html highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;text</span>
+    <span class="na">wx:for=</span><span class="s">"{ { orders } }"</span>
+    <span class="na">data-id=</span><span class="s">"{ { item.id } }"</span>
+    <span class="na">data-name=</span><span class="s">"{ { item.name } }"</span>
+    <span class="na">data-type=</span><span class="s">"order"</span>
+    <span class="na">bindtap=</span><span class="s">"triggerSelected"</span><span class="nt">&gt;</span>{ { item.name } }<span class="nt">&lt;/text&gt;</span>
+</code></pre>
+</div>
+
+<div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="nx">triggerSelected</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">dataset</span> <span class="o">=</span> <span class="nx">e</span><span class="p">.</span><span class="nx">target</span><span class="p">.</span><span class="nx">dataset</span><span class="p">;</span>
+    <span class="kd">var</span> <span class="nx">id</span> <span class="o">=</span> <span class="nx">dataset</span><span class="p">.</span><span class="nx">id</span><span class="p">;</span>
+    <span class="kd">var</span> <span class="nx">name</span> <span class="o">=</span> <span class="nx">dataset</span><span class="p">.</span><span class="nx">name</span><span class="p">;</span>
+    <span class="kd">var</span> <span class="nx">type</span> <span class="o">=</span> <span class="nx">dataset</span><span class="p">.</span><span class="nx">type</span><span class="p">;</span>
+    <span class="nx">wx</span><span class="p">.</span><span class="nx">reportAnalytics</span><span class="p">(</span><span class="s1">'click_fliter_item'</span><span class="p">,</span> <span class="p">{</span>
+        <span class="na">item_type</span><span class="p">:</span> <span class="nx">type</span><span class="p">,</span>
+        <span class="na">item_id</span><span class="p">:</span> <span class="nx">id</span><span class="p">,</span>
+        <span class="na">item_name</span><span class="p">:</span> <span class="nx">name</span>
+    <span class="p">});</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<h4 id="关于-rpx">关于 rpx</h4>
+
+<p>rpx 在不同设备被小程序换算为 px 时能产生各种 bug，当设备宽度除不尽 750 时结果值精确至哪一位呢（额…bug 产生原因本人猜的），看看换算表：</p>
+
+<p><img src="http://p20v1ngpr.bkt.clouddn.com/rpx.jpg" alt="" /></p>
+
+<p>举个例子：</p>
+
+<div class="language-html highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;view</span> <span class="na">class=</span><span class="s">"fliter-bar"</span> <span class="na">style=</span><span class="s">"top: { { top } }rpx;"</span><span class="nt">&gt;&lt;/view&gt;</span>
+<span class="nt">&lt;view</span> <span class="na">class=</span><span class="s">"fliter-wrap"</span> <span class="na">style=</span><span class="s">"top: { { top + 84 } }rpx;"</span><span class="nt">&gt;&lt;/view&gt;</span>
+</code></pre>
+</div>
+
+<p>问题一：当 top = 0 时，0rpx 被换算为 0.5px 也是厉害~</p>
+
+<p><img src="http://p20v1ngpr.bkt.clouddn.com/rpx-top.jpg" alt="" /></p>
+
+<p>解决方案：</p>
+
+<div class="language-html highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;view</span> <span class="na">class=</span><span class="s">"fliter-bar"</span> <span class="na">style=</span><span class="s">"top: { { top ? (top + 'rpx') : 0 } };"</span><span class="nt">&gt;&lt;/view&gt;</span>
+</code></pre>
+</div>
+
+<p>问题二：当 fliter-bar 高度为 84rpx，理论上紧贴的 fliter-bar 与 fliter-wrap 在部分设备上也不紧贴…</p>
+
+<h4 id="关于-setdata">关于 setData</h4>
+
+<p>假如你想在 this.setData 的 key 中传入变量，下述写法报错：</p>
+
+<div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="nx">triggerSelected</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">dataset</span> <span class="o">=</span> <span class="nx">e</span><span class="p">.</span><span class="nx">target</span><span class="p">.</span><span class="nx">dataset</span><span class="p">;</span>
+    <span class="kd">var</span> <span class="nx">id</span> <span class="o">=</span> <span class="nx">dataset</span><span class="p">.</span><span class="nx">id</span><span class="p">;</span>
+    <span class="kd">var</span> <span class="nx">name</span> <span class="o">=</span> <span class="nx">dataset</span><span class="p">.</span><span class="nx">name</span><span class="p">;</span>
+    <span class="kd">var</span> <span class="nx">type</span> <span class="o">=</span> <span class="nx">dataset</span><span class="p">.</span><span class="nx">type</span><span class="p">;</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">setData</span><span class="p">({</span>
+        <span class="nx">selected</span><span class="p">[</span><span class="nx">type</span><span class="p">]:</span> <span class="p">{</span>
+            <span class="na">id</span><span class="p">:</span> <span class="nx">id</span><span class="p">,</span>
+            <span class="na">name</span><span class="p">:</span> <span class="nx">name</span>
+        <span class="p">}</span>
+    <span class="p">});</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<p>且 this.setData 不支持模板字符串形式的 key，下述写法也报错：</p>
+
+<div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="nx">triggerSelected</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">dataset</span> <span class="o">=</span> <span class="nx">e</span><span class="p">.</span><span class="nx">target</span><span class="p">.</span><span class="nx">dataset</span><span class="p">;</span>
+    <span class="kd">var</span> <span class="nx">id</span> <span class="o">=</span> <span class="nx">dataset</span><span class="p">.</span><span class="nx">id</span><span class="p">;</span>
+    <span class="kd">var</span> <span class="nx">name</span> <span class="o">=</span> <span class="nx">dataset</span><span class="p">.</span><span class="nx">name</span><span class="p">;</span>
+    <span class="kd">var</span> <span class="nx">type</span> <span class="o">=</span> <span class="nx">dataset</span><span class="p">.</span><span class="nx">type</span><span class="p">;</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">setData</span><span class="p">({</span>
+        <span class="err">`</span><span class="nx">selected</span><span class="p">.</span><span class="nx">$</span><span class="p">{</span><span class="nx">type</span><span class="p">}</span><span class="err">`</span><span class="p">:</span> <span class="p">{</span>
+            <span class="na">id</span><span class="p">:</span> <span class="nx">id</span><span class="p">,</span>
+            <span class="na">name</span><span class="p">:</span> <span class="nx">name</span>
+        <span class="p">}</span>
+    <span class="p">});</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<p>可将 selected 存入变量，直接操作 selected 变量后再 this.setData：</p>
+
+<div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="nx">triggerSelected</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">dataset</span> <span class="o">=</span> <span class="nx">e</span><span class="p">.</span><span class="nx">target</span><span class="p">.</span><span class="nx">dataset</span><span class="p">;</span>
+    <span class="kd">var</span> <span class="nx">id</span> <span class="o">=</span> <span class="nx">dataset</span><span class="p">.</span><span class="nx">id</span><span class="p">;</span>
+    <span class="kd">var</span> <span class="nx">name</span> <span class="o">=</span> <span class="nx">dataset</span><span class="p">.</span><span class="nx">name</span><span class="p">;</span>
+    <span class="kd">var</span> <span class="nx">type</span> <span class="o">=</span> <span class="nx">dataset</span><span class="p">.</span><span class="nx">type</span><span class="p">;</span>
+    <span class="kd">var</span> <span class="nx">selected</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="nx">selected</span><span class="p">;</span>
+    <span class="nx">selected</span><span class="p">[</span><span class="nx">type</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="na">id</span><span class="p">:</span> <span class="nx">id</span><span class="p">,</span>
+        <span class="na">name</span><span class="p">:</span> <span class="nx">name</span>
+    <span class="p">};</span>
+    <span class="k">this</span><span class="p">.</span><span class="nx">setData</span><span class="p">({</span>
+        <span class="na">selected</span><span class="p">:</span> <span class="nx">selected</span>
+    <span class="p">});</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<p>检测 page data 内 selected 值与预期的一致，但当 selected 与视图渲染相关时，意想不到的情况发生了…假定我通过 selected 的某一属性值控制元素 class：</p>
+
+<div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="o">&lt;</span><span class="nx">text</span>
+    <span class="kr">class</span><span class="o">=</span><span class="s2">"{ { selected.order.id == item.id ? 'active' : '' } }"</span>
+    <span class="nl">wx</span><span class="p">:</span><span class="k">for</span><span class="o">=</span><span class="s2">"{ { orders } }"</span>
+    <span class="nx">data</span><span class="o">-</span><span class="nx">id</span><span class="o">=</span><span class="s2">"{ { item.id } }"</span>
+    <span class="nx">data</span><span class="o">-</span><span class="nx">name</span><span class="o">=</span><span class="s2">"{ { item.name } }"</span>
+    <span class="nx">data</span><span class="o">-</span><span class="nx">type</span><span class="o">=</span><span class="s2">"order"</span>
+    <span class="nx">bindtap</span><span class="o">=</span><span class="s2">"triggerSelected"</span><span class="o">&gt;</span><span class="p">{</span> <span class="p">{</span> <span class="nx">item</span><span class="p">.</span><span class="nx">name</span> <span class="p">}</span> <span class="p">}</span><span class="o">&lt;</span><span class="sr">/text</span><span class="err">&gt;
+</span></code></pre>
+</div>
+
+<p>当元素被点击时其 class 被赋值 active 使之呈现绿色：</p>
+
+<p><img src="http://p20v1ngpr.bkt.clouddn.com/active1.jpg" alt="" /></p>
+
+<p>而后我点击了另一与之前被点击元素 type 不同的元素，理论上不应影响第一次被点击元素的状态（selected.type2 变化不影响 selected.type1），然而：</p>
+
+<p><img src="http://p20v1ngpr.bkt.clouddn.com/active2.jpg" alt="" /></p>
+
+<p>active 仍在绿色却不见了，这 bug 也是醉了，我不得不写点烂代码了（通过 switch case 一一处理）：</p>
+
+<div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="nx">triggerSelected</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">dataset</span> <span class="o">=</span> <span class="nx">e</span><span class="p">.</span><span class="nx">target</span><span class="p">.</span><span class="nx">dataset</span><span class="p">;</span>
+    <span class="kd">var</span> <span class="nx">id</span> <span class="o">=</span> <span class="nx">dataset</span><span class="p">.</span><span class="nx">id</span><span class="p">;</span>
+    <span class="kd">var</span> <span class="nx">name</span> <span class="o">=</span> <span class="nx">dataset</span><span class="p">.</span><span class="nx">name</span><span class="p">;</span>
+    <span class="kd">var</span> <span class="nx">type</span> <span class="o">=</span> <span class="nx">dataset</span><span class="p">.</span><span class="nx">type</span><span class="p">;</span>
+    <span class="kd">var</span> <span class="nx">selected</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="nx">selected</span><span class="p">;</span>
+    <span class="k">switch</span> <span class="p">(</span><span class="nx">type</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">case</span> <span class="s1">'area'</span><span class="err">:</span>
+            <span class="k">this</span><span class="p">.</span><span class="nx">setData</span><span class="p">({</span>
+                <span class="s1">'selected.area'</span><span class="p">:</span> <span class="p">{</span>
+                    <span class="na">id</span><span class="p">:</span> <span class="nx">id</span><span class="p">,</span>
+                    <span class="na">name</span><span class="p">:</span> <span class="nx">name</span>
+                <span class="p">}</span>
+            <span class="p">});</span>
+            <span class="k">break</span><span class="p">;</span>
+        <span class="k">case</span> <span class="s1">'tag'</span><span class="p">:</span>
+            <span class="k">this</span><span class="p">.</span><span class="nx">setData</span><span class="p">({</span>
+                <span class="s1">'selected.tag'</span><span class="p">:</span> <span class="p">{</span>
+                    <span class="na">id</span><span class="p">:</span> <span class="nx">id</span><span class="p">,</span>
+                    <span class="na">name</span><span class="p">:</span> <span class="nx">name</span>
+                <span class="p">}</span>
+            <span class="p">});</span>
+            <span class="k">break</span><span class="p">;</span>
+        <span class="k">case</span> <span class="s1">'order'</span><span class="p">:</span>
+            <span class="k">this</span><span class="p">.</span><span class="nx">setData</span><span class="p">({</span>
+                <span class="s1">'selected.order'</span><span class="p">:</span> <span class="p">{</span>
+                    <span class="na">id</span><span class="p">:</span> <span class="nx">id</span><span class="p">,</span>
+                    <span class="na">name</span><span class="p">:</span> <span class="nx">name</span>
+                <span class="p">}</span>
+            <span class="p">});</span>
+            <span class="k">break</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<hr />
+
+<p>未完待续，谢谢关注~</p>
+
+<p>作者：呆恋小喵</p>
+
+<p>我的后花园：<a href="https://sunmengyuan.github.io/garden/">https://sunmengyuan.github.io/garden/</a></p>
+
+<p>我的 github：<a href="https://github.com/sunmengyuan">https://github.com/sunmengyuan</a></p>
+
+<p>原文链接：<a href="https://sunmengyuan.github.io/garden/2018/01/04/xcx-gm.html">https://sunmengyuan.github.io/garden/2018/01/04/xcx-gm.html</a></p>
+
+</article>
+<footer>
+    <a href="/garden/views/posts" class="js_goto_posts">返回目录 - 我的印记</a>
+</footer>
+<div class="browser js_browser">
+    <img src="" />
+</div>
+
+<script src="/garden/assets/script/main.js"></script>
+</body>
+</html>

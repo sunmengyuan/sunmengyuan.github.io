@@ -38,6 +38,12 @@ thumb: "http://oij8a9ql4.bkt.clouddn.com/default-fe.jpg"
     相关知识：[Express.js](http://www.expressjs.com.cn/)、[Websocket](https://socket.io/)、[MongoDB](https://www.mongodb.com/)、[Mongoose](http://www.nodeclass.com/api/mongoose.html)
    
     该项目使用 Express.js 框架搭建，使用 MongoDB 存储数据。核心内容在于全双工通讯请查阅 [Websocket](https://socket.io/)。
+
+__开启自恋模式__ 欢迎欣赏本人深度好文：
+
++ [NodeJS 小工具推荐](https://sunmengyuan.github.io/garden/2017/10/20/node-tool.html)    
+
++ [我的 Mock Server - Meow Mock](https://sunmengyuan.github.io/garden/2017/09/15/meow-mock.html)
     
 *****
 
@@ -139,6 +145,8 @@ React Native 环境搭建指南，正在撰写中，敬请期待。
 
 使用 Svg 绘制的图标无限放大后不模糊这点很赞。但其更强大的功能在于动画，可惜我的示例比较简易无法体现这点...
 
+__开启自恋模式__ 欢迎欣赏本人深度好文：[Svg 路径动画实现旋转进度条](https://sunmengyuan.github.io/garden/2017/11/16/svg-comet.html)
+
 *****
 
 ### Three.js ###
@@ -208,6 +216,16 @@ __开启自恋模式__ 欢迎欣赏本人深度好文：[Sass 学习笔记（应
 上面两个是基友的大作业啦，属于友情开发。
 
 相关知识：[Webpack](https://webpack.github.io/docs/)
+
+*****
+
+### 微信小程序 ###
+
+__开启自恋模式__ 欢迎欣赏本人深度好文：
+
++ [入坑微信小程序（项目搭建）](https://sunmengyuan.github.io/garden/2018/01/04/xcx-gm.html)
+
++ [微信小程序开发心得](https://sunmengyuan.github.io/garden/2017/07/05/xcx-cocktail.html)
 
 *****
 

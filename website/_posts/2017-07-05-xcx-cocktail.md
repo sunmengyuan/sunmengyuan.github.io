@@ -83,10 +83,16 @@ Page({
 
 *****
 
+###### 2018/01/15 续更
+
+超荣幸能够参与我司【更美小程序】的搭建，在此分享些心得希望能够帮助到像我一样的前端界萌新，请欣赏 [入坑微信小程序（项目搭建）](https://sunmengyuan.github.io/garden/2018/01/04/xcx-gm.html)。
+
+*****
+
 作者：呆恋小喵
 
 我的后花园：<https://sunmengyuan.github.io/garden/>
 
 我的 github：<https://github.com/sunmengyuan>
 
-原文链接：<https://sunmengyuan.github.io/garden/2017/07/05/wechat-cocktail.html>
+原文链接：<https://sunmengyuan.github.io/garden/2017/07/05/xcx-cocktail.html>

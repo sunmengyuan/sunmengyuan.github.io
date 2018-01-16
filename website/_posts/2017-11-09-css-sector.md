@@ -3,7 +3,7 @@ layout: post
 title: "纯 Css 绘制扇形"
 date: "2017-11-09"
 abstract: "在此分享如何纯 Css 打造圆环进度条。阅读此文需具备基本数学知识：圆心角、弧度制、三角函数。"
-keywords: ["css", "css3"]
+keywords: ["css", "css3", "sass"]
 thumb: "http://oz54mleef.bkt.clouddn.com/thumb.jpg"
 ---
 

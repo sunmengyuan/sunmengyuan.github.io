@@ -4,12 +4,12 @@ title: "微信小程序开发心得"
 date: "2017-07-05"
 abstract: "业余时间开发了一枚调制鸡尾酒的小游戏，具体技术细节不在此赘述，谈些个人感受。"
 keywords: ["微信小程序"]
-thumb: "http://osm0bpix4.bkt.clouddn.com/thumb.jpg"
+thumb: "http://p3asta5xg.bkt.clouddn.com/qrcode.jpg"
 ---
 
 首先欢迎大家捧场：
 
-![](http://osm0bpix4.bkt.clouddn.com/wxcode.jpg)
+![](http://p3asta5xg.bkt.clouddn.com/qrcode.jpg)
 
 [源码](https://github.com/sunmengyuan/metis/tree/master/wechat/cocktail) 
 
@@ -31,9 +31,9 @@ __hover-class__ 可控制元素被点击时的瞬间状态，对此我大开脑�
 
 正确做法如下：
 
-![](http://osm0bpix4.bkt.clouddn.com/example1-code1.jpg)
+![](http://p3asta5xg.bkt.clouddn.com/example1-code1.jpg)
 
-![](http://osm0bpix4.bkt.clouddn.com/example1-code2.jpg)
+![](http://p3asta5xg.bkt.clouddn.com/example1-code2.jpg)
 
 上述其实是使用 __Data__ 控制 __Dom__ 表现的通用思路，与 __jQuery__ 大大不同。微信小程序的设计思想接近于 [React](https://facebook.github.io/react/) 或者 [Vue](http://cn.vuejs.org/)，属于数据驱动且含生命周期的概念，不了解的同学请自行科普...
 
@@ -43,7 +43,7 @@ __hover-class__ 可控制元素被点击时的瞬间状态，对此我大开脑�
 
 顺便说下 __wx:for__ 是个好东西，对于列表结构较多的页面大大节省了 __wxml__ 代码量，当然其它框架也有类似的循环语句。语句 __wx:for__ 可多重嵌套，使用 __wx:for-item__ 变更循环变量名以防止混淆。
 
-![](http://osm0bpix4.bkt.clouddn.com/example2-code.jpg)
+![](http://p3asta5xg.bkt.clouddn.com/example2-code.jpg)
 
 *****
 
@@ -51,11 +51,11 @@ __hover-class__ 可控制元素被点击时的瞬间状态，对此我大开脑�
 
 该项目的图片资源使用[七牛](https://portal.qiniu.com)管理，七牛本身也有缓存，但在清除七牛缓存后发现小程序内的图片缓存仍在。故点击了微信开发者工具中的如下几个按钮：
 
-![](http://osm0bpix4.bkt.clouddn.com/clean-cache.jpg)
+![](http://p3asta5xg.bkt.clouddn.com/clean-cache.jpg)
 
 并不奏效...
 
-最终的解决方案是在图片链接后加一个不痛不痒的参数，例如：http://osm0bpix4.bkt.clouddn.com/clean-cache.jpg?refresh
+最终的解决方案是在图片链接后加一个不痛不痒的参数，例如：http://p3asta5xg.bkt.clouddn.com/clean-cache.jpg?refresh
 
 *****
 

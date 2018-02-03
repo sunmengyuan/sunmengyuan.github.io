@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Sass 学习笔记（应用场景的思考）"
+title: "Sass 学习笔记"
 date: "2017-05-17"
 abstract: "本文以 sass 语法点为主线展开，但语法细节不在此赘述，如有疑问请移驾至 http://sass-lang.com 自行查阅。我所认为的 sass 的优势：结构化（层级关系更清晰）、组件化（公用模块的提取）、继承（公用样式的提取），希望读者能在浏览完此文后有所体会。"
 keywords: ["sass", "css 预处理器"]

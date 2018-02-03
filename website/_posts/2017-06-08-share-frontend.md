@@ -195,7 +195,7 @@ __开启自恋模式__ 欢迎欣赏本人深度好文：[Svg 路径动画实现�
 
 + [Sass 入门 - Sass 教程](http://www.w3cplus.com/sassguide/)
 
-__开启自恋模式__ 欢迎欣赏本人深度好文：[Sass 学习笔记（应用场景的思考）](https://sunmengyuan.github.io/garden/2017/05/17/sass-application.html)
+__开启自恋模式__ 欢迎欣赏本人深度好文：[Sass 学习笔记](https://sunmengyuan.github.io/garden/2017/05/17/sass-application.html)
 
 *****
 
@@ -225,7 +225,7 @@ __开启自恋模式__ 欢迎欣赏本人深度好文：
 
 + [入坑微信小程序（项目搭建）](https://sunmengyuan.github.io/garden/2018/01/04/xcx-gm.html)
 
-+ [微信小程序开发心得](https://sunmengyuan.github.io/garden/2017/07/05/xcx-cocktail.html)
++ [初尝微信小程序（浪漫调酒师）](https://sunmengyuan.github.io/garden/2017/07/05/xcx-cocktail.html)
 
 *****
 

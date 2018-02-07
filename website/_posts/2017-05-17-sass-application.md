@@ -691,7 +691,7 @@ for 循环的书写形式有两种：
 
 区域划分是有一定规则的，如下图：当前行仅含一张图片时图片宽度为 100%，两张时为 50%，... n 张时为 (100 / n)%。
 
-![固定模板](http://oq4xwrn7d.bkt.clouddn.com/static-template.jpg)
+![](http://oq4xwrn7d.bkt.clouddn.com/static-template.jpg)
 
 相关代码：
 

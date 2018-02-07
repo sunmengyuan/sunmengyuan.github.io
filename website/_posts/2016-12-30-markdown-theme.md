@@ -68,7 +68,7 @@ ___粗斜体___
 
 图片
 
-![图片](http://oij8a9ql4.bkt.clouddn.com/nothumb.png)
+![](http://oij8a9ql4.bkt.clouddn.com/nothumb.png)
 
 *****
 

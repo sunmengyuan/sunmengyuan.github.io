@@ -13,11 +13,11 @@ thumb: "http://om0msk8ci.bkt.clouddn.com/thumb.jpg"
 
 github 用户名是可以修改的：
 
-![github 用户名变更](http://om0msk8ci.bkt.clouddn.com/change-username.png)
+![](http://om0msk8ci.bkt.clouddn.com/change-username.png)
 
 若执行上述操作后发现用户名仍未变更，其原因多半是该用户名已被占用（提示信息不明显，以致很多人不明修改失败的原因）。
 
-![github 用户名变更失败](http://om0msk8ci.bkt.clouddn.com/change-username-alert.png)
+![](http://om0msk8ci.bkt.clouddn.com/change-username-alert.png)
 
 ### 二、新建仓库
 
@@ -25,17 +25,17 @@ github 用户名是可以修改的：
 
 下面，开始创建新仓库：
 
-![创建 github 仓库](http://om0msk8ci.bkt.clouddn.com/create-repository.png)
+![](http://om0msk8ci.bkt.clouddn.com/create-repository.png)
 
 最后，将项目克隆至本地：
 
-![克隆 github 项目至本地](http://om0msk8ci.bkt.clouddn.com/clone-repository.png)
+![](http://om0msk8ci.bkt.clouddn.com/clone-repository.png)
 
 ### 三、搭建个人网站
 
 github 有许多模板主题可供选择，相关代码可自动生成：
 
-![github pages 主题选择](http://om0msk8ci.bkt.clouddn.com/select-theme.png)
+![](http://om0msk8ci.bkt.clouddn.com/select-theme.png)
 
 但本人更倾向于自行搭建模板：一是因为与其改别人的不如自己写；二是为了令自己的网站更符合个人审美；三是因为作为一枚傲娇的前端工程师套用别人的模板实在说不过去。
 
@@ -51,7 +51,7 @@ jekyll 是一种静态站点生成工具，它可以使发表文章的过程简�
 
 目录结构如下：_layouts 内的文件为骨架模板；_posts 内的 markdown 文件会转化为我们所需发表的文章；assets 含一些静态资源文件；views 包含站点内的所有页面；_config.yml 为配置文件。
 
-![jekyll 项目目录结构](http://om0msk8ci.bkt.clouddn.com/jekyll-catalog.png)
+![](http://om0msk8ci.bkt.clouddn.com/jekyll-catalog.png)
 
 ##### * 关于 jekyll 开发环境
 

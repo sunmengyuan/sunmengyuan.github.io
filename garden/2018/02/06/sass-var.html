@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="keywords" content="前端开发,sass,webpack" />
+    <meta name="description" content="讲述如何通过 sass-resources-loader 在 vue 项目中全局注册由 @mixin、% 定义的通用样式。" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0" />
+    <title>呆恋小喵的后花园 - 通过 sassResourcesLoader 全局注册 Sass 变量</title>
+    <link rel="shortcut icon" href="http://oij8a9ql4.bkt.clouddn.com/shortcut.ico" />
+    <link rel="stylesheet" href="https://cdn.bootcss.com/highlight.js/8.0/styles/sunburst.min.css" />
+    <link rel="stylesheet/less" href="/garden/assets/style/style.less" />
+    <script src="https://lib.sinaapp.com/js/jquery/1.9.1/jquery-1.9.1.min.js"></script>
+    <script src="https://cdn.bootcss.com/less.js/1.7.0/less.min.js"></script>
+    <script src="https://cdn.bootcss.com/highlight.js/8.0/highlight.min.js"></script>
+</head>
+<body>
+<script>
+    var pageData = {};
+    var _hmt = _hmt || [];
+    (function () {
+        var hm = document.createElement('script');
+        hm.src = 'https://hm.baidu.com/hm.js?6b9830e6ab8073ce1a44ad49a03d8596';
+        var s = document.getElementsByTagName('script')[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+<img src="http://oij8a9ql4.bkt.clouddn.com/portrait.jpg" alt="呆恋小喵" width="0" height="0" />
+<nav>
+    <a href="javascript:;" class="js_menu_btn">
+        <span></span>
+        <span></span>
+        <span></span>
+    </a>
+    <ul class="js_menu">
+        <li><a href="/garden/">Home</a></li>
+        <li><a href="/garden/views/posts" class="js_goto_posts">Posts</a></li>
+        <li><a href="/garden/views/about">About</a></li>
+    </ul>
+</nav>
+<a href="javascript:;" class="gotop js_gotop"></a>
+<header class="post" style="background-image: url('http://oij8a9ql4.bkt.clouddn.com/banner.jpg')">
+    <div>
+        <h2>通过 sassResourcesLoader 全局注册 Sass 变量</h2>
+        <time>06 Feb 2018</time>
+        <p class="abstract">讲述如何通过 sass-resources-loader 在 vue 项目中全局注册由 @mixin、% 定义的通用样式。</p>
+        <ul class="c-fix">
+            
+            <li>sass</li>
+            
+            <li>webpack</li>
+            
+        </ul>
+    </div>
+</header>
+<article class="js_article">
+    <p>先描述下情境，项目中含如下 3 个 .scss 文件：</p>
+
+<p><img src="http://p3kcye1tf.bkt.clouddn.com/assets.jpg" alt="" /></p>
+
+<p>其中 app.scss 在 entry.js 内 import，它定义了部分通用样式（但并未有使用 @mixin 或 % 定义的），引用方式即在组件元素上添加相应 class。请注意：</p>
+
+<blockquote>
+  <p>app.scss 内的通用样式并未有使用 @mixin 或 % 定义的。</p>
+</blockquote>
+
+<p>app.scss 内定义的 @mixin、%、变量，若在 .vue 中引用需再次 import app.scss，否则 not found（sass 变量作用域的锅）：</p>
+
+<div class="language-html highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;style </span><span class="na">lang=</span><span class="s">"scss"</span> <span class="na">scoped</span><span class="nt">&gt;</span>
+<span class="k">@import</span> <span class="s1">"../assets/app.scss"</span><span class="p">;</span>
+<span class="nc">.gm-nodata</span> <span class="p">{</span>
+    <span class="err">img,</span> <span class="err">p</span> <span class="err">{</span>
+        <span class="nl">position</span><span class="p">:</span> <span class="nb">absolute</span><span class="p">;</span>
+        <span class="err">@extend</span> <span class="err">%gm-center;</span>
+    <span class="p">}</span>
+    <span class="nt">p</span> <span class="p">{</span>
+        <span class="nl">font-size</span><span class="p">:</span> <span class="m">0.3rem</span><span class="p">;</span>
+        <span class="nl">line-height</span><span class="p">:</span> <span class="m">0.4rem</span><span class="p">;</span>
+        <span class="nl">color</span><span class="p">:</span> <span class="err">$</span><span class="n">fClrWeak</span><span class="p">;</span>
+        <span class="nl">margin-top</span><span class="p">:</span> <span class="m">1.5rem</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="err">}</span>
+<span class="nt">&lt;/style&gt;</span>
+</code></pre>
+</div>
+
+<p>每一 .vue 均 import app.scss，很麻烦…然而更严重的是：</p>
+
+<p><img src="http://p3kcye1tf.bkt.clouddn.com/build-app.jpg" alt="" /></p>
+
+<p>上图为 build 后部分代码的截图，显而易见上下两段代码是冗余的。因为在 .vue 中每 import app.scss 均会产生一段雷同的代码。</p>
+
+<p>故不宜在 app.scss 内定义 @mixin、%、变量，应将 @mixin、% 抽离至 mixins.scss，变量抽离至 vars.scss。但在 .vue 中引用它们也需各自 import，依然麻烦…</p>
+
+<p>是否可全局注册 mixins.scss 及 vars.scss？请尝试 <a href="https://www.npmjs.com/package/sass-resources-loader">sass-resources-loader</a>！</p>
+
+<p>在 build/utils.js 的 exports.cssLoaders 函数内添加如下代码：</p>
+
+<div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="nx">exports</span><span class="p">.</span><span class="nx">cssLoaders</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">options</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// ...</span>
+
+    <span class="kd">function</span> <span class="nx">generateSassResourceLoader</span> <span class="p">()</span> <span class="p">{</span>
+        <span class="kd">var</span> <span class="nx">loaders</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="nx">cssLoader</span><span class="p">,</span>
+            <span class="s1">'sass-loader'</span><span class="p">,</span>
+            <span class="p">{</span>
+                <span class="na">loader</span><span class="p">:</span> <span class="s1">'sass-resources-loader'</span><span class="p">,</span>
+                <span class="na">options</span><span class="p">:</span> <span class="p">{</span>
+                    <span class="na">resources</span><span class="p">:</span> <span class="p">[</span>
+                        <span class="nx">path</span><span class="p">.</span><span class="nx">resolve</span><span class="p">(</span><span class="nx">__dirname</span><span class="p">,</span> <span class="s1">'../src/assets/var.scss'</span><span class="p">),</span>
+                        <span class="nx">path</span><span class="p">.</span><span class="nx">resolve</span><span class="p">(</span><span class="nx">__dirname</span><span class="p">,</span> <span class="s1">'../src/assets/mixins.scss'</span><span class="p">)</span>
+                    <span class="p">]</span>
+                <span class="p">}</span>
+            <span class="p">}</span>
+        <span class="p">]</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nx">options</span><span class="p">.</span><span class="nx">extract</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="nx">ExtractTextPlugin</span><span class="p">.</span><span class="nx">extract</span><span class="p">({</span>
+                <span class="na">use</span><span class="p">:</span> <span class="nx">loaders</span><span class="p">,</span>
+                <span class="na">fallback</span><span class="p">:</span> <span class="s1">'vue-style-loader'</span>
+            <span class="p">})</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="p">[</span><span class="s1">'vue-style-loader'</span><span class="p">].</span><span class="nx">concat</span><span class="p">(</span><span class="nx">loaders</span><span class="p">)</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="c1">// ...</span>
+
+    <span class="k">return</span> <span class="p">{</span>
+        <span class="c1">// ...</span>
+        <span class="na">sass</span><span class="p">:</span> <span class="nx">generateSassResourceLoader</span><span class="p">(),</span>
+        <span class="na">scss</span><span class="p">:</span> <span class="nx">generateSassResourceLoader</span><span class="p">(),</span>
+        <span class="c1">// ...</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<blockquote>
+  <p>Now you can use these resources without manually importing them.</p>
+</blockquote>
+
+<p>那我们可将 app.scss 添加至 sass loader resources 吗？像这样：</p>
+
+<div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">loaders</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="nx">cssLoader</span><span class="p">,</span>
+    <span class="s1">'sass-loader'</span><span class="p">,</span>
+    <span class="p">{</span>
+        <span class="na">loader</span><span class="p">:</span> <span class="s1">'sass-resources-loader'</span><span class="p">,</span>
+        <span class="na">options</span><span class="p">:</span> <span class="p">{</span>
+            <span class="na">resources</span><span class="p">:</span> <span class="p">[</span>
+                <span class="nx">path</span><span class="p">.</span><span class="nx">resolve</span><span class="p">(</span><span class="nx">__dirname</span><span class="p">,</span> <span class="s1">'../src/assets/app.scss'</span><span class="p">),</span>
+                <span class="nx">path</span><span class="p">.</span><span class="nx">resolve</span><span class="p">(</span><span class="nx">__dirname</span><span class="p">,</span> <span class="s1">'../src/assets/var.scss'</span><span class="p">),</span>
+                <span class="nx">path</span><span class="p">.</span><span class="nx">resolve</span><span class="p">(</span><span class="nx">__dirname</span><span class="p">,</span> <span class="s1">'../src/assets/mixins.scss'</span><span class="p">)</span>
+            <span class="p">]</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">]</span>       
+</code></pre>
+</div>
+
+<p>不可以！build 后代码冗余：</p>
+
+<p><img src="http://p3kcye1tf.bkt.clouddn.com/build-app.jpg" alt="" /></p>
+
+<p>为何？sass-resources-loader 似乎帮我们完成了 import，但与手动 import 本质并无差异。然 var.scss、mixins.scss 注入 sass loader resources 不会产生冗余代码。</p>
+
+<blockquote>
+  <p>使用 @mixin、% 定义的通用样式未被继承不会被解析产生相应的 css，则不会冗余。</p>
+</blockquote>
+
+<p>想了解更多的同学请研读 <a href="http://sass-lang.com/">Sass: Syntactically Awesome Style Sheets</a>。</p>
+
+<p>谢幕！</p>
+
+<hr />
+
+<p>作者：呆恋小喵</p>
+
+<p>相关文章：<a href="https://sunmengyuan.github.io/garden/2017/05/17/sass-application.html">Sass 学习笔记</a></p>
+
+<p>我的后花园：<a href="https://sunmengyuan.github.io/garden/">https://sunmengyuan.github.io/garden/</a></p>
+
+<p>我的 github：<a href="https://github.com/sunmengyuan">https://github.com/sunmengyuan</a></p>
+
+<p>原文链接：<a href="https://sunmengyuan.github.io/garden/2018/02/06/sass-var.html">https://sunmengyuan.github.io/garden/2018/02/06/sass-var.html</a></p>
+
+</article>
+<footer>
+    <a href="/garden/views/posts" class="js_goto_posts">返回目录 - 我的印记</a>
+</footer>
+<div class="browser js_browser">
+    <img src="" />
+</div>
+
+<script src="/garden/assets/script/main.js"></script>
+</body>
+</html>

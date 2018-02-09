@@ -817,6 +817,8 @@ gem install [sass.gem 路径]/sass.gem
 
 作者：呆恋小喵
 
+相关文章：[通过 sass-resources-loader 全局注册 Sass 变量](https://sunmengyuan.github.io/garden/2018/02/06/sass-var.html)
+
 我的后花园：<https://sunmengyuan.github.io/garden/>
 
 我的 github：<https://github.com/sunmengyuan>

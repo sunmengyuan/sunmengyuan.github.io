@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="keywords" content="前端开发,sass,webpack" />
-    <meta name="description" content="讲述如何通过 sass-resources-loader 在 vue 项目中全局注册由 @mixin、% 定义的通用样式。" />
+    <meta name="description" content="本文讲述如何通过 sass-resources-loader 全局注册变量及由 @mixin、% 定义的通用样式，以 vue 项目为例。" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0" />
-    <title>呆恋小喵的后花园 - 通过 sassResourcesLoader 全局注册 Sass 变量</title>
+    <title>呆恋小喵的后花园 - 通过 sass-resources-loader 全局注册 Sass 变量</title>
     <link rel="shortcut icon" href="http://oij8a9ql4.bkt.clouddn.com/shortcut.ico" />
     <link rel="stylesheet" href="https://cdn.bootcss.com/highlight.js/8.0/styles/sunburst.min.css" />
     <link rel="stylesheet/less" href="/garden/assets/style/style.less" />
@@ -40,9 +40,9 @@
 <a href="javascript:;" class="gotop js_gotop"></a>
 <header class="post" style="background-image: url('http://oij8a9ql4.bkt.clouddn.com/banner.jpg')">
     <div>
-        <h2>通过 sassResourcesLoader 全局注册 Sass 变量</h2>
+        <h2>通过 sass-resources-loader 全局注册 Sass 变量</h2>
         <time>06 Feb 2018</time>
-        <p class="abstract">讲述如何通过 sass-resources-loader 在 vue 项目中全局注册由 @mixin、% 定义的通用样式。</p>
+        <p class="abstract">本文讲述如何通过 sass-resources-loader 全局注册变量及由 @mixin、% 定义的通用样式，以 vue 项目为例。</p>
         <ul class="c-fix">
             
             <li>sass</li>
@@ -57,7 +57,7 @@
 
 <p><img src="http://p3kcye1tf.bkt.clouddn.com/assets.jpg" alt="" /></p>
 
-<p>其中 app.scss 在 entry.js 内 import，它定义了部分通用样式（但并未有使用 @mixin 或 % 定义的），引用方式即在组件元素上添加相应 class。请注意：</p>
+<p>其中 app.scss 在入口文件 entry.js 内 import，它定义了部分通用样式（但并未有使用 @mixin 或 % 定义的），引用方式即在组件元素上添加相应 class。请注意：</p>
 
 <blockquote>
   <p>app.scss 内的通用样式并未有使用 @mixin 或 % 定义的。</p>

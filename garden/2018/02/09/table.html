@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="keywords" content="前端开发,前端黑科技" />
+    <meta name="description" content="日常开发中的小脑洞与大家分享~" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0" />
+    <title>呆恋小喵的后花园 - 教你实现首行及首列固定 Table</title>
+    <link rel="shortcut icon" href="http://oij8a9ql4.bkt.clouddn.com/shortcut.ico" />
+    <link rel="stylesheet" href="https://cdn.bootcss.com/highlight.js/8.0/styles/sunburst.min.css" />
+    <link rel="stylesheet/less" href="/garden/assets/style/style.less" />
+    <script src="https://lib.sinaapp.com/js/jquery/1.9.1/jquery-1.9.1.min.js"></script>
+    <script src="https://cdn.bootcss.com/less.js/1.7.0/less.min.js"></script>
+    <script src="https://cdn.bootcss.com/highlight.js/8.0/highlight.min.js"></script>
+</head>
+<body>
+<script>
+    var pageData = {};
+    var _hmt = _hmt || [];
+    (function () {
+        var hm = document.createElement('script');
+        hm.src = 'https://hm.baidu.com/hm.js?6b9830e6ab8073ce1a44ad49a03d8596';
+        var s = document.getElementsByTagName('script')[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+<img src="http://oij8a9ql4.bkt.clouddn.com/portrait.jpg" alt="呆恋小喵" width="0" height="0" />
+<nav>
+    <a href="javascript:;" class="js_menu_btn">
+        <span></span>
+        <span></span>
+        <span></span>
+    </a>
+    <ul class="js_menu">
+        <li><a href="/garden/">Home</a></li>
+        <li><a href="/garden/views/posts" class="js_goto_posts">Posts</a></li>
+        <li><a href="/garden/views/about">About</a></li>
+    </ul>
+</nav>
+<a href="javascript:;" class="gotop js_gotop"></a>
+<header class="post" style="background-image: url('http://oij8a9ql4.bkt.clouddn.com/banner.jpg')">
+    <div>
+        <h2>教你实现首行及首列固定 Table</h2>
+        <time>09 Feb 2018</time>
+        <p class="abstract">日常开发中的小脑洞与大家分享~</p>
+        <ul class="c-fix">
+            
+            <li>前端黑科技</li>
+            
+        </ul>
+    </div>
+</header>
+<article class="js_article">
+    <p>先秀一下 <a href="https://sunmengyuan.github.io/demos/other/table.html">demo</a>！此款 Table <a href="https://github.com/sunmengyuan/metis/blob/master/css/table.html">源码</a>~</p>
+
+<p>表面上，在顶部及左侧悬挂两栏并非难事。但单元格尺寸根据其不确定的内容伸展，且顶部及左侧表头也应随之调整宽高。</p>
+
+<p>Table 天然具备如此属性，我们可将 thead 剥离进行 fixed，但首列每一项分散在每一行，如何整体剥离？显然剥离较棘手，需转变思路。</p>
+
+<p>定义新元素模拟首列并悬挂于左侧，但其单元格如何同步同行单元格高度？利用 js 获取当前行高度并赋值于首列元素，假定表格上千行便需如此操作上千次，过于麻烦…</p>
+
+<p>一个 Table 难搞定，两个何如？我需要它们一模一样：</p>
+
+<p><img src="http://p3kbg5wmv.bkt.clouddn.com/table.jpg" alt="" /></p>
+
+<p>令 table1 与 table2 共享一套样式、数据便可一模一样（使两者同行同列元素尺寸同步）。将 table1 的 thead 剥离进行 fixed；table2 整体置为 fixed 覆盖于 table1 之上，并将 table2 除首列单元格外的其它元素置为透明。此时首行及首列悬挂完成了，但它们并未随表格主体的滚动而滚动。</p>
+
+<p>动用 js 获取 window 滚动位置，scrollX 即为首行向左偏移距离，scrollY 为首列向上偏移距离：</p>
+
+<div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">curX</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">curY</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="nx">$</span><span class="p">(</span><span class="nb">window</span><span class="p">).</span><span class="nx">on</span><span class="p">(</span><span class="s1">'scroll'</span><span class="p">,</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">scrollX</span> <span class="o">=</span> <span class="nb">window</span><span class="p">.</span><span class="nx">scrollX</span><span class="p">;</span>
+    <span class="kd">var</span> <span class="nx">scrollY</span> <span class="o">=</span> <span class="nb">window</span><span class="p">.</span><span class="nx">scrollY</span><span class="p">;</span>
+    <span class="c1">// 首行向左偏移 scrollX</span>
+    <span class="nb">Math</span><span class="p">.</span><span class="nx">abs</span><span class="p">(</span><span class="nx">curX</span> <span class="o">-</span> <span class="nx">scrollX</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="nx">$</span><span class="p">(</span><span class="s1">'.table1 .thead'</span><span class="p">).</span><span class="nx">css</span><span class="p">(</span><span class="s1">'left'</span><span class="p">,</span> <span class="o">-</span><span class="nx">scrollX</span><span class="p">);</span>
+    <span class="c1">// 首列向上偏移 scrollY（table2 仅首列非透明等同于整体偏移）</span>
+    <span class="nb">Math</span><span class="p">.</span><span class="nx">abs</span><span class="p">(</span><span class="nx">curY</span> <span class="o">-</span> <span class="nx">scrollY</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="nx">$</span><span class="p">(</span><span class="s1">'.table2'</span><span class="p">).</span><span class="nx">css</span><span class="p">(</span><span class="s1">'top'</span><span class="p">,</span> <span class="o">-</span><span class="nx">scrollY</span><span class="p">);</span>
+    <span class="nx">curX</span> <span class="o">=</span> <span class="nx">scrollX</span><span class="p">;</span>
+    <span class="nx">curY</span> <span class="o">=</span> <span class="nx">scrollY</span><span class="p">;</span>
+<span class="p">});</span>
+</code></pre>
+</div>
+
+<p>讲解完毕！</p>
+
+<hr />
+
+<p>作者：呆恋小喵</p>
+
+<p>我的后花园：<a href="https://sunmengyuan.github.io/garden/">https://sunmengyuan.github.io/garden/</a></p>
+
+<p>我的 github：<a href="https://github.com/sunmengyuan">https://github.com/sunmengyuan</a></p>
+
+<p>原文链接：<a href="https://sunmengyuan.github.io/garden/2018/02/09/table.html">https://sunmengyuan.github.io/garden/2018/02/09/table.html</a></p>
+
+</article>
+<footer>
+    <a href="/garden/views/posts" class="js_goto_posts">返回目录 - 我的印记</a>
+</footer>
+<div class="browser js_browser">
+    <img src="" />
+</div>
+
+<script src="/garden/assets/script/main.js"></script>
+</body>
+</html>

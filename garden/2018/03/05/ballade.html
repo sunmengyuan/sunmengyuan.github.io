@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="keywords" content="前端开发,vue,webpack,gulp,混合开发" />
+    <meta name="description" content="本文介绍一款基于 Vue 的使 App 支持离线缓存 Web 资源的混合开发框架。" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0" />
+    <title>呆恋小喵的后花园 - 应用于 Hybrid App 的 Vue 多页面构建</title>
+    <link rel="shortcut icon" href="http://oij8a9ql4.bkt.clouddn.com/shortcut.ico" />
+    <link rel="stylesheet" href="https://cdn.bootcss.com/highlight.js/8.0/styles/sunburst.min.css" />
+    <link rel="stylesheet/less" href="/garden/assets/style/style.less" />
+    <script src="https://lib.sinaapp.com/js/jquery/1.9.1/jquery-1.9.1.min.js"></script>
+    <script src="https://cdn.bootcss.com/less.js/1.7.0/less.min.js"></script>
+    <script src="https://cdn.bootcss.com/highlight.js/8.0/highlight.min.js"></script>
+</head>
+<body>
+<script>
+    var pageData = {};
+    var _hmt = _hmt || [];
+    (function () {
+        var hm = document.createElement('script');
+        hm.src = 'https://hm.baidu.com/hm.js?6b9830e6ab8073ce1a44ad49a03d8596';
+        var s = document.getElementsByTagName('script')[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+<img src="http://oij8a9ql4.bkt.clouddn.com/portrait.jpg" alt="呆恋小喵" width="0" height="0" />
+<nav>
+    <a href="javascript:;" class="js_menu_btn">
+        <span></span>
+        <span></span>
+        <span></span>
+    </a>
+    <ul class="js_menu">
+        <li><a href="/garden/">Home</a></li>
+        <li><a href="/garden/views/posts" class="js_goto_posts">Posts</a></li>
+        <li><a href="/garden/views/about">About</a></li>
+    </ul>
+</nav>
+<a href="javascript:;" class="gotop js_gotop"></a>
+<header class="post" style="background-image: url('http://oij8a9ql4.bkt.clouddn.com/banner.jpg')">
+    <div>
+        <h2>应用于 Hybrid App 的 Vue 多页面构建</h2>
+        <time>05 Mar 2018</time>
+        <p class="abstract">本文介绍一款基于 Vue 的使 App 支持离线缓存 Web 资源的混合开发框架。</p>
+        <ul class="c-fix">
+            
+            <li>vue</li>
+            
+            <li>webpack</li>
+            
+            <li>gulp</li>
+            
+            <li>混合开发</li>
+            
+        </ul>
+    </div>
+</header>
+<article class="js_article">
+    <h4 id="为何选择混合开发">为何选择混合开发？</h4>
+
+<ul>
+  <li>
+    <p>高效率界面开发：HTML + CSS + JavaScript 被证实具备极高的界面开发效率。</p>
+  </li>
+  <li>
+    <p>跨平台：较统一的浏览器内核标准，使 H5 页面在 IOS、Android 共享同套代码。使用 Native 开发一功能需 IOS、Android 研发各一枚，而使用 H5 一枚前端工程师足矣。但混合 App 并非 Native 越少越佳，性能要求较高的仍需劳 Native 大驾…分工需明确，不可厚此薄彼。</p>
+  </li>
+  <li>
+    <p>热更新：不依赖于发布渠道自主更新应用。Native 修复线上 Bug 需发布新版本，用户未升级 App 该 Bug 将一直呈现。而修复 H5 只需将 Fixbug 的代码推至服务器，任一版本 App 便可同步更新对应功能无需升级。</p>
+  </li>
+</ul>
+
+<h4 id="为何离线缓存-web-资源">为何离线缓存 Web 资源？</h4>
+
+<p>相比于从远程服务器请求加载 Web 资源，App 优先加载本地预置资源，可提升页面响应速度，节省用户流量。</p>
+
+<p>问题来了…本地预置的 Web 资源也随 App 安装包一起成为泼出去的水，修复 H5 线上 Bug 也需发版了？丢西瓜捡芝麻的事定不可做！请注意“优先加载本地预置资源”，但检测到更新时加载远程最新资源，如何检测更新我稍后阐明。</p>
+
+<h4 id="对我司前端团队的意义">对我司前端团队的意义</h4>
+
+<ul>
+  <li>
+    <p>技术栈由 Jinja + jQuery + Require + Gulp 迁移至 Vue + Webpack + Gulp + Sass。</p>
+  </li>
+  <li>
+    <p>实现前后端分离：原 <a href="http://docs.jinkan.org/docs/jinja2/templates.html">Jinja</a> 为 Python 模板引擎，前端代码的运作依赖于服务端，服务端异常等待环境维修严重影响前端工作进度。分离后，服务器挂了我们愉快的开启 Mock Server 继续搬砖便是。</p>
+  </li>
+  <li>
+    <p>App 优先加载本地预置 Web 资源，可提升 H5 页面加载速度。</p>
+  </li>
+</ul>
+
+<h4 id="弊端">弊端</h4>
+
+<ul>
+  <li>
+    <p>技术重构本身具备风险性。</p>
+  </li>
+  <li>
+    <p>增加团队学习成本。</p>
+  </li>
+  <li>
+    <p>前端框架通过 JS 渲染 HTML 对 SEO 不友好。但你可选择使用 <a href="https://ssr.vuejs.org/zh/">Vue 2.2 的服务端渲染（SSR）</a>。增添 Node 层除实现 SSR，能做的事还很多…</p>
+  </li>
+</ul>
+
+<hr />
+
+<p>进入正题~</p>
+
+<h3 id="混合开发框架运作机制">混合开发框架运作机制</h3>
+
+<p><img src="http://p2znmi5xx.bkt.clouddn.com/flow.jpg" alt="" /></p>
+
+<p>将 Web 资源文件打包至 dist/（含 routes.json 及 N 多 .html）并压缩为 dist.zip，图片资源单独打包至 assets/，一同上传至 CDN。</p>
+
+<p><img src="http://p2znmi5xx.bkt.clouddn.com/dist.jpg" alt="" /></p>
+
+<p>App 内预置 dist/ 下全部资源（发版时仅下载 dist.zip，安装 App 时解压），在拦截并解析 URL 后，通过 routes.json 查找并加载本地 .html 页面。</p>
+
+<p>routes.json 如下：</p>
+
+<div class="language-json highlighter-rouge"><pre class="highlight"><code><span class="p">{</span><span class="w">
+    </span><span class="nt">"items"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"remote_file"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://p2znmi5xx.bkt.clouddn.com/dist/demo/Demo-13700fc663.html"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"uri"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://backend.igengmei.com/demo[/]?.*"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"remote_file"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://p2znmi5xx.bkt.clouddn.com/dist/demo/Album-a757d93443.html"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"uri"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://backend.igengmei.com/album[/]?.*"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"remote_file"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://p2znmi5xx.bkt.clouddn.com/dist/post/ArticleDetail-d5c43ffc46.html"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"uri"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://backend.igengmei.com/article/detail[/]?.*"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+    </span><span class="nt">"deploy_time"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Fri Mar 16 2018 15:27:57 GMT+0800 (CST)"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+</div>
+
+<p>欠你一个回答~</p>
+
+<blockquote>
+  <p>请注意“优先加载本地预置资源”，但检测到更新时加载远程最新资源，如何检测更新我稍后阐明。</p>
+</blockquote>
+
+<p>检测 .html 文件更新的桥梁便是 routes.json。每启动 App 从 CDN 静默更新 routes.json 一次（CDN 缓存会导致 routes.json 无法及时更新，下载路由表请添加时间戳参数强制更新），任一资源更新均同步至 routes.json 并上传 CDN。</p>
+
+<p>标记更新的方式则是为 .html 打 Hash（MD5）戳，于 App 而言不同 Hash 后缀的 .html 为不同文件。App 根据路由表 remote_file 查寻本地 .html，若该 .html 不存在则直接加载远程资源同时静默下载更新。</p>
+
+<p>注：由于 js、css 脚本均被内联至对应 .html，App 仅需监听 .html 文件的变化。其实我们可以提取公用脚本并为之打 Hash 戳，将该资源的变化记录至一张表供 App 监听。常年不更新的公用脚本，缓存在 App 内不随 .html 一同加载也可提升页面响应速度。</p>
+
+<p>综上，Web 资源虽被预置于 App，但其 Fixbug 级别的更新不必走发版这条路。</p>
+
+<p>为何图片资源单独打包至 assets/，先欠着~</p>
+
+<hr />
+
+<h3 id="web-框架设计">Web 框架设计</h3>
+
+<p>Web 框架设计围绕：</p>
+
+<ul>
+  <li>
+    <p>减少无用资源及冗余资源</p>
+  </li>
+  <li>
+    <p>减小依赖模块对 Hash 的影响</p>
+  </li>
+  <li>
+    <p>开发环境模式尽量简易</p>
+  </li>
+</ul>
+
+<h4 id="减少无用资源及冗余资源">减少无用资源及冗余资源</h4>
+
+<p>机智的你发现使用 Vue 脚手架 build 后产生单 .html、单 .js、单 .css（所有页面资源打包在一坨啦），而我所举例的却是多 .html。如何实现 Vue 多页面拆分我会细讲，先讨论拆分多页面的意义吧：“快” + “节约”！</p>
+
+<p>假定我站含页面 A、B、C，用户仅访问 A 但单页应用却将 A、B、C 所依赖的全部资源加载。B、C 于用户而言是无用的，我们偷偷吃用户流量下载无用资源很不厚道。</p>
+
+<p>拆分资源可减小 .html 体积自然提升页面加载速度，且 App 优先访问本地 .html 免去远程请求更是快上加快。</p>
+
+<p>无用资源需丢弃，公共资源也需提取。假定页面 A、B 均引用资源 C，资源 C 便可单独提取。可使用 <a href="https://doc.webpack-china.org/plugins/commons-chunk-plugin">CommonsChunkPlugin</a> 达成对第三方库，公用组件的抽离。一提取项目所应用 node_module 脚本示例：</p>
+
+<div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="k">new</span> <span class="nx">webpack</span><span class="p">.</span><span class="nx">optimize</span><span class="p">.</span><span class="nx">CommonsChunkPlugin</span><span class="p">({</span>
+    <span class="na">name</span><span class="p">:</span> <span class="s1">'vendor'</span><span class="p">,</span>
+    <span class="na">minChunks</span><span class="p">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">module</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="p">(</span>
+            <span class="nx">module</span><span class="p">.</span><span class="nx">resource</span> <span class="o">&amp;&amp;</span>
+            <span class="sr">/</span><span class="se">\.</span><span class="sr">js$/</span><span class="p">.</span><span class="nx">test</span><span class="p">(</span><span class="nx">module</span><span class="p">.</span><span class="nx">resource</span><span class="p">)</span> <span class="o">&amp;&amp;</span>
+            <span class="nx">module</span><span class="p">.</span><span class="nx">resource</span><span class="p">.</span><span class="nx">indexOf</span><span class="p">(</span>
+                <span class="nx">path</span><span class="p">.</span><span class="nx">join</span><span class="p">(</span><span class="nx">__dirname</span><span class="p">,</span> <span class="s1">'../node_modules'</span><span class="p">)</span>
+            <span class="p">)</span> <span class="o">===</span> <span class="mi">0</span>
+        <span class="p">)</span>
+    <span class="p">}</span>
+<span class="p">})</span>
+</code></pre>
+</div>
+
+<p>项目中所应用到的 node_module 将统一打包至 vendor.js。公用脚本也需预置，也需检测更新，若认为监听众多资源较麻烦将脚本内联至 .html 也可，但我不提倡这样做（失去了去冗余的意义）。预置的公用脚本拷贝到哪里？拷贝至手机内存空间不够怎么破，拷贝至存储卡被用户误删怎么破，客户端同学为此很纠结…emmm</p>
+
+<p>vendor.js 含所有页面依赖到的 node_module。假定页面 A 使用了 Swiper 而其它页面未引用它，vendor.js 中的 Swiper 相关代码便应仅打包至页面 A，如何实现？</p>
+
+<ul>
+  <li>
+    <p>生成 vendor.js 时过滤 Swiper 并将其单独打包，node_modules 仍含 Swiper。</p>
+  </li>
+  <li>
+    <p>将 Swiper 从 node_modules 移动至其它路径，引用时使用迁移后的路径。</p>
+  </li>
+</ul>
+
+<p>引入 Sass 也可一定程度的去除无用代码：</p>
+
+<blockquote>
+  <p>使用 @mixin、% 定义的通用样式未被继承不会被解析产生相应的 css。</p>
+</blockquote>
+
+<p>想了解更多的同学请研读 <a href="http://sass-lang.com/">Sass: Syntactically Awesome Style Sheets</a>。</p>
+
+<h4 id="减小依赖模块对-hash-的影响">减小依赖模块对 Hash 的影响</h4>
+
+<p>由于 App 需监听众 .html 变化并实时更新资源，应格外注意 Hash 值的稳定性，为此应坚守代码模块化原则。假定全局引入 app.js、app.css，则不允许添加非全局性质的代码至上述两个文件。</p>
+
+<p>假如模块 A 被注入 app.js，它的修改将影响所有 .html 的 Hash 值，未调用模块 A 的页面实际上未做修改却被动更新 Hash。App 根据 Hash 的变化判断资源更新则认为所有 .html 更新了，进而重新下载所有 Web 资源。</p>
+
+<p>总之 A 未调用 B，B 的修改不要影响 A 的 Hash，模块如何拆分请自行依照此原则把握。</p>
+
+<p>接下来讨论 manifest 的注入时机。manifest 包含模块处理逻辑，在 Webpack 编译及映射应用代码时，模块信息被记录至 manifest，runtime 则根据 manifest 加载模块。</p>
+
+<div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="k">new</span> <span class="nx">webpack</span><span class="p">.</span><span class="nx">optimize</span><span class="p">.</span><span class="nx">CommonsChunkPlugin</span><span class="p">({</span>
+    <span class="na">name</span><span class="p">:</span> <span class="s1">'manifest'</span><span class="p">,</span>
+    <span class="na">minChunks</span><span class="p">:</span> <span class="kc">Infinity</span>
+<span class="p">})</span>
+</code></pre>
+</div>
+
+<p>任一模块更新均会引发它的细微变化（但可通过 minChunks 控制 manifest 影响范围），且所有页面加载依赖 manifest。可怕的现象发生了：manifest 更新所有 .html 的 Hash 更新 -&gt; 所有 .html 被重新下载。我们可先为 .html 打 Hash 再将 manifest 内联，因为未更新模块调用旧 manifest 不会受影响。</p>
+
+<h4 id="开发环境模式尽量简易">开发环境模式尽量简易</h4>
+
+<p>一个项目参与者众多，开发环境模式复杂将提高学习成本与风险。在简化开发模式上我做了哪些：</p>
+
+<h5 id="开发环境单入口生产环境多入口">开发环境单入口、生产环境多入口</h5>
+
+<p>先讲下 Vue 多页面拆分如何做。相关文章很多在此推荐一篇，<a href="https://github.com/zhaoqize/blog/issues/17">点我</a>~</p>
+
+<p>核心思想：</p>
+
+<p><img src="http://p2znmi5xx.bkt.clouddn.com/mpa.jpg" alt="" /></p>
+
+<ul>
+  <li>
+    <p>单页：多 View 对应 <strong>单 index.html</strong> + <strong>单 entry.js</strong>。</p>
+  </li>
+  <li>
+    <p>多页：多 View 对应 <strong>多 index.html</strong> + <strong>多 entry.js</strong>。</p>
+  </li>
+</ul>
+
+<p>假定含 100 个 View 则需对应创建 100 个 index.html、100 个 entry.js！但它们几乎一模一样，重复创建十分浪费，开发成本也被增加。</p>
+
+<p>index.html 可被多个 View 复用，entry.js 不可。共享 entry 需在其中 import 全部 View，则 build 生成的每一页面含每一 View 的全部资源，即 100 个内容一模一样的 .html。</p>
+
+<p>我们可形式上单入口，实际上多入口，如何做？定义一含占位符的 entry 模板，build 时将占位符替换为对应 View 的引入，如此 import 资源将按需拆分。</p>
+
+<p>含 <strong>&lt;%=Page%&gt;</strong> 占位符的 entry.js：</p>
+
+<div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="kr">import</span> <span class="nx">Vue</span> <span class="nx">from</span> <span class="s1">'vue'</span>
+<span class="kr">import</span> <span class="nx">Page</span> <span class="nx">from</span> <span class="s1">'&lt;%=Page%&gt;'</span>
+<span class="cm">/* eslint-disable no-new */</span>
+<span class="k">new</span> <span class="nx">Vue</span><span class="p">({</span>
+    <span class="na">el</span><span class="p">:</span> <span class="s1">'#app'</span><span class="p">,</span>
+    <span class="na">template</span><span class="p">:</span> <span class="s1">'&lt;Page /&gt;'</span><span class="p">,</span>
+    <span class="na">components</span><span class="p">:</span> <span class="p">{</span>
+        <span class="nx">Page</span>
+    <span class="p">}</span>
+<span class="p">})</span>
+</code></pre>
+</div>
+
+<p>生成多 entry 的 gulp task：</p>
+
+<div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="nx">gulp</span><span class="p">.</span><span class="nx">task</span><span class="p">(</span><span class="s1">'entries'</span><span class="p">,</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">flag</span> <span class="o">=</span> <span class="kc">true</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">key</span> <span class="k">in</span> <span class="nx">routes</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">// 检查 entry 是否已存在</span>
+        <span class="nx">gulp</span><span class="p">.</span><span class="nx">src</span><span class="p">(</span><span class="err">`</span><span class="p">.</span><span class="o">/</span><span class="nx">entry</span><span class="o">/</span><span class="nx">entries</span><span class="o">/</span><span class="nx">$</span><span class="p">{</span><span class="nx">routes</span><span class="p">[</span><span class="nx">key</span><span class="p">].</span><span class="nx">view</span><span class="p">}.</span><span class="nx">js</span><span class="err">`</span><span class="p">)</span>
+            <span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">'data'</span><span class="p">,</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+                <span class="c1">// 已存在 entry 不重复构造</span>
+                <span class="nx">flag</span> <span class="o">=</span> <span class="kc">false</span>
+            <span class="p">})</span>
+            <span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">'end'</span><span class="p">,</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+                <span class="k">if</span> <span class="p">(</span><span class="nx">flag</span><span class="p">)</span> <span class="p">{</span>
+                    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'new entry: '</span><span class="p">,</span> <span class="err">`</span><span class="o">/</span><span class="nx">entries</span><span class="o">/</span><span class="nx">$</span><span class="p">{</span><span class="nx">routes</span><span class="p">[</span><span class="nx">key</span><span class="p">].</span><span class="nx">view</span><span class="p">}.</span><span class="nx">js</span><span class="err">`</span><span class="p">)</span>
+                    <span class="c1">// 构造新 entry</span>
+                    <span class="nx">gulp</span><span class="p">.</span><span class="nx">src</span><span class="p">(</span><span class="s1">'./entry/entry.js'</span><span class="p">)</span>
+                        <span class="p">.</span><span class="nx">pipe</span><span class="p">(</span><span class="nx">replace</span><span class="p">({</span>
+                            <span class="na">patterns</span><span class="p">:</span> <span class="p">[</span>
+                                <span class="p">{</span>
+                                    <span class="na">match</span><span class="p">:</span> <span class="sr">/&lt;%=Page%&gt;/g</span><span class="p">,</span>
+                                    <span class="na">replacement</span><span class="p">:</span> <span class="err">`</span><span class="p">..</span><span class="o">/</span><span class="p">..</span><span class="o">/</span><span class="nx">src</span><span class="o">/</span><span class="nx">views</span><span class="o">/</span><span class="nx">$</span><span class="p">{</span><span class="nx">routes</span><span class="p">[</span><span class="nx">key</span><span class="p">].</span><span class="nx">path</span><span class="p">}</span><span class="nx">$</span><span class="p">{</span><span class="nx">routes</span><span class="p">[</span><span class="nx">key</span><span class="p">].</span><span class="nx">view</span><span class="p">}</span><span class="err">`</span>
+                                <span class="p">}</span>
+                            <span class="p">]</span>
+                        <span class="p">}))</span>
+                        <span class="p">.</span><span class="nx">pipe</span><span class="p">(</span><span class="nx">rename</span><span class="p">(</span><span class="err">`</span><span class="nx">entries</span><span class="o">/</span><span class="nx">$</span><span class="p">{</span><span class="nx">routes</span><span class="p">[</span><span class="nx">key</span><span class="p">].</span><span class="nx">view</span><span class="p">}.</span><span class="nx">js</span><span class="err">`</span><span class="p">))</span>
+                        <span class="p">.</span><span class="nx">pipe</span><span class="p">(</span><span class="nx">gulp</span><span class="p">.</span><span class="nx">dest</span><span class="p">(</span><span class="s1">'./entry/'</span><span class="p">))</span>
+                <span class="p">}</span>
+                <span class="nx">flag</span> <span class="o">=</span> <span class="kc">true</span>
+            <span class="p">})</span>
+    <span class="p">}</span>
+<span class="p">})</span>
+</code></pre>
+</div>
+
+<p>仅生产环境执行 gulp entries 构造多入口，开发环境单入口即可，免去研发同学构造 entry 的成本。</p>
+
+<div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">entries</span> <span class="p">()</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">entries</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">key</span> <span class="k">in</span> <span class="nx">routes</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">entries</span><span class="p">[</span><span class="nx">routes</span><span class="p">[</span><span class="nx">key</span><span class="p">].</span><span class="nx">view</span><span class="p">]</span> <span class="o">=</span> <span class="nx">process</span><span class="p">.</span><span class="nx">env</span><span class="p">.</span><span class="nx">NODE_ENV</span> <span class="o">===</span> <span class="s1">'production'</span>
+            <span class="p">?</span> <span class="err">`</span><span class="p">.</span><span class="o">/</span><span class="nx">entry</span><span class="o">/</span><span class="nx">entries</span><span class="o">/</span><span class="nx">$</span><span class="p">{</span><span class="nx">routes</span><span class="p">[</span><span class="nx">key</span><span class="p">].</span><span class="nx">view</span><span class="p">}.</span><span class="nx">js</span><span class="err">`</span>
+            <span class="p">:</span> <span class="s1">'./entry/dev.js'</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="nx">entries</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<h5 id="开发环境引用本地图片生产环境引用-cdn-图片">开发环境引用本地图片、生产环境引用 CDN 图片</h5>
+
+<p>由于 App 仅监听 .html 变化，图片资源需从远程引用。研发自行上传图片至 CDN 似乎并不复杂，但我司 CDN 上传权限泛滥是不被允许的。</p>
+
+<p>图片上传交专人负责，方法原始沟通成本高，等待他人上传也影响自身开发效率。</p>
+
+<p>开发阶段将图片上传测试 CDN，生产阶段再统一拷贝至线上环境？转化成本不小，遗漏上传还会引发线上事故。</p>
+
+<p>开发阶段书写相对路径引用本地资源，免去研发自行上传图片的烦恼且模式与传统 Web 开发保持一致。生产环境直接转化图片链接为 CDN 路径。并将所有 image 单独打包至 assets/ 一同上传 CDN，此时 .html 对 CDN 图片的引用生效了。</p>
+
+<div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="p">{</span>
+    <span class="nl">test</span><span class="p">:</span> <span class="sr">/</span><span class="se">\.(</span><span class="sr">png|jpe</span><span class="se">?</span><span class="sr">g|gif|svg</span><span class="se">)(\?</span><span class="sr">.*</span><span class="se">)?</span><span class="sr">$/</span><span class="p">,</span>
+    <span class="nx">loader</span><span class="err">:</span> <span class="s1">'url-loader'</span><span class="p">,</span>
+    <span class="nx">options</span><span class="err">:</span> <span class="p">{</span>
+        <span class="nl">limit</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="nx">name</span><span class="err">:</span> <span class="s1">'assets/imgs/[name]-[hash:10].[ext]'</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<p>为防止 CDN 缓存导致图片无法及时更新，build 后图片名称添加 Hash 后缀。在此我设置 Base64 转化 limit 为 1，防止 HTML 穿插过多 Base64 格式图片阻塞加载。</p>
+
+<p>生产环境图片链接转化 CDN 路径代码如下：</p>
+
+<div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="kr">const</span> <span class="nx">settings</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'../settings'</span><span class="p">)</span>
+<span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="na">dev</span><span class="p">:</span> <span class="p">{</span>
+        <span class="c1">// code...</span>
+    <span class="p">},</span>
+    <span class="na">build</span><span class="p">:</span> <span class="p">{</span>
+        <span class="na">assetsRoot</span><span class="p">:</span> <span class="nx">path</span><span class="p">.</span><span class="nx">resolve</span><span class="p">(</span><span class="nx">__dirname</span><span class="p">,</span> <span class="s1">'../../dist'</span><span class="p">),</span>
+        <span class="na">assetsSubDirectory</span><span class="p">:</span> <span class="s1">'static'</span><span class="p">,</span>
+        <span class="na">assetsPublicPath</span><span class="p">:</span> <span class="err">`</span><span class="nx">$</span><span class="p">{</span><span class="nx">settings</span><span class="p">.</span><span class="nx">cdn</span><span class="p">}</span><span class="sr">/`</span><span class="err">,
+</span>        <span class="c1">// code...</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<hr />
+
+<h3 id="工具一览">工具一览</h3>
+
+<p><a href="https://www.npmjs.com/package/html-webpack-inline-source-plugin">html-webpack-inline-source-plugin</a>、<a href="https://www.npmjs.com/package/gulp-inline-source">gulp-inline-source</a>：JS、CSS 资源内联工具。</p>
+
+<p><a href="https://doc.webpack-china.org/plugins/commons-chunk-plugin">commons-chunk-plugin</a>：公共模块拆分工具。</p>
+
+<p><a href="https://www.npmjs.com/package/gulp-rev">gulp-rev</a>、<a href="https://doc.webpack-china.org/plugins/hashed-module-ids-plugin">hashed-module-ids-plugin</a>：MD5 签名生成工具。</p>
+
+<p><a href="https://www.npmjs.com/package/gulp-zip">gulp-zip</a>：压缩工具。</p>
+
+<p>其它常用 Gulp 工具：<a href="https://www.npmjs.com/package/gulp-rename">gulp-rename</a>、<a href="https://www.npmjs.com/package/gulp-replace-task">gulp-replace-task</a>、<a href="https://www.npmjs.com/package/del">del</a></p>
+
+<hr />
+
+<h3 id="踩坑札记">踩坑札记</h3>
+
+<h4 id="cookie-同步问题">Cookie 同步问题</h4>
+
+<p>App 加载本地预置资源在 file:/// 域，无法直接将 Cookie 载入 Webview，对 file:/// 开放 Cookie 将导致安全问题。几种解决思路：</p>
+
+<ul>
+  <li>
+    <p>区分 file:/// 来源，判定来源安全则载入 Cookie，但 H5 依然无法将 Cookie 带到请求中。</p>
+  </li>
+  <li>
+    <p>伪造类似 http 请求形成假域。</p>
+  </li>
+  <li>
+    <p>Native 维护 Cookie 并提供获取接口，H5 拼接 Cookie 自行写入 Request Header。</p>
+  </li>
+</ul>
+
+<p>通常在页面 render 时服务器会将 CSRFToken 写入 Cookie，Request 时再将 CSRFToken 传回服务器防止跨域攻击。但加载本地 HTML 缺少上述步骤，需额外注意 CSRFToken 的获取问题。</p>
+
+<p>未完待续~</p>
+
+<hr />
+
+<p>作者：呆恋小喵</p>
+
+<p>我的后花园：<a href="https://sunmengyuan.github.io/garden/">https://sunmengyuan.github.io/garden/</a></p>
+
+<p>我的 github：<a href="https://github.com/sunmengyuan">https://github.com/sunmengyuan</a></p>
+
+<p>原文链接：<a href="https://sunmengyuan.github.io/garden/2018/03/05/ballade.html">https://sunmengyuan.github.io/garden/2018/03/05/ballade.html</a></p>
+
+</article>
+<footer>
+    <a href="/garden/views/posts" class="js_goto_posts">返回目录 - 我的印记</a>
+</footer>
+<div class="browser js_browser">
+    <img src="" />
+</div>
+
+<script src="/garden/assets/script/main.js"></script>
+</body>
+</html>

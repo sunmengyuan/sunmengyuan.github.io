@@ -478,6 +478,8 @@
 
 <p>此时任一 .vue 可直接调用 this.$router，无需 import。调用频率较高的 method 均可 bind 至 Vue.prototype，例如对请求的封装 this.$request。</p>
 
+<p>缺陷：自制 router 仅支持 query 参数不支持 param 参数。</p>
+
 <h4 id="cookie-同步问题">Cookie 同步问题</h4>
 
 <p>App 加载本地预置资源在 file:/// 域，无法直接将 Cookie 载入 Webview，对 file:/// 开放 Cookie 将导致安全问题。几种解决思路：</p>
@@ -491,6 +493,9 @@
   </li>
   <li>
     <p>Native 维护 Cookie 并提供获取接口，H5 拼接 Cookie 自行写入 Request Header。</p>
+  </li>
+  <li>
+    <p>Native 代发请求回传返回值，但无法实现大数据量 POST 请求（例 POST File）。</p>
   </li>
 </ul>
 

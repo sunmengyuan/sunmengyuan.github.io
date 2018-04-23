@@ -4,7 +4,7 @@ title: "分享我的前端学习之旅"
 date: "2017-06-08"
 abstract: "从事前端开发近 2 年，积攒了一些学习资料与大家分享。在日常工作中极少应用到下述知识，示例代码完全因个人兴趣而生，不地道之处欢迎大家前来吐槽指导！"
 keywords: ["前端开发", "前端框架"]
-thumb: "http://oij8a9ql4.bkt.clouddn.com/default-fe.jpg"
+thumb: "http://oij8a9ql4.bkt.clouddn.com/frontend.jpg"
 ---
 
 ### Node.js ###

@@ -4,7 +4,7 @@ title: "自定制 Markdown 主题试水"
 date: "2016-12-30"
 abstract: "展示本站所应用的 markdown 主题。"
 keywords: ["关于本站", "说明"]
-thumb: "http://oij8a9ql4.bkt.clouddn.com/thumb-markdown.jpg"
+thumb: "http://oij8a9ql4.bkt.clouddn.com/markdown.jpg"
 ---
 
 # 一级标题

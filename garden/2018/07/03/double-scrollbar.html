@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="keywords" content="前端开发,前端黑科技" />
+    <meta name="description" content="习惯性记录日常工作所遇坑点，不仅仅是经验分享，真心希望走过路过的大神留言赐教！" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0" />
+    <title>呆恋小喵的后花园 - 踩坑页面蒙层导致的双滚动条</title>
+    <link rel="shortcut icon" href="http://oij8a9ql4.bkt.clouddn.com/shortcut.ico" />
+    <link rel="stylesheet" href="https://cdn.bootcss.com/highlight.js/8.0/styles/sunburst.min.css" />
+    <link rel="stylesheet/less" href="/garden/assets/style/style.less" />
+    <script src="https://lib.sinaapp.com/js/jquery/1.9.1/jquery-1.9.1.min.js"></script>
+    <script src="https://cdn.bootcss.com/less.js/1.7.0/less.min.js"></script>
+    <script src="https://cdn.bootcss.com/highlight.js/8.0/highlight.min.js"></script>
+</head>
+<body>
+<script>
+    var pageData = {};
+    var _hmt = _hmt || [];
+    (function () {
+        var hm = document.createElement('script');
+        hm.src = 'https://hm.baidu.com/hm.js?6b9830e6ab8073ce1a44ad49a03d8596';
+        var s = document.getElementsByTagName('script')[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+<img src="http://oij8a9ql4.bkt.clouddn.com/portrait.jpg" alt="呆恋小喵" width="0" height="0" />
+<nav>
+    <a href="javascript:;" class="js_menu_btn">
+        <span></span>
+        <span></span>
+        <span></span>
+    </a>
+    <ul class="js_menu">
+        <li><a href="/garden/">Home</a></li>
+        <li><a href="/garden/views/posts" class="js_goto_posts">Posts</a></li>
+        <li><a href="/garden/views/about">About</a></li>
+    </ul>
+</nav>
+<a href="javascript:;" class="gotop js_gotop"></a>
+<header class="post" style="background-image: url('http://oij8a9ql4.bkt.clouddn.com/banner.jpg')">
+    <div>
+        <h2>踩坑页面蒙层导致的双滚动条</h2>
+        <time>03 Jul 2018</time>
+        <p class="abstract">习惯性记录日常工作所遇坑点，不仅仅是经验分享，真心希望走过路过的大神留言赐教！</p>
+        <ul class="c-fix">
+            
+            <li>前端黑科技</li>
+            
+        </ul>
+    </div>
+</header>
+<article class="js_article">
+    <p>场景如述：蒙层下一可滚动加载的 List，蒙层上一可滚动加载的 List。</p>
+
+<p><img src="http://pba807g2q.bkt.clouddn.com/double-scrollbar/example.png" alt="" /></p>
+
+<p>目标为蒙层展现时下层滚动不触发，几种解决方案：</p>
+
+<ul>
+  <li>
+    <p>禁用下层 touch 事件</p>
+  </li>
+  <li>
+    <p>禁用下层滚动事件</p>
+  </li>
+  <li>
+    <p>裁切下层溢出屏幕元素曲线禁用下层滚动事件</p>
+  </li>
+</ul>
+
+<p>禁用 touch 事件，你可分别禁用 touchstart、touchmove、touchend，也可巧妙的为元素设置 touch-action: none 属性。但滚动滑块依然存在：</p>
+
+<p><img src="http://pba807g2q.bkt.clouddn.com/double-scrollbar/slider.png" alt="" /></p>
+
+<p>用户无法触摸触发滚动但可拖动滑块触发滚动…</p>
+
+<p>于是乎将下层元素裁切至与屏幕等高，无溢出自然不会触发滚动，裁切方案如下：</p>
+
+<ul>
+  <li>
+    <p>蒙层呈现时设置下层元素高度为屏幕可用高度，并添加 overflow: hidden 属性；蒙层消失时恢复元素默认设置。</p>
+  </li>
+  <li>
+    <p>蒙层呈现时为下层元素添加 fixed 定位属性；蒙层消失时恢复元素默认设置。</p>
+  </li>
+</ul>
+
+<div class="language-css highlighter-rouge"><pre class="highlight"><code><span class="p">{</span>
+    <span class="nl">position</span><span class="p">:</span> <span class="nb">fixed</span><span class="p">;</span>
+    <span class="nl">top</span><span class="p">:</span> <span class="m">0</span><span class="p">;</span>
+    <span class="nl">left</span><span class="p">:</span> <span class="m">0</span><span class="p">;</span>
+    <span class="nl">width</span><span class="p">:</span> <span class="m">100%</span><span class="p">;</span>
+    <span class="nl">height</span><span class="p">:</span> <span class="m">100%</span><span class="p">;</span>
+    <span class="nl">overflow</span><span class="p">:</span> <span class="nb">hidden</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<p>方案二显然优于方案一，因未动用 JS 且考虑大多人区分不清 availHeight、clientHeight、offsetHeight、scrollHeight…</p>
+
+<p>但蒙层消失时下层的 scrollTop 未恢复…</p>
+
+<p>假定下层 List 含 100 条数据，用户滚动浏览至第 60 ~ 70 条这一屏时开启蒙层，下层元素被裁切默默恢复 scrollTop = 0。蒙层关闭时将为用户呈现第 0 ~ 10 条数据而非第 60 ~ 70 条，用户想继续浏览第 70 ~ 100 条则需疯狂上拉页面。</p>
+
+<p>故在开启蒙层前记录此刻 scrollTop 值，关闭蒙层时恢复下层 scrollTop。然 scrollTop 的获取与设置依然有坑，存在以下两种方式：</p>
+
+<ul>
+  <li><strong>document.documentElement.scrollTop</strong></li>
+</ul>
+
+<div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">scrollTop</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">documentElement</span><span class="p">.</span><span class="nx">scrollTop</span>
+<span class="nb">document</span><span class="p">.</span><span class="nx">documentElement</span><span class="p">.</span><span class="nx">scrollTop</span> <span class="o">=</span> <span class="nx">scrollTop</span>
+</code></pre>
+</div>
+
+<ul>
+  <li><strong>document.body.scrollTop</strong></li>
+</ul>
+
+<div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">scrollTop</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">scrollTop</span>
+<span class="nb">document</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">scrollTop</span> <span class="o">=</span> <span class="nx">scrollTop</span>
+</code></pre>
+</div>
+
+<p>部分浏览器支持 document.documentElement.scrollTop 而部分支持 document.body.scrollTop，所幸其中一者有值另一者必为 0，取巧方案：</p>
+
+<div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="kd">var</span> <span class="nx">scrollTop</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">documentElement</span><span class="p">.</span><span class="nx">scrollTop</span> <span class="o">+</span> <span class="nb">document</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">scrollTop</span>
+<span class="nb">document</span><span class="p">.</span><span class="nx">documentElement</span><span class="p">.</span><span class="nx">scrollTop</span> <span class="o">=</span> <span class="nx">scrollTop</span>
+<span class="nb">document</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">scrollTop</span> <span class="o">=</span> <span class="nx">scrollTop</span>
+</code></pre>
+</div>
+
+<p>不幸的是，即便裁切元素可防止触摸蒙层时下层滚动，但滚动事件依然透至下层，导致上层滚动卡涩。IOS 如是，Android 经住了考验（Android 终于胜出一局）。</p>
+
+<p>上述方案有缺陷，希望走过路过的大神留言赐教！</p>
+
+<hr />
+
+<p>作者：呆恋小喵</p>
+
+<p>我的后花园：<a href="https://sunmengyuan.github.io/garden/">https://sunmengyuan.github.io/garden/</a></p>
+
+<p>我的 github：<a href="https://github.com/sunmengyuan">https://github.com/sunmengyuan</a></p>
+
+<p>原文链接：<a href="https://sunmengyuan.github.io/garden/2018/07/03/double-scrollbar.html">https://sunmengyuan.github.io/garden/2018/07/03/double-scrollbar.html</a></p>
+
+</article>
+<footer>
+    <a href="/garden/views/posts" class="js_goto_posts">返回目录 - 我的印记</a>
+</footer>
+<div class="browser js_browser">
+    <img src="" />
+</div>
+
+<script src="/garden/assets/script/main.js"></script>
+</body>
+</html>

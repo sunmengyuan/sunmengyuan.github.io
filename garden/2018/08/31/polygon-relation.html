@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="keywords" content="前端开发,turf,前端黑科技" />
+    <meta name="description" content="利用第三方库 turf 无需研究几何算法，轻松获取 2 个多边形的相切、相交、包含、相等、相离关系。" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0" />
+    <title>呆恋小喵的后花园 - 论如何获取 2 个多边形相交关系</title>
+    <link rel="shortcut icon" href="http://oij8a9ql4.bkt.clouddn.com/shortcut.ico" />
+    <link rel="stylesheet" href="https://cdn.bootcss.com/highlight.js/9.12.0/styles/atom-one-dark.min.css" />
+    <link rel="stylesheet/less" href="/garden/assets/style/style.less" />
+    <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/less.js/1.7.0/less.min.js"></script>
+    <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+</head>
+<body>
+<script>
+    var pageData = {};
+    var _hmt = _hmt || [];
+    (function () {
+        var hm = document.createElement('script');
+        hm.src = 'https://hm.baidu.com/hm.js?6b9830e6ab8073ce1a44ad49a03d8596';
+        var s = document.getElementsByTagName('script')[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+<img src="http://oij8a9ql4.bkt.clouddn.com/portrait.jpg" alt="呆恋小喵" width="0" height="0" />
+<nav>
+    <a href="javascript:;" class="js_menu_btn">
+        <span></span>
+        <span></span>
+        <span></span>
+    </a>
+    <ul class="js_menu">
+        <li><a href="/garden/">Home</a></li>
+        <li><a href="/garden/views/posts" class="js_goto_posts">Posts</a></li>
+        <li><a href="/garden/views/about">About</a></li>
+    </ul>
+</nav>
+<a href="javascript:;" class="gotop js_gotop"></a>
+<header class="post" style="background-image: url('http://oij8a9ql4.bkt.clouddn.com/banner.jpg')">
+    <div>
+        <h2>论如何获取 2 个多边形相交关系</h2>
+        <time>31 Aug 2018</time>
+        <p class="abstract">利用第三方库 turf 无需研究几何算法，轻松获取 2 个多边形的相切、相交、包含、相等、相离关系。</p>
+        <ul class="c-fix">
+            
+            <li>turf</li>
+            
+            <li>前端黑科技</li>
+            
+        </ul>
+    </div>
+</header>
+<article class="js_article">
+    <p>2 个多边形的关系无非：</p>
+
+<ul>
+  <li>相交（一处交集）</li>
+</ul>
+
+<p><img src="http://pba807g2q.bkt.clouddn.com/polygon-relation/intersectant.png" alt="" /></p>
+
+<ul>
+  <li>相交（多处交集）</li>
+</ul>
+
+<p><img src="http://pba807g2q.bkt.clouddn.com/polygon-relation/multi-intersectant.png" alt="" /></p>
+
+<ul>
+  <li>相切（相交的一种，交集为线）</li>
+</ul>
+
+<p><img src="http://pba807g2q.bkt.clouddn.com/polygon-relation/tangent.png" alt="" /></p>
+
+<ul>
+  <li>包含（相交的一种，交集为面积较小多边形）</li>
+</ul>
+
+<p><img src="http://pba807g2q.bkt.clouddn.com/polygon-relation/included.png" alt="" /></p>
+
+<ul>
+  <li>相等（相交的一种，交集为 2 多边形本身）</li>
+</ul>
+
+<p><img src="http://pba807g2q.bkt.clouddn.com/polygon-relation/equal.png" alt="" /></p>
+
+<ul>
+  <li>相离（无交集）</li>
+</ul>
+
+<p><img src="http://pba807g2q.bkt.clouddn.com/polygon-relation/separated.png" alt="" /></p>
+
+<p>先向大家阐述我的应用场景：需求方欲通过在地图上绘制蜂窝以分配员工所负责区域。纯手工绘制易将道路、楼、园林、水系等切割引发划分纠纷，故我们接入一叫 block 的服务，根据绘制点返回周围的 N 个 block 即真正的地理分区（不切割道路、楼、园林、水系等），我们将这 N 个 block 合并形成一整个蜂窝。但绘制点跨度较大时将遗漏其间细小 block 产生缝隙，更糟糕的情况是产生零散块儿使合并结果不为一整体。此刻需获知每一零散块儿与蜂窝的关系，丢弃相离及被完全包含的，并入相交的。</p>
+
+<p><img src="http://pba807g2q.bkt.clouddn.com/polygon-relation/block.png" alt="" /></p>
+
+<p>业务场景不再赘述，直接上代码：</p>
+
+<div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="kr">import</span> <span class="nx">MD5</span> <span class="nx">from</span> <span class="s1">'md5'</span>
+<span class="kr">import</span> <span class="nx">TURF</span> <span class="nx">from</span> <span class="s1">'turf'</span>
+
+<span class="cm">/**
+ * 获取 N 个多边形面积
+ * @param callback
+ * @param opts
+ *  polygons(List{ polygonOpts })(必传): 多边形对象 List
+ *  order(String)(默认不排序): ascend(升序) 或 descend(降序)
+ *  @param polygonOpts
+ *   path(Path)(必传): 路径 [[lng(Number), lat(Number)], ...]
+ */</span>
+<span class="kr">export</span> <span class="kd">function</span> <span class="nx">getPolygonsArea</span> <span class="p">(</span><span class="nx">callback</span><span class="p">,</span> <span class="nx">opts</span> <span class="o">=</span> <span class="p">{})</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">polygons</span> <span class="o">=</span> <span class="nx">opts</span><span class="p">.</span><span class="nx">polygons</span>
+    <span class="kd">var</span> <span class="nx">response</span> <span class="o">=</span> <span class="p">{</span> <span class="na">polygons</span><span class="p">:</span> <span class="p">[]</span> <span class="p">}</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">polygons</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">// 获取多边形面积</span>
+        <span class="kd">let</span> <span class="nx">area</span> <span class="o">=</span> <span class="nx">TURF</span><span class="p">.</span><span class="nx">area</span><span class="p">(</span><span class="nx">TURF</span><span class="p">.</span><span class="nx">polygon</span><span class="p">([</span><span class="nx">polygons</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">path</span><span class="p">]))</span>
+        <span class="nx">response</span><span class="p">.</span><span class="nx">polygons</span><span class="p">.</span><span class="nx">push</span><span class="p">({</span> <span class="p">...</span><span class="nx">polygons</span><span class="p">[</span><span class="nx">i</span><span class="p">],</span> <span class="na">area</span><span class="p">:</span> <span class="nx">area</span> <span class="p">})</span>
+    <span class="p">}</span>
+    <span class="k">switch</span> <span class="p">(</span><span class="nx">opts</span><span class="p">.</span><span class="nx">order</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// 升序排列</span>
+    <span class="k">case</span> <span class="s1">'ascend'</span><span class="err">:</span>
+        <span class="nx">response</span><span class="p">.</span><span class="nx">polygons</span><span class="p">.</span><span class="nx">sort</span><span class="p">((</span><span class="nx">a</span><span class="p">,</span> <span class="nx">b</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">a</span><span class="p">.</span><span class="nx">area</span> <span class="o">-</span> <span class="nx">b</span><span class="p">.</span><span class="nx">area</span><span class="p">)</span>
+        <span class="k">break</span>
+    <span class="c1">// 降序排列</span>
+    <span class="k">case</span> <span class="s1">'descend'</span><span class="err">:</span>
+        <span class="nx">response</span><span class="p">.</span><span class="nx">polygons</span><span class="p">.</span><span class="nx">sort</span><span class="p">((</span><span class="nx">a</span><span class="p">,</span> <span class="nx">b</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">b</span><span class="p">.</span><span class="nx">area</span> <span class="o">-</span> <span class="nx">a</span><span class="p">.</span><span class="nx">area</span><span class="p">)</span>
+        <span class="k">break</span>
+    <span class="k">default</span><span class="err">:</span>
+        <span class="k">break</span>
+    <span class="p">}</span>
+    <span class="nx">callback</span> <span class="o">&amp;&amp;</span> <span class="nx">callback</span><span class="p">(</span><span class="nx">response</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="cm">/**
+ * 获取 2 个多边形相交关系
+ * @param callback
+ * @param opts
+ *  polygonA(Polygon{ polygonOpts })(必传): 多边形对象 A
+ *  polygonB(Polygon{ polygonOpts })(必传): 多边形对象 B
+ *  @param polygonOpts
+ *   path(Path)(必传): 路径 [[lng(Number), lat(Number)], ...]
+ */</span>
+<span class="kr">export</span> <span class="kd">function</span> <span class="nx">getPolygonsRelation</span> <span class="p">(</span><span class="nx">callback</span><span class="p">,</span> <span class="nx">opts</span> <span class="o">=</span> <span class="p">{})</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">polygonA</span> <span class="o">=</span> <span class="nx">TURF</span><span class="p">.</span><span class="nx">polygon</span><span class="p">([</span><span class="nx">opts</span><span class="p">.</span><span class="nx">polygonA</span><span class="p">.</span><span class="nx">path</span><span class="p">])</span>
+    <span class="kd">var</span> <span class="nx">polygonB</span> <span class="o">=</span> <span class="nx">TURF</span><span class="p">.</span><span class="nx">polygon</span><span class="p">([</span><span class="nx">opts</span><span class="p">.</span><span class="nx">polygonB</span><span class="p">.</span><span class="nx">path</span><span class="p">])</span>
+    <span class="c1">// 获取 polygonA 与 polygonB 交集</span>
+    <span class="kd">var</span> <span class="nx">intersection</span> <span class="o">=</span> <span class="nx">TURF</span><span class="p">.</span><span class="nx">intersect</span><span class="p">(</span><span class="nx">polygonA</span><span class="p">,</span> <span class="nx">polygonB</span><span class="p">)</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">intersection</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kd">let</span> <span class="nx">geometry</span> <span class="o">=</span> <span class="nx">intersection</span><span class="p">.</span><span class="nx">geometry</span>
+        <span class="k">switch</span> <span class="p">(</span><span class="nx">geometry</span><span class="p">.</span><span class="nx">type</span><span class="p">)</span> <span class="p">{</span>
+            <span class="c1">// 交集为线</span>
+            <span class="k">case</span> <span class="s1">'MultiLineString'</span><span class="err">:</span>
+                <span class="nx">callback</span> <span class="o">&amp;&amp;</span> <span class="nx">callback</span><span class="p">({</span>
+                    <span class="na">relation</span><span class="p">:</span> <span class="s1">'tangent'</span><span class="p">,</span>
+                    <span class="na">desc</span><span class="p">:</span> <span class="s1">'相切的'</span><span class="p">,</span>
+                    <span class="na">intersection</span><span class="p">:</span> <span class="nx">intersection</span><span class="p">,</span>
+                    <span class="na">polygonA</span><span class="p">:</span> <span class="nx">opts</span><span class="p">.</span><span class="nx">polygonA</span><span class="p">,</span>
+                    <span class="na">polygonB</span><span class="p">:</span> <span class="nx">opts</span><span class="p">.</span><span class="nx">polygonB</span>
+                <span class="p">})</span>
+                <span class="k">return</span>
+            <span class="c1">// 交集为多个多边形</span>
+            <span class="k">case</span> <span class="s1">'MultiPolygon'</span><span class="err">:</span>
+                <span class="nx">callback</span> <span class="o">&amp;&amp;</span> <span class="nx">callback</span><span class="p">({</span>
+                    <span class="na">relation</span><span class="p">:</span> <span class="s1">'multiIntersectant'</span><span class="p">,</span>
+                    <span class="na">desc</span><span class="p">:</span> <span class="s1">'相交的（多处交集）'</span><span class="p">,</span>
+                    <span class="na">intersection</span><span class="p">:</span> <span class="nx">intersection</span><span class="p">,</span>
+                    <span class="na">polygonA</span><span class="p">:</span> <span class="nx">opts</span><span class="p">.</span><span class="nx">polygonA</span><span class="p">,</span>
+                    <span class="na">polygonB</span><span class="p">:</span> <span class="nx">opts</span><span class="p">.</span><span class="nx">polygonB</span>
+                <span class="p">})</span>
+                <span class="k">return</span>
+            <span class="c1">// 交集为单个多边形</span>
+            <span class="k">case</span> <span class="s1">'Polygon'</span><span class="err">:</span>
+                <span class="nx">getPolygonsArea</span><span class="p">((</span><span class="nx">res</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+                    <span class="c1">// 面积较小多边形</span>
+                    <span class="kd">let</span> <span class="nx">minPolygon</span> <span class="o">=</span> <span class="nx">res</span><span class="p">.</span><span class="nx">polygons</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+                    <span class="c1">// 面积较大多边形</span>
+                    <span class="kd">let</span> <span class="nx">maxPolygon</span> <span class="o">=</span> <span class="nx">res</span><span class="p">.</span><span class="nx">polygons</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+                    <span class="c1">// 判断 2 个多边形 path 是否一模一样</span>
+                    <span class="k">if</span> <span class="p">(</span><span class="nx">MD5</span><span class="p">(</span><span class="nx">minPolygon</span><span class="p">.</span><span class="nx">path</span><span class="p">)</span> <span class="o">===</span> <span class="nx">MD5</span><span class="p">(</span><span class="nx">maxPolygon</span><span class="p">.</span><span class="nx">path</span><span class="p">))</span> <span class="p">{</span>
+                        <span class="nx">callback</span> <span class="o">&amp;&amp;</span> <span class="nx">callback</span><span class="p">({</span>
+                            <span class="na">relation</span><span class="p">:</span> <span class="s1">'equal'</span><span class="p">,</span>
+                            <span class="na">desc</span><span class="p">:</span> <span class="s1">'相等的'</span><span class="p">,</span>
+                            <span class="na">intersection</span><span class="p">:</span> <span class="nx">intersection</span><span class="p">,</span>
+                            <span class="na">polygonA</span><span class="p">:</span> <span class="nx">opts</span><span class="p">.</span><span class="nx">polygonA</span><span class="p">,</span>
+                            <span class="na">polygonB</span><span class="p">:</span> <span class="nx">opts</span><span class="p">.</span><span class="nx">polygonB</span>
+                        <span class="p">})</span>
+                        <span class="k">return</span>
+                    <span class="p">}</span>
+                    <span class="c1">// 判断较小多边形 path 与交集多边形 path 是否一模一样</span>
+                    <span class="k">if</span> <span class="p">(</span><span class="nx">MD5</span><span class="p">(</span><span class="nx">minPolygon</span><span class="p">.</span><span class="nx">path</span><span class="p">)</span> <span class="o">===</span> <span class="nx">MD5</span><span class="p">(</span><span class="nx">geometry</span><span class="p">.</span><span class="nx">coordinates</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span> <span class="p">{</span>
+                        <span class="nx">callback</span> <span class="o">&amp;&amp;</span> <span class="nx">callback</span><span class="p">({</span>
+                            <span class="na">relation</span><span class="p">:</span> <span class="s1">'included'</span><span class="p">,</span>
+                            <span class="na">desc</span><span class="p">:</span> <span class="s1">'包含的'</span><span class="p">,</span>
+                            <span class="na">intersection</span><span class="p">:</span> <span class="nx">intersection</span><span class="p">,</span>
+                            <span class="na">polygonA</span><span class="p">:</span> <span class="nx">opts</span><span class="p">.</span><span class="nx">polygonA</span><span class="p">,</span>
+                            <span class="na">polygonB</span><span class="p">:</span> <span class="nx">opts</span><span class="p">.</span><span class="nx">polygonB</span><span class="p">,</span>
+                            <span class="na">minPolygon</span><span class="p">:</span> <span class="nx">minPolygon</span><span class="p">,</span>
+                            <span class="na">maxPolygon</span><span class="p">:</span> <span class="nx">maxPolygon</span>
+                        <span class="p">})</span>
+                    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+                        <span class="nx">callback</span> <span class="o">&amp;&amp;</span> <span class="nx">callback</span><span class="p">({</span>
+                            <span class="na">relation</span><span class="p">:</span> <span class="s1">'intersectant'</span><span class="p">,</span>
+                            <span class="na">desc</span><span class="p">:</span> <span class="s1">'相交（一处交集）'</span><span class="p">,</span>
+                            <span class="na">intersection</span><span class="p">:</span> <span class="nx">intersection</span><span class="p">,</span>
+                            <span class="na">polygonA</span><span class="p">:</span> <span class="nx">opts</span><span class="p">.</span><span class="nx">polygonA</span><span class="p">,</span>
+                            <span class="na">polygonB</span><span class="p">:</span> <span class="nx">opts</span><span class="p">.</span><span class="nx">polygonB</span>
+                        <span class="p">})</span>
+                    <span class="p">}</span>
+                <span class="p">},</span> <span class="p">{</span>
+                    <span class="na">polygons</span><span class="p">:</span> <span class="p">[</span><span class="nx">opts</span><span class="p">.</span><span class="nx">polygonA</span><span class="p">,</span> <span class="nx">opts</span><span class="p">.</span><span class="nx">polygonB</span><span class="p">],</span>
+                    <span class="na">order</span><span class="p">:</span> <span class="s1">'ascend'</span>
+                <span class="p">})</span>
+                <span class="k">return</span>
+        <span class="p">}</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="nx">callback</span> <span class="o">&amp;&amp;</span> <span class="nx">callback</span><span class="p">({</span>
+            <span class="na">relation</span><span class="p">:</span> <span class="s1">'separated'</span><span class="p">,</span>
+            <span class="na">desc</span><span class="p">:</span> <span class="s1">'相离的'</span><span class="p">,</span>
+            <span class="na">intersection</span><span class="p">:</span> <span class="nx">intersection</span><span class="p">,</span>
+            <span class="na">polygonA</span><span class="p">:</span> <span class="nx">opts</span><span class="p">.</span><span class="nx">polygonA</span><span class="p">,</span>
+            <span class="na">polygonB</span><span class="p">:</span> <span class="nx">opts</span><span class="p">.</span><span class="nx">polygonB</span>
+        <span class="p">})</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+
+<p>机智的你发现我利用了第三方库 <a href="http://turfjs.org/">turf</a>，未自行研究大量几何算法。此分享内容不多，代码量较小，望勿嫌弃。俗话说“君子善假于物也”，俗话又说“天下代码一大抄，看你会抄不会抄”…</p>
+
+<hr />
+
+<p>作者：呆恋小喵</p>
+
+<p>我的后花园：<a href="https://sunmengyuan.github.io/garden/">https://sunmengyuan.github.io/garden/</a></p>
+
+<p>我的 github：<a href="https://github.com/sunmengyuan">https://github.com/sunmengyuan</a></p>
+
+<p>原文链接：<a href="https://sunmengyuan.github.io/garden/2018/08/31/polygon-relation.html">https://sunmengyuan.github.io/garden/2018/08/31/polygon-relation.html</a></p>
+
+</article>
+<footer>
+    <a href="/garden/views/posts" class="js_goto_posts">返回目录 - 我的印记</a>
+</footer>
+<div class="browser js_browser">
+    <img src="" />
+</div>
+
+<script src="/garden/assets/script/main.js"></script>
+</body>
+</html>

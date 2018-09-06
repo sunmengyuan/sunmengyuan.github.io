@@ -92,12 +92,38 @@ export function getPolygonsRelation (callback, opts = {}) {
     if (intersection) {
         let geometry = intersection.geometry
         switch (geometry.type) {
-            // 交集为线
-            case 'MultiLineString':
+            case 'Point':
+                callback && callback({
+                    relation: 'pointIntersectant',
+                    desc: '相交的（交集为单点）',
+                    intersection: geometry,
+                    polygonA: opts.polygonA,
+                    polygonB: opts.polygonB
+                })
+                return
+            case 'MultiPoint':
+                callback && callback({
+                    relation: 'multiPointIntersectant',
+                    desc: '相交的（交集为多点）',
+                    intersection: geometry,
+                    polygonA: opts.polygonA,
+                    polygonB: opts.polygonB
+                })
+                return
+            case 'LineString':
                 callback && callback({
                     relation: 'tangent',
-                    desc: '相切的',
-                    intersection: intersection,
+                    desc: '相切的（交集为单线）',
+                    intersection: geometry,
+                    polygonA: opts.polygonA,
+                    polygonB: opts.polygonB
+                })
+                return
+            case 'MultiLineString':
+                callback && callback({
+                    relation: 'multiTangent',
+                    desc: '相切的（交集为多线）',
+                    intersection: geometry,
                     polygonA: opts.polygonA,
                     polygonB: opts.polygonB
                 })
@@ -107,7 +133,7 @@ export function getPolygonsRelation (callback, opts = {}) {
                 callback && callback({
                     relation: 'multiIntersectant',
                     desc: '相交的（多处交集）',
-                    intersection: intersection,
+                    intersection: geometry,
                     polygonA: opts.polygonA,
                     polygonB: opts.polygonB
                 })
@@ -141,18 +167,27 @@ export function getPolygonsRelation (callback, opts = {}) {
                             minPolygon: minPolygon,
                             maxPolygon: maxPolygon
                         })
-                    } else {
-                        callback && callback({
-                            relation: 'intersectant',
-                            desc: '相交（一处交集）',
-                            intersection: intersection,
-                            polygonA: opts.polygonA,
-                            polygonB: opts.polygonB
-                        })
+                        return
                     }
+                    callback && callback({
+                        relation: 'intersectant',
+                        desc: '相交（一处交集）',
+                        intersection: intersection,
+                        polygonA: opts.polygonA,
+                        polygonB: opts.polygonB
+                    })
                 }, {
                     polygons: [opts.polygonA, opts.polygonB],
                     order: 'ascend'
+                })
+                return
+            default:
+                callback && callback({
+                    relation: 'fixedIntersectant',
+                    desc: '相交的（多种类型交集）',
+                    intersection: geometry,
+                    polygonA: opts.polygonA,
+                    polygonB: opts.polygonB
                 })
                 return
         }

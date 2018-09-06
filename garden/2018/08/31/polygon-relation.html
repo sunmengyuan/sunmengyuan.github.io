@@ -149,12 +149,38 @@
     <span class="k">if</span> <span class="p">(</span><span class="nx">intersection</span><span class="p">)</span> <span class="p">{</span>
         <span class="kd">let</span> <span class="nx">geometry</span> <span class="o">=</span> <span class="nx">intersection</span><span class="p">.</span><span class="nx">geometry</span>
         <span class="k">switch</span> <span class="p">(</span><span class="nx">geometry</span><span class="p">.</span><span class="nx">type</span><span class="p">)</span> <span class="p">{</span>
-            <span class="c1">// 交集为线</span>
-            <span class="k">case</span> <span class="s1">'MultiLineString'</span><span class="err">:</span>
+            <span class="k">case</span> <span class="s1">'Point'</span><span class="err">:</span>
+                <span class="nx">callback</span> <span class="o">&amp;&amp;</span> <span class="nx">callback</span><span class="p">({</span>
+                    <span class="na">relation</span><span class="p">:</span> <span class="s1">'pointIntersectant'</span><span class="p">,</span>
+                    <span class="na">desc</span><span class="p">:</span> <span class="s1">'相交的（交集为单点）'</span><span class="p">,</span>
+                    <span class="na">intersection</span><span class="p">:</span> <span class="nx">geometry</span><span class="p">,</span>
+                    <span class="na">polygonA</span><span class="p">:</span> <span class="nx">opts</span><span class="p">.</span><span class="nx">polygonA</span><span class="p">,</span>
+                    <span class="na">polygonB</span><span class="p">:</span> <span class="nx">opts</span><span class="p">.</span><span class="nx">polygonB</span>
+                <span class="p">})</span>
+                <span class="k">return</span>
+            <span class="k">case</span> <span class="s1">'MultiPoint'</span><span class="err">:</span>
+                <span class="nx">callback</span> <span class="o">&amp;&amp;</span> <span class="nx">callback</span><span class="p">({</span>
+                    <span class="na">relation</span><span class="p">:</span> <span class="s1">'multiPointIntersectant'</span><span class="p">,</span>
+                    <span class="na">desc</span><span class="p">:</span> <span class="s1">'相交的（交集为多点）'</span><span class="p">,</span>
+                    <span class="na">intersection</span><span class="p">:</span> <span class="nx">geometry</span><span class="p">,</span>
+                    <span class="na">polygonA</span><span class="p">:</span> <span class="nx">opts</span><span class="p">.</span><span class="nx">polygonA</span><span class="p">,</span>
+                    <span class="na">polygonB</span><span class="p">:</span> <span class="nx">opts</span><span class="p">.</span><span class="nx">polygonB</span>
+                <span class="p">})</span>
+                <span class="k">return</span>
+            <span class="k">case</span> <span class="s1">'LineString'</span><span class="err">:</span>
                 <span class="nx">callback</span> <span class="o">&amp;&amp;</span> <span class="nx">callback</span><span class="p">({</span>
                     <span class="na">relation</span><span class="p">:</span> <span class="s1">'tangent'</span><span class="p">,</span>
-                    <span class="na">desc</span><span class="p">:</span> <span class="s1">'相切的'</span><span class="p">,</span>
-                    <span class="na">intersection</span><span class="p">:</span> <span class="nx">intersection</span><span class="p">,</span>
+                    <span class="na">desc</span><span class="p">:</span> <span class="s1">'相切的（交集为单线）'</span><span class="p">,</span>
+                    <span class="na">intersection</span><span class="p">:</span> <span class="nx">geometry</span><span class="p">,</span>
+                    <span class="na">polygonA</span><span class="p">:</span> <span class="nx">opts</span><span class="p">.</span><span class="nx">polygonA</span><span class="p">,</span>
+                    <span class="na">polygonB</span><span class="p">:</span> <span class="nx">opts</span><span class="p">.</span><span class="nx">polygonB</span>
+                <span class="p">})</span>
+                <span class="k">return</span>
+            <span class="k">case</span> <span class="s1">'MultiLineString'</span><span class="err">:</span>
+                <span class="nx">callback</span> <span class="o">&amp;&amp;</span> <span class="nx">callback</span><span class="p">({</span>
+                    <span class="na">relation</span><span class="p">:</span> <span class="s1">'multiTangent'</span><span class="p">,</span>
+                    <span class="na">desc</span><span class="p">:</span> <span class="s1">'相切的（交集为多线）'</span><span class="p">,</span>
+                    <span class="na">intersection</span><span class="p">:</span> <span class="nx">geometry</span><span class="p">,</span>
                     <span class="na">polygonA</span><span class="p">:</span> <span class="nx">opts</span><span class="p">.</span><span class="nx">polygonA</span><span class="p">,</span>
                     <span class="na">polygonB</span><span class="p">:</span> <span class="nx">opts</span><span class="p">.</span><span class="nx">polygonB</span>
                 <span class="p">})</span>
@@ -164,7 +190,7 @@
                 <span class="nx">callback</span> <span class="o">&amp;&amp;</span> <span class="nx">callback</span><span class="p">({</span>
                     <span class="na">relation</span><span class="p">:</span> <span class="s1">'multiIntersectant'</span><span class="p">,</span>
                     <span class="na">desc</span><span class="p">:</span> <span class="s1">'相交的（多处交集）'</span><span class="p">,</span>
-                    <span class="na">intersection</span><span class="p">:</span> <span class="nx">intersection</span><span class="p">,</span>
+                    <span class="na">intersection</span><span class="p">:</span> <span class="nx">geometry</span><span class="p">,</span>
                     <span class="na">polygonA</span><span class="p">:</span> <span class="nx">opts</span><span class="p">.</span><span class="nx">polygonA</span><span class="p">,</span>
                     <span class="na">polygonB</span><span class="p">:</span> <span class="nx">opts</span><span class="p">.</span><span class="nx">polygonB</span>
                 <span class="p">})</span>
@@ -198,18 +224,27 @@
                             <span class="na">minPolygon</span><span class="p">:</span> <span class="nx">minPolygon</span><span class="p">,</span>
                             <span class="na">maxPolygon</span><span class="p">:</span> <span class="nx">maxPolygon</span>
                         <span class="p">})</span>
-                    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-                        <span class="nx">callback</span> <span class="o">&amp;&amp;</span> <span class="nx">callback</span><span class="p">({</span>
-                            <span class="na">relation</span><span class="p">:</span> <span class="s1">'intersectant'</span><span class="p">,</span>
-                            <span class="na">desc</span><span class="p">:</span> <span class="s1">'相交（一处交集）'</span><span class="p">,</span>
-                            <span class="na">intersection</span><span class="p">:</span> <span class="nx">intersection</span><span class="p">,</span>
-                            <span class="na">polygonA</span><span class="p">:</span> <span class="nx">opts</span><span class="p">.</span><span class="nx">polygonA</span><span class="p">,</span>
-                            <span class="na">polygonB</span><span class="p">:</span> <span class="nx">opts</span><span class="p">.</span><span class="nx">polygonB</span>
-                        <span class="p">})</span>
+                        <span class="k">return</span>
                     <span class="p">}</span>
+                    <span class="nx">callback</span> <span class="o">&amp;&amp;</span> <span class="nx">callback</span><span class="p">({</span>
+                        <span class="na">relation</span><span class="p">:</span> <span class="s1">'intersectant'</span><span class="p">,</span>
+                        <span class="na">desc</span><span class="p">:</span> <span class="s1">'相交（一处交集）'</span><span class="p">,</span>
+                        <span class="na">intersection</span><span class="p">:</span> <span class="nx">intersection</span><span class="p">,</span>
+                        <span class="na">polygonA</span><span class="p">:</span> <span class="nx">opts</span><span class="p">.</span><span class="nx">polygonA</span><span class="p">,</span>
+                        <span class="na">polygonB</span><span class="p">:</span> <span class="nx">opts</span><span class="p">.</span><span class="nx">polygonB</span>
+                    <span class="p">})</span>
                 <span class="p">},</span> <span class="p">{</span>
                     <span class="na">polygons</span><span class="p">:</span> <span class="p">[</span><span class="nx">opts</span><span class="p">.</span><span class="nx">polygonA</span><span class="p">,</span> <span class="nx">opts</span><span class="p">.</span><span class="nx">polygonB</span><span class="p">],</span>
                     <span class="na">order</span><span class="p">:</span> <span class="s1">'ascend'</span>
+                <span class="p">})</span>
+                <span class="k">return</span>
+            <span class="k">default</span><span class="err">:</span>
+                <span class="nx">callback</span> <span class="o">&amp;&amp;</span> <span class="nx">callback</span><span class="p">({</span>
+                    <span class="na">relation</span><span class="p">:</span> <span class="s1">'fixedIntersectant'</span><span class="p">,</span>
+                    <span class="na">desc</span><span class="p">:</span> <span class="s1">'相交的（多种类型交集）'</span><span class="p">,</span>
+                    <span class="na">intersection</span><span class="p">:</span> <span class="nx">geometry</span><span class="p">,</span>
+                    <span class="na">polygonA</span><span class="p">:</span> <span class="nx">opts</span><span class="p">.</span><span class="nx">polygonA</span><span class="p">,</span>
+                    <span class="na">polygonB</span><span class="p">:</span> <span class="nx">opts</span><span class="p">.</span><span class="nx">polygonB</span>
                 <span class="p">})</span>
                 <span class="k">return</span>
         <span class="p">}</span>

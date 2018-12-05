@@ -4,7 +4,7 @@ title: "Sass 学习笔记"
 date: "2017-05-17"
 abstract: "本文以 sass 语法点为主线展开，但语法细节不在此赘述，如有疑问请移驾至 http://sass-lang.com 自行查阅。我所认为的 sass 的优势：结构化（层级关系更清晰）、组件化（公用模块的提取）、继承（公用样式的提取），希望读者能在浏览完此文后有所体会。"
 keywords: ["sass", "css 预处理器"]
-thumb: "http://oq4xwrn7d.bkt.clouddn.com/thumb.jpg"
+thumb: "https://sunmengyuan.github.io/materials/garden/post/sass-application/thumb.jpg"
 ---
 
 进入正文前，先为大家推荐一枚神奇的网站：<https://www.sassmeister.com/>。
@@ -19,7 +19,7 @@ thumb: "http://oq4xwrn7d.bkt.clouddn.com/thumb.jpg"
 
 一个站点内的公用模块在不同页面的展现形式会有些许不同，例如一个列表模块中列表项的分隔方式在不同页面存在差异。
 
-![](http://oq4xwrn7d.bkt.clouddn.com/module-list.jpg)
+![](https://sunmengyuan.github.io/materials/garden/post/sass-application/module-list.jpg)
 
 传统做法：
 
@@ -163,11 +163,11 @@ console.log(a); // -> 5
 
 由于存在图片失效或尺寸不合规定的情况，我们通常需要为图片添加默认底色及占位。例如浮动布局中元素尺寸的变化会扰乱呈现效果：
 
-![](http://oq4xwrn7d.bkt.clouddn.com/thumb-placeholder-anti.jpg)
+![](https://sunmengyuan.github.io/materials/garden/post/sass-application/thumb-placeholder-anti.jpg)
 
 当然，上述问题可以通过为左侧元素清除浮动或延时加载图片等方法解决。在此，我们仅讲述为图片添加占位这一方法，效果如下：
 
-![](http://oq4xwrn7d.bkt.clouddn.com/thumb-placeholder.jpg)
+![](https://sunmengyuan.github.io/materials/garden/post/sass-application/thumb-placeholder.jpg)
 
 在不同的业务场景下，占位图风格各异。例如我司的常规需求、活动类需求、专题类需求所启用的占位图就在颜色及底纹上存在差异。
 
@@ -230,7 +230,7 @@ $thumbType: default, activity, special;
 
 通常，一个站点含多套配色方案，以按钮的配色为例：主色、辅助色、弱色。每套配色又由多种状态色组成：常态色、点击色、失效色。
 
-![](http://oq4xwrn7d.bkt.clouddn.com/btn-group.jpg)
+![](https://sunmengyuan.github.io/materials/garden/post/sass-application/btn-group.jpg)
 
 我们可以将这些色值按照一定的规则储存在 __Map 类型变量__ 中，这样做的优势为：
 
@@ -691,7 +691,7 @@ for 循环的书写形式有两种：
 
 区域划分是有一定规则的，如下图：当前行仅含一张图片时图片宽度为 100%，两张时为 50%，... n 张时为 (100 / n)%。
 
-![](http://oq4xwrn7d.bkt.clouddn.com/static-template.jpg)
+![](https://sunmengyuan.github.io/materials/garden/post/sass-application/static-template.jpg)
 
 相关代码：
 
@@ -762,7 +762,7 @@ section.static-template .count3 a {
 
 上述其实是 __多列布局__ 的一个实例，__多列布局__ 的应用很广泛，比如导航栏：
 
-![](http://oq4xwrn7d.bkt.clouddn.com/column-nav.jpg)
+![](https://sunmengyuan.github.io/materials/garden/post/sass-application/column-nav.jpg)
 
 #### @each
 

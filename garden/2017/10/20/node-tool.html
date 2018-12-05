@@ -81,11 +81,11 @@
 </code></pre>
 </div>
 
-<p><img src="http://oy4688ju4.bkt.clouddn.com/readfile-utf8.png" alt="" /></p>
+<p><img src="https://sunmengyuan.github.io/materials/garden/post/node-tool/readfile-utf8.png" alt="" /></p>
 
 <p>需要指定字符编码为 <strong>utf8</strong>，不然 data 值如下：</p>
 
-<p><img src="http://oy4688ju4.bkt.clouddn.com/readfile-buffer.png" alt="" /></p>
+<p><img src="https://sunmengyuan.github.io/materials/garden/post/node-tool/readfile-buffer.png" alt="" /></p>
 
 <p>获取到 .html 模板内容后如何解析并定位元素呢？正则匹配是可行的，但有更好的方法：使用 <a href="https://github.com/cheeriojs/cheerio">Cheerio</a>。</p>
 
@@ -112,7 +112,7 @@
 
 <p>使用 Github 作为媒介：</p>
 
-<p><img src="http://oy4688ju4.bkt.clouddn.com/filesync.png" alt="" /></p>
+<p><img src="https://sunmengyuan.github.io/materials/garden/post/node-tool/filesync.png" alt="" /></p>
 
 <p>文件的增删改在服务器 A 上进行，而后提交至 Github，服务器 B 从 Github 上拉取更新即可完成资源同步。</p>
 
@@ -148,7 +148,7 @@
 </code></pre>
 </div>
 
-<p><img src="http://oy4688ju4.bkt.clouddn.com/runstart.png" alt="" /></p>
+<p><img src="https://sunmengyuan.github.io/materials/garden/post/node-tool/runstart.png" alt="" /></p>
 
 <p>当服务端代码更新时，需要重启服务，执行：</p>
 
@@ -156,7 +156,7 @@
 </code></pre>
 </div>
 
-<p><img src="http://oy4688ju4.bkt.clouddn.com/restart.png" alt="" /></p>
+<p><img src="https://sunmengyuan.github.io/materials/garden/post/node-tool/restart.png" alt="" /></p>
 
 <p>原先的进程会被 kill，并开启新的进程。故无需通过 lsof 端口号手动 kill 进程。</p>
 

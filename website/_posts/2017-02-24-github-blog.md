@@ -4,7 +4,7 @@ title: "使用 Jekyll + Github Pages 搭建个人网站"
 date: "2017-02-24"
 abstract: "前段时间，朋友问我如何高大上地展现个人作品。既然要求高大上，无外乎易传播、体验好、摒除纸媒，那就以线上的方式将自己的作品丢给面试官呗（朋友在求职）。我向她推荐了 github pages，一来无需购买服务器及域名，二则因为按照她的需求一个静态站点足矣。本文算是为朋友量身打造，比较适合小白食用，介绍了如何使用静态站点生成工具 jekyll 及 github 服务器搭建个人网站。大神请飘过但不反对批评指正，万分感谢。"
 keywords: ["github pages", "jekyll", "个人网站搭建"]
-thumb: "http://om0msk8ci.bkt.clouddn.com/thumb.jpg"
+thumb: "https://sunmengyuan.github.io/materials/garden/post/github-blog/thumb.jpg"
 ---
 
 ### 一、创建 github 账号
@@ -13,11 +13,11 @@ thumb: "http://om0msk8ci.bkt.clouddn.com/thumb.jpg"
 
 github 用户名是可以修改的：
 
-![](http://om0msk8ci.bkt.clouddn.com/change-username.png)
+![](https://sunmengyuan.github.io/materials/garden/post/github-blog/change-username.png)
 
 若执行上述操作后发现用户名仍未变更，其原因多半是该用户名已被占用（提示信息不明显，以致很多人不明修改失败的原因）。
 
-![](http://om0msk8ci.bkt.clouddn.com/change-username-alert.png)
+![](https://sunmengyuan.github.io/materials/garden/post/github-blog/change-username-alert.png)
 
 ### 二、新建仓库
 
@@ -25,17 +25,17 @@ github 用户名是可以修改的：
 
 下面，开始创建新仓库：
 
-![](http://om0msk8ci.bkt.clouddn.com/create-repository.png)
+![](https://sunmengyuan.github.io/materials/garden/post/github-blog/create-repository.png)
 
 最后，将项目克隆至本地：
 
-![](http://om0msk8ci.bkt.clouddn.com/clone-repository.png)
+![](https://sunmengyuan.github.io/materials/garden/post/github-blog/clone-repository.png)
 
 ### 三、搭建个人网站
 
 github 有许多模板主题可供选择，相关代码可自动生成：
 
-![](http://om0msk8ci.bkt.clouddn.com/select-theme.png)
+![](https://sunmengyuan.github.io/materials/garden/post/github-blog/select-theme.png)
 
 但本人更倾向于自行搭建模板：一是因为与其改别人的不如自己写；二是为了令自己的网站更符合个人审美；三是因为作为一枚傲娇的前端工程师套用别人的模板实在说不过去。
 
@@ -51,7 +51,7 @@ jekyll 是一种静态站点生成工具，它可以使发表文章的过程简�
 
 目录结构如下：_layouts 内的文件为骨架模板；_posts 内的 markdown 文件会转化为我们所需发表的文章；assets 含一些静态资源文件；views 包含站点内的所有页面；_config.yml 为配置文件。
 
-![](http://om0msk8ci.bkt.clouddn.com/jekyll-catalog.png)
+![](https://sunmengyuan.github.io/materials/garden/post/github-blog/jekyll-catalog.png)
 
 ##### * 关于 jekyll 开发环境
 

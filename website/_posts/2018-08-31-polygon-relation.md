@@ -4,38 +4,38 @@ title: "论如何获取 2 个多边形相交关系"
 date: "2018-08-31"
 abstract: "利用第三方库 turf 无需研究几何算法，轻松获取 2 个多边形的相切、相交、包含、相等、相离关系。"
 keywords: ["turf", "前端黑科技"]
-thumb: "http://pba807g2q.bkt.clouddn.com/polygon-relation/thumb.png"
+thumb: "https://sunmengyuan.github.io/materials/garden/post/polygon-relation/thumb.png"
 ---
 
 2 个多边形的关系无非：
 
 + 相交（一处交集）
 
-![](http://pba807g2q.bkt.clouddn.com/polygon-relation/intersectant.png)
+![](https://sunmengyuan.github.io/materials/garden/post/polygon-relation/intersectant.png)
 
 + 相交（多处交集）
 
-![](http://pba807g2q.bkt.clouddn.com/polygon-relation/multi-intersectant.png)
+![](https://sunmengyuan.github.io/materials/garden/post/polygon-relation/multi-intersectant.png)
 
 + 相切（相交的一种，交集为线）
 
-![](http://pba807g2q.bkt.clouddn.com/polygon-relation/tangent.png)
+![](https://sunmengyuan.github.io/materials/garden/post/polygon-relation/tangent.png)
 
 + 包含（相交的一种，交集为面积较小多边形）
 
-![](http://pba807g2q.bkt.clouddn.com/polygon-relation/included.png)
+![](https://sunmengyuan.github.io/materials/garden/post/polygon-relation/included.png)
 
 + 相等（相交的一种，交集为 2 多边形本身）
 
-![](http://pba807g2q.bkt.clouddn.com/polygon-relation/equal.png)
+![](https://sunmengyuan.github.io/materials/garden/post/polygon-relation/equal.png)
 
 + 相离（无交集）
 
-![](http://pba807g2q.bkt.clouddn.com/polygon-relation/separated.png)
+![](https://sunmengyuan.github.io/materials/garden/post/polygon-relation/separated.png)
 
 先向大家阐述我的应用场景：需求方欲通过在地图上绘制蜂窝以分配员工所负责区域。纯手工绘制易将道路、楼、园林、水系等切割引发划分纠纷，故我们接入一叫 block 的服务，根据绘制点返回周围的 N 个 block 即真正的地理分区（不切割道路、楼、园林、水系等），我们将这 N 个 block 合并形成一整个蜂窝。但绘制点跨度较大时将遗漏其间细小 block 产生缝隙，更糟糕的情况是产生零散块儿使合并结果不为一整体。此刻需获知每一零散块儿与蜂窝的关系，丢弃相离及被完全包含的，并入相交的。
 
-![](http://pba807g2q.bkt.clouddn.com/polygon-relation/block.png)
+![](https://sunmengyuan.github.io/materials/garden/post/polygon-relation/block.png)
 
 业务场景不再赘述，直接上代码：
 

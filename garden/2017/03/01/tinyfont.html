@@ -55,7 +55,7 @@
 <article class="js_article">
     <p>第一个例子：看到红框内 9px 的小字体了吗？用 transform: scale(n) 单独处理这一行，字体被缩小的同时，上下左右间距也被缩小了。那么问题来了：你能算出缩小处理后多出了多少空白，能知道使用 margin-left 向左折回多少像素来实现左对齐吗？显然不能！</p>
 
-<p><img src="http://om4r1gige.bkt.clouddn.com/example-1.jpg" alt="" /></p>
+<p><img src="https://sunmengyuan.github.io/materials/garden/post/tinyfont/example-1.jpg" alt="" /></p>
 
 <p>缩小处理后的留白为 <strong><em>(1 - n) * 原尺寸 / 2</em></strong> 像素。原尺寸是不定的，因为这行文案中的价格不一定总是 4 位数，并且对于不同尺寸的屏幕它的占比也不同。所以上述方法缩小了字体却无法实现左对齐。</p>
 
@@ -63,21 +63,21 @@
 
 <p>transform: scale(n) 处理前：</p>
 
-<p><img src="http://om4r1gige.bkt.clouddn.com/tinyfont-space-before.png" alt="" /></p>
+<p><img src="https://sunmengyuan.github.io/materials/garden/post/tinyfont/tinyfont-space-before.png" alt="" /></p>
 
 <p>transform: scale(n) 处理后：</p>
 
-<p><img src="http://om4r1gige.bkt.clouddn.com/tinyfont-space-after.png" alt="" /></p>
+<p><img src="https://sunmengyuan.github.io/materials/garden/post/tinyfont/tinyfont-space-after.png" alt="" /></p>
 
 <hr />
 
 <p>第二个例子：文字居中对齐所以左右有多少留白都无所谓了吗？我开始也这么认为，然而……</p>
 
-<p><img src="http://om4r1gige.bkt.clouddn.com/example-2.jpg" alt="" /></p>
+<p><img src="https://sunmengyuan.github.io/materials/garden/post/tinyfont/example-2.jpg" alt="" /></p>
 
 <p>看似没有问题，其实当该行文字超出限度时，两端并不能与其它行对齐。原因必然是缩小处理后产生了留白。</p>
 
-<p><img src="http://om4r1gige.bkt.clouddn.com/tinyfont-center-space.png" alt="" /></p>
+<p><img src="https://sunmengyuan.github.io/materials/garden/post/tinyfont/tinyfont-center-space.png" alt="" /></p>
 
 <hr />
 
@@ -108,7 +108,7 @@
 
 <p>之前说，不定高的情况无法处理。其实对于外层不定高而内部元素定高的情况是可以处理的。举个例子：</p>
 
-<p><img src="http://om4r1gige.bkt.clouddn.com/example-3.jpg" alt="" /></p>
+<p><img src="https://sunmengyuan.github.io/materials/garden/post/tinyfont/example-3.jpg" alt="" /></p>
 
 <p>红框内的所有元素被一个父级元素包裹，该父级元素是定宽的，我们可以对其进行横向缩放：</p>
 

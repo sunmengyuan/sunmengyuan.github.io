@@ -65,7 +65,7 @@
 </code></pre>
 </div>
 
-<p><img src="http://pba807g2q.bkt.clouddn.com/cluster-log/pm2-cluster.png" alt="" /></p>
+<p><img src="https://sunmengyuan.github.io/materials/garden/post/cluster-log/pm2-cluster.png" alt="" /></p>
 
 <p>但 PM2 Cluster 与 Log4js 相撞时，砸出了大坑，本人踩了进去。</p>
 
@@ -119,11 +119,11 @@
 
 <p>Log4js 在 Cluster 模式下，worker 将日志发送至 master，master 实现日志写入文件。但在 PM2 Cluster 模式下，所有进程皆为 worker：</p>
 
-<p><img src="http://pba807g2q.bkt.clouddn.com/cluster-log/pm2-pid.png" alt="" /></p>
+<p><img src="https://sunmengyuan.github.io/materials/garden/post/cluster-log/pm2-pid.png" alt="" /></p>
 
 <p>于是按照 Log4js 源码的指引安装 pm2-intercom 进程间通讯模块：</p>
 
-<p><img src="http://pba807g2q.bkt.clouddn.com/cluster-log/pm2-intercom.png" alt="" /></p>
+<p><img src="https://sunmengyuan.github.io/materials/garden/post/cluster-log/pm2-intercom.png" alt="" /></p>
 
 <p>仍不奏效，又注意到 isPM2Master()：</p>
 
@@ -166,13 +166,13 @@
 
 <p>端口 PID 与控制台显示的 PID List 关系：</p>
 
-<p><img src="http://pba807g2q.bkt.clouddn.com/cluster-log/node-pid.png" alt="" /></p>
+<p><img src="https://sunmengyuan.github.io/materials/garden/post/cluster-log/node-pid.png" alt="" /></p>
 
-<p><img src="http://pba807g2q.bkt.clouddn.com/cluster-log/port-pid.png" alt="" /></p>
+<p><img src="https://sunmengyuan.github.io/materials/garden/post/cluster-log/port-pid.png" alt="" /></p>
 
 <p>使用 PM2 Cluster 启动 Node 应用，端口 PID 与 PM2 控制台显示的 PID List 关系：</p>
 
-<p><img src="http://pba807g2q.bkt.clouddn.com/cluster-log/pm2-pid.png" alt="" /></p>
+<p><img src="https://sunmengyuan.github.io/materials/garden/post/cluster-log/pm2-pid.png" alt="" /></p>
 
 <hr />
 

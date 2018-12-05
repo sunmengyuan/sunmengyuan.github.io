@@ -4,12 +4,12 @@ title: "踩坑页面蒙层导致的双滚动条"
 date: "2018-07-03"
 abstract: "习惯性记录日常工作所遇坑点，不仅仅是经验分享，真心希望走过路过的大神留言赐教！"
 keywords: ["前端黑科技"]
-thumb: "http://pba807g2q.bkt.clouddn.com/double-scrollbar/thumb.png"
+thumb: "https://sunmengyuan.github.io/materials/garden/post/double-scrollbar/thumb.png"
 ---
 
 场景如述：蒙层下一可滚动加载的 List，蒙层上一可滚动加载的 List。
 
-![](http://pba807g2q.bkt.clouddn.com/double-scrollbar/example.png)
+![](https://sunmengyuan.github.io/materials/garden/post/double-scrollbar/example.png)
 
 目标为蒙层展现时下层滚动不触发，几种解决方案：
 
@@ -21,7 +21,7 @@ thumb: "http://pba807g2q.bkt.clouddn.com/double-scrollbar/thumb.png"
 
 禁用 touch 事件，你可分别禁用 touchstart、touchmove、touchend，也可巧妙的为元素设置 touch-action: none 属性。但滚动滑块依然存在：
 
-![](http://pba807g2q.bkt.clouddn.com/double-scrollbar/slider.png)
+![](https://sunmengyuan.github.io/materials/garden/post/double-scrollbar/slider.png)
 
 用户无法触摸触发滚动但可拖动滑块触发滚动...
 

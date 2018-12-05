@@ -57,21 +57,21 @@
 <article class="js_article">
     <p>为实现如下效果呕心沥血：</p>
 
-<p><img src="http://oz54mleef.bkt.clouddn.com/example.jpg" alt="" /></p>
+<p><img src="https://sunmengyuan.github.io/materials/garden/post/css-sector/example.jpg" alt="" /></p>
 
 <p>当然你可以拥抱 Svg…在此分享如何纯 Css 打造圆环进度条，只需三步！</p>
 
-<p><img src="http://oz54mleef.bkt.clouddn.com/coverage.jpg" alt="" /></p>
+<p><img src="https://sunmengyuan.github.io/materials/garden/post/css-sector/coverage.jpg" alt="" /></p>
 
 <p>此物乃 2 + 1 夹心饼干，蓝绿色部分为果酱。显而易见饼干为两个削成了圆形的 <strong>div</strong>，我们重点演示果酱是怎么制作的：</p>
 
-<p><img src="http://oz54mleef.bkt.clouddn.com/elem-sector.jpg" alt="" /></p>
+<p><img src="https://sunmengyuan.github.io/materials/garden/post/css-sector/elem-sector.jpg" alt="" /></p>
 
 <p>如图所示，大扇形由 <strong>6</strong> 个小扇形构成，每一小扇形占整个圆饼的 <strong>1/15</strong>，大扇形占整个圆饼的 <strong>6/15</strong>。我们只需构造一个扇形单元，将其复制 6 份后旋转相应角度连接至一起即可。</p>
 
 <p>如何构造扇形？用三角形伪装…</p>
 
-<p><img src="http://oz54mleef.bkt.clouddn.com/real-feature.jpg" alt="" /></p>
+<p><img src="https://sunmengyuan.github.io/materials/garden/post/css-sector/real-feature.jpg" alt="" /></p>
 
 <p>三角形的宽高如何计算？假定圆半径 <strong>$radius</strong> 为 100px，等分数 <strong>$count</strong> 为 15。则小扇形的圆心角为 <strong>360deg / 15</strong>，三角形的高为 100px，宽为 <strong>2 * 100px * tan(360deg / 15 / 2)</strong>。其中 <strong>360deg / 15 / 2</strong> 转化弧度制为 <strong>PI / 15</strong>（PI == 360deg / 2）。</p>
 
@@ -90,7 +90,7 @@
 
 <p>对于 <strong>$count</strong> 为 <strong>1</strong> 或 <strong>2</strong> 的情况需特殊处理，因为 <strong>tan(PI)</strong> 及 <strong>tan(PI / 2)</strong> 为无穷值，不了解的同学请研究正切函数图像：</p>
 
-<p><img src="http://oz54mleef.bkt.clouddn.com/tan.jpg" alt="" /></p>
+<p><img src="https://sunmengyuan.github.io/materials/garden/post/css-sector/tan.jpg" alt="" /></p>
 
 <p>相关代码（其中 <strong>$diameter = 2 * $radius</strong> 为圆直径）：</p>
 
@@ -134,7 +134,7 @@
 
 <h6 id="20171114-续更">2017/11/14 续更</h6>
 
-<p>由于本例引入了三角函数等数学运算，使用 <strong>Sass</strong> 预编译。未安装 <strong>Sass</strong> 的同学可下载经编译的 <a href="http://oz54mleef.bkt.clouddn.com/sector.zip">源码</a> 开启 <strong>sector.html</strong> 查看效果。</p>
+<p>由于本例引入了三角函数等数学运算，使用 <strong>Sass</strong> 预编译。未安装 <strong>Sass</strong> 的同学可下载经编译的 <a href="https://sunmengyuan.github.io/materials/garden/post/css-sector/sector.zip">源码</a> 开启 <strong>sector.html</strong> 查看效果。</p>
 
 <p>安装 <strong>Sass</strong> 请参考 <a href="https://sunmengyuan.github.io/garden/2017/05/17/sass-application.html">https://sunmengyuan.github.io/garden/2017/05/17/sass-application.html</a> 文章末尾的安装教程。</p>
 

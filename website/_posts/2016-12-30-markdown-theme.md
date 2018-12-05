@@ -4,7 +4,7 @@ title: "自定制 Markdown 主题试水"
 date: "2016-12-30"
 abstract: "展示本站所应用的 markdown 主题。"
 keywords: ["关于本站", "说明"]
-thumb: "http://oij8a9ql4.bkt.clouddn.com/markdown.jpg"
+thumb: "https://sunmengyuan.github.io/materials/garden/post/markdown-theme/thumb.jpg"
 ---
 
 # 一级标题
@@ -27,7 +27,7 @@ __粗体__
 
 ___粗斜体___
 
-[链接](http://oij8a9ql4.bkt.clouddn.com/nothumb.png)
+[链接](https://sunmengyuan.github.io/materials/garden/nothumb.jpg)
 
 > 引用
 
@@ -68,7 +68,7 @@ ___粗斜体___
 
 图片
 
-![](http://oij8a9ql4.bkt.clouddn.com/nothumb.png)
+![](https://sunmengyuan.github.io/materials/garden/nothumb.jpg)
 
 *****
 

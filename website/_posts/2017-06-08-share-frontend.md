@@ -11,9 +11,9 @@ thumb: "https://sunmengyuan.github.io/materials/garden/post/share-frontend/thumb
 
 ##### 参考资料 #####
 
-+ [Node.js 开发指南](/book/Node.js%E5%BC%80%E5%8F%91%E6%8C%87%E5%8D%97.pdf)
++ [Node.js 开发指南](https://pan.baidu.com/s/18XYAv7qVd1vpkLfX1B4REw)
 
-+ [深入浅出 Node.js](/book/%E6%B7%B1%E5%85%A5%E6%B5%85%E5%87%BANode.js.pdf)
++ [深入浅出 Node.js](https://pan.baidu.com/s/1_asQd0U071WQIwJ9yYRfhQ)
 
 + [Node.js 中文网](http://nodejs.cn/)
 
@@ -111,7 +111,7 @@ React Native 环境搭建指南，正在撰写中，敬请期待。
 
 ##### 参考资料 #####
 
-+ [HTML5 Canvas 核心技术](/book/HTML5%20Canvas%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF.pdf)
++ [HTML5 Canvas 核心技术](https://pan.baidu.com/s/1Mfb-8lMUYH6sHoh1KxKeyA)
 
 ##### 示例 #####
 

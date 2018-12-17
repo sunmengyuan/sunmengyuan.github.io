@@ -273,7 +273,7 @@
   </li>
 </ul>
 
-<p>至于 UV，统计 PV 时采集 userId 去重即可。若应用无用户管理体系，采集 IP、deviceId 也可粗略得知 UV（不精准）。</p>
+<p>至于 UV，统计 PV 时采集 <strong>userId</strong> 去重即可。若应用无用户管理体系，采集 <strong>IP</strong>、<strong>deviceId</strong> 也可粗略得知 UV（不精准）。</p>
 
 <hr />
 
@@ -318,10 +318,10 @@
 
 <ul>
   <li>
-    <p>将埋点上报混入业务接口请求，上报 crash 不仅丢失统计数据，还将影响主功能。</p>
+    <p>将埋点上报混入业务接口，上报 crash 不仅丢失统计数据，还将影响主功能。</p>
   </li>
   <li>
-    <p>统计与业务 <strong>高耦合</strong>，讲真两者不应混于同一服务。</p>
+    <p>统计与业务 <strong>高耦合</strong>，两者尽量不混于同一服务。</p>
   </li>
 </ul>
 
@@ -348,10 +348,10 @@
 
 <ul>
   <li>
-    <p>请求数翻倍：但统计与业务服务拆分后，请求并非同一组服务器承担。</p>
+    <p>请求量翻倍：但统计与业务服务拆分后，请求并非同一组服务器承担。</p>
   </li>
   <li>
-    <p>待上报的点击事件函数均需调用 <strong>logEvent</strong>：封装一枚附带埋点上报的组件，以 Vue 为例。</p>
+    <p>待上报的点击事件函数均需调用 <strong>logEvent</strong>：封装一枚附带埋点上报的 <strong>组件</strong>，以 Vue 为例。</p>
   </li>
 </ul>
 
@@ -394,7 +394,7 @@
                     <span class="na">name</span><span class="p">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">name</span><span class="p">,</span>
                     <span class="na">from</span><span class="p">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">from</span><span class="p">,</span>
                     <span class="na">time</span><span class="p">:</span> <span class="k">new</span> <span class="nb">Date</span><span class="p">().</span><span class="nx">valueOf</span><span class="p">(),</span>
-                    <span class="na">params</span><span class="p">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">params</span> <span class="o">||</span> <span class="p">{}</span>
+                    <span class="na">params</span><span class="p">:</span> <span class="k">this</span><span class="p">.</span><span class="nx">params</span>
                 <span class="p">}</span>
             <span class="p">})</span>
         <span class="p">}</span>

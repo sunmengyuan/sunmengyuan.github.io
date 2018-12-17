@@ -51,13 +51,13 @@
     </div>
 </header>
 <article class="js_article">
-    <p>埋点即监控用户在应用表现层的行为，于产品迭代而言至关重要。埋点数据分析是产品需求的来源，检验功能是否达预期的佐证。</p>
+    <p>埋点即监控用户在应用表现层的行为，于产品迭代而言至关重要。埋点数据分析是产品需求的 <strong>来源</strong>，检验功能是否达预期的 <strong>佐证</strong>。</p>
 
 <p>采集埋点数据可做如下分析（以百度统计为例）：</p>
 
 <p><img src="https://sunmengyuan.github.io/materials/garden/post/trace/baidu.png" alt="" /></p>
 
-<p>将用户属性、用户行为转化各类可视化图表：</p>
+<p>将 <strong>用户属性</strong>、<strong>用户行为</strong> 转化各类可视化图表：</p>
 
 <p><img src="https://sunmengyuan.github.io/materials/garden/post/trace/chart-line.png" alt="" /></p>
 
@@ -84,28 +84,28 @@
 
 <ul>
   <li>
-    <p>PV：页面访问人次</p>
+    <p><strong>PV</strong>：页面访问人次</p>
   </li>
   <li>
-    <p>UV：页面访问人数</p>
+    <p><strong>UV</strong>：页面访问人数</p>
   </li>
 </ul>
 
-<p>页面访问量，并非仅仅取决于其内容吸引力，影响因素包含入口外观、位置、深度等等（在此不考虑刚需）。入口外观属 UI 设计范畴，入口位置可通过分析用户点击热力图调整，入口深度可通过分析用户访问路径调整。</p>
+<p>页面访问量，并非仅仅取决于其内容吸引力，影响因素包含入口 <strong>外观</strong>、<strong>位置</strong>、<strong>深度</strong> 等等（在此不考虑刚需）。入口外观属 UI 设计范畴，入口位置可通过分析用户点击热力图调整，入口深度可通过分析用户访问路径调整。</p>
 
-<p>用户点击热力图形如：</p>
+<p>用户点击 <strong>热力图</strong> 形如：</p>
 
 <p><img src="https://sunmengyuan.github.io/materials/garden/post/trace/heatmap.jpg" alt="" /></p>
 
 <p>将核心页面入口置于热力图红色区域？</p>
 
-<p>采集页面加载 from、to 以获知用户访问路径：</p>
+<p>采集页面加载 <strong>from</strong>、<strong>to</strong> 以获知用户访问路径：</p>
 
 <p><img src="https://sunmengyuan.github.io/materials/garden/post/trace/visit-route.png" alt="" /></p>
 
-<p>分析可知用户普遍访问深度、每一深度 &amp; 每一页面的流失率等，依照结果调整核心页面入口源、入口深度？</p>
+<p>分析可知用户普遍 <strong>访问深度</strong>、每一深度 &amp; 每一页面的 <strong>流失率</strong> 等，依照结果调整核心页面入口源、入口深度？</p>
 
-<p>页面访问量，也并非仅仅取决于产品设计。假若 PV 稳定的页面访问量爆跌，便需考虑其加载成功率了（或许是枚技术 bug）。</p>
+<p>页面访问量，也并非仅仅取决于产品设计。假若 PV 稳定的页面访问量 <strong>爆跌</strong>，便需考虑其加载成功率了（或许是枚技术 bug）。</p>
 
 <hr />
 
@@ -113,7 +113,7 @@
 
 <h5 id="方案一">方案一</h5>
 
-<p>通过在入口文件 index.js 全局定义 Router.beforeEach：</p>
+<p>通过在入口文件 index.js 全局定义 <strong>Router.beforeEach</strong>：</p>
 
 <div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="kr">import</span> <span class="nx">App</span> <span class="nx">from</span> <span class="s1">'./app'</span>
 <span class="kr">import</span> <span class="nx">Router</span> <span class="nx">from</span> <span class="s1">'./router'</span>
@@ -141,9 +141,9 @@
 </code></pre>
 </div>
 
-<p>停留时长可通过（跳转页 time - 当前页 time）获知，但关闭应用时如何统计？监听应用关闭 <a href="https://developer.mozilla.org/zh-CN/docs/Web/API/Window/onbeforeunload">onbeforeunload</a> + <a href="https://developer.mozilla.org/zh-CN/docs/Web/API/Window/onunload">onunload</a>？</p>
+<p>停留时长可通过 <strong>（跳转页 time - 当前页 time）</strong> 获知，但关闭应用时如何统计？监听应用关闭 <a href="https://developer.mozilla.org/zh-CN/docs/Web/API/Window/onbeforeunload">onbeforeunload</a> + <a href="https://developer.mozilla.org/zh-CN/docs/Web/API/Window/onunload">onunload</a>？</p>
 
-<p>其中 App.logEvent 为自定义 Vue 插件 App 中的 method，用于向服务器发起埋点上报请求：</p>
+<p>其中 <strong>App.logEvent</strong> 为自定义 Vue 插件 App 中的 method，用于向服务器发起 <strong>埋点上报请求</strong>：</p>
 
 <div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="kr">import</span> <span class="nx">Request</span> <span class="nx">from</span> <span class="s1">'./utils/request'</span>
 
@@ -175,7 +175,7 @@
 
 <h5 id="方案二">方案二</h5>
 
-<p>通过在入口文件 index.js 全局注册混入 beforeRouteEnter、beforeRouteLeave 对象：</p>
+<p>通过在入口文件 index.js 全局注册混入 <strong>beforeRouteEnter</strong>、<strong>beforeRouteLeave</strong> 对象：</p>
 
 <div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="kr">import</span> <span class="nx">Vue</span> <span class="nx">from</span> <span class="s1">'vue'</span>
 
@@ -225,29 +225,29 @@
 </code></pre>
 </div>
 
-<p>关闭应用时 beforeRouteLeave 是否触发？</p>
+<p>关闭应用时 <strong>beforeRouteLeave</strong> 是否触发？</p>
 
 <p>上述方案存在明显缺陷：</p>
 
 <ul>
   <li>
-    <p>官方曰慎用全局混入对象！</p>
+    <p>官方曰慎用全局混入对象！！！</p>
   </li>
   <li>
-    <p>对于页面同名钩子函数 beforeRouteEnter、beforeRouteLeave，如何 merge？如何 next？</p>
+    <p>对于页面同名钩子函数 <strong>beforeRouteEnter</strong>、<strong>beforeRouteLeave</strong>，如何 <strong>merge</strong>？如何 <strong>next</strong>？</p>
   </li>
   <li>
-    <p>含子路由的页面将调用 2 次 beforeRouteEnter、beforeRouteLeave，PV 无形翻倍…</p>
+    <p>含子路由的页面将调用 <strong>2</strong> 次 <strong>beforeRouteEnter</strong>、<strong>beforeRouteLeave</strong>，PV 无形翻倍…</p>
   </li>
 </ul>
 
-<p>我猜此刻有打全局混入 created、destroyed 并通过 this.$route 获知访问对象主意的人了，试试看？</p>
+<p>我猜此刻有打全局混入 <strong>created</strong>、<strong>destroyed</strong> 并通过 <strong>this.$route</strong> 获知访问对象主意的人了，试试看？</p>
 
 <p><img src="https://sunmengyuan.github.io/materials/garden/post/trace/created.png" alt="" /></p>
 
-<p>令人不知所措的输出，打印次数与路由表长度一致嗷~</p>
+<p>令人不知所措的输出，打印次数与 <strong>路由表</strong> 长度一致嗷~</p>
 
-<p>其中 this.$app.logEvent（vm.$app.logEvent）等同方案一中 App.logEvent，不再赘述。</p>
+<p>其中 <strong>this.$app.logEvent（vm.$app.logEvent）</strong> 等同方案一中 <strong>App.logEvent</strong>，不再赘述。</p>
 
 <hr />
 
@@ -255,10 +255,10 @@
 
 <ul>
   <li>
-    <p>SPA 应用：仅单入口，在入口文件全局定义 Router.beforeEach 方便可行。</p>
+    <p><strong>SPA 应用</strong>：仅单入口，在入口文件全局定义 <strong>Router.beforeEach</strong> 方便可行。</p>
   </li>
   <li>
-    <p>MPA 应用：多入口，在每个入口文件定义 Router.beforeEach？可封装公用逻辑（伪装单入口），免去重复构造 entry 的成本。</p>
+    <p><strong>MPA 应用</strong>：多入口，在每个入口文件定义 <strong>Router.beforeEach</strong>？可封装公用逻辑（伪装单入口），免去重复构造 entry 的成本。</p>
   </li>
 </ul>
 
@@ -266,10 +266,10 @@
 
 <ul>
   <li>
-    <p>SPA + MPA 混合应用：emmmmmm…采用 MPA 应用的统计方案。</p>
+    <p><strong>SPA + MPA 混合应用</strong>：emmmmmm…采用 MPA 应用的统计方案。</p>
   </li>
   <li>
-    <p>SSR 应用：为追求更好的 SEO 而采用服务端渲染（SSR）。以 <a href="http://docs.jinkan.org/docs/jinja2/templates.html">Jinja（Python 模板）</a>为例，调用 TemplateView 则为渲染页面（不同于前后端分离项目，服务端无法获知接口调用与页面渲染的对应关系），统计其调用次数及 TemplateName 可知页面 PV。</p>
+    <p><strong>SSR 应用</strong>：为追求更好的 <strong>SEO</strong> 而采用服务端渲染（SSR）。以 <a href="http://docs.jinkan.org/docs/jinja2/templates.html">Jinja（Python 模板）</a>为例，调用 <strong>TemplateView</strong> 则为渲染页面（不同于前后端分离项目，服务端无法获知接口调用与页面渲染的对应关系），统计其调用次数及 <strong>TemplateName</strong> 可知页面 PV。</p>
   </li>
 </ul>
 
@@ -283,13 +283,13 @@
 
 <p><img src="https://sunmengyuan.github.io/materials/garden/post/trace/heatmap-card.jpg" alt="" /></p>
 
-<p>按钮点击量，影响因素包含按钮外观、位置、入口等等（在此不考虑刚需）。按钮外观属 UI 设计范畴，按钮位置可通过分析用户点击热力图调整，按钮入口可通过分析触发源分布调整。</p>
+<p>按钮点击量，影响因素包含按钮 <strong>外观</strong>、<strong>位置</strong>、<strong>入口</strong> 等等（在此不考虑刚需）。按钮外观属 UI 设计范畴，按钮位置可通过分析用户点击热力图调整，按钮入口可通过分析触发源分布调整。</p>
 
 <p>举一实例：</p>
 
 <p><img src="https://sunmengyuan.github.io/materials/garden/post/sass-application/static-template.jpg" alt="" /></p>
 
-<p>运营同学会将一张图片裁切成 n 个区域，点击每一区域所推荐商品不同。统计区域点击坐标，据热力图调整商品排序以求利益最大化。</p>
+<p>运营同学会将一张图片裁切成 n 个区域，点击每一区域所推荐商品不同。统计区域点击坐标，据热力图调整商品排序以求 <strong>利益最大化</strong>。</p>
 
 <hr />
 
@@ -312,7 +312,7 @@
 
 <p><img src="https://sunmengyuan.github.io/materials/garden/post/trace/trace-request.jpg" alt="" /></p>
 
-<p>其中 param keys 指代需上报的业务请求参数 key list（并非全部参数均需随埋点上报）。</p>
+<p>其中 <strong>param keys</strong> 指代需上报的业务请求参数 <strong>key list</strong>（并非全部参数均需随埋点上报）。</p>
 
 <p>上述方案大大节约请求数，但存在明显缺陷：</p>
 
@@ -321,7 +321,7 @@
     <p>将埋点上报混入业务接口请求，上报 crash 不仅丢失统计数据，还将影响主功能。</p>
   </li>
   <li>
-    <p>统计与业务高耦合，讲真两者不应混于同一服务。</p>
+    <p>统计与业务 <strong>高耦合</strong>，讲真两者不应混于同一服务。</p>
   </li>
 </ul>
 
@@ -351,7 +351,7 @@
     <p>请求数翻倍：但统计与业务服务拆分后，请求并非同一组服务器承担。</p>
   </li>
   <li>
-    <p>待上报的点击事件函数均需调用 logEvent：封装一枚附带埋点上报的组件，以 Vue 为例。</p>
+    <p>待上报的点击事件函数均需调用 <strong>logEvent</strong>：封装一枚附带埋点上报的组件，以 Vue 为例。</p>
   </li>
 </ul>
 
@@ -406,7 +406,7 @@
 
 <hr />
 
-<p>方案本无优劣，适合才更重要，需综合考虑产品设计、产品使用度、服务利用率等等。例使用度较低应用可将统计与业务混于同一服务以节约成本，使用度较高应用可采取本地缓存、批量上报以降低服务压力，但批量上报是否加大统计误差？</p>
+<p>方案本无优劣，适合才更重要，需综合考虑 <strong>产品设计</strong>、<strong>产品使用度</strong>、<strong>服务利用率</strong> 等等。例使用度较低应用可将统计与业务混于同一服务以节约成本，使用度较高应用可采取 <strong>本地缓存</strong>、<strong>批量上报</strong> 以降低服务压力，但批量上报是否加大统计 <strong>误差</strong>？</p>
 
 <p>本文所述仅冰山一角，欢迎大家留言宝贵经验~</p>
 

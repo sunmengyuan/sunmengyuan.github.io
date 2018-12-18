@@ -111,7 +111,7 @@
 
 <p>前端如何实现全局 PV 统计，以 Vue 应用为例。</p>
 
-<h5 id="方案一">方案一</h5>
+<h4 id="方案一">方案一</h4>
 
 <p>通过在入口文件 index.js 全局定义 <strong>Router.beforeEach</strong>：</p>
 
@@ -173,7 +173,7 @@
 </code></pre>
 </div>
 
-<h5 id="方案二">方案二</h5>
+<h4 id="方案二">方案二</h4>
 
 <p>通过在入口文件 index.js 全局注册混入 <strong>beforeRouteEnter</strong>、<strong>beforeRouteLeave</strong> 对象：</p>
 
@@ -306,7 +306,7 @@
   </li>
 </ul>
 
-<h5 id="方案一-1">方案一</h5>
+<h4 id="方案一-1">方案一</h4>
 
 <p>将埋点上报混入业务接口请求，无接口请求的点击采用自定义上报：</p>
 
@@ -325,7 +325,7 @@
   </li>
 </ul>
 
-<h5 id="方案二-1">方案二</h5>
+<h4 id="方案二-1">方案二</h4>
 
 <p>将所有点击事件视为同一类，走统一上报接口：</p>
 

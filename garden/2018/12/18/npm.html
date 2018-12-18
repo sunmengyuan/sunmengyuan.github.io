@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="keywords" content="前端开发,npm" />
+    <meta name="description" content="重点阐述 npm 包发布前后所踩坑~" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0" />
+    <title>呆恋小喵的后花园 - 踩坑札记之 npm 包发布</title>
+    <link rel="shortcut icon" href="https://sunmengyuan.github.io/materials/garden/shortcut.ico" />
+    <link rel="stylesheet" href="https://cdn.bootcss.com/highlight.js/9.12.0/styles/atom-one-dark.min.css" />
+    <link rel="stylesheet/less" href="/garden/assets/style/style.less" />
+    <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/less.js/1.7.0/less.min.js"></script>
+    <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+</head>
+<body>
+<script>
+    var pageData = {};
+    var _hmt = _hmt || [];
+    (function () {
+        var hm = document.createElement('script');
+        hm.src = 'https://hm.baidu.com/hm.js?6b9830e6ab8073ce1a44ad49a03d8596';
+        var s = document.getElementsByTagName('script')[0];
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+<img src="https://sunmengyuan.github.io/materials/garden/portrait.jpg" alt="呆恋小喵" width="0" height="0" />
+<nav>
+    <a href="javascript:;" class="js_menu_btn">
+        <span></span>
+        <span></span>
+        <span></span>
+    </a>
+    <ul class="js_menu">
+        <li><a href="/garden/">Home</a></li>
+        <li><a href="/garden/views/posts" class="js_goto_posts">Posts</a></li>
+        <li><a href="/garden/views/about">About</a></li>
+    </ul>
+</nav>
+<a href="javascript:;" class="gotop js_gotop"></a>
+<header class="post" style="background-image: url('https://sunmengyuan.github.io/materials/garden/banner.jpg')">
+    <div>
+        <h2>踩坑札记之 npm 包发布</h2>
+        <time>18 Dec 2018</time>
+        <p class="abstract">重点阐述 npm 包发布前后所踩坑~</p>
+        <ul class="c-fix">
+            
+            <li>npm</li>
+            
+        </ul>
+    </div>
+</header>
+<article class="js_article">
+    <p>首先科普如何发布 npm 包</p>
+
+<h3 id="发布流程">发布流程</h3>
+
+<h4 id="注册账号">注册账号</h4>
+
+<p>开启终端输入：</p>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code>npm adduser
+</code></pre>
+</div>
+
+<p>根据提示输入 username、password、email 即刻注册成功，已注册用户请忽略上述步骤。</p>
+
+<p>登录请直接：</p>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code>npm login
+</code></pre>
+</div>
+
+<h4 id="初始化包">初始化包</h4>
+
+<p>新建一文件夹如 bridge，而后：</p>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code><span class="nb">cd </span>bridge
+npm init
+</code></pre>
+</div>
+
+<p>依提示完成初始化并完善目录：</p>
+
+<p><img src="https://sunmengyuan.github.io/materials/garden/post/npm/files.png" alt="" /></p>
+
+<p>.eslintrc、.gitignore、package.json、node_modules 不必过多解释，各位前端大大知晓。</p>
+
+<p><strong>src</strong> 内为未经 <strong>Babel 转码</strong> 的源代码，转码后置于 bridge 根目录，Babel 通过 <strong>.babelrc</strong> 配置。</p>
+
+<p>至于 <strong>README.md</strong>，共享包说明书必不可少。</p>
+
+<h4 id="发布包">发布包</h4>
+
+<p>首先设置版本号，规则请参考 <a href="https://semver.org/lang/zh-CN/">Semver</a>，而后：</p>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code>npm publish
+</code></pre>
+</div>
+
+<p>理想情况下，包已成功发布至 npm，下述为非理想情况：</p>
+
+<ul>
+  <li><strong>命名问题</strong></li>
+</ul>
+
+<blockquote>
+  <p>npm ERR! you do not have permission to publish XXX. Are you logged in as the correct user?</p>
+</blockquote>
+
+<p>检查 npm name 是否被占用，若被占用请更改后重新发布。</p>
+
+<ul>
+  <li><strong>版本号问题</strong></li>
+</ul>
+
+<blockquote>
+  <p>npm ERR! forbidden cannot modify pre-existing version: 1.0.9: XXX</p>
+</blockquote>
+
+<p>当前版本已发布，请更新版本号。</p>
+
+<ul>
+  <li><strong>镜像配置问题</strong></li>
+</ul>
+
+<blockquote>
+  <p>npm ERR! no_perms Private mode enable, only admin can publish this module: XXX</p>
+</blockquote>
+
+<p>为加速 npm 部分同学利用淘宝镜像代理，请恢复原配置：</p>
+
+<div class="language-bash highlighter-rouge"><pre class="highlight"><code>npm config <span class="nb">set </span><span class="nv">registry</span><span class="o">=</span>http://registry.npmjs.org
+</code></pre>
+</div>
+
+<hr />
+
+<p>步入正题</p>
+
+<h3 id="踩坑札记">踩坑札记</h3>
+
+<h4 id="https">https</h4>
+
+<p>若 npm 包中 method 含协议类型为 <strong>http</strong> 的 <strong>请求</strong>（可跨域请求），但调用服务协议类型为 <strong>https</strong>，将报错：</p>
+
+<blockquote>
+  <p>[blocked] The page at https://XXX was not allowed to display insecure content from http://XXX</p>
+</blockquote>
+
+<p>请将接口服务升级 https，url 书写方案：</p>
+
+<ul>
+  <li>
+    <p><strong>https://XXX</strong>：http 服务请求 https 接口 <strong>无报错</strong>；https 服务请求 https 接口 <strong>无报错</strong>。</p>
+  </li>
+  <li>
+    <p><strong>//XXX</strong>：请求协议类型随服务协议类型 <strong>自动转化</strong>。</p>
+  </li>
+</ul>
+
+<h4 id="环境变量">环境变量</h4>
+
+<p>若 npm 包中 method 执行需区分服务环境，通过 <strong>process.env.NODE_ENV</strong> 获取 <strong>环境变量</strong> 是否准确（node npm 包无上述准确性问题）？即便准确，命名规范也 <strong>未统一</strong>，如生产环境可由 prod、production 等指代。可考虑传参 <strong>约定的</strong> 环境变量。</p>
+
+<h4 id="转码">转码</h4>
+
+<p>转码即将 ES6、ES7 转 ES5，先附赠 <a href="http://es6.ruanyifeng.com/#docs/intro#Babel-%E8%BD%AC%E7%A0%81%E5%99%A8">Babel 转码教程</a>，再科普忽视转码的危害：</p>
+
+<ul>
+  <li>未转码 <strong>前端包</strong> 引用于 <strong>低版本浏览器</strong> 不兼容。</li>
+</ul>
+
+<p>另外，含未转码片段的 <strong>vendor.js</strong>（通常将所依赖 node_modules 模块打包至 vendor.js）若先于 <strong>app.js</strong> 执行将直接导致较低版本浏览器 <strong>白屏</strong>。</p>
+
+<ul>
+  <li>未转码 <strong>node 包</strong> 引用于 <strong>低版本 node 服务</strong> 抛异常。</li>
+</ul>
+
+<p>若服务器所安装 node 版本较低，引用未转码包将导致接口 <strong>抛异常</strong>。更糟糕的是若被页面加载前置中间件依赖，直接引发 <strong>白屏</strong>。</p>
+
+<p>此刻或许有同学考虑植入 <a href="https://www.npmjs.com/package/babel-polyfill">babel-polyfill</a>~</p>
+
+<hr />
+
+<p>作者：呆恋小喵</p>
+
+<p>我的后花园：<a href="https://sunmengyuan.github.io/garden/">https://sunmengyuan.github.io/garden/</a></p>
+
+<p>我的 github：<a href="https://github.com/sunmengyuan">https://github.com/sunmengyuan</a></p>
+
+<p>原文链接：<a href="https://sunmengyuan.github.io/garden/2018/12/18/npm.html">https://sunmengyuan.github.io/garden/2018/12/18/npm.html</a></p>
+
+</article>
+<footer>
+    <a href="/garden/views/posts" class="js_goto_posts">返回目录 - 我的印记</a>
+</footer>
+<div class="browser js_browser">
+    <img src="" />
+</div>
+
+<script src="/garden/assets/script/main.js"></script>
+</body>
+</html>

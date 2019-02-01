@@ -95,31 +95,31 @@
 <h4 id="observe-工厂函数">observe 工厂函数</h4>
 
 <div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="kr">export</span> <span class="kd">function</span> <span class="nx">observe</span> <span class="p">(</span><span class="nx">value</span><span class="err">:</span> <span class="nx">any</span><span class="p">,</span> <span class="nx">asRootData</span><span class="err">:</span> <span class="p">?</span><span class="kr">boolean</span><span class="p">):</span> <span class="nx">Observer</span> <span class="o">|</span> <span class="k">void</span> <span class="p">{</span>
-  	<span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">isObject</span><span class="p">(</span><span class="nx">value</span><span class="p">)</span> <span class="o">||</span> <span class="nx">value</span> <span class="k">instanceof</span> <span class="nx">VNode</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">isObject</span><span class="p">(</span><span class="nx">value</span><span class="p">)</span> <span class="o">||</span> <span class="nx">value</span> <span class="k">instanceof</span> <span class="nx">VNode</span><span class="p">)</span> <span class="p">{</span>
         <span class="k">return</span>
-  	<span class="p">}</span>
-  	<span class="kd">let</span> <span class="na">ob</span><span class="p">:</span> <span class="nx">Observer</span> <span class="o">|</span> <span class="k">void</span>
+    <span class="p">}</span>
+    <span class="kd">let</span> <span class="na">ob</span><span class="p">:</span> <span class="nx">Observer</span> <span class="o">|</span> <span class="k">void</span>
     <span class="c1">// 避免重复观测</span>
-  	<span class="k">if</span> <span class="p">(</span><span class="nx">hasOwn</span><span class="p">(</span><span class="nx">value</span><span class="p">,</span> <span class="s1">'__ob__'</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="nx">value</span><span class="p">.</span><span class="nx">__ob__</span> <span class="k">instanceof</span> <span class="nx">Observer</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">hasOwn</span><span class="p">(</span><span class="nx">value</span><span class="p">,</span> <span class="s1">'__ob__'</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="nx">value</span><span class="p">.</span><span class="nx">__ob__</span> <span class="k">instanceof</span> <span class="nx">Observer</span><span class="p">)</span> <span class="p">{</span>
         <span class="nx">ob</span> <span class="o">=</span> <span class="nx">value</span><span class="p">.</span><span class="nx">__ob__</span>
-  	<span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span>
-      	<span class="c1">// 是否开启观测</span>
-    	<span class="nx">shouldObserve</span> <span class="o">&amp;&amp;</span>
-      	<span class="c1">// 是否服务端渲染</span>
-    	<span class="o">!</span><span class="nx">isServerRendering</span><span class="p">()</span> <span class="o">&amp;&amp;</span>
-      	<span class="c1">// 待观测对象是否为数组或纯对象</span>
-    	<span class="p">(</span><span class="nb">Array</span><span class="p">.</span><span class="nx">isArray</span><span class="p">(</span><span class="nx">value</span><span class="p">)</span> <span class="o">||</span> <span class="nx">isPlainObject</span><span class="p">(</span><span class="nx">value</span><span class="p">))</span> <span class="o">&amp;&amp;</span>
-      	<span class="c1">// 待观测对象是否可扩展</span>
-    	<span class="nb">Object</span><span class="p">.</span><span class="nx">isExtensible</span><span class="p">(</span><span class="nx">value</span><span class="p">)</span> <span class="o">&amp;&amp;</span>
-      	<span class="c1">// 避免观测 Vue 实例</span>
-    	<span class="o">!</span><span class="nx">value</span><span class="p">.</span><span class="nx">_isVue</span>
-  	<span class="p">)</span> <span class="p">{</span>
-    	<span class="nx">ob</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Observer</span><span class="p">(</span><span class="nx">value</span><span class="p">)</span>
-  	<span class="p">}</span>
-  	<span class="k">if</span> <span class="p">(</span><span class="nx">asRootData</span> <span class="o">&amp;&amp;</span> <span class="nx">ob</span><span class="p">)</span> <span class="p">{</span>
-    	<span class="nx">ob</span><span class="p">.</span><span class="nx">vmCount</span><span class="o">++</span>
-  	<span class="p">}</span>
-  	<span class="k">return</span> <span class="nx">ob</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span>
+        <span class="c1">// 是否开启观测</span>
+        <span class="nx">shouldObserve</span> <span class="o">&amp;&amp;</span>
+        <span class="c1">// 是否服务端渲染</span>
+        <span class="o">!</span><span class="nx">isServerRendering</span><span class="p">()</span> <span class="o">&amp;&amp;</span>
+        <span class="c1">// 待观测对象是否为数组或纯对象</span>
+        <span class="p">(</span><span class="nb">Array</span><span class="p">.</span><span class="nx">isArray</span><span class="p">(</span><span class="nx">value</span><span class="p">)</span> <span class="o">||</span> <span class="nx">isPlainObject</span><span class="p">(</span><span class="nx">value</span><span class="p">))</span> <span class="o">&amp;&amp;</span>
+        <span class="c1">// 待观测对象是否可扩展</span>
+        <span class="nb">Object</span><span class="p">.</span><span class="nx">isExtensible</span><span class="p">(</span><span class="nx">value</span><span class="p">)</span> <span class="o">&amp;&amp;</span>
+        <span class="c1">// 避免观测 Vue 实例</span>
+        <span class="o">!</span><span class="nx">value</span><span class="p">.</span><span class="nx">_isVue</span>
+    <span class="p">)</span> <span class="p">{</span>
+        <span class="nx">ob</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Observer</span><span class="p">(</span><span class="nx">value</span><span class="p">)</span>
+    <span class="p">}</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">asRootData</span> <span class="o">&amp;&amp;</span> <span class="nx">ob</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">ob</span><span class="p">.</span><span class="nx">vmCount</span><span class="o">++</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="nx">ob</span>
 <span class="p">}</span>
 </code></pre>
 </div>
@@ -128,41 +128,41 @@
 
 <div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="kr">export</span> <span class="kr">class</span> <span class="nx">Observer</span> <span class="p">{</span>
     <span class="c1">// 待观测对象</span>
-  	<span class="nl">value</span><span class="p">:</span> <span class="nx">any</span><span class="p">;</span>
-  	<span class="c1">// 待观测对象依赖收集“筐”</span>
-  	<span class="nl">dep</span><span class="p">:</span> <span class="nx">Dep</span><span class="p">;</span>
-  	<span class="nl">vmCount</span><span class="p">:</span> <span class="nx">number</span><span class="p">;</span>
-  	<span class="nx">constructor</span> <span class="p">(</span><span class="nx">value</span><span class="err">:</span> <span class="nx">any</span><span class="p">)</span> <span class="p">{</span>
-    	<span class="k">this</span><span class="p">.</span><span class="nx">value</span> <span class="o">=</span> <span class="nx">value</span>
-    	<span class="k">this</span><span class="p">.</span><span class="nx">dep</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Dep</span><span class="p">()</span>
-    	<span class="k">this</span><span class="p">.</span><span class="nx">vmCount</span> <span class="o">=</span> <span class="mi">0</span>
-      	<span class="c1">// 为待观测对象定义不可枚举 __ob__ 属性</span>
-    	<span class="nx">def</span><span class="p">(</span><span class="nx">value</span><span class="p">,</span> <span class="s1">'__ob__'</span><span class="p">,</span> <span class="k">this</span><span class="p">)</span>
-      	<span class="c1">// 处理数组</span>
-    	<span class="k">if</span> <span class="p">(</span><span class="nb">Array</span><span class="p">.</span><span class="nx">isArray</span><span class="p">(</span><span class="nx">value</span><span class="p">))</span> <span class="p">{</span>
-      		<span class="kr">const</span> <span class="nx">augment</span> <span class="o">=</span> <span class="nx">hasProto</span>
-        		<span class="p">?</span> <span class="nx">protoAugment</span>
-        		<span class="p">:</span> <span class="nx">copyAugment</span>
+    <span class="nl">value</span><span class="p">:</span> <span class="nx">any</span><span class="p">;</span>
+    <span class="c1">// 待观测对象依赖收集“筐”</span>
+    <span class="nl">dep</span><span class="p">:</span> <span class="nx">Dep</span><span class="p">;</span>
+    <span class="nl">vmCount</span><span class="p">:</span> <span class="nx">number</span><span class="p">;</span>
+    <span class="nx">constructor</span> <span class="p">(</span><span class="nx">value</span><span class="err">:</span> <span class="nx">any</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">value</span> <span class="o">=</span> <span class="nx">value</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">dep</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Dep</span><span class="p">()</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">vmCount</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="c1">// 为待观测对象定义不可枚举 __ob__ 属性</span>
+        <span class="nx">def</span><span class="p">(</span><span class="nx">value</span><span class="p">,</span> <span class="s1">'__ob__'</span><span class="p">,</span> <span class="k">this</span><span class="p">)</span>
+        <span class="c1">// 处理数组</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nb">Array</span><span class="p">.</span><span class="nx">isArray</span><span class="p">(</span><span class="nx">value</span><span class="p">))</span> <span class="p">{</span>
+            <span class="kr">const</span> <span class="nx">augment</span> <span class="o">=</span> <span class="nx">hasProto</span>
+                <span class="p">?</span> <span class="nx">protoAugment</span>
+                <span class="p">:</span> <span class="nx">copyAugment</span>
             <span class="c1">// 调用变异函数时执行依赖</span>
-      		<span class="nx">augment</span><span class="p">(</span><span class="nx">value</span><span class="p">,</span> <span class="nx">arrayMethods</span><span class="p">,</span> <span class="nx">arrayKeys</span><span class="p">)</span>
-          	<span class="c1">// 开启深度观测</span>
-      		<span class="k">this</span><span class="p">.</span><span class="nx">observeArray</span><span class="p">(</span><span class="nx">value</span><span class="p">)</span>
+            <span class="nx">augment</span><span class="p">(</span><span class="nx">value</span><span class="p">,</span> <span class="nx">arrayMethods</span><span class="p">,</span> <span class="nx">arrayKeys</span><span class="p">)</span>
+            <span class="c1">// 开启深度观测</span>
+            <span class="k">this</span><span class="p">.</span><span class="nx">observeArray</span><span class="p">(</span><span class="nx">value</span><span class="p">)</span>
         <span class="c1">// 处理纯对象</span>
-    	<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-      		<span class="k">this</span><span class="p">.</span><span class="nx">walk</span><span class="p">(</span><span class="nx">value</span><span class="p">)</span>
-    	<span class="p">}</span>
-  	<span class="p">}</span>
-  	<span class="nx">walk</span> <span class="p">(</span><span class="nx">obj</span><span class="err">:</span> <span class="nb">Object</span><span class="p">)</span> <span class="p">{</span>
-    	<span class="kr">const</span> <span class="nx">keys</span> <span class="o">=</span> <span class="nb">Object</span><span class="p">.</span><span class="nx">keys</span><span class="p">(</span><span class="nx">obj</span><span class="p">)</span>
-    	<span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">keys</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
-      		<span class="nx">defineReactive</span><span class="p">(</span><span class="nx">obj</span><span class="p">,</span> <span class="nx">keys</span><span class="p">[</span><span class="nx">i</span><span class="p">])</span>
-    	<span class="p">}</span>
-  	<span class="p">}</span>
-  	<span class="nx">observeArray</span> <span class="p">(</span><span class="nx">items</span><span class="err">:</span> <span class="nb">Array</span><span class="o">&lt;</span><span class="nx">any</span><span class="o">&gt;</span><span class="p">)</span> <span class="p">{</span>
-    	<span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">l</span> <span class="o">=</span> <span class="nx">items</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">l</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
-      		<span class="nx">observe</span><span class="p">(</span><span class="nx">items</span><span class="p">[</span><span class="nx">i</span><span class="p">])</span>
-    	<span class="p">}</span>
-  	<span class="p">}</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="k">this</span><span class="p">.</span><span class="nx">walk</span><span class="p">(</span><span class="nx">value</span><span class="p">)</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="nx">walk</span> <span class="p">(</span><span class="nx">obj</span><span class="err">:</span> <span class="nb">Object</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kr">const</span> <span class="nx">keys</span> <span class="o">=</span> <span class="nb">Object</span><span class="p">.</span><span class="nx">keys</span><span class="p">(</span><span class="nx">obj</span><span class="p">)</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">keys</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nx">defineReactive</span><span class="p">(</span><span class="nx">obj</span><span class="p">,</span> <span class="nx">keys</span><span class="p">[</span><span class="nx">i</span><span class="p">])</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="nx">observeArray</span> <span class="p">(</span><span class="nx">items</span><span class="err">:</span> <span class="nb">Array</span><span class="o">&lt;</span><span class="nx">any</span><span class="o">&gt;</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">l</span> <span class="o">=</span> <span class="nx">items</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">l</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nx">observe</span><span class="p">(</span><span class="nx">items</span><span class="p">[</span><span class="nx">i</span><span class="p">])</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
 <span class="p">}</span>
 </code></pre>
 </div>
@@ -192,73 +192,73 @@
 </ul>
 
 <div class="language-js highlighter-rouge"><pre class="highlight"><code><span class="kr">export</span> <span class="kd">function</span> <span class="nx">defineReactive</span> <span class="p">(</span>
-  	<span class="nx">obj</span><span class="err">:</span> <span class="nb">Object</span><span class="p">,</span>
-  	<span class="nx">key</span><span class="err">:</span> <span class="nx">string</span><span class="p">,</span>
-  	<span class="nx">val</span><span class="err">:</span> <span class="nx">any</span><span class="p">,</span>
-  	<span class="nx">customSetter</span><span class="p">?:</span> <span class="p">?</span><span class="nb">Function</span><span class="p">,</span>
-  	<span class="nx">shallow</span><span class="p">?:</span> <span class="kr">boolean</span>
+    <span class="nx">obj</span><span class="err">:</span> <span class="nb">Object</span><span class="p">,</span>
+    <span class="nx">key</span><span class="err">:</span> <span class="nx">string</span><span class="p">,</span>
+    <span class="nx">val</span><span class="err">:</span> <span class="nx">any</span><span class="p">,</span>
+    <span class="nx">customSetter</span><span class="p">?:</span> <span class="p">?</span><span class="nb">Function</span><span class="p">,</span>
+    <span class="nx">shallow</span><span class="p">?:</span> <span class="kr">boolean</span>
 <span class="p">)</span> <span class="p">{</span>
-  	<span class="c1">// 待观测对象依赖收集“筐”</span>
-  	<span class="kr">const</span> <span class="nx">dep</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Dep</span><span class="p">()</span>
+    <span class="c1">// 待观测对象依赖收集“筐”</span>
+    <span class="kr">const</span> <span class="nx">dep</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Dep</span><span class="p">()</span>
     <span class="c1">// 属性描述对象</span>
-  	<span class="kr">const</span> <span class="nx">property</span> <span class="o">=</span> <span class="nb">Object</span><span class="p">.</span><span class="nx">getOwnPropertyDescriptor</span><span class="p">(</span><span class="nx">obj</span><span class="p">,</span> <span class="nx">key</span><span class="p">)</span>
+    <span class="kr">const</span> <span class="nx">property</span> <span class="o">=</span> <span class="nb">Object</span><span class="p">.</span><span class="nx">getOwnPropertyDescriptor</span><span class="p">(</span><span class="nx">obj</span><span class="p">,</span> <span class="nx">key</span><span class="p">)</span>
     <span class="c1">// 属性描述对象是否可配置</span>
-  	<span class="k">if</span> <span class="p">(</span><span class="nx">property</span> <span class="o">&amp;&amp;</span> <span class="nx">property</span><span class="p">.</span><span class="nx">configurable</span> <span class="o">===</span> <span class="kc">false</span><span class="p">)</span> <span class="p">{</span>
-    	<span class="k">return</span>
-  	<span class="p">}</span>
-	<span class="c1">// 缓存原 setter、getter</span>
-  	<span class="kr">const</span> <span class="nx">getter</span> <span class="o">=</span> <span class="nx">property</span> <span class="o">&amp;&amp;</span> <span class="nx">property</span><span class="p">.</span><span class="nx">get</span>
-  	<span class="kr">const</span> <span class="nx">setter</span> <span class="o">=</span> <span class="nx">property</span> <span class="o">&amp;&amp;</span> <span class="nx">property</span><span class="p">.</span><span class="nx">set</span>
-  	<span class="k">if</span> <span class="p">((</span><span class="o">!</span><span class="nx">getter</span> <span class="o">||</span> <span class="nx">setter</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="nx">arguments</span><span class="p">.</span><span class="nx">length</span> <span class="o">===</span> <span class="mi">2</span><span class="p">)</span> <span class="p">{</span>
-    	<span class="nx">val</span> <span class="o">=</span> <span class="nx">obj</span><span class="p">[</span><span class="nx">key</span><span class="p">]</span>
-  	<span class="p">}</span>
-	<span class="c1">// 开启深度观测</span>
-  	<span class="kd">let</span> <span class="nx">childOb</span> <span class="o">=</span> <span class="o">!</span><span class="nx">shallow</span> <span class="o">&amp;&amp;</span> <span class="nx">observe</span><span class="p">(</span><span class="nx">val</span><span class="p">)</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">property</span> <span class="o">&amp;&amp;</span> <span class="nx">property</span><span class="p">.</span><span class="nx">configurable</span> <span class="o">===</span> <span class="kc">false</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span>
+    <span class="p">}</span>
+    <span class="c1">// 缓存原 setter、getter</span>
+    <span class="kr">const</span> <span class="nx">getter</span> <span class="o">=</span> <span class="nx">property</span> <span class="o">&amp;&amp;</span> <span class="nx">property</span><span class="p">.</span><span class="nx">get</span>
+    <span class="kr">const</span> <span class="nx">setter</span> <span class="o">=</span> <span class="nx">property</span> <span class="o">&amp;&amp;</span> <span class="nx">property</span><span class="p">.</span><span class="nx">set</span>
+    <span class="k">if</span> <span class="p">((</span><span class="o">!</span><span class="nx">getter</span> <span class="o">||</span> <span class="nx">setter</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="nx">arguments</span><span class="p">.</span><span class="nx">length</span> <span class="o">===</span> <span class="mi">2</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">val</span> <span class="o">=</span> <span class="nx">obj</span><span class="p">[</span><span class="nx">key</span><span class="p">]</span>
+    <span class="p">}</span>
+    <span class="c1">// 开启深度观测</span>
+    <span class="kd">let</span> <span class="nx">childOb</span> <span class="o">=</span> <span class="o">!</span><span class="nx">shallow</span> <span class="o">&amp;&amp;</span> <span class="nx">observe</span><span class="p">(</span><span class="nx">val</span><span class="p">)</span>
     <span class="c1">// 重定义 setter、getter</span>
-  	<span class="nb">Object</span><span class="p">.</span><span class="nx">defineProperty</span><span class="p">(</span><span class="nx">obj</span><span class="p">,</span> <span class="nx">key</span><span class="p">,</span> <span class="p">{</span>
-    	<span class="na">enumerable</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
-    	<span class="na">configurable</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
-    	<span class="na">get</span><span class="p">:</span> <span class="kd">function</span> <span class="nx">reactiveGetter</span> <span class="p">()</span> <span class="p">{</span>
-          	<span class="c1">// 保证原 getter 正常运作且返回属性值</span>
-      		<span class="kr">const</span> <span class="nx">value</span> <span class="o">=</span> <span class="nx">getter</span> <span class="p">?</span> <span class="nx">getter</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="nx">obj</span><span class="p">)</span> <span class="p">:</span> <span class="nx">val</span>
+    <span class="nb">Object</span><span class="p">.</span><span class="nx">defineProperty</span><span class="p">(</span><span class="nx">obj</span><span class="p">,</span> <span class="nx">key</span><span class="p">,</span> <span class="p">{</span>
+        <span class="na">enumerable</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+        <span class="na">configurable</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+        <span class="na">get</span><span class="p">:</span> <span class="kd">function</span> <span class="nx">reactiveGetter</span> <span class="p">()</span> <span class="p">{</span>
+            <span class="c1">// 保证原 getter 正常运作且返回属性值</span>
+            <span class="kr">const</span> <span class="nx">value</span> <span class="o">=</span> <span class="nx">getter</span> <span class="p">?</span> <span class="nx">getter</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="nx">obj</span><span class="p">)</span> <span class="p">:</span> <span class="nx">val</span>
             <span class="c1">// 依赖是否存在</span>
-      		<span class="k">if</span> <span class="p">(</span><span class="nx">Dep</span><span class="p">.</span><span class="nx">target</span><span class="p">)</span> <span class="p">{</span>
-              	<span class="c1">// 收集依赖至 dep “筐”，属性值被修改时执行依赖</span>
-        		<span class="nx">dep</span><span class="p">.</span><span class="nx">depend</span><span class="p">()</span>
-        		<span class="k">if</span> <span class="p">(</span><span class="nx">childOb</span><span class="p">)</span> <span class="p">{</span>
-                  	<span class="c1">// 收集依赖至 childOb.dep “筐”，添加新属性时执行依赖</span>
-          			<span class="nx">childOb</span><span class="p">.</span><span class="nx">dep</span><span class="p">.</span><span class="nx">depend</span><span class="p">()</span>
-          			<span class="k">if</span> <span class="p">(</span><span class="nb">Array</span><span class="p">.</span><span class="nx">isArray</span><span class="p">(</span><span class="nx">value</span><span class="p">))</span> <span class="p">{</span>
-                      	<span class="c1">// 因数组索引无 get，逐个收集每一数组元素依赖</span>
-            			<span class="nx">dependArray</span><span class="p">(</span><span class="nx">value</span><span class="p">)</span>
-          			<span class="p">}</span>
-        		<span class="p">}</span>
-      		<span class="p">}</span>
-      		<span class="k">return</span> <span class="nx">value</span>
-    	<span class="p">},</span>
-    	<span class="na">set</span><span class="p">:</span> <span class="kd">function</span> <span class="nx">reactiveSetter</span> <span class="p">(</span><span class="nx">newVal</span><span class="p">)</span> <span class="p">{</span>
-          	<span class="c1">// 获取原属性值</span>
-      		<span class="kr">const</span> <span class="nx">value</span> <span class="o">=</span> <span class="nx">getter</span> <span class="p">?</span> <span class="nx">getter</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="nx">obj</span><span class="p">)</span> <span class="p">:</span> <span class="nx">val</span>
+            <span class="k">if</span> <span class="p">(</span><span class="nx">Dep</span><span class="p">.</span><span class="nx">target</span><span class="p">)</span> <span class="p">{</span>
+                <span class="c1">// 收集依赖至 dep “筐”，属性值被修改时执行依赖</span>
+                <span class="nx">dep</span><span class="p">.</span><span class="nx">depend</span><span class="p">()</span>
+                <span class="k">if</span> <span class="p">(</span><span class="nx">childOb</span><span class="p">)</span> <span class="p">{</span>
+                    <span class="c1">// 收集依赖至 childOb.dep “筐”，添加新属性时执行依赖</span>
+                    <span class="nx">childOb</span><span class="p">.</span><span class="nx">dep</span><span class="p">.</span><span class="nx">depend</span><span class="p">()</span>
+                    <span class="k">if</span> <span class="p">(</span><span class="nb">Array</span><span class="p">.</span><span class="nx">isArray</span><span class="p">(</span><span class="nx">value</span><span class="p">))</span> <span class="p">{</span>
+                        <span class="c1">// 因数组索引无 get，逐个收集每一数组元素依赖</span>
+                        <span class="nx">dependArray</span><span class="p">(</span><span class="nx">value</span><span class="p">)</span>
+                    <span class="p">}</span>
+                <span class="p">}</span>
+            <span class="p">}</span>
+            <span class="k">return</span> <span class="nx">value</span>
+        <span class="p">},</span>
+        <span class="na">set</span><span class="p">:</span> <span class="kd">function</span> <span class="nx">reactiveSetter</span> <span class="p">(</span><span class="nx">newVal</span><span class="p">)</span> <span class="p">{</span>
+            <span class="c1">// 获取原属性值</span>
+            <span class="kr">const</span> <span class="nx">value</span> <span class="o">=</span> <span class="nx">getter</span> <span class="p">?</span> <span class="nx">getter</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="nx">obj</span><span class="p">)</span> <span class="p">:</span> <span class="nx">val</span>
             <span class="c1">// 属性值是否更新</span>
-      		<span class="k">if</span> <span class="p">(</span><span class="nx">newVal</span> <span class="o">===</span> <span class="nx">value</span> <span class="o">||</span> <span class="p">(</span><span class="nx">newVal</span> <span class="o">!==</span> <span class="nx">newVal</span> <span class="o">&amp;&amp;</span> <span class="nx">value</span> <span class="o">!==</span> <span class="nx">value</span><span class="p">))</span> <span class="p">{</span>
-        		<span class="k">return</span>
-      		<span class="p">}</span>
-          	<span class="c1">// 非生产环境打印辅助信息</span>
-      		<span class="k">if</span> <span class="p">(</span><span class="nx">process</span><span class="p">.</span><span class="nx">env</span><span class="p">.</span><span class="nx">NODE_ENV</span> <span class="o">!==</span> <span class="s1">'production'</span> <span class="o">&amp;&amp;</span> <span class="nx">customSetter</span><span class="p">)</span> <span class="p">{</span>
-        	    <span class="nx">customSetter</span><span class="p">()</span>
-      		<span class="p">}</span>
-          	<span class="c1">// 保证原 setter 正常运作且设置属性值</span>
-      		<span class="k">if</span> <span class="p">(</span><span class="nx">setter</span><span class="p">)</span> <span class="p">{</span>
-        		<span class="nx">setter</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="nx">obj</span><span class="p">,</span> <span class="nx">newVal</span><span class="p">)</span>
-      		<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-        		<span class="nx">val</span> <span class="o">=</span> <span class="nx">newVal</span>
-      		<span class="p">}</span>
-          	<span class="c1">// 开启深度观测</span>
-      		<span class="nx">childOb</span> <span class="o">=</span> <span class="o">!</span><span class="nx">shallow</span> <span class="o">&amp;&amp;</span> <span class="nx">observe</span><span class="p">(</span><span class="nx">newVal</span><span class="p">)</span>
-          	<span class="c1">// 执行依赖</span>
-      		<span class="nx">dep</span><span class="p">.</span><span class="nx">notify</span><span class="p">()</span>
-    	<span class="p">}</span>
-  	<span class="p">})</span>
+            <span class="k">if</span> <span class="p">(</span><span class="nx">newVal</span> <span class="o">===</span> <span class="nx">value</span> <span class="o">||</span> <span class="p">(</span><span class="nx">newVal</span> <span class="o">!==</span> <span class="nx">newVal</span> <span class="o">&amp;&amp;</span> <span class="nx">value</span> <span class="o">!==</span> <span class="nx">value</span><span class="p">))</span> <span class="p">{</span>
+                <span class="k">return</span>
+            <span class="p">}</span>
+            <span class="c1">// 非生产环境打印辅助信息</span>
+            <span class="k">if</span> <span class="p">(</span><span class="nx">process</span><span class="p">.</span><span class="nx">env</span><span class="p">.</span><span class="nx">NODE_ENV</span> <span class="o">!==</span> <span class="s1">'production'</span> <span class="o">&amp;&amp;</span> <span class="nx">customSetter</span><span class="p">)</span> <span class="p">{</span>
+                <span class="nx">customSetter</span><span class="p">()</span>
+            <span class="p">}</span>
+            <span class="c1">// 保证原 setter 正常运作且设置属性值</span>
+            <span class="k">if</span> <span class="p">(</span><span class="nx">setter</span><span class="p">)</span> <span class="p">{</span>
+                <span class="nx">setter</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="nx">obj</span><span class="p">,</span> <span class="nx">newVal</span><span class="p">)</span>
+            <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+                <span class="nx">val</span> <span class="o">=</span> <span class="nx">newVal</span>
+            <span class="p">}</span>
+            <span class="c1">// 开启深度观测</span>
+            <span class="nx">childOb</span> <span class="o">=</span> <span class="o">!</span><span class="nx">shallow</span> <span class="o">&amp;&amp;</span> <span class="nx">observe</span><span class="p">(</span><span class="nx">newVal</span><span class="p">)</span>
+            <span class="c1">// 执行依赖</span>
+            <span class="nx">dep</span><span class="p">.</span><span class="nx">notify</span><span class="p">()</span>
+        <span class="p">}</span>
+    <span class="p">})</span>
 <span class="p">}</span>
 </code></pre>
 </div>
@@ -269,38 +269,38 @@
 <span class="kr">const</span> <span class="nx">arrayProto</span> <span class="o">=</span> <span class="nb">Array</span><span class="p">.</span><span class="nx">prototype</span>
 <span class="kr">export</span> <span class="kr">const</span> <span class="nx">arrayMethods</span> <span class="o">=</span> <span class="nb">Object</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="nx">arrayProto</span><span class="p">)</span>
 <span class="kr">const</span> <span class="nx">methodsToPatch</span> <span class="o">=</span> <span class="p">[</span>
-  	<span class="s1">'push'</span><span class="p">,</span>
-  	<span class="s1">'pop'</span><span class="p">,</span>
-  	<span class="s1">'shift'</span><span class="p">,</span>
-  	<span class="s1">'unshift'</span><span class="p">,</span>
-  	<span class="s1">'splice'</span><span class="p">,</span>
-  	<span class="s1">'sort'</span><span class="p">,</span>
-  	<span class="s1">'reverse'</span>
+    <span class="s1">'push'</span><span class="p">,</span>
+    <span class="s1">'pop'</span><span class="p">,</span>
+    <span class="s1">'shift'</span><span class="p">,</span>
+    <span class="s1">'unshift'</span><span class="p">,</span>
+    <span class="s1">'splice'</span><span class="p">,</span>
+    <span class="s1">'sort'</span><span class="p">,</span>
+    <span class="s1">'reverse'</span>
 <span class="p">]</span>
 <span class="nx">methodsToPatch</span><span class="p">.</span><span class="nx">forEach</span><span class="p">(</span><span class="kd">function</span> <span class="p">(</span><span class="nx">method</span><span class="p">)</span> <span class="p">{</span>
-  	<span class="c1">// 缓存原变异函数</span>
-  	<span class="kr">const</span> <span class="nx">original</span> <span class="o">=</span> <span class="nx">arrayProto</span><span class="p">[</span><span class="nx">method</span><span class="p">]</span>
+    <span class="c1">// 缓存原变异函数</span>
+    <span class="kr">const</span> <span class="nx">original</span> <span class="o">=</span> <span class="nx">arrayProto</span><span class="p">[</span><span class="nx">method</span><span class="p">]</span>
     <span class="c1">// 定义与变异函数同名的拦截函数</span>
-  	<span class="nx">def</span><span class="p">(</span><span class="nx">arrayMethods</span><span class="p">,</span> <span class="nx">method</span><span class="p">,</span> <span class="kd">function</span> <span class="nx">mutator</span> <span class="p">(...</span><span class="nx">args</span><span class="p">)</span> <span class="p">{</span>
-      	<span class="c1">// 调用原变异函数</span>
-    	<span class="kr">const</span> <span class="nx">result</span> <span class="o">=</span> <span class="nx">original</span><span class="p">.</span><span class="nx">apply</span><span class="p">(</span><span class="k">this</span><span class="p">,</span> <span class="nx">args</span><span class="p">)</span>
-    	<span class="kr">const</span> <span class="nx">ob</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">__ob__</span>
-    	<span class="kd">let</span> <span class="nx">inserted</span>
-    	<span class="k">switch</span> <span class="p">(</span><span class="nx">method</span><span class="p">)</span> <span class="p">{</span>
-      		<span class="k">case</span> <span class="s1">'push'</span><span class="err">:</span>
-      		<span class="k">case</span> <span class="s1">'unshift'</span><span class="err">:</span>
-        		<span class="nx">inserted</span> <span class="o">=</span> <span class="nx">args</span>
-        		<span class="k">break</span>
-      		<span class="k">case</span> <span class="s1">'splice'</span><span class="err">:</span>
-        		<span class="nx">inserted</span> <span class="o">=</span> <span class="nx">args</span><span class="p">.</span><span class="nx">slice</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-        		<span class="k">break</span>
-    	<span class="p">}</span>
-      	<span class="c1">// 观测新增元素</span>
-    	<span class="k">if</span> <span class="p">(</span><span class="nx">inserted</span><span class="p">)</span> <span class="nx">ob</span><span class="p">.</span><span class="nx">observeArray</span><span class="p">(</span><span class="nx">inserted</span><span class="p">)</span>
-      	<span class="c1">// 执行依赖</span>
-    	<span class="nx">ob</span><span class="p">.</span><span class="nx">dep</span><span class="p">.</span><span class="nx">notify</span><span class="p">()</span>
-    	<span class="k">return</span> <span class="nx">result</span>
-  	<span class="p">})</span>
+    <span class="nx">def</span><span class="p">(</span><span class="nx">arrayMethods</span><span class="p">,</span> <span class="nx">method</span><span class="p">,</span> <span class="kd">function</span> <span class="nx">mutator</span> <span class="p">(...</span><span class="nx">args</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">// 调用原变异函数</span>
+        <span class="kr">const</span> <span class="nx">result</span> <span class="o">=</span> <span class="nx">original</span><span class="p">.</span><span class="nx">apply</span><span class="p">(</span><span class="k">this</span><span class="p">,</span> <span class="nx">args</span><span class="p">)</span>
+        <span class="kr">const</span> <span class="nx">ob</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">__ob__</span>
+        <span class="kd">let</span> <span class="nx">inserted</span>
+        <span class="k">switch</span> <span class="p">(</span><span class="nx">method</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">case</span> <span class="s1">'push'</span><span class="err">:</span>
+            <span class="k">case</span> <span class="s1">'unshift'</span><span class="err">:</span>
+                <span class="nx">inserted</span> <span class="o">=</span> <span class="nx">args</span>
+                <span class="k">break</span>
+            <span class="k">case</span> <span class="s1">'splice'</span><span class="err">:</span>
+                <span class="nx">inserted</span> <span class="o">=</span> <span class="nx">args</span><span class="p">.</span><span class="nx">slice</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+                <span class="k">break</span>
+        <span class="p">}</span>
+        <span class="c1">// 观测新增元素</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nx">inserted</span><span class="p">)</span> <span class="nx">ob</span><span class="p">.</span><span class="nx">observeArray</span><span class="p">(</span><span class="nx">inserted</span><span class="p">)</span>
+        <span class="c1">// 执行依赖</span>
+        <span class="nx">ob</span><span class="p">.</span><span class="nx">dep</span><span class="p">.</span><span class="nx">notify</span><span class="p">()</span>
+        <span class="k">return</span> <span class="nx">result</span>
+    <span class="p">})</span>
 <span class="p">})</span>
 </code></pre>
 </div>

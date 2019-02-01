@@ -29,6 +29,8 @@ thumb: "https://sunmengyuan.github.io/materials/garden/post/vue-secret/thumb.jpg
 
 + 处理 __边界__ 条件
 
+*****
+
 #### observe 工厂函数
 
 ```js
@@ -60,6 +62,8 @@ export function observe (value: any, asRootData: ?boolean): Observer | void {
     return ob
 }
 ```
+
+*****
 
 #### observer 构造函数
 
@@ -103,6 +107,8 @@ export class Observer {
     }
 }
 ```
+
+*****
 
 #### defineReactive 函数
 
@@ -189,6 +195,8 @@ export function defineReactive (
     })
 }
 ```
+
+*****
 
 #### 数组变异函数拦截
 

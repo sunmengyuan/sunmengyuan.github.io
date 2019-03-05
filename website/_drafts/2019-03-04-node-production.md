@@ -7,3 +7,102 @@ keywords: ["node", "production"]
 thumb: "https://sunmengyuan.github.io/materials/garden/post/node-production/thumb.jpg"
 ---
 
+### Monitoring
+
+#### 吞吐量
+
+固定时间应用访问量波动不应过大。
+
++ 骤升：运营活动？请求延时引发用户过频点击？...
+
++ 骤降：服务异常阻塞访问？...
+
+#### 错误率
+
++ 系统异常
+
++ 业务异常
+
++ ...
+
+#### 响应时长
+
++ 分位统计
+
++ 延时分布：优化较慢 API 节点、...
+
++ ...
+
+#### 饱和度
+
++ CPU 使用率：Node 不宜处理 CPU 密集型任务、...
+
++ 内存使用率：关注内存泄露、...
+
++ ...
+
+### Increase transparency using smart logging
+
+#### 格式化
+
+时间、系统、用户、transactionID、...
+
+#### 聚合
+
+#### 解析
+
+#### 可视化
+
+### Delegate anything possible (e.g. gzip, SSL) to a reverse proxy
+
+Node 不宜处理 Gzipping、SSL Termination 等 CPU 密集型任务，请使用 Nginx。
+
+### Lock dependencies
+
+依赖版本需在所有环境一致。
+
+### Guard process uptime using the right tool
+
+进程守护：
+
+### Utilize all CPU cores
+
+PM2 Cluster：
+
+### Create a 'maintenance endpoint'
+
+### Discover errors and downtime using APM products
+
+应用性能管理：
+
+### Make your code production-ready
+
+12 因素指南：<https://12factor.net/>
+
+### Measure and guard the memory usage
+
+关注内存泄露：
+
+### Get your frontend assets out of Node
+
+Node 宜处理动态服务，请将静态资源托管至 CDN。
+
+### Be stateless, kill your servers almost every day
+
+无状态：
+
+### Use tools that automatically detect vulnerabilities
+
+漏洞检测工具：
+
+### Assign a transaction id to each log statement
+
+transactionID：
+
+### Set NODE_ENV=production
+
+NODE_ENV：
+
+### Design automated, atomic and zero-downtime deployments
+
+自动化部署：

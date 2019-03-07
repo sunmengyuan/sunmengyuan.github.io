@@ -63,25 +63,29 @@ Node 不宜处理 Gzipping、SSL Termination 等 CPU 密集型任务，请使用
 
 ### Guard process uptime using the right tool
 
-进程守护：
+进程守护：<https://www.cnblogs.com/lggggg/p/6970395.html>
 
 ### Utilize all CPU cores
 
-PM2 Cluster：
+PM2 Cluster：<https://www.cnblogs.com/jaxu/p/5193643.html>
 
 ### Create a 'maintenance endpoint'
 
 ### Discover errors and downtime using APM products
 
-应用性能管理：
+应用性能管理：<https://www.toushibao.com/product_server.html>
 
 ### Make your code production-ready
 
-12 因素指南：<https://12factor.net/>
+12 因素指南：
 
 ### Measure and guard the memory usage
 
 关注内存泄露：
+
+<http://www.ruanyifeng.com/blog/2017/04/memory-leak.html>
+
+<https://www.cnblogs.com/woniubushinide/p/8024051.html>
 
 ### Get your frontend assets out of Node
 
